@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#a3f69c",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-variant": "#e2e2e2",
+                    "primary-fixed-dim": "#ffb59a",
+                    "outline-variant": "#e3bfb2",
+                    "surface-tint": "#a83900",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-bright": "#f9f9f9",
+                    "on-primary-fixed-variant": "#802a00",
+                    "surface": "#f9f9f9",
+                    "primary-fixed": "#ffdbcf",
+                    "primary-container": "#cd4700",
+                    "on-primary-container": "#fffbff",
+                    "tertiary": "#005ab7",
+                    "tertiary-container": "#0072e4",
+                    "on-tertiary-container": "#fefcff",
+                    "on-secondary-container": "#217128",
+                    "on-primary-fixed": "#380d00",
+                    "inverse-primary": "#ffb59a",
+                    "on-secondary-fixed-variant": "#005312",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#a0f399",
+                    "on-secondary": "#ffffff",
+                    "outline": "#8f7066",
+                    "secondary-fixed-dim": "#88d982",
+                    "inverse-on-surface": "#f0f1f1",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#5a4138",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#d7e2ff",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "on-secondary-fixed": "#002204",
+                    "secondary": "#1b6d24",
+                    "on-tertiary-fixed": "#001b3f",
+                    "background": "#f9f9f9",
+                    "surface-dim": "#dadada",
+                    "surface-container": "#eeeeee",
+                    "inverse-surface": "#2f3131",
+                    "primary": "#a43700",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-clay-glow {
+            text-shadow: 0 0 20px rgba(164, 55, 0, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-hidden">
+<!-- TopAppBar suppressed for onboarding -->
+<main class="relative min-h-screen flex flex-col overflow-hidden">
+<!-- Hero Visual Section: Asymmetric & Layered -->
+<section class="relative h-[486px] w-full pt-12 px-6">
+<!-- Decorative Background Element (Textured Clay Circle) -->
+<div class="absolute top-[-10%] right-[-20%] w-80 h-80 rounded-full bg-primary-fixed/30 blur-3xl -z-10"></div>
+<div class="relative h-full w-full rounded-[2.5rem] overflow-hidden">
+<!-- Main Illustration Layer -->
+<div class="absolute inset-0 bg-surface-container-low">
+<img alt="Indian student illustration" class="w-full h-full object-cover mix-blend-multiply opacity-90" data-alt="Modern minimalist illustration of an Indian student holding a tall glass of Sattu protein drink, vibrant earth tones, terracotta background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFGQG1rjJhrVHb_FR-E87L8_U44r8qGXqlzAhRopaznbNG2ke1JUfaNMVhTsbtxc6DNDdKdKZHJi2yIoOr3XO_B3e0QT7IW__MOuoJCYG7K2ll1EHkKgW7_gZtpoBlKvpd80RRN-c4UuJ646_eWz6YgpLjr446uGU6nuf8JtlL14vGhS11k71MIs0JylzyRqD7cAEJjoXw4o9tM3DB42jG_C7qGBjbNhNpU0LfDBXIlGTU4aFQLksp8ZKNUppOpgId2kkxU2uHyqY"/>
+</div>
+<!-- Floating Detail Card (Tactile Component) -->
+<div class="absolute bottom-6 left-6 right-6 p-5 bg-surface/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/20">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div>
+<p class="text-xs font-bold font-headline uppercase tracking-widest text-primary">Budget Hack</p>
+<p class="text-on-surface font-semibold">25g Protein for ₹15</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Section: Editorial Voice -->
+<section class="flex-grow px-8 pt-10 pb-24 relative">
+<div class="space-y-4">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold uppercase tracking-tighter">
+                    Fueling India
+                </div>
+<h1 class="font-headline text-4xl font-extrabold text-on-surface leading-tight tracking-tight text-clay-glow">
+                    Eat Like a King <br/>
+<span class="text-primary italic">on a Peon's Budget</span>
+</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-[90%]">
+                    Track protein and cost for every meal. <br/> 
+                    Stay <span class="font-bold text-on-surface">under ₹100/day</span> without losing gains.
+                </p>
+</div>
+</section>
+<!-- Fixed Footer Actions -->
+<footer class="fixed bottom-0 left-0 w-full px-8 pb-10 pt-4 bg-gradient-to-t from-surface via-surface/95 to-transparent">
+<div class="flex items-center justify-between">
+<!-- Progress Dots (1/5) -->
+<div class="flex gap-2.5">
+<div class="h-1.5 w-8 rounded-full bg-primary shadow-sm"></div>
+<div class="h-1.5 w-2 rounded-full bg-surface-container-highest"></div>
+<div class="h-1.5 w-2 rounded-full bg-surface-container-highest"></div>
+<div class="h-1.5 w-2 rounded-full bg-surface-container-highest"></div>
+<div class="h-1.5 w-2 rounded-full bg-surface-container-highest"></div>
+</div>
+<!-- Next Button (Kinetic Element) -->
+<button class="flex items-center justify-center gap-2 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold px-8 py-4 rounded-2xl shadow-[0_4px_20px_rgba(164,55,0,0.2)] active:scale-95 transition-all duration-200">
+                    Next
+                    <span class="material-symbols-outlined font-bold">arrow_forward</span>
+</button>
+</div>
+</footer>
+</main>
+<!-- Invisible background texture for "Modern Craftsman" feel -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay z-[-1]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCyj-8GTDwh_Yo1aGIb2ARDSm8JvBCy6XA2Gb4VrO0VVRdGCqRCMYr3ZiZEL6GHYpF73MLKQHGUBy_eD9jmUyog-zU-M6_EQ580Ct0FTPpAgSaY6-ivEOlJDdV-jJ_tN_oe0okW2BPNLDa20tfu4DT6HENvszSejctLAIW1mqyX62zA7zR14HLFMsJDbSVmZZBq-rD4QTy6O4nI5FFosepV9z2e6LHwal3tynG_F0OKFqMxrElpa30N9OCGtMAwqNE-047fBAporCA');"></div>
+</body></html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit - The Electric Kettle Chef</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#a3f69c",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-variant": "#e2e2e2",
+                    "primary-fixed-dim": "#ffb59a",
+                    "outline-variant": "#e3bfb2",
+                    "surface-tint": "#a83900",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-bright": "#f9f9f9",
+                    "on-primary-fixed-variant": "#802a00",
+                    "surface": "#f9f9f9",
+                    "primary-fixed": "#ffdbcf",
+                    "primary-container": "#cd4700",
+                    "on-primary-container": "#fffbff",
+                    "tertiary": "#005ab7",
+                    "tertiary-container": "#0072e4",
+                    "on-tertiary-container": "#fefcff",
+                    "on-secondary-container": "#217128",
+                    "on-primary-fixed": "#380d00",
+                    "inverse-primary": "#ffb59a",
+                    "on-secondary-fixed-variant": "#005312",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#a0f399",
+                    "on-secondary": "#ffffff",
+                    "outline": "#8f7066",
+                    "secondary-fixed-dim": "#88d982",
+                    "inverse-on-surface": "#f0f1f1",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#5a4138",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#d7e2ff",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "on-secondary-fixed": "#002204",
+                    "secondary": "#1b6d24",
+                    "on-tertiary-fixed": "#001b3f",
+                    "background": "#f9f9f9",
+                    "surface-dim": "#dadada",
+                    "surface-container": "#eeeeee",
+                    "inverse-surface": "#2f3131",
+                    "primary": "#a43700",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<header class="fixed top-0 w-full z-50 bg-[#F9F9F9]/80 backdrop-blur-xl flex items-center justify-between px-6 h-16">
+<div class="text-primary font-headline font-bold text-lg tracking-tight">FitCraft</div>
+<button class="text-on-surface-variant font-label font-semibold text-sm hover:bg-surface-container-low transition-colors px-4 py-2 rounded-xl">Skip</button>
+</header>
+<main class="flex-grow flex flex-col pt-20 pb-32 px-8 max-w-md mx-auto w-full">
+<div class="flex-grow flex flex-col justify-center items-center text-center space-y-12">
+<div class="relative w-full aspect-square max-w-[280px] group">
+<div class="absolute inset-0 bg-secondary-container/20 rounded-full blur-3xl group-hover:bg-secondary-container/30 transition-all"></div>
+<div class="relative w-full h-full bg-surface-container-lowest rounded-[2.5rem] p-8 flex items-center justify-center shadow-[0_8px_40px_rgba(0,0,0,0.04)] overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none bg-[radial-gradient(#a43700_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<img class="w-full h-full object-contain drop-shadow-2xl scale-110" data-alt="Modern stylish orange electric kettle with rising steam on a clean white kitchen surface, soft cinematic lighting, editorial food photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfGiTeZrTqY2JFXCILHrQV0p-OVYUkbZo1eNpBz7sr3xkOYMli378EUBG75Xggyiaj50ltBS3QhMdGO1bIN75avkqiUnpRXcC4ljl0wSOtM2h_OMTq6AO1B2m9zHaW1mCk5mPS1r7fWrG6lbn12kb8UgjQbcOSfXiXpaWLW-c-UaMBh4uxQgLtA5u6ysy8tZe-eYgEgOPgICeHbhCfU65zzMNMkq07dPT-JG0Cevqg56Ml7YQWEDp7uCNvN1VWcUUwYCyzSf2ZAPk"/>
+</div>
+</div>
+<div class="space-y-4">
+<h1 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight leading-tight">
+                    The Electric <span class="text-primary">Kettle</span> Chef
+                </h1>
+<p class="text-on-surface-variant text-lg leading-relaxed font-medium">
+                    Recipes curated for hostel living.<br/>
+<span class="text-on-surface">No stove? No problem.</span>
+</p>
+</div>
+<div class="w-full grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col items-center space-y-2 border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-3xl">bolt</span>
+<span class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Quick Prep</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl flex flex-col items-center space-y-2 border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary text-3xl">eco</span>
+<span class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Hostel Friendly</span>
+</div>
+</div>
+</div>
+</main>
+<footer class="fixed bottom-0 left-0 w-full p-8 bg-gradient-to-t from-surface via-surface to-transparent">
+<div class="max-w-md mx-auto flex flex-col items-center space-y-8">
+<div class="flex items-center space-x-3">
+<div class="h-1.5 w-4 rounded-full bg-surface-container-highest"></div>
+<div class="h-1.5 w-10 rounded-full bg-primary"></div>
+<div class="h-1.5 w-4 rounded-full bg-surface-container-highest"></div>
+<div class="h-1.5 w-4 rounded-full bg-surface-container-highest"></div>
+<div class="h-1.5 w-4 rounded-full bg-surface-container-highest"></div>
+</div>
+<button class="w-full h-14 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold text-lg rounded-2xl shadow-[0_4px_20px_rgba(164,55,0,0.25)] flex items-center justify-center space-x-2 active:scale-95 transition-all duration-200">
+<span>Next</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 600">arrow_forward</span>
+</button>
+</div>
+</footer>
+</body></html>

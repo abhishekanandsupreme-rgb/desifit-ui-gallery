@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit - Weekly Jugaad Planner</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f9f9f9",
+                    "inverse-surface": "#2f3131",
+                    "surface-container": "#eeeeee",
+                    "secondary": "#1b6d24",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "on-surface-variant": "#5a4138",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "primary-fixed-dim": "#ffb59a",
+                    "surface-tint": "#a83900",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-error-container": "#93000a",
+                    "outline": "#8f7066",
+                    "secondary-fixed-dim": "#88d982",
+                    "tertiary-container": "#0072e4",
+                    "surface-container-high": "#e8e8e8",
+                    "secondary-container": "#a0f399",
+                    "on-primary-fixed-variant": "#802a00",
+                    "on-secondary-fixed": "#002204",
+                    "on-secondary-fixed-variant": "#005312",
+                    "tertiary": "#005ab7",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#001b3f",
+                    "on-tertiary-container": "#fefcff",
+                    "background": "#f9f9f9",
+                    "primary-fixed": "#ffdbcf",
+                    "outline-variant": "#e3bfb2",
+                    "on-background": "#1a1c1c",
+                    "surface-dim": "#dadada",
+                    "surface-container-low": "#f3f3f3",
+                    "inverse-on-surface": "#f0f1f1",
+                    "tertiary-fixed": "#d7e2ff",
+                    "on-primary-fixed": "#380d00",
+                    "primary": "#a43700",
+                    "surface-variant": "#e2e2e2",
+                    "primary-container": "#cd4700",
+                    "on-surface": "#1a1c1c",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#217128",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#a3f69c",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f9f9f9",
+                    "on-primary-container": "#fffbff",
+                    "inverse-primary": "#ffb59a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-background font-body min-h-screen pb-32">
+<!-- Top Bar: Shared Component [TopAppBar] -->
+<header class="w-full top-0 sticky z-50 bg-[#F9F9F9] dark:bg-neutral-900 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Profile" data-alt="close-up portrait of a young Indian man with a friendly smile, natural sunlight, warm skin tones, professional photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2cFCAOWRL3n3JW-UnlH_u67Kq7bGlpIRh_jLGYt5pO5YpL16ptmnbTCQP0XPIL2tzPluxn4-mmzYZzxSoDCzfeixv925tLFLjkVvdhp55sdOVmAelA7Z0FgGfpiPX2BO46hlBkxYwytUACnG23JC9PED1GnwQprZBou1IZsbVEkxiFCaZEFuZrEUoSFPoM1eF2L0Z7thZfUib6zT5V2GGZiBPihPMonRh3qfVu7b8fIwB9Gy5pivOJYXde5kyGoscP4E3aG1KhMw"/>
+</div>
+<h1 class="font-['Plus_Jakarta_Sans'] font-extrabold text-[#A43700] dark:text-[#E65100] tracking-tight text-lg">Fuel &amp; Fit</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-[#F3F3F3] dark:hover:bg-neutral-800 transition-colors scale-95 active:duration-150">
+<span class="material-symbols-outlined text-neutral-500">settings</span>
+</button>
+</header>
+<main class="px-6 max-w-2xl mx-auto space-y-8 mt-4">
+<!-- Page Title Section -->
+<section>
+<h2 class="font-headline font-bold text-2xl text-on-surface tracking-tight">Weekly Jugaad Planner</h2>
+<p class="text-on-surface-variant text-sm mt-1">Budget protein hacks for the modern Desi.</p>
+</section>
+<!-- Weekly Calendar: Horizontal Scroll -->
+<section class="overflow-x-auto hide-scrollbar -mx-6 px-6">
+<div class="flex gap-3">
+<!-- Days of the week -->
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 bg-surface-container-low rounded-2xl transition-all">
+<span class="text-xs font-semibold text-neutral-500">MON</span>
+<span class="text-lg font-bold text-on-surface">12</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 bg-primary-container text-on-primary-container rounded-2xl shadow-lg shadow-primary/20 transition-all border-b-4 border-primary">
+<span class="text-xs font-semibold opacity-80">TUE</span>
+<span class="text-lg font-bold">13</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 bg-surface-container-low rounded-2xl transition-all">
+<span class="text-xs font-semibold text-neutral-500">WED</span>
+<span class="text-lg font-bold text-on-surface">14</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 bg-surface-container-low rounded-2xl transition-all">
+<span class="text-xs font-semibold text-neutral-500">THU</span>
+<span class="text-lg font-bold text-on-surface">15</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 bg-surface-container-low rounded-2xl transition-all">
+<span class="text-xs font-semibold text-neutral-500">FRI</span>
+<span class="text-lg font-bold text-on-surface">16</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 bg-surface-container-low rounded-2xl transition-all">
+<span class="text-xs font-semibold text-neutral-500">SAT</span>
+<span class="text-lg font-bold text-on-surface">17</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 bg-surface-container-low rounded-2xl transition-all">
+<span class="text-xs font-semibold text-neutral-500">SUN</span>
+<span class="text-lg font-bold text-on-surface">18</span>
+</div>
+</div>
+</section>
+<!-- Daily Summary Card: Bento Style -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-sm flex flex-col gap-1">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Projected Cost</span>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-extrabold text-on-surface">₹85</span>
+<span class="text-xs text-secondary font-medium">Daily Budget</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-sm flex flex-col gap-1">
+<span class="text-xs font-bold text-secondary uppercase tracking-wider">Projected Protein</span>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-extrabold text-on-surface">55g</span>
+<span class="text-xs text-primary font-medium">Goal Met</span>
+</div>
+</div>
+</section>
+<!-- Meal Slots: Asymmetric List -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline font-bold text-xl">Today's Hacks</h3>
+<span class="text-xs font-medium text-on-surface-variant bg-surface-container px-3 py-1 rounded-full">4 Slots Filled</span>
+</div>
+<!-- Breakfast -->
+<div class="relative group">
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex items-stretch">
+<div class="w-24 bg-primary-fixed flex flex-col items-center justify-center p-2 text-center">
+<span class="material-symbols-outlined text-primary mb-1">breakfast_dining</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-on-primary-fixed">Breakfast</span>
+</div>
+<div class="flex-1 p-4 flex flex-col justify-center">
+<h4 class="font-bold text-on-surface">Sattu Drink + 2 Bananas</h4>
+<div class="flex gap-4 mt-1">
+<span class="text-xs font-semibold text-primary">₹15</span>
+<span class="text-xs font-semibold text-secondary">12g Protein</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Lunch -->
+<div class="relative group">
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex items-stretch">
+<div class="w-24 bg-secondary-fixed flex flex-col items-center justify-center p-2 text-center">
+<span class="material-symbols-outlined text-secondary mb-1">lunch_dining</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-on-secondary-fixed">Lunch</span>
+</div>
+<div class="flex-1 p-4 flex flex-col justify-center">
+<h4 class="font-bold text-on-surface">Kettle Soya Pulao</h4>
+<div class="flex gap-4 mt-1">
+<span class="text-xs font-semibold text-primary">₹25</span>
+<span class="text-xs font-semibold text-secondary">18g Protein</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dinner -->
+<div class="relative group">
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex items-stretch">
+<div class="w-24 bg-tertiary-fixed flex flex-col items-center justify-center p-2 text-center">
+<span class="material-symbols-outlined text-tertiary mb-1">dinner_dining</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-on-tertiary-fixed">Dinner</span>
+</div>
+<div class="flex-1 p-4 flex flex-col justify-center">
+<h4 class="font-bold text-on-surface">Boiled Egg Chaat</h4>
+<div class="flex gap-4 mt-1">
+<span class="text-xs font-semibold text-primary">₹20</span>
+<span class="text-xs font-semibold text-secondary">14g Protein</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Snack -->
+<div class="relative group">
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex items-stretch border-l-4 border-outline-variant">
+<div class="w-24 bg-surface-container-low flex flex-col items-center justify-center p-2 text-center">
+<span class="material-symbols-outlined text-outline mb-1">cookie</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-on-surface-variant">Snack</span>
+</div>
+<div class="flex-1 p-4 flex flex-col justify-center">
+<h4 class="font-bold text-on-surface">Handful Peanuts</h4>
+<div class="flex gap-4 mt-1">
+<span class="text-xs font-semibold text-primary">₹5</span>
+<span class="text-xs font-semibold text-secondary">8g Protein</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Buttons -->
+<section class="flex flex-col gap-4 py-4">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(164,55,0,0.2)] active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+                Add Meal
+            </button>
+<button class="w-full border-2 border-secondary text-secondary py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-secondary-container/10 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                Auto-Fill with Budget Hacks
+            </button>
+</section>
+</main>
+<!-- Navigation Shell: Shared Component [BottomNavBar] -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-2xl bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-t border-neutral-100 dark:border-neutral-800 shadow-[0_-4px_20px_rgba(164,55,0,0.08)] flex justify-around items-center h-20 px-4 pb-safe">
+<!-- Planner Item (Active) -->
+<div class="flex flex-col items-center justify-center bg-[#CD4700]/10 text-[#A43700] rounded-2xl px-4 py-1 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-['Inter'] text-xs font-semibold">Planner</span>
+</div>
+<!-- Recipes Item -->
+<div class="flex flex-col items-center justify-center text-neutral-500 hover:text-[#A43700] transition-all">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-['Inter'] text-xs font-semibold">Recipes</span>
+</div>
+<!-- Budget Item -->
+<div class="flex flex-col items-center justify-center text-neutral-500 hover:text-[#A43700] transition-all">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Inter'] text-xs font-semibold">Budget</span>
+</div>
+<!-- Profile Item -->
+<div class="flex flex-col items-center justify-center text-neutral-500 hover:text-[#A43700] transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-xs font-semibold">Profile</span>
+</div>
+</nav>
+</body></html>

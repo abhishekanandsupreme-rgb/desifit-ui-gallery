@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit - Protein-per-Rupee Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#001b3f",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e2e2e2",
+                    "primary-fixed-dim": "#ffb59a",
+                    "surface-container-high": "#e8e8e8",
+                    "on-background": "#1a1c1c",
+                    "on-secondary-fixed-variant": "#005312",
+                    "inverse-primary": "#ffb59a",
+                    "outline-variant": "#e3bfb2",
+                    "on-surface-variant": "#5a4138",
+                    "primary-fixed": "#ffdbcf",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#a3f69c",
+                    "tertiary": "#005ab7",
+                    "secondary": "#1b6d24",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-secondary-fixed": "#002204",
+                    "surface-container-low": "#f3f3f3",
+                    "surface": "#f9f9f9",
+                    "outline": "#8f7066",
+                    "secondary-container": "#a0f399",
+                    "secondary-fixed-dim": "#88d982",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "background": "#f9f9f9",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#802a00",
+                    "surface-tint": "#a83900",
+                    "primary": "#a43700",
+                    "inverse-surface": "#2f3131",
+                    "on-primary-container": "#fffbff",
+                    "on-secondary-container": "#217128",
+                    "surface-dim": "#dadada",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "on-tertiary-container": "#fefcff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#d7e2ff",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "surface-container": "#eeeeee",
+                    "tertiary-container": "#0072e4",
+                    "primary-container": "#cd4700",
+                    "on-primary-fixed": "#380d00",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f9f9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #a43700 0%, #cd4700 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-sm flex justify-between items-center px-4 py-2 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a fit indian woman in athletic wear smiling confidently with bright morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8dVvVJW_dey7qvULAEy2BHk8MmOkE7xEjZU_QIXlPbADcWuPRQ02TfyzbuJ7CWsru31UC4TLdPHx0pSveIbace9kDjfK_X5UxI-75-rhhepZG3IxyX0I5ed5tNIUaGTGfc2_-HnOIuQykL4rvsjvZgI6sKGKXGSDMKdnLN4aLyglyCAvQApVlICTbVTyfmPz-9vPPOsf84ZztjE1e5BwLoVQzFUqp8dR3ECWOMJFGW5ig3d2Qn14rbVmSdKjDqbVuF4XRhIFDXLc"/>
+</div>
+<span class="text-xl font-bold text-orange-900 dark:text-orange-100 font-headline tracking-tight">DesiFit</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-orange-700 dark:text-orange-500 transition-all duration-300 active:scale-95 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</nav>
+<main class="pt-20 pb-24 px-4 max-w-2xl mx-auto">
+<!-- Hero Section: Editorial Header -->
+<header class="mb-8">
+<div class="inline-block px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-semibold mb-3">
+                BUDGET KINGS
+            </div>
+<h1 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2 leading-none">The Protein Pesa Index</h1>
+<p class="text-on-surface-variant leading-relaxed">Who is getting the most gains for every rupee spent? Indian protein hacks revealed.</p>
+</header>
+<!-- Podium: Top 3 Bento -->
+<div class="grid grid-cols-12 gap-3 mb-10">
+<!-- Rank 1 -->
+<div class="col-span-12 bg-surface-container-lowest p-6 rounded-3xl relative overflow-hidden shadow-sm">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="flex items-end gap-4 mb-4">
+<div class="relative">
+<div class="w-20 h-20 rounded-2xl overflow-hidden border-4 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="headshot of a smiling young man wearing a saffron-colored sports jersey in a bright studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6-T4mU6C_8qV0X1uHsIwrdY6M59Uz-VWFobMzJP8o1DXcAsa-h6jEm9LLfqFn26dFHvKHNgXVk6nt0NV1DbArvAYj_1xsfLlvmwmWgRVVHa9rK4g03C4HfxY4y9tD8TWLL9TSFCIaF6kD2GUv7rNckyCqarSOBrnQL8CwVM9qB6yEZ9jshm73Lv6-zYxAm48YBtrnS4Tbi2onqfFXb2sYO2lqU1l_t0V0tFMN_HPYBVROsgN-vUE6WpMR5pDhdJL0H8KJl6hPIts"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm">1</div>
+</div>
+<div>
+<h3 class="font-headline font-bold text-xl">Arjun M.</h3>
+<div class="flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-sm" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+                            Sattu Samrat
+                        </div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-outline-variant/15 pt-4">
+<div>
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-wider">Efficiency</p>
+<p class="text-2xl font-black text-primary">₹2.4 <span class="text-sm font-normal">/ g</span></p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-wider">Daily Protein</p>
+<p class="text-2xl font-black text-on-surface">142g</p>
+</div>
+</div>
+</div>
+<!-- Rank 2 & 3 -->
+<div class="col-span-6 bg-surface-container-low p-5 rounded-3xl shadow-sm">
+<div class="w-14 h-14 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover" data-alt="portrait of a focused young woman with her hair in a bun exercising at an outdoor indian park" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA79bZ9hh0SihpDjR0WN1SbAtqVx_sO5vHYpmYtQZ8sf4nL7ypk2m8tNeRIKGO6A2sNDTHwqdeZEl8pBJzPD2RpTG-Vdc4gO189Kt3hQQOVjN8YNoWZyN-Xj9vZA9-GQPtEFLkblWgnxgmBorsRnpdBMTHxfCVw28AAK7BTEHIYxpZQKi441pfYfWSc21sGfoYaDZvTxsaSnu4G8-dtHDybU74bhcR3M6djuEV7BIYejAaSCw2U-17xxo52TQ3nPIU9aQLjJolH0uk"/>
+</div>
+<p class="font-bold truncate text-on-surface">Priya Sharma</p>
+<div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+<span class="material-symbols-outlined text-[14px]" data-icon="token">token</span>
+                    Soya Sardar
+                </div>
+<p class="text-xl font-black text-primary">₹3.1 <span class="text-xs font-normal">/ g</span></p>
+</div>
+<div class="col-span-6 bg-surface-container-low p-5 rounded-3xl shadow-sm">
+<div class="w-14 h-14 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover" data-alt="middle aged man in workout gear looking at camera with a confident expression in a bright gym" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDzLa9YZ9JiOa9IDbPa1sl1jH49gRoumefNRaFQ2L2v5cRKTNSZ6uUHTEcSY7A_qdJ1NrVsUhlLNvSskJ13Ju0u6sjzWluIe1naRrsUwhDbSp7lR4GcmAwC6Y62GxP5EV6X2GqN1WSCLJjEVayFss5GxPT3uE5LXGW5VdtDF5JA0NrI5qLKBg8VnTzM21OwVHZodv6KlPpryhXySbgqmHPuSYo26XZv5JI1Bqxfj-pjamylzQFC2RGGZJnlhaLg55KEcYCZhLxggw"/>
+</div>
+<p class="font-bold truncate text-on-surface">Rajiv Kapur</p>
+<div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+<span class="material-symbols-outlined text-[14px]" data-icon="star">star</span>
+                    Dal Defender
+                </div>
+<p class="text-xl font-black text-primary">₹3.8 <span class="text-xs font-normal">/ g</span></p>
+</div>
+</div>
+<!-- Leaderboard List -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline font-bold text-xl">The Contenders</h2>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 rounded-full bg-surface-container-highest text-xs font-bold text-on-surface-variant">Weekly</button>
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary text-xs font-bold">All-Time</button>
+</div>
+</div>
+<div class="space-y-3">
+<!-- User Row -->
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-2xl transition-all duration-300 active:scale-[0.98] hover:bg-surface-container-low cursor-pointer">
+<span class="font-black text-on-surface-variant w-4">4</span>
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high shrink-0">
+<img class="w-full h-full object-cover" data-alt="portrait of a young indian man in a white tee shirt with a soft smiling gaze and warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdRhgqCFIoF_IJd92l29EpcriwFKUFouWqj3wFuU8m8Liq-yg-9M6UURxPAMwdOOnCElfSxZNOPczjuMImkGrwd1TEuwPDVBf9awjtveckdsp-KKxxNAhq_DUS5MGlpi_jrjRTTHouSE3RFt_zKwKjyL7Xi3bA8rlidFmC3ocTiNXwfJ_TgYU64oMVJyORZ7rz1WeYgZRBNWp-8kaW3xl_ViDu5i2seq0f9wWGE00a0bD-meDaM-0tKqc5TO3qHIVLRsYxKN5Vkt8"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-bold text-on-surface truncate">Vikram Singh</p>
+<p class="text-xs text-on-surface-variant">Whey Warrior</p>
+</div>
+<div class="text-right">
+<p class="font-black text-on-surface">₹4.2/g</p>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-tighter">120g Daily</p>
+</div>
+</div>
+<!-- User Row: Budget King Highlight -->
+<div class="flex items-center gap-4 bg-orange-50/50 dark:bg-orange-900/10 p-4 rounded-2xl border-l-4 border-primary">
+<span class="font-black text-primary w-4">5</span>
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high shrink-0">
+<img class="w-full h-full object-cover" data-alt="portrait of a woman in athletic clothing with natural lighting looking away thoughtfully" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7yK1um72xDDZCaYhADugsNuu3QUDOSCbIs4OJa6E4_8jImz2148LueQLVnGa1vjGvYh8yW2R9xaCXHup9HodxiBDPkD7_5JpwuoRZiZewl8yDZAVh8wLkIxq-eJ1s1qj21vvnuRTvy-0yNY0TQ87HWZ664VtcLL_n53QQZi5OK2wl-uQRpeL2ba6QFs32qfpZwXTIPXtLjTJ06VaUMnoQqrhQI3qL_tTwzEpA_FcjjvELpox-u8w0mDG3s3Ma9NSwdHh-cslQcbQ"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-bold text-on-surface truncate">Sneha Roy</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[14px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<p class="text-xs text-primary font-bold">Paneer Pro</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-black text-on-surface">₹4.5/g</p>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-tighter">98g Daily</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-2xl">
+<span class="font-black text-on-surface-variant w-4">6</span>
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high shrink-0">
+<img class="w-full h-full object-cover" data-alt="headshot of an indian male with a short beard looking directly at the camera with soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASXDDl-ZnVUmaEefvTl1QLBgJmuDdaEsgIwys6ySe_hW2_hWAbzjC5ANs1Ke7-lHGSop6Ieh74DNlezj3Plq7MP_ZGaLSSN6iB7Dqt8wltstoz1tg_YXohsLFMC3Mn4j2FakR97Q41tWMRRHq2JU6crWM9Cw6PPw8iuBeHESJ4xPNjz9j6y02tcQFpTCCBVhLdIqV9nS_3Ku-V5WDOg1KJJV_Pvy6Nfs0Z4KpelGqsZAF-4dJ2bsFplMuQYu3ARMJaeHQ97Pm4CVg"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-bold text-on-surface truncate">Karan Oberoi</p>
+<p class="text-xs text-on-surface-variant">Egg Enthusiast</p>
+</div>
+<div class="text-right">
+<p class="font-black text-on-surface">₹5.1/g</p>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-tighter">105g Daily</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Budget Kings Tip Card -->
+<section class="mt-12 mb-8 p-6 editorial-gradient rounded-[2rem] text-on-primary shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16 blur-2xl"></div>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-4xl mb-4" data-icon="tips_and_updates">tips_and_updates</span>
+<h3 class="font-headline text-2xl font-bold mb-2">Want to top the leaderboard?</h3>
+<p class="text-primary-fixed leading-relaxed mb-6">The "Sattu Samrat" badge is unlocked by achieving 25g+ protein for under ₹20. Try adding roasted Chana to your morning shake.</p>
+<button class="bg-white text-primary px-6 py-3 rounded-xl font-bold text-sm transition-transform active:scale-95 shadow-sm">VIEW BUDGET HACKS</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<footer class="fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<div class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-5 py-1.5 transition-transform duration-200 active:scale-90 hover:text-orange-600">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-5 py-1.5 transition-transform duration-200 active:scale-90 hover:text-orange-600">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Recipes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-5 py-1.5 transition-transform duration-200 active:scale-90 hover:text-orange-600">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Coach</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 rounded-2xl px-5 py-1.5 transition-transform duration-200 active:scale-90">
+<span class="material-symbols-outlined" data-icon="leaderboard" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Rank</span>
+</div>
+</footer>
+</body></html>

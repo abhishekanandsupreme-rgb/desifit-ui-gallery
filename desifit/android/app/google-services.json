@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "652471571975",
+    "project_id": "desifit-app",
+    "storage_bucket": "desifit-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652471571975:android:9cfcb40b144b3a3b9a3ca2",
+        "android_client_info": {
+          "package_name": "com.desifit.app.desifit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwnU0Ch7WBERyxgPzCUNRC4Nc0BYbCFqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

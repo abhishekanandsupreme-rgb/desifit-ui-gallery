@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#a3f69c",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-variant": "#e2e2e2",
+                    "primary-fixed-dim": "#ffb59a",
+                    "outline-variant": "#e3bfb2",
+                    "surface-tint": "#a83900",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-bright": "#f9f9f9",
+                    "on-primary-fixed-variant": "#802a00",
+                    "surface": "#f9f9f9",
+                    "primary-fixed": "#ffdbcf",
+                    "primary-container": "#cd4700",
+                    "on-primary-container": "#fffbff",
+                    "tertiary": "#005ab7",
+                    "tertiary-container": "#0072e4",
+                    "on-tertiary-container": "#fefcff",
+                    "on-secondary-container": "#217128",
+                    "on-primary-fixed": "#380d00",
+                    "inverse-primary": "#ffb59a",
+                    "on-secondary-fixed-variant": "#005312",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#a0f399",
+                    "on-secondary": "#ffffff",
+                    "outline": "#8f7066",
+                    "secondary-fixed-dim": "#88d982",
+                    "inverse-on-surface": "#f0f1f1",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#5a4138",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#d7e2ff",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "on-secondary-fixed": "#002204",
+                    "secondary": "#1b6d24",
+                    "on-tertiary-fixed": "#001b3f",
+                    "background": "#f9f9f9",
+                    "surface-dim": "#dadada",
+                    "surface-container": "#eeeeee",
+                    "inverse-surface": "#2f3131",
+                    "primary": "#a43700",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-clay-glow {
+            text-shadow: 0 0 20px rgba(164, 55, 0, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-hidden">
+<!-- Top Navigation Anchor (Minimal for Onboarding) -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 h-20 bg-gradient-to-b from-surface to-transparent">
+<span class="font-headline font-extrabold text-2xl tracking-tighter text-primary">FitCraft</span>
+<button class="text-on-surface-variant font-semibold text-sm hover:text-primary transition-colors">Skip</button>
+</header>
+<main class="relative h-screen w-full flex flex-col items-center">
+<!-- Editorial Image Section (Bleeding layout) -->
+<div class="relative w-full h-[486px] overflow-hidden rounded-b-[3rem] shadow-[0_10px_40px_rgba(164,55,0,0.1)]">
+<img alt="Group of diverse Indian students laughing and sharing a healthy meal in a cozy dorm room" class="w-full h-full object-cover" data-alt="Candid shot of happy university students sitting on the floor sharing a home-cooked healthy meal, warm sunbeams lighting the dorm room, cozy aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4G7T19q1FpSB2tddyrSETCXb7KuuAsKP_tGT_aG6GQ0ehYz0SNg-zuf-VvIs5OzoBQk9_E6FvtIIvLErOkE3yK6MtnUt0GcVJCyWj6nDY7-mnFireOqD1JA-6eFtNc2YM2agfEbQHfijCm7TFbnOPZVRms1sP-QajCp5jzU85yiJfS_bskv_BgI2dBG8yz3Wz7rBL0IZz8q1KSD_G0KG2QRDkJO1lS7MyQAQt55z7F5RrGRggHtMtZQrVldHoes6PgAt15eejB8M"/>
+<!-- Tonal Layering Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent"></div>
+<!-- Floating Hack Card (Bento-style snippet) -->
+<div class="absolute bottom-10 left-6 right-6 bg-surface-container-lowest/90 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<p class="text-xs font-bold text-secondary uppercase tracking-widest">Trending Hack</p>
+<p class="text-sm font-semibold">"Hostel-style Oats with Desi Jaggery"</p>
+</div>
+</div>
+</div>
+<!-- Content Section -->
+<div class="flex-1 w-full max-w-lg px-8 pt-10 flex flex-col items-center text-center">
+<h1 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface mb-4">
+                Jugaad Community
+            </h1>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-[320px]">
+                Share your budget hacks and see what others are cooking in their dorms.
+            </p>
+<!-- Progress & Controls Footer -->
+<div class="mt-auto pb-12 w-full flex flex-col items-center gap-8">
+<!-- Progress Dots -->
+<div class="flex gap-2.5">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<!-- Step 4 Active -->
+<div class="w-8 h-2 rounded-full bg-primary-container"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<!-- Next Button (Fired Clay Shine Gradient) -->
+<button class="w-full h-[64px] bg-gradient-to-br from-primary to-primary-container rounded-2xl flex items-center justify-center gap-3 text-white font-bold text-lg shadow-[0_4px_20px_rgba(164,55,0,0.25)] active:scale-95 transition-transform duration-200">
+                    Next
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Background Decorative Element (Organic Leaf Tinge) -->
+<div class="fixed -bottom-20 -left-20 w-64 h-64 bg-secondary-container/10 rounded-full blur-[80px] -z-10"></div>
+<div class="fixed top-1/2 -right-20 w-48 h-48 bg-primary-fixed/20 rounded-full blur-[100px] -z-10"></div>
+</body></html>

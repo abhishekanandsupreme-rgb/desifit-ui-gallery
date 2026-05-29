@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit - Budget Grocery List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#001b3f",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e2e2e2",
+                    "primary-fixed-dim": "#ffb59a",
+                    "surface-container-high": "#e8e8e8",
+                    "on-background": "#1a1c1c",
+                    "on-secondary-fixed-variant": "#005312",
+                    "inverse-primary": "#ffb59a",
+                    "outline-variant": "#e3bfb2",
+                    "on-surface-variant": "#5a4138",
+                    "primary-fixed": "#ffdbcf",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#a3f69c",
+                    "tertiary": "#005ab7",
+                    "secondary": "#1b6d24",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-secondary-fixed": "#002204",
+                    "surface-container-low": "#f3f3f3",
+                    "surface": "#f9f9f9",
+                    "outline": "#8f7066",
+                    "secondary-container": "#a0f399",
+                    "secondary-fixed-dim": "#88d982",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "background": "#f9f9f9",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#802a00",
+                    "surface-tint": "#a83900",
+                    "primary": "#a43700",
+                    "inverse-surface": "#2f3131",
+                    "on-primary-container": "#fffbff",
+                    "on-secondary-container": "#217128",
+                    "surface-dim": "#dadada",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "on-tertiary-container": "#fefcff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#d7e2ff",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "surface-container": "#eeeeee",
+                    "tertiary-container": "#0072e4",
+                    "primary-container": "#cd4700",
+                    "on-primary-fixed": "#380d00",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f9f9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center px-4 py-2 w-full max-w-5xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a fit South Asian man smiling, warm natural lighting, professional fitness coach look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALZxwvjbtISGqXcYRrCPR1iRKbfQkrnmh2LvQTBMxZUZDXKdmDee0HUoLywkMmBYkmeefjc_ZeaonKiauRtyYPYoCPVlZFdV3viIr55ITXyLxP1GFjXqam7NCjHHYxE-4VfaxtvKWZwP8mOOqpv0aybl5PGMZFR2vW0LL74hdR5-RSEy63lCtxbVaaXYVHNbY25mfp-YqX2YVmczGl-06HLxOSH8VFVqXMEwfnecpzK75ASdOg-eu99U197sWuvP0uYLgSwFwipxM"/>
+</div>
+<span class="text-xl font-bold text-orange-900 dark:text-orange-100 font-['Plus_Jakarta_Sans'] tracking-tight">DesiFit</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 active:scale-95 hover:bg-zinc-100/50">
+<span class="material-symbols-outlined text-orange-700">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-20 px-4 max-w-5xl mx-auto">
+<!-- Hero Section: Editorial Style -->
+<section class="py-6">
+<div class="relative overflow-hidden rounded-3xl bg-surface-container-low p-8 mb-8">
+<div class="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
+<img alt="Grains" class="w-full h-full object-cover" data-alt="Top down view of various Indian pulses and grains in terracotta bowls, warm earthy tones, rustic texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGk-P_0bpfgSaBcej7auzgC-gt1rG0IWcVh6thFJgccLkFyvOj1CMFfcvdHkbTdxe4jMEtocEGE8Z4MrzlGvPFv54hRi8CRb819Mo5_w0293IcIFfU5bAuSm9l5lIW6z2gE1yqlHztig-M3JVyoX3xfyZky17YuFxqlrX7JemNWLFgYXPH4dhbDbpx-492dLiRtQfSDmOPY0UyNu3J9HFAzZWAGTs4iAxu1RCImJaSZOIPQLkmNcX2fwAk_fUjrdW-31HmnGSaVjw"/>
+</div>
+<div class="relative z-10">
+<span class="text-secondary font-bold text-sm tracking-widest uppercase mb-2 block">Value Hunt</span>
+<h1 class="text-4xl md:text-5xl font-extrabold text-on-background tracking-tighter leading-none mb-4">
+                        Protein <br/><span class="text-primary">On A Budget</span>
+</h1>
+<p class="text-on-surface-variant max-w-md body-md leading-relaxed">
+                        Maximizing your gains shouldn't break the bank. We've ranked India's best protein sources by their Protein-per-Rupee value.
+                    </p>
+</div>
+</div>
+<!-- Bento Grid - Market Insights -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+<!-- Highlight Card -->
+<div class="md:col-span-2 bg-primary-container p-6 rounded-3xl text-on-primary-container flex flex-col justify-between min-h-[160px]">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-4xl">trending_down</span>
+<span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold">MARKET LOW</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold tracking-tight">Soya Chunks</h3>
+<p class="opacity-90 text-sm">Cheapest high-quality protein currently available in local markets.</p>
+</div>
+</div>
+<!-- Mini Metric Card -->
+<div class="bg-secondary-container p-6 rounded-3xl text-on-secondary-container flex flex-col items-center justify-center text-center">
+<span class="text-3xl font-bold">₹1.2</span>
+<span class="text-xs font-semibold uppercase tracking-wider opacity-80">Avg. Per Gram Protein</span>
+</div>
+</div>
+<!-- Grocery List - Asymmetric Table/Card hybrid -->
+<div class="space-y-4">
+<div class="flex justify-between items-end px-2 mb-2">
+<h2 class="text-2xl font-bold text-on-background tracking-tight">Protein Catalog</h2>
+<span class="text-xs text-outline font-medium">Prices updated 2h ago</span>
+</div>
+<!-- Protein Items -->
+<div class="grid gap-4">
+<!-- Item 1: Soya Chunks -->
+<div class="group bg-surface-container-lowest p-5 rounded-3xl flex flex-col md:flex-row md:items-center gap-6 transition-all hover:bg-surface-bright shadow-sm">
+<div class="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">egg_alt</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-lg font-bold text-on-surface leading-none mb-1">Soya Chunks</h4>
+<span class="text-xs font-semibold text-secondary-fixed-dim bg-secondary/10 px-2 py-0.5 rounded-md">High Protein Density</span>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-on-surface">₹110/kg</p>
+<p class="text-[10px] text-outline font-bold uppercase tracking-tighter">Market Price</p>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Value Ratio</span>
+<span class="text-sm font-bold text-primary">₹0.21 / g Protein</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Protein/100g</span>
+<span class="text-sm font-bold text-on-surface">52g</span>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                    Add
+                                </button>
+</div>
+</div>
+</div>
+<!-- Item 2: Sattu -->
+<div class="group bg-surface-container-lowest p-5 rounded-3xl flex flex-col md:flex-row md:items-center gap-6 transition-all hover:bg-surface-bright shadow-sm">
+<div class="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">grain</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-lg font-bold text-on-surface leading-none mb-1">Sattu (Roasted Gram)</h4>
+<span class="text-xs font-semibold text-tertiary bg-tertiary-fixed px-2 py-0.5 rounded-md">Desi Superfood</span>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-on-surface">₹160/kg</p>
+<p class="text-[10px] text-outline font-bold uppercase tracking-tighter">Market Price</p>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Value Ratio</span>
+<span class="text-sm font-bold text-primary">₹0.80 / g Protein</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Protein/100g</span>
+<span class="text-sm font-bold text-on-surface">20g</span>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                    Add
+                                </button>
+</div>
+</div>
+</div>
+<!-- Item 3: Eggs -->
+<div class="group bg-surface-container-lowest p-5 rounded-3xl flex flex-col md:flex-row md:items-center gap-6 transition-all hover:bg-surface-bright shadow-sm">
+<div class="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">egg</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-lg font-bold text-on-surface leading-none mb-1">Eggs</h4>
+<span class="text-xs font-semibold text-secondary-fixed-dim bg-secondary/10 px-2 py-0.5 rounded-md">Bioavailable Gold</span>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-on-surface">₹72/dozen</p>
+<p class="text-[10px] text-outline font-bold uppercase tracking-tighter">Market Price</p>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Value Ratio</span>
+<span class="text-sm font-bold text-primary">₹1.00 / g Protein</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Protein/Egg</span>
+<span class="text-sm font-bold text-on-surface">6g</span>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                    Add
+                                </button>
+</div>
+</div>
+</div>
+<!-- Item 4: Peanuts -->
+<div class="group bg-surface-container-lowest p-5 rounded-3xl flex flex-col md:flex-row md:items-center gap-6 transition-all hover:bg-surface-bright shadow-sm">
+<div class="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">eco</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-lg font-bold text-on-surface leading-none mb-1">Peanuts</h4>
+<span class="text-xs font-semibold text-outline bg-surface-container-high px-2 py-0.5 rounded-md">Energy Dense</span>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-on-surface">₹140/kg</p>
+<p class="text-[10px] text-outline font-bold uppercase tracking-tighter">Market Price</p>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Value Ratio</span>
+<span class="text-sm font-bold text-primary">₹0.54 / g Protein</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Protein/100g</span>
+<span class="text-sm font-bold text-on-surface">26g</span>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                    Add
+                                </button>
+</div>
+</div>
+</div>
+<!-- Item 5: Curd -->
+<div class="group bg-surface-container-lowest p-5 rounded-3xl flex flex-col md:flex-row md:items-center gap-6 transition-all hover:bg-surface-bright shadow-sm">
+<div class="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">bakery_dining</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-lg font-bold text-on-surface leading-none mb-1">Curd (Homemade)</h4>
+<span class="text-xs font-semibold text-secondary-fixed-dim bg-secondary/10 px-2 py-0.5 rounded-md">Gut Health Focus</span>
+</div>
+<div class="text-right">
+<p class="text-lg font-bold text-on-surface">₹60/kg</p>
+<p class="text-[10px] text-outline font-bold uppercase tracking-tighter">Market Price</p>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Value Ratio</span>
+<span class="text-sm font-bold text-primary">₹1.50 / g Protein</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline font-bold uppercase tracking-tighter">Protein/100g</span>
+<span class="text-sm font-bold text-on-surface">4g</span>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                                    Add
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar from JSON -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<div class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-5 py-1.5 transition-transform duration-200 active:scale-90 hover:text-orange-600">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Home</span>
+</div>
+<!-- Recipes active because we are looking at grocery/food lists -->
+<div class="flex flex-col items-center justify-center bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 rounded-2xl px-5 py-1.5 transition-transform duration-200 active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Recipes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-5 py-1.5 transition-transform duration-200 active:scale-90 hover:text-orange-600">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Coach</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-5 py-1.5 transition-transform duration-200 active:scale-90 hover:text-orange-600">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Rank</span>
+</div>
+</nav>
+<!-- Contextual Floating Action Button -->
+<div class="fixed bottom-24 right-6 z-40">
+<button class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-white shadow-[0_4px_20px_rgba(164,55,0,0.2),0_8px_40px_rgba(0,0,0,0.1)] flex items-center justify-center transition-all duration-300 active:scale-90 group overflow-hidden relative">
+<span class="material-symbols-outlined text-2xl relative z-10">shopping_basket</span>
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+</div>
+</body></html>

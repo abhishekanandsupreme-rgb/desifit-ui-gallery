@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit - AI Dietitian</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#001b3f",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e2e2e2",
+                    "primary-fixed-dim": "#ffb59a",
+                    "surface-container-high": "#e8e8e8",
+                    "on-background": "#1a1c1c",
+                    "on-secondary-fixed-variant": "#005312",
+                    "inverse-primary": "#ffb59a",
+                    "outline-variant": "#e3bfb2",
+                    "on-surface-variant": "#5a4138",
+                    "primary-fixed": "#ffdbcf",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#a3f69c",
+                    "tertiary": "#005ab7",
+                    "secondary": "#1b6d24",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-secondary-fixed": "#002204",
+                    "surface-container-low": "#f3f3f3",
+                    "surface": "#f9f9f9",
+                    "outline": "#8f7066",
+                    "secondary-container": "#a0f399",
+                    "secondary-fixed-dim": "#88d982",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "background": "#f9f9f9",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#802a00",
+                    "surface-tint": "#a83900",
+                    "primary": "#a43700",
+                    "inverse-surface": "#2f3131",
+                    "on-primary-container": "#fffbff",
+                    "on-secondary-container": "#217128",
+                    "surface-dim": "#dadada",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "on-tertiary-container": "#fefcff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#d7e2ff",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "surface-container": "#eeeeee",
+                    "tertiary-container": "#0072e4",
+                    "primary-container": "#cd4700",
+                    "on-primary-fixed": "#380d00",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f9f9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chat-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-container::-webkit-scrollbar-thumb {
+            background: #e3bfb2;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl fixed top-0 w-full z-50 shadow-sm">
+<div class="flex justify-between items-center px-4 py-2 w-full">
+<div class="flex items-center gap-3">
+<button class="transition-all duration-300 active:scale-95 text-zinc-500">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-700">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+</div>
+<div>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold tracking-tight text-orange-900 leading-tight">Coach Bheem</h1>
+<p class="text-[11px] font-medium text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Online
+                        </p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-zinc-500">more_vert</span>
+</div>
+</div>
+</header>
+<!-- Chat Canvas -->
+<main class="flex-1 overflow-y-auto pt-16 pb-24 px-4 chat-container space-y-6">
+<!-- Date Marker -->
+<div class="flex justify-center my-6">
+<span class="text-[11px] font-semibold text-zinc-400 bg-zinc-100 px-3 py-1 rounded-full uppercase tracking-widest">Today</span>
+</div>
+<!-- AI Message -->
+<div class="flex flex-col items-start gap-1 max-w-[85%]">
+<div class="flex items-end gap-2">
+<div class="bg-surface-container-lowest shadow-sm rounded-2xl rounded-bl-none p-4 text-on-surface border border-outline-variant/15">
+<p class="text-sm leading-relaxed">
+                        Namaste! **Coach Bheem** here. Ready to smash your fitness goals? 
+                        <br/><br/>
+                        Whether it's protein-rich **Paneer Tikka** recipes or tracking your daily calories, I've got your back. What's on your plate today?
+                    </p>
+</div>
+</div>
+<span class="text-[10px] text-zinc-400 ml-1">10:02 AM</span>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-1 ml-auto max-w-[85%]">
+<div class="bg-primary-container shadow-md rounded-2xl rounded-br-none p-4 text-on-primary-container">
+<p class="text-sm leading-relaxed">
+                    Hey Bheem! I had two Aloo Parathas with curd for breakfast. Is that okay for a weight loss diet?
+                </p>
+</div>
+<div class="flex items-center gap-1 mr-1">
+<span class="text-[10px] text-zinc-400">10:05 AM</span>
+<span class="material-symbols-outlined text-xs text-orange-700" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+<!-- AI Message with Markdown & Bullets -->
+<div class="flex flex-col items-start gap-1 max-w-[85%]">
+<div class="bg-surface-container-lowest shadow-sm rounded-2xl rounded-bl-none p-4 text-on-surface border border-outline-variant/15">
+<div class="text-sm leading-relaxed space-y-3">
+<p>Aloo Paratha is high-energy, but for weight loss, we need to tweak it! Here's the breakdown:</p>
+<ul class="space-y-1.5 ml-4 list-disc marker:text-primary">
+<li>**Carbs:** High (Potato + Wheat)</li>
+<li>**Fats:** Moderate (if buttered)</li>
+<li>**Protein:** Low (only in curd)</li>
+</ul>
+<p class="bg-orange-50 p-2.5 rounded-lg border-l-4 border-orange-400 italic">
+                        "Pro Tip: Next time, try stuffing with **Sattu** or **Paneer** to boost protein."
+                    </p>
+</div>
+</div>
+<span class="text-[10px] text-zinc-400 ml-1">10:06 AM</span>
+</div>
+<!-- Aesthetic Bento-style Recommendation Card -->
+<div class="flex flex-col items-start gap-2 max-w-[90%]">
+<div class="w-full bg-surface-container-low rounded-3xl p-4 space-y-4">
+<h3 class="text-xs font-bold text-zinc-500 uppercase tracking-wider">Suggested for Lunch</h3>
+<div class="flex gap-4">
+<div class="flex-1 space-y-1">
+<p class="text-lg font-bold text-on-surface">Masala Oats Khichdi</p>
+<p class="text-xs text-zinc-500">320 kcal • 18g Protein</p>
+</div>
+<div class="w-20 h-20 rounded-2xl overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="overhead shot of savory indian masala oats in a ceramic bowl with cilantro garnish and steam rising" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYgIou9HMDs14zgvaMzTVe1oHrTKpPZc9GR7todzCxcn2zYiETg4hu6b6cvj5gD1B_HhklIqS7E2DU8CEuv5vDa5kjhvjijfykO1dPQmoz8mbVN4vKSoQsNlDLvdlOV_IxlIL_09K6pgZyXYRIqsGs0u9vMJ7jBbkIT-OPDxv2MMuaKaE1H5zZpJXG9k0QGLyoG56JKQ2nFh-D6f5t0EFbVYbNDQKoVq1Mpm3jo6CH1mw_YPK3y5WHH5ao4U1tYoOXrepPGvBVSPQ"/>
+</div>
+</div>
+<button class="w-full py-2.5 bg-secondary/10 text-secondary font-bold text-xs rounded-xl flex items-center justify-center gap-2 hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-sm">restaurant_menu</span>
+                    VIEW RECIPE
+                </button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Shell logic: suppressed for focus journey) -->
+<!-- Input Section -->
+<div class="fixed bottom-0 left-0 w-full bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md px-4 py-4 pb-8 border-t border-outline-variant/10">
+<div class="max-w-screen-md mx-auto flex items-end gap-3">
+<div class="flex-1 bg-surface-container-highest rounded-2xl flex items-end p-2 transition-all focus-within:ring-2 ring-primary/20">
+<button class="p-2 text-zinc-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-sm py-2 px-1 max-h-32 resize-none placeholder:text-zinc-400" placeholder="Type your meal or question..." rows="1"></textarea>
+<button class="p-2 text-zinc-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+</div>
+<button class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+<!-- Quick Actions Floating Bar (Asymmetric/Layered UI) -->
+<div class="fixed bottom-24 left-0 w-full px-4 flex gap-2 overflow-x-auto no-scrollbar pb-2">
+<button class="whitespace-nowrap bg-white/90 border border-outline-variant/30 text-zinc-700 px-4 py-2 rounded-full text-xs font-semibold shadow-sm hover:bg-orange-50 transition-colors">
+            Analyze Photo 📸
+        </button>
+<button class="whitespace-nowrap bg-white/90 border border-outline-variant/30 text-zinc-700 px-4 py-2 rounded-full text-xs font-semibold shadow-sm hover:bg-orange-50 transition-colors">
+            Protein Tracker 🍗
+        </button>
+<button class="whitespace-nowrap bg-white/90 border border-outline-variant/30 text-zinc-700 px-4 py-2 rounded-full text-xs font-semibold shadow-sm hover:bg-orange-50 transition-colors">
+            Water Intake 💧
+        </button>
+</div>
+</body></html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit AI Coach</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#002204",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "secondary-container": "#a0f399",
+                    "on-secondary-container": "#217128",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#005312",
+                    "tertiary": "#005ab7",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#dadada",
+                    "tertiary-fixed": "#d7e2ff",
+                    "on-primary-container": "#fffbff",
+                    "on-primary-fixed-variant": "#802a00",
+                    "on-primary-fixed": "#380d00",
+                    "secondary": "#1b6d24",
+                    "primary-container": "#cd4700",
+                    "surface-container-high": "#e8e8e8",
+                    "outline": "#8f7066",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f3f3f3",
+                    "inverse-surface": "#2f3131",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-tertiary-container": "#fefcff",
+                    "tertiary-container": "#0072e4",
+                    "secondary-fixed-dim": "#88d982",
+                    "error": "#ba1a1a",
+                    "on-surface": "#1a1c1c",
+                    "surface-bright": "#f9f9f9",
+                    "inverse-primary": "#ffb59a",
+                    "primary": "#a43700",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "surface-tint": "#a83900",
+                    "primary-fixed-dim": "#ffb59a",
+                    "primary-fixed": "#ffdbcf",
+                    "on-surface-variant": "#5a4138",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#001b3f",
+                    "surface": "#f9f9f9",
+                    "on-error": "#ffffff",
+                    "background": "#f9f9f9",
+                    "outline-variant": "#e3bfb2",
+                    "secondary-fixed": "#a3f69c",
+                    "surface-container": "#eeeeee"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chat-container {
+            height: calc(100vh - 144px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2 w-full">
+<div class="flex items-center gap-3">
+<button class="p-2 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full transition-transform active:scale-95 duration-200">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">menu</span>
+</button>
+<h1 class="font-plus-jakarta-sans font-bold tracking-tight text-xl text-[#E65100] dark:text-[#FF8A50]">DesiFit</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex flex-col items-end mr-2 hidden md:flex">
+<span class="text-xs font-bold text-primary uppercase tracking-widest">Premium Member</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border-2 border-primary/20">
+<img alt="Student Profile" data-alt="professional portrait of a young Indian man smiling confidently with warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkFNVfLHKWDF9lSFPOL5sTRQ5NdLMZSz78fapwk0dz84L5_qRHtDY4NlkZ4xNS6NR_cAuBjxHNy9WoV8MFO9E4berdE3l0SJ1VvvBXEQ8JJEGnAti3jju-4uytJpo4jbFMhX8UpmYB9UmnGeRDZZ2wO_YPV4aUpvwuWJNsn8cB9p02RbxLEHptWiQJyZDWK6dnWwO2SGGxNKjQkAP-wmOp7wes-6S15ZEsevV0MwcquXvEGXMj22pyeZZuXSAtOP1bJuq5Bdxeplw"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-14 pb-24 md:pb-16 flex flex-col items-center min-h-screen bg-surface-container-low">
+<!-- Chat Area Container -->
+<div class="w-full max-w-2xl flex flex-col chat-container overflow-hidden">
+<!-- Coach Identity Header (Sub-header) -->
+<div class="px-6 py-4 flex items-center gap-4 bg-surface-bright/50 backdrop-blur-md">
+<div class="relative">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-on-primary shadow-lg">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-secondary border-2 border-surface-bright rounded-full"></div>
+</div>
+<div>
+<h2 class="font-headline text-lg font-bold text-on-surface leading-tight">Coach Bheem</h2>
+<p class="text-xs text-secondary font-semibold uppercase tracking-wider">AI Desi Dietitian • Online</p>
+</div>
+</div>
+<!-- Messages Thread -->
+<div class="flex-1 overflow-y-auto px-4 py-6 space-y-6 no-scrollbar">
+<!-- Date Divider -->
+<div class="flex justify-center">
+<span class="px-4 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Today</span>
+</div>
+<!-- Coach Message -->
+<div class="flex items-end gap-2 max-w-[85%]">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed-dim flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-surface-container-lowest shadow-sm p-4 rounded-2xl rounded-bl-none">
+<p class="text-on-surface leading-relaxed">Namaste! I'm **Coach Bheem**, your AI Desi Dietitian. Ready to hit your fitness goals without giving up your favorite hostel food?</p>
+<p class="mt-2 text-on-surface leading-relaxed">Tell me, what did you have for lunch today at the mess? 🍛</p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex items-end justify-end gap-2 ml-auto max-w-[85%]">
+<div class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-4 rounded-2xl rounded-br-none shadow-md">
+<p class="leading-relaxed">I had 2 rotis, a bowl of yellow dal, and some aloo gobhi. Also a small bowl of dahi.</p>
+</div>
+</div>
+<!-- Coach Message with Markdown/Bullets -->
+<div class="flex items-end gap-2 max-w-[85%]">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed-dim flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-surface-container-lowest shadow-sm p-4 rounded-2xl rounded-bl-none">
+<p class="text-on-surface leading-relaxed">That's a solid, balanced meal! Here's a quick breakdown for you:</p>
+<ul class="mt-3 space-y-2">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+<span class="text-sm">**Protein:** Good mix from dal and dahi.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-lg">info</span>
+<span class="text-sm">**Carbs:** Rotis are great energy for your evening workout.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-outline text-lg">warning</span>
+<span class="text-sm">**Tip:** Watch the oil in mess aloo gobhi. Try squeezing some **lemon** for better iron absorption!</span>
+</li>
+</ul>
+<div class="mt-4 p-3 bg-secondary-container/20 rounded-xl border-l-4 border-secondary">
+<p class="text-xs font-bold text-on-secondary-container">ESTIMATED CALORIES: 450 kcal</p>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex items-end justify-end gap-2 ml-auto max-w-[85%]">
+<div class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-4 rounded-2xl rounded-br-none shadow-md">
+<p class="leading-relaxed">Got it. I'm hitting the gym in an hour. Any pre-workout snack suggestion from the canteen?</p>
+</div>
+</div>
+<!-- Coach Thinking (Typing Indicator) -->
+<div class="flex items-end gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed-dim flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-surface-container-highest px-4 py-3 rounded-full flex gap-1">
+<div class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce"></div>
+<div class="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+<div class="w-1.5 h-1.5 bg-primary/80 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+</div>
+</div>
+</div>
+<!-- Input Bar -->
+<div class="p-4 bg-surface-bright/80 backdrop-blur-xl">
+<div class="flex items-center gap-2 max-w-screen-md mx-auto">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<div class="flex-1 relative">
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary/20 rounded-2xl px-4 py-3 text-sm placeholder:text-on-surface-variant/60" placeholder="Ask Coach Bheem about your diet..." type="text"/>
+</div>
+<button class="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<p class="text-[10px] text-center mt-2 text-on-surface-variant/50">AI advice is for guidance. Consult a doctor for medical diets.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl flex justify-around items-center px-2 pb-4 pt-2 shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:bg-stone-50 dark:hover:bg-stone-800 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:bg-stone-50 dark:hover:bg-stone-800 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans">Recipes</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#FFCCBC] dark:bg-[#A43700]/30 text-[#A43700] dark:text-[#FFCCBC] rounded-2xl px-5 py-1 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans">Coach</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:bg-stone-50 dark:hover:bg-stone-800 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans">Planner</span>
+</a>
+</nav>
+</body></html>

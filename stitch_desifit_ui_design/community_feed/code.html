@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit Community</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#a3f69c",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-variant": "#e2e2e2",
+                    "primary-fixed-dim": "#ffb59a",
+                    "outline-variant": "#e3bfb2",
+                    "surface-tint": "#a83900",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-bright": "#f9f9f9",
+                    "on-primary-fixed-variant": "#802a00",
+                    "surface": "#f9f9f9",
+                    "primary-fixed": "#ffdbcf",
+                    "primary-container": "#cd4700",
+                    "on-primary-container": "#fffbff",
+                    "tertiary": "#005ab7",
+                    "tertiary-container": "#0072e4",
+                    "on-tertiary-container": "#fefcff",
+                    "on-secondary-container": "#217128",
+                    "on-primary-fixed": "#380d00",
+                    "inverse-primary": "#ffb59a",
+                    "on-secondary-fixed-variant": "#005312",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#a0f399",
+                    "on-secondary": "#ffffff",
+                    "outline": "#8f7066",
+                    "secondary-fixed-dim": "#88d982",
+                    "inverse-on-surface": "#f0f1f1",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#5a4138",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#d7e2ff",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "on-secondary-fixed": "#002204",
+                    "secondary": "#1b6d24",
+                    "on-tertiary-fixed": "#001b3f",
+                    "background": "#f9f9f9",
+                    "surface-dim": "#dadada",
+                    "surface-container": "#eeeeee",
+                    "inverse-surface": "#2f3131",
+                    "primary": "#a43700",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#F9F9F9]/80 backdrop-blur-xl bg-gradient-to-b from-[#F3F3F3] to-transparent">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#A43700] hover:bg-[#F3F3F3]/50 transition-colors p-2 rounded-full active:scale-95 duration-200">menu</button>
+<h1 class="text-[#A43700] font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight">DesiFit Community</h1>
+</div>
+<div class="flex items-center">
+<button class="material-symbols-outlined text-[#A43700] hover:bg-[#F3F3F3]/50 transition-colors p-2 rounded-full active:scale-95 duration-200">account_circle</button>
+</div>
+</div>
+</header>
+<main class="pt-20 px-4 max-w-2xl mx-auto space-y-6">
+<!-- Trending Section / Horizontal Scroll -->
+<section class="mb-8">
+<h2 class="font-headline text-on-surface-variant text-sm font-semibold uppercase tracking-widest mb-4 px-2">Trending Hacks</h2>
+<div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+<div class="flex-none w-64 bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm">
+<img class="w-full h-32 object-cover" data-alt="Close-up of a vibrant healthy bowl with paneer, spinach, and colorful roasted vegetables in a modern ceramic bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeRSABcCwn1Z0zMPvKHfALh7tG71Cf7XC0uzL4DABsZQJ7y46upE7HCzi2E-kU011mwS_DaAoT2BnXhhnpSC-tBCs68qIcrRyfpES-rBfJ2SFRQeDlGSrwJKSTlwsZ8MVJbLbDre4zzbnYE4aDAACcWBY-6YGKjEWBS5XQNNuzDQ_qTZXl-5Udv-zg2uhTLxHi4ZYPNINLKgacMNzp2MJFzZHqONs_FNyacMSNlHxwibH2fvu0DnP-EjsXwotTg5kxZ0_pCln1D9Y"/>
+<div class="p-3">
+<span class="text-[10px] font-bold text-secondary uppercase bg-secondary-container px-2 py-0.5 rounded-full">Nutrition</span>
+<h3 class="font-headline font-bold text-sm mt-1">Paneer Tikka Meal Prep</h3>
+</div>
+</div>
+<div class="flex-none w-64 bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm">
+<img class="w-full h-32 object-cover" data-alt="Healthy sprout salad with chopped tomatoes, onions, and green chilies served on a textured terracotta plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCul2NwkzDCppLJ1FdIp2APcwLCYWlW9eBsKnuoAzfFDQqJ3z9uozzLBxeqYWnp71xhNGXvscR8IM2E6c3zHqYqDTezfQdumoOjxZSC2OdAYTmmJ75kxp5FfMJ54kQ-k3n_8zynVfFjZhDOWf5_IUWgWmhUEXAO-L58LTXw13_D4--3HTlRBmyqoKtc_BqqSmFjBpq1t5qO58t5FBJJnNvlkIELT6vAR9i_E0T69Mw4Avy46oCBVv5oxEbkEpgZ6b0mFeLdG4Q-jA4"/>
+<div class="p-3">
+<span class="text-[10px] font-bold text-tertiary uppercase bg-tertiary-container/10 px-2 py-0.5 rounded-full">Weight Loss</span>
+<h3 class="font-headline font-bold text-sm mt-1">10-Min Moong Sprout Salad</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Community Feed -->
+<div class="space-y-6">
+<!-- Post 1 -->
+<article class="bg-surface-container-lowest rounded-3xl p-4 shadow-sm group">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young Indian man with a friendly smile, clean-cut beard, and athletic build" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBScbROGuj5mHZnxP2Iwsch-AZQVb7PYdME50vlgTstfkpiuYMnnK4zKItPLxV3qztio7arFN2z5hv7WNnfLjOOQBZHsPBjWvM7ZaIyYiXWBkA6ri3BFjG2JS2bhtEsi1rqAFREoQEgM6iyd0LlI-o1amWqM5_MPQsvDixUpeASUmFR36lB-zRYeKzSV3AlZHeHOMcyQzkxDRxUa6Lq7BhgbjaF1y2OBMubGEg1gVj4lp2lZ5Fk6AygwrFNem4-n7Vn6touDtyjg_0"/>
+</div>
+<div>
+<p class="font-headline font-bold text-sm text-on-surface">@HostelHacker</p>
+<p class="text-xs text-on-surface-variant/70">2 hours ago</p>
+</div>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant">more_vert</button>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3 leading-tight text-on-surface">Double Protein Maggi Hack</h3>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">Added 100g crumbled paneer and a handful of peas. Squeezed some lemon for that extra zing. Hostel living just got healthier! 🍜🔥</p>
+<div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A steaming bowl of Maggi noodles enriched with cubes of paneer, green peas, and fresh cilantro, warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIRzwPdUAJIuFvl0YvoLBsvpInp5vIwVJHQB3y2qfW9BuWB2yQUMen-tE8Hp_42e48FBqHFF6uXs7zUXNOcN-LqBP-gCofI9hW4JYXBnpU8oMNg5Vkm6peMoO6nPF7EQM01eHAfAuyBb18Hq6R_YucHqzxPHZ7GsLyBJrqii1TyI6XAJlalUBr0aPRCKzEcN6irihSxbllxkOGA2zOxfVnIEDBXPNvL9LrZvRqA1VJ-fOQOXMTJ0UVDg6JxpMuslnX8unxz44hAm8"/>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1 bg-surface-container-low rounded-full p-1">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-full hover:bg-primary-fixed transition-colors text-primary font-bold">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="text-sm">248</span>
+</button>
+<div class="w-[1px] h-4 bg-outline-variant/30"></div>
+<button class="flex items-center px-3 py-1.5 rounded-full hover:bg-error-container/20 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-xl">thumb_down</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-xl">chat_bubble_outline</span>
+<span class="text-sm">42 Comments</span>
+</button>
+</div>
+</article>
+<!-- Post 2 -->
+<article class="bg-surface-container-lowest rounded-3xl p-4 shadow-sm group">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up of a young woman with a joyful expression, wearing fitness apparel with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeFqb3iDo2sycaeWkOkNPCREZDqWCC3p9yhDNzV1uygdfl0LIxjBCmoZnAZqvvQlLuFxv-Ezuy7Y_TMAjL4i62eDtEnCmRgekPOr7guqsY7lthzMlTuVS-0Y_Wj3kCJRE0UbvYYduFp48pVMbO7cU2-2SA4xH1caf548zhO1FckZqphrxb3EZfEgFQw8tVl1pCdXFEpAuGiGX0p-matOdySCgy2YSr985Da58KCO_fQiP-gkoViJMYAoq9ptuOWXcJjmwdaQtWbVY"/>
+</div>
+<div>
+<p class="font-headline font-bold text-sm text-on-surface">@DesiYogaDiva</p>
+<p class="text-xs text-on-surface-variant/70">5 hours ago</p>
+</div>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant">more_vert</button>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3 leading-tight text-on-surface">Morning Sattu Power Shake</h3>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">Forget expensive whey, the ancient Desi protein is here. 2 scoops Sattu, roasted cumin, black salt, and cold water. 15g protein for under ₹10! 🍶</p>
+<div class="rounded-2xl overflow-hidden mb-4 aspect-video bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Traditional Indian refreshing drink in a rustic glass with scattered roasted gram around it, earthy aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADaSTZyvBnZe3aYnVwcnhKVZIGUogdWzoZqfMvQbL-JWFAFH4DVzsimqopHTwMKqN3tVmHT09UwGI1ABclQ_MzjhtTKtyvN8l8jRaRIVvPK3EEooXfqe1XPYTIUlX3flyf7-EiQATPm69IBYztjP0em4ARpnohsGyx0OunPVYoSJLldYt52wWWyZoec5dLjEZ6HRLsfRYaTHDzzYULUvBSz4U5T5CSknXvhuMFVyLnPVedVfOPI9xRiNIEnBHOG-O4wSN7O6hgJBY"/>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1 bg-surface-container-low rounded-full p-1">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-full hover:bg-primary-fixed transition-colors text-primary font-bold">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="text-sm">812</span>
+</button>
+<div class="w-[1px] h-4 bg-outline-variant/30"></div>
+<button class="flex items-center px-3 py-1.5 rounded-full hover:bg-error-container/20 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-xl">thumb_down</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-xl">chat_bubble_outline</span>
+<span class="text-sm">128 Comments</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 w-14 h-14 rounded-2xl bg-gradient-to-br from-[#A43700] to-[#CD4700] text-white shadow-lg flex items-center justify-center active:scale-90 duration-200 z-50">
+<span class="material-symbols-outlined text-2xl font-bold">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50">
+<div class="bg-[#F9F9F9]/80 backdrop-blur-xl border-t border-[#1A1C1C]/5 shadow-[0_-4px_20px_rgba(164,55,0,0.08)] rounded-t-3xl">
+<div class="flex justify-around items-center px-4 pt-3 pb-6">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-[#1A1C1C]/60 hover:bg-[#F3F3F3] transition-all px-4 py-1.5 rounded-2xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Home</span>
+</a>
+<!-- Workouts -->
+<a class="flex flex-col items-center justify-center text-[#1A1C1C]/60 hover:bg-[#F3F3F3] transition-all px-4 py-1.5 rounded-2xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">fitness_center</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Workouts</span>
+</a>
+<!-- Community (Active) -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#A43700] to-[#CD4700] text-white rounded-2xl px-4 py-1.5 shadow-lg active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Community</span>
+</a>
+<!-- Insights -->
+<a class="flex flex-col items-center justify-center text-[#1A1C1C]/60 hover:bg-[#F3F3F3] transition-all px-4 py-1.5 rounded-2xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">analytics</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Insights</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-[#1A1C1C]/60 hover:bg-[#F3F3F3] transition-all px-4 py-1.5 rounded-2xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-wider">Profile</span>
+</a>
+</div>
+</div>
+</nav>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

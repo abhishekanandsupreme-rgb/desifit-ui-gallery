@@ -1,0 +1,47 @@
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+desifit/.dart_tool/
+desifit/.flutter-plugins
+desifit/.flutter-plugins-dependencies
+desifit/.packages
+desifit/.pub-cache/
+desifit/.pub/
+desifit/build/
+
+AuraSync/.dart_tool/
+AuraSync/.flutter-plugins
+AuraSync/.flutter-plugins-dependencies
+AuraSync/.packages
+AuraSync/.pub-cache/
+AuraSync/.pub/
+AuraSync/build/
+
+# Android Local Config
+desifit/android/local.properties
+desifit/android/app/key.jks
+desifit/android/key.properties
+
+# Secrets and keys
+*.keystore
+*.jks
+*.properties
+*.env
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+desifit/.idea/
+desifit/*.iml
+desifit/.vscode/
+
+# Operating System
+.DS_Store
+Thumbs.db

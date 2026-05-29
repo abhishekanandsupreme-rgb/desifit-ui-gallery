@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit - Hostel Recipe Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface pb-24">
+<!-- TopAppBar Execution -->
+<header class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2 w-full bg-stone-100 dark:bg-stone-900">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">menu</span>
+<span class="text-xl font-bold text-[#E65100] dark:text-[#FF8A50] font-plus-jakarta-sans font-bold tracking-tight">DesiFit</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Student Profile" data-alt="close up portrait of a young Indian male student with a friendly smile, campus setting in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsGuvLl2pupLN1AWe90wsIfkXTD5TOm1FUMp8JMGVYZNMzGJDUw4GLt58Ps0Pvfou6_YFwSKejyslPayKDUP_zKYsTMTf2Xvuc41fZGLMoXyLcDW0D_c_g32SR2arWq3PsRb48GKNZRSszThorytfdjQPqgb4pINuCLPDWjdfrCK-citjQ_VZebPPjy3XwISQrvgD6yAgdQuCFmsZxMcNJ-FpVLTknRm6ivhvbNHC6Jt0XoXV1bbbAyyiwUZ-OEttIGXaSGA70LlI"/>
+</div>
+</header>
+<main class="mt-16 px-4">
+<!-- Search & Filter Section -->
+<section class="py-6 space-y-6">
+<div class="flex flex-col gap-4">
+<h1 class="font-headline text-3xl font-bold text-on-surface tracking-tight">Hostel Recipe Engine</h1>
+<!-- Search Bar -->
+<div class="relative flex items-center">
+<div class="absolute left-4 text-on-surface-variant">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none h-14 pl-12 pr-12 rounded-xl text-on-surface focus:ring-2 focus:ring-primary placeholder-on-surface-variant/60" placeholder="Search quick recipes..." type="text"/>
+<button class="absolute right-3 w-10 h-10 flex items-center justify-center bg-primary text-on-primary rounded-lg">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+<!-- Filter Chips -->
+<div class="flex overflow-x-auto gap-2 pb-2 -mx-4 px-4 scroll-smooth">
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary-container text-on-primary font-medium text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+                        Only Kettle
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-highest text-on-surface-variant font-medium text-sm hover:bg-surface-variant transition-colors">
+                        No Cook
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-highest text-on-surface-variant font-medium text-sm hover:bg-surface-variant transition-colors">
+                        Under ₹30
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-highest text-on-surface-variant font-medium text-sm hover:bg-surface-variant transition-colors">
+                        High Protein
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-highest text-on-surface-variant font-medium text-sm hover:bg-surface-variant transition-colors">
+                        Quick Snack
+                    </button>
+</div>
+</div>
+<!-- Recipe List / Grid -->
+<div class="recipe-grid">
+<!-- Recipe Card 1 -->
+<div class="group bg-surface-container-lowest rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Kettle Soya Pulao" class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" data-alt="steaming hot vegetable pulao with soy chunks in a white bowl, warm ambient kitchen lighting with spices scattered around" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdp5H2W9mgjPtMXzzrmz9AhuMdOHPosH8z8PrckGB6cBu08UgpeVVDTylxUxidCkc7vf9pmS6lcUTyyKFlKefqLDfNSmEC2rB8JNvFLIAUItzl4AwWHwYpj4ca51uisnyvsSQ6XzeR1g30W3FZqt-qizngvIIC_t5JcMT31gWf-OipG87uRCXPut93RuPgmBv5zIxhNCAShqNTYu6Rwmrkl6XKugcVcvhm1xSij_i3gxCUDHC7JIKT7dgvHbFsHF-WWHtNCI31j20"/>
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-xs font-bold text-on-surface uppercase tracking-wider">Electric Kettle Only</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-lg font-bold text-on-surface leading-tight">Kettle Soya Pulao</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span class="text-xs font-medium">10 mins</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">payments</span>
+<span class="text-xs font-medium text-secondary">₹25</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant/30">
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Protein</span>
+<span class="text-primary font-bold text-lg">15g</span>
+</div>
+<button class="px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-bold text-sm shadow-sm active:scale-95 transition-transform">
+                                Cook Now
+                            </button>
+</div>
+</div>
+</div>
+<!-- Recipe Card 2 -->
+<div class="group bg-surface-container-lowest rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Paneer Sprouts Salad" class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" data-alt="fresh colorful salad with paneer cubes, sprouts, pomegranate seeds and lemon wedges, bright natural lighting on textured table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBdGhk6yOD-TV-huKSGmr8q0tOGFyfGSFN5Ujn2rH7kgIhgXzypaWprlG7sJMVDLVyzN745GPlltJ9Gf5uI6YY8Yg5MLQ86-RN5TPReMD8YXNu3jCiKlsJfxTj7ygkxlkN1qsVp_cRH1ERSNIs2OVW4-5kcZaGOp3fT3sOmsigaIlvidbsMWOeqyG5g7wheyt-7NSxwlJsnVZMpi1bY9zImmgvmNZO-MLan2_vQYN2oikfQ4RK2Y7Nw8mRPZfZ7LgfAqWl4f_6Hh4"/>
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="text-xs font-bold text-on-surface uppercase tracking-wider">No Cook</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-lg font-bold text-on-surface leading-tight">Paneer Sprouts Salad</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span class="text-xs font-medium">5 mins</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">payments</span>
+<span class="text-xs font-medium text-secondary">₹30</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant/30">
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Protein</span>
+<span class="text-primary font-bold text-lg">22g</span>
+</div>
+<button class="px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-bold text-sm shadow-sm active:scale-95 transition-transform">
+                                Cook Now
+                            </button>
+</div>
+</div>
+</div>
+<!-- Recipe Card 3 -->
+<div class="group bg-surface-container-lowest rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Peanut Butter Oats" class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" data-alt="creamy bowl of oatmeal topped with peanut butter, banana slices and almonds, rustic aesthetic with soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnDekQWlxmXWvS-MwibRky99BWeSRmy4zdFHBg2RKykJVuBoShB2qf86X9mxHuftFAI8Z-SMCVZmBDMmUXUi7J7AWF7DPi5wDqpAZyD7OebfMzw_zXgdPSzguU7q4YUakViWiEA84VtRi_5YAXoJ1TLf1O2ImCRxIHDByvQg1u0EW52wAb_tvE2upuL2p988BAJ-wRGdqekcp2FYqihreFQTeCPpiB9Qp2bU3mA6Z5HmWCmIGwEf371R4pyxUGEGpPoT0lzTArNMA"/>
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-xs font-bold text-on-surface uppercase tracking-wider">Under ₹20</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-lg font-bold text-on-surface leading-tight">Hostel Overnight Oats</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span class="text-xs font-medium">2 mins</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">payments</span>
+<span class="text-xs font-medium text-secondary">₹18</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant/30">
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Protein</span>
+<span class="text-primary font-bold text-lg">12g</span>
+</div>
+<button class="px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-bold text-sm shadow-sm active:scale-95 transition-transform">
+                                Cook Now
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Execution -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-2 pb-4 pt-2 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#FFCCBC] dark:bg-[#A43700]/30 text-[#A43700] dark:text-[#FFCCBC] rounded-2xl px-5 py-1 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans">Recipes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans">Coach</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans">Planner</span>
+</div>
+</nav>
+<!-- Contextual FAB - suppressed on list view for cleaner editorial feel but available for new recipes -->
+<button class="fixed right-6 bottom-24 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary shadow-2xl flex items-center justify-center z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

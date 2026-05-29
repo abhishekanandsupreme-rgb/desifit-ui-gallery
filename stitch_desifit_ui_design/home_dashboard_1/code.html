@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased mb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-600">menu</span>
+<span class="text-xl font-bold text-[#E65100] dark:text-[#FF8A50] font-headline tracking-tight">DesiFit</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-600">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Student Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a young Indian man with a friendly smile, professional lighting, clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFG7DYKKJ2j4byFjiXebNgHrgAyzTtYYIlsaCVlaReZ8PEwCjYk1Jj4pwbXi3S1Guwwh2H5_BF25Fk-ML_SbjzMaWAevH7Agj-HyoIQ683lyNbdofih3N-H_R6wJiLtv_uAMGmxRmQIdyZ8NcGbtI-Qx-o-jVv5ATIunti8gppRZP5N5KXROXMk9SeDGyh1t9WQ23A7XCRCzPUySOG5sgU-GO-H7VMURdZ0sbpBQaDh5EjRFYEvwvWbTHICYbZSodiA6wDEfYetww"/>
+</div>
+</div>
+</header>
+<main class="pt-16 px-4 max-w-2xl mx-auto">
+<!-- Greeting Section -->
+<section class="mt-6 mb-8">
+<h1 class="text-3xl font-headline font-extrabold tracking-tight text-on-surface">Hello, Champ!</h1>
+<p class="text-on-surface-variant font-medium mt-1">Ready to fuel up on a budget?</p>
+</section>
+<!-- Hero: Circular Gauges (Bento Style) -->
+<section class="grid grid-cols-2 gap-4 mb-8">
+<!-- Gauge 1: Budget -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl flex flex-col items-center justify-center shadow-[0_4px_20px_rgba(164,55,0,0.04)]">
+<div class="relative w-24 h-24 mb-3">
+<svg class="w-full h-full">
+<circle class="text-surface-container-high" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary progress-ring__circle" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="163" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-lg font-bold font-headline">₹35</span>
+</div>
+</div>
+<p class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Budget Left</p>
+<p class="text-[10px] text-stone-400 mt-0.5">Limit: ₹100</p>
+</div>
+<!-- Gauge 2: Protein -->
+<div class="bg-surface-container-lowest p-5 rounded-3xl flex flex-col items-center justify-center shadow-[0_4px_20px_rgba(164,55,0,0.04)]">
+<div class="relative w-24 h-24 mb-3">
+<svg class="w-full h-full">
+<circle class="text-surface-container-high" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary progress-ring__circle" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="84" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-lg font-bold font-headline text-secondary">40g</span>
+</div>
+</div>
+<p class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Protein Hit</p>
+<p class="text-[10px] text-stone-400 mt-0.5">Goal: 60g</p>
+</div>
+</section>
+<!-- Quick Add Section -->
+<section class="mb-8">
+<div class="flex justify-between items-end mb-4">
+<h2 class="text-xl font-headline font-bold text-on-surface">Quick Add</h2>
+<span class="text-xs font-semibold text-primary uppercase tracking-widest">See All</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Sattu -->
+<button class="flex flex-col items-start p-4 bg-surface-container-low rounded-2xl active:scale-95 transition-transform duration-200 text-left relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl">local_drink</span>
+</div>
+<span class="text-sm font-bold text-on-surface mb-1">1 Glass Sattu</span>
+<div class="flex flex-col gap-0.5">
+<span class="text-xs text-primary font-bold">₹10</span>
+<span class="text-xs text-secondary font-medium">10g protein</span>
+</div>
+</button>
+<!-- Soya -->
+<button class="flex flex-col items-start p-4 bg-surface-container-low rounded-2xl active:scale-95 transition-transform duration-200 text-left relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl">nutrition</span>
+</div>
+<span class="text-sm font-bold text-on-surface mb-1">50g Soya</span>
+<div class="flex flex-col gap-0.5">
+<span class="text-xs text-primary font-bold">₹8</span>
+<span class="text-xs text-secondary font-medium">25g protein</span>
+</div>
+</button>
+<!-- Roti -->
+<button class="flex flex-col items-start p-4 bg-surface-container-low rounded-2xl active:scale-95 transition-transform duration-200 text-left relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl">bakery_dining</span>
+</div>
+<span class="text-sm font-bold text-on-surface mb-1">2 Roti</span>
+<div class="flex flex-col gap-0.5">
+<span class="text-xs text-primary font-bold">₹6</span>
+<span class="text-xs text-secondary font-medium">6g protein</span>
+</div>
+</button>
+<!-- Peanuts -->
+<button class="flex flex-col items-start p-4 bg-surface-container-low rounded-2xl active:scale-95 transition-transform duration-200 text-left relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl">grain</span>
+</div>
+<span class="text-sm font-bold text-on-surface mb-1">Handful Peanuts</span>
+<div class="flex flex-col gap-0.5">
+<span class="text-xs text-primary font-bold">₹5</span>
+<span class="text-xs text-secondary font-medium">8g protein</span>
+</div>
+</button>
+</div>
+</section>
+<!-- Banner Ad Section -->
+<section class="mb-12">
+<div class="relative w-full h-32 rounded-3xl overflow-hidden bg-surface-container-highest group">
+<div class="absolute inset-0 bg-gradient-to-r from-stone-900/80 to-transparent z-10 flex flex-col justify-center px-6">
+<h3 class="text-white font-bold text-lg mb-1 leading-tight">Amazon Deal</h3>
+<p class="text-white/80 text-xs mb-3">Buy 1kg Peanut Butter on Amazon</p>
+<button class="bg-white text-stone-900 px-4 py-1.5 rounded-full text-[10px] font-bold w-max uppercase tracking-wider">Shop Now</button>
+</div>
+<img class="w-full h-full object-cover" data-alt="High quality jar of creamy peanut butter on a rustic wooden table with peanuts scattered around, warm earthy tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmv1BbT9lEWsS0UL5oxAQcZZFQ_ED4NbriHr__nSI5ojDAMXD8ETsqrErHMviiLDCtCBs_j2udObuMvUlc2fPebxgpGgxBYtVPWGAx8OnDLFy7g39J55-AltmiAObChneyEKK3EV4mmrSN3TGEWQy4Iua45QDDQcD0wi8AuMI7Dkca_KVVdo9axO2q8dbM6g-6cFrUn38byP8h-5_vWLivDY_iI8d-c5mm9LEA_DmsrId3cUlUAfwjbcljJ4t1-2_2a7ikcwT2494"/>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-2 pb-4 pt-2 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center bg-[#FFCCBC] dark:bg-[#A43700]/30 text-[#A43700] dark:text-[#FFCCBC] rounded-2xl px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[11px] font-medium font-headline">Home</span>
+</a>
+<!-- Recipes -->
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[11px] font-medium font-headline">Recipes</span>
+</a>
+<!-- Coach -->
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="text-[11px] font-medium font-headline">Coach</span>
+</a>
+<!-- Planner -->
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-[11px] font-medium font-headline">Planner</span>
+</a>
+</nav>
+<!-- FAB (Suppressed on Home according to logic but often useful; here we skip it to strictly follow "Suppressed if not alignment" or add it for "Quick Add" intent. The instructions say suppress on Detail/Settings, but often FAB is for Quick Add on Home. Let's strictly follow suppression rules for clean dashboard) -->
+</body></html>

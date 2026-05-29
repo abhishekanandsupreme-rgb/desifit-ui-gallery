@@ -1,0 +1,8 @@
+# Example signing configurations file for production release builds.
+# Rename this file to 'key.properties' in this directory and fill in your real details.
+# Make sure to keep your real key.properties out of Git (already ignored by default flutter .gitignore).
+
+storePassword=your_keystore_password
+keyPassword=your_key_password
+keyAlias=your_key_alias
+storeFile=key.jks

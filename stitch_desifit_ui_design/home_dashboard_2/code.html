@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesiFit Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#001b3f",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed-dim": "#ffb59a",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#005312",
+                        "inverse-primary": "#ffb59a",
+                        "outline-variant": "#e3bfb2",
+                        "on-surface-variant": "#5a4138",
+                        "primary-fixed": "#ffdbcf",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#a3f69c",
+                        "tertiary": "#005ab7",
+                        "secondary": "#1b6d24",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-low": "#f3f3f3",
+                        "surface": "#f9f9f9",
+                        "outline": "#8f7066",
+                        "secondary-container": "#a0f399",
+                        "secondary-fixed-dim": "#88d982",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "background": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "surface-tint": "#a83900",
+                        "primary": "#a43700",
+                        "inverse-surface": "#2f3131",
+                        "on-primary-container": "#fffbff",
+                        "on-secondary-container": "#217128",
+                        "surface-dim": "#dadada",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "on-tertiary-container": "#fefcff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#d7e2ff",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "surface-container": "#eeeeee",
+                        "tertiary-container": "#0072e4",
+                        "primary-container": "#cd4700",
+                        "on-primary-fixed": "#380d00",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f9f9f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .circular-progress {
+            background: radial-gradient(closest-side, white 79%, transparent 80% 100%),
+                        conic-gradient(var(--progress-color) var(--percentage), #f3f3f3 0);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen pb-24">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-sm flex justify-between items-center px-4 py-2 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/10">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a fit young Indian man with a friendly smile, warm natural lighting, outdoor urban background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSngY7nw7xUqgssLqYLtL1vtQMyp5FzD6gHzLHA1ss_QVBLWBN5vkI0urD6enTA-6OKu8s7d9QD9enBLMsFjdq1iyVKd4JrQ0nTHMstRd2L92QGSmKeXLqCX3jIT_cmt7KNFR_50tUZDx5zdyGOAgJwxLLwaf6LtDHdJWbE0DYpxrAUiWg3xEhYuYtv8QxFbq5Bfy0bhsXDnJHThjfvEPaZ99uIufsVXoFjV_y1BfcE9XI6t87gHqR9D6CBXYymRLl0umQFde46qM"/>
+</div>
+<span class="text-orange-900 dark:text-orange-100 text-xl font-bold font-headline tracking-tight">DesiFit</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-orange-700 dark:text-orange-500 transition-all duration-300 active:scale-95 hover:bg-zinc-100/50 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</nav>
+<main class="pt-20 px-4 max-w-2xl mx-auto">
+<!-- Header & Greeting -->
+<header class="flex justify-between items-end mb-8">
+<div>
+<p class="text-zinc-500 font-medium mb-1">Welcome back,</p>
+<h1 class="font-headline font-extrabold text-3xl text-on-surface tracking-tight">Hello, Champ!</h1>
+</div>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container-low rounded-xl text-on-surface-variant transition-all active:scale-90 shadow-sm">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<!-- Hero Section: Progress Gauges -->
+<section class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-lowest p-6 rounded-[2rem] shadow-sm flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-5">
+<span class="material-symbols-outlined text-6xl">payments</span>
+</div>
+<div class="circular-progress w-32 h-32 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-105" style="--progress-color: #a43700; --percentage: 35%;">
+<div class="flex flex-col items-center">
+<span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Left</span>
+<span class="text-xl font-extrabold text-primary">₹35</span>
+</div>
+</div>
+<h3 class="font-headline font-bold text-on-surface">Budget Left</h3>
+<p class="text-xs text-zinc-500 font-medium mt-1">Goal: ₹100/day</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-[2rem] shadow-sm flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-5">
+<span class="material-symbols-outlined text-6xl">fitness_center</span>
+</div>
+<div class="circular-progress w-32 h-32 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-105" style="--progress-color: #1b6d24; --percentage: 66%;">
+<div class="flex flex-col items-center">
+<span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Done</span>
+<span class="text-xl font-extrabold text-secondary">40g</span>
+</div>
+</div>
+<h3 class="font-headline font-bold text-on-surface">Protein Hit</h3>
+<p class="text-xs text-zinc-500 font-medium mt-1">Goal: 60g/day</p>
+</div>
+</section>
+<!-- Quick Add Section -->
+<section class="mb-10">
+<div class="flex justify-between items-center mb-5">
+<h2 class="font-headline font-bold text-xl text-on-surface">Quick Add</h2>
+<span class="text-xs font-bold text-primary px-3 py-1 bg-primary-fixed rounded-full">MOST ECONOMICAL</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Sattu Card -->
+<button class="text-left bg-white/60 backdrop-blur-md border border-white/20 p-4 rounded-3xl shadow-sm transition-all active:scale-95 hover:shadow-md group">
+<div class="w-10 h-10 bg-orange-100 rounded-2xl flex items-center justify-center mb-3 text-orange-700 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">local_drink</span>
+</div>
+<div class="font-bold text-on-surface leading-tight mb-1">1 Glass Sattu</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-extrabold text-primary">₹10</span>
+<span class="w-1 h-1 bg-zinc-300 rounded-full"></span>
+<span class="text-sm font-semibold text-secondary">10g Protein</span>
+</div>
+</button>
+<!-- Soya Card -->
+<button class="text-left bg-white/60 backdrop-blur-md border border-white/20 p-4 rounded-3xl shadow-sm transition-all active:scale-95 hover:shadow-md group">
+<div class="w-10 h-10 bg-green-100 rounded-2xl flex items-center justify-center mb-3 text-green-700 group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<div class="font-bold text-on-surface leading-tight mb-1">50g Soya</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-extrabold text-primary">₹8</span>
+<span class="w-1 h-1 bg-zinc-300 rounded-full"></span>
+<span class="text-sm font-semibold text-secondary">25g Protein</span>
+</div>
+</button>
+<!-- Roti Card -->
+<button class="text-left bg-white/60 backdrop-blur-md border border-white/20 p-4 rounded-3xl shadow-sm transition-all active:scale-95 hover:shadow-md group">
+<div class="w-10 h-10 bg-amber-100 rounded-2xl flex items-center justify-center mb-3 text-amber-700 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">flatware</span>
+</div>
+<div class="font-bold text-on-surface leading-tight mb-1">2 Roti</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-extrabold text-primary">₹6</span>
+<span class="w-1 h-1 bg-zinc-300 rounded-full"></span>
+<span class="text-sm font-semibold text-secondary">6g Protein</span>
+</div>
+</button>
+<!-- Peanuts Card -->
+<button class="text-left bg-white/60 backdrop-blur-md border border-white/20 p-4 rounded-3xl shadow-sm transition-all active:scale-95 hover:shadow-md group">
+<div class="w-10 h-10 bg-rose-100 rounded-2xl flex items-center justify-center mb-3 text-rose-700 group-hover:bg-rose-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">grain</span>
+</div>
+<div class="font-bold text-on-surface leading-tight mb-1">Handful Peanuts</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-extrabold text-primary">₹5</span>
+<span class="w-1 h-1 bg-zinc-300 rounded-full"></span>
+<span class="text-sm font-semibold text-secondary">8g Protein</span>
+</div>
+</button>
+</div>
+</section>
+<!-- Banner Ad Section -->
+<section class="relative h-32 w-full rounded-[1.5rem] overflow-hidden group shadow-lg mb-4">
+<img alt="Healthy Indian Salad" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Top view of a vibrant healthy Indian salad bowl with fresh greens, chickpeas, and pomegranate seeds on a rustic textured background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4F1LwM3EGhTG1OR3MCJ4yCAIya4WZXcSJ401hpg0Klc7hQnVt1azu6ktzQTxXnYTzT7UANssCx5KwmYraoI-vF8JU36movqJGf9N_bYZICfWtOetUymfMd8VQE84T8589c8yYA7HQE4SABnzmtcdfJ5YCHFma6ACeuYjhyQO1jWoOmj2s_tdezOTGEkuM4rfT3XyfY0_2UKzxKWTShnPtogCdwNf-uOrGisjZX9dkdrxh_hV17ylNKIA7RSei4i4bi5e7klI1-bU"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent flex flex-col justify-center px-8">
+<span class="text-[10px] font-bold text-secondary-fixed tracking-[0.2em] mb-1">PREMIUM UPGRADE</span>
+<h4 class="text-white font-headline font-bold text-lg leading-tight">Unlock 100+<br/>Low-Budget Recipes</h4>
+</div>
+<div class="absolute bottom-4 right-4">
+<button class="bg-white text-on-surface px-4 py-2 rounded-full text-xs font-extrabold shadow-xl active:scale-95 transition-transform">EXPLORE</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-2 py-3 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<a class="flex flex-col items-center justify-center bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 rounded-2xl px-5 py-1.5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-5 py-1.5 transition-transform duration-200 active:scale-90 hover:text-orange-600" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Recipes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-5 py-1.5 transition-transform duration-200 active:scale-90 hover:text-orange-600" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Coach</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-5 py-1.5 transition-transform duration-200 active:scale-90 hover:text-orange-600" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">Rank</span>
+</a>
+</nav>
+<!-- FAB (Floating Action Button) - Supplement for Quick Add Logic -->
+<button class="fixed bottom-24 right-6 w-16 h-16 bg-gradient-to-br from-primary to-primary-container text-white rounded-full shadow-[0_4px_20px_rgba(164,55,0,0.25)] flex items-center justify-center transition-transform active:scale-90 z-40 group">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform duration-300">add</span>
+</button>
+</body></html>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/widget_background"
+    android:padding="12dp"
+    android:baselineAligned="false">
+
+    <!-- Left Bento Cell: Streak Counter -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="vertical"
+        android:background="@drawable/widget_glass_cell"
+        android:layout_marginEnd="8dp"
+        android:padding="8dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/widget_streak_emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔥"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/widget_streak_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 Days"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="2dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/widget_streak_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sattu Streak"
+            android:textColor="#FFE3D6"
+            android:textSize="11sp"
+            android:layout_marginTop="1dp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Right Column: Nutrition Metrics -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
+        android:orientation="vertical">
+
+        <!-- Top Half: Calories Remaining -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:background="@drawable/widget_glass_cell"
+            android:layout_marginBottom="6dp"
+            android:padding="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚡ CALORIES LEFT"
+                android:textColor="#FFE3D6"
+                android:textSize="9dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_calories_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2,000 kcal"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <!-- Bottom Half: Protein Progress -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:background="@drawable/widget_glass_cell"
+            android:padding="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💪 PROTEIN METRIC"
+                android:textColor="#FFE3D6"
+                android:textSize="9dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_protein_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0g / 60g"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
