@@ -17,7 +17,7 @@ class NotificationService {
     // Initialize Timezone Database
     tz.initializeTimeZones();
     try {
-      final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
+      final String currentTimeZone = (await FlutterTimezone.getLocalTimezone()).identifier;
       tz.setLocalLocation(tz.getLocation(currentTimeZone));
     } catch (e) {
       debugPrint('Failed to set timezone: $e. Defaulting to GMT/UTC.');
