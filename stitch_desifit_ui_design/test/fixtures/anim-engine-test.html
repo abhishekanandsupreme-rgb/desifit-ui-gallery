@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anim Engine Test</title>
+  <style>
+    body { min-height: 2000px; padding: 20px; font-family: sans-serif; }
+    .stagger-item, .scroll-reveal, .scroll-header, .scroll-stagger-item { height: 50px; margin: 10px 0; background: #eee; }
+    .parallax-layer, .scroll-parallax { height: 100px; }
+    .scroll-progress-bar { height: 4px; background: red; width: 75%; }
+    .chat-bubble { padding: 10px; margin: 5px; background: #ddd; }
+    .typing-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #999; margin: 0 2px; }
+    .card-lift { padding: 20px; margin: 10px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .float-gentle { width: 50px; height: 50px; background: orange; border-radius: 50%; }
+    .fab-pulse { width: 60px; height: 60px; background: #a43700; border-radius: 50%; }
+    .filter-item { padding: 10px; margin: 5px; border: 1px solid #ccc; }
+    .ripple-btn { padding: 12px 24px; background: #a43700; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    #back-to-top { position: fixed; bottom: 20px; right: 20px; padding: 10px; background: #333; color: white; }
+    #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: red; width: 0%; }
+    .scroll-ring svg { width: 100px; height: 100px; }
+    #screen-search { width: 300px; padding: 8px; }
+    .progress-ring__circle { stroke-dasharray: 283; }
+    .icon-wiggle { font-size: 24px; cursor: pointer; }
+    nav { background: #eee; padding: 10px; }
+    nav a, nav button { padding: 8px 16px; margin: 0 4px; }
+    .text-reveal { font-size: 24px; font-weight: bold; }
+    #liquid-overlay { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg, #a43700, #cd4700); transform: translateY(100%); transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1); pointer-events: none; }
+    #liquid-overlay.active { transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas" style="width:400px;height:300px;"></canvas>
+
+  <div class="stagger-item" data-name="test-item-1">Item 1</div>
+  <div class="stagger-item" data-name="test-item-2">Item 2</div>
+
+  <div class="scroll-reveal" data-direction="up">Reveal Up</div>
+  <div class="scroll-reveal" data-direction="left" data-delay="200">Reveal Left</div>
+
+  <div class="scroll-parallax" data-rate="0.5">Parallax</div>
+  <div class="parallax-layer">Layer</div>
+
+  <div class="scroll-progress-bar" style="width:50%;"></div>
+
+  <div class="scroll-counter" data-count="42" data-prefix="$" data-suffix="%"></div>
+
+  <div class="scroll-header">Header Item</div>
+
+  <div class="scroll-stagger-container">
+    <div class="scroll-stagger-item">Stagger Child 1</div>
+    <div class="scroll-stagger-item">Stagger Child 2</div>
+  </div>
+
+  <div class="scroll-ring">
+    <svg><circle class="progress-ring__circle" data-target="0.75" stroke-dasharray="283" /></svg>
+  </div>
+
+  <button class="btn-interactive">Click Me</button>
+  <span class="icon-wiggle">🔔</span>
+  <div class="fab-pulse"></div>
+
+  <div class="chat-bubble">Hello</div>
+  <div class="chat-bubble">World</div>
+
+  <div class="typing-dots"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>
+
+  <div class="card-lift">Hover Me</div>
+  <div class="text-reveal">Test Text!</div>
+  <div class="float-gentle"></div>
+
+  <nav>
+    <button class="bg-primary">Active Nav</button>
+    <button>Inactive</button>
+  </nav>
+
+  <div class="filter-item" data-category="features" data-name="Test Feature">Feature</div>
+  <div class="filter-item" data-category="dashboard" data-name="Test Dashboard">Dashboard</div>
+  <div class="filter-item" data-category="fun" data-name="Test Fun">Fun</div>
+
+  <input id="screen-search" type="text" placeholder="Search..." />
+
+  <div id="category-tabs">
+    <button data-category="all" class="tab-btn active bg-primary text-on-primary">All</button>
+    <button data-category="features" class="tab-btn bg-surface-container-highest text-on-surface-variant">Features</button>
+    <button data-category="dashboard" class="tab-btn bg-surface-container-highest text-on-surface-variant">Dashboard</button>
+  </div>
+
+  <button id="back-to-top" class="opacity-0 pointer-events-none">Back to Top</button>
+  <button class="ripple-btn">Ripple Me</button>
+
+  <div id="scroll-progress"></div>
+  <div id="liquid-overlay"></div>
+
+  <script src="file:///C:/Users/asus/Downloads/stitch_desifit_ui_design/stitch_desifit_ui_design/animation-engine.js"></script>
+</body>
+</html>
