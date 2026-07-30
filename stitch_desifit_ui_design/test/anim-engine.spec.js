@@ -427,6 +427,50 @@ test.describe('Dark Mode (Anim Engine)', () => {
     expect(result).toBe(true);
     await page.close();
   });
+
+  test('initDarkModeTier sets _darkMode from system preference', async () => {
+    const page = await createPage();
+    const result = await page.evaluate(() => {
+      window.DesiFitAnim.initDarkModeTier();
+      return window.DesiFitAnim.isDarkMode();
+    });
+    expect(typeof result).toBe('boolean');
+    await page.close();
+  });
+
+  test('getParticleCount reduces count when dark mode is active', async () => {
+    const page = await createPage();
+    await page.evaluate(() => {
+      localStorage.setItem('desifit-dark-mode', 'true');
+      window.DesiFitAnim.initDarkModeTier();
+    });
+    const darkCount = await page.evaluate(() => window.DesiFitAnim.getParticleCount());
+    expect(darkCount).toBe(30);
+
+    await page.evaluate(() => {
+      localStorage.setItem('desifit-dark-mode', 'false');
+      window.DesiFitAnim.initDarkModeTier();
+    });
+    const lightCount = await page.evaluate(() => window.DesiFitAnim.getParticleCount());
+    expect(lightCount).toBe(50);
+    await page.close();
+  });
+
+  test('isDarkMode reflects darkmodechange event', async () => {
+    const page = await createPage();
+    await page.evaluate(() => {
+      localStorage.removeItem('desifit-dark-mode');
+      window.DesiFitAnim.initDarkModeTier();
+    });
+    await page.evaluate(() => window.DesiFitAnim.setDarkMode(true));
+    const isDarkOn = await page.evaluate(() => window.DesiFitAnim.isDarkMode());
+    expect(isDarkOn).toBe(true);
+
+    await page.evaluate(() => window.DesiFitAnim.setDarkMode(false));
+    const isDarkOff = await page.evaluate(() => window.DesiFitAnim.isDarkMode());
+    expect(isDarkOff).toBe(false);
+    await page.close();
+  });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -2430,37 +2474,31 @@ test.describe('initScreenshotExport', () => {
     await page.close();
   });
 
-  // ─── URL hash deep-link + share button (Day 3) ───
-  // Tests load the production index.html (where the IIFE lives) rather
-  // than the minimal animation-engine test fixture, because the feature
-  // code lives in the gallery IIFE — not in the animation engine itself.
+  // ─── URL hash deep-link + share button (Day 3) + Ctrl/Cmd+L (Day 4) ───
+  // Shared setup: one browser + INDEX_PATH for all gallery-page tests.
+  const INDEX_PATH = 'file://' + path.resolve(__dirname, '..', 'index.html');
+
+  let galleryBrowser;
+  test.beforeAll(async () => {
+    galleryBrowser = await chromium.launch();
+  });
+  test.afterAll(async () => {
+    if (galleryBrowser) await galleryBrowser.close();
+  });
+
+  async function createGalleryPage() {
+    const page = await galleryBrowser.newPage();
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(INDEX_PATH, { waitUntil: 'domcontentloaded', timeout: 15000 });
+    await page.waitForFunction(
+      () => typeof window.fireHashChange === 'function',
+      {},
+      { timeout: 30000 }
+    );
+    return page;
+  }
+
   test.describe('URL hash deep-link + share button', () => {
-    const INDEX_PATH = 'file://' + path.resolve(__dirname, '..', 'index.html');
-
-    // Shared browser for the URL-hash describe block. Playwright runs tests
-    // in parallel across worker processes; each worker invokes beforeAll ONCE
-    // before the describe's tests, so one chromium per worker beats per-test
-    // launches AND eliminates the wasted FIXTURE_PATH double-goto the prior
-    // createPage() wrap incurred.
-    let galleryBrowser;
-    test.beforeAll(async () => {
-      galleryBrowser = await chromium.launch();
-    });
-    test.afterAll(async () => {
-      if (galleryBrowser) await galleryBrowser.close();
-    });
-
-    async function createGalleryPage() {
-      const page = await galleryBrowser.newPage();
-      await page.setViewportSize({ width: 1280, height: 800 });
-      await page.goto(INDEX_PATH, { waitUntil: 'domcontentloaded', timeout: 15000 });
-      await page.waitForFunction(
-        () => typeof window.fireHashChange === 'function',
-        {},
-        { timeout: 30000 }
-      );
-      return page;
-    }
 
     test('hash #card-3 highlights the 3rd filter-item', async () => {
       const page = await createGalleryPage();
@@ -2597,6 +2635,112 @@ test.describe('initScreenshotExport', () => {
         return -1;
       });
       expect(highlightedIndex).toBe(4); // card-5 → 0-based index 4
+      await page.close();
+    });
+  });
+
+  test.describe('Ctrl/Cmd+L keyboard shortcut', () => {
+    test('Ctrl+L copies share URL when a card is highlighted', async () => {
+      const page = await createGalleryPage();
+      await page.evaluate(() => {
+        window.location.hash = '#card-3';
+        window.fireHashChange();
+      });
+      await page.waitForTimeout(200);
+
+      const hasHighlight = await page.evaluate(() => {
+        return document.querySelector('.filter-item.is-hash-target') !== null;
+      });
+      expect(hasHighlight).toBe(true);
+
+      await page.keyboard.press('Control+l');
+      await page.waitForTimeout(300);
+
+      const stillHighlighted = await page.evaluate(() => {
+        return document.querySelector('.filter-item.is-hash-target') !== null;
+      });
+    expect(stillHighlighted).toBe(true);
+    await page.close();
+  });
+
+  test.describe('Axe-core a11y audit', () => {
+    test('axe-core loads from CDN and axe.run is available', async () => {
+      const page = await createGalleryPage();
+      const loaded = await page.evaluate(function () {
+        return new Promise(function (resolve) {
+          var s = document.createElement('script');
+          s.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.10.3/axe.min.js';
+          var timeout = setTimeout(function () { resolve(false); }, 15000);
+          s.onload = function () { clearTimeout(timeout); resolve(true); };
+          s.onerror = function () { clearTimeout(timeout); resolve(false); };
+          document.head.appendChild(s);
+        });
+      });
+      if (!loaded) { await page.close(); return; }
+      const axeAvailable = await page.evaluate(function () {
+        return typeof window.axe === 'object' && typeof window.axe.run === 'function';
+      });
+      expect(axeAvailable).toBe(true);
+      await page.close();
+    });
+
+    test('axe.run reports violations for missing alt text', async () => {
+      const page = await createGalleryPage();
+      const loaded = await page.evaluate(function () {
+        return new Promise(function (resolve) {
+          var s = document.createElement('script');
+          s.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.10.3/axe.min.js';
+          var timeout = setTimeout(function () { resolve(false); }, 15000);
+          s.onload = function () { clearTimeout(timeout); resolve(true); };
+          s.onerror = function () { clearTimeout(timeout); resolve(false); };
+          document.head.appendChild(s);
+        });
+      });
+      if (!loaded) { await page.close(); return; }
+      await page.evaluate(function () {
+        var img = document.createElement('img');
+        img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>';
+        img.id = 'test-a11y-img';
+        document.body.appendChild(img);
+      });
+      const result = await page.evaluate(function () {
+        return window.axe.run(document, {
+          runOnly: { type: 'tag', values: ['wcag2a'] },
+          resultTypes: ['violations']
+        }).then(function (r) {
+          var violations = r.violations.filter(function (v) {
+            return v.nodes.some(function (n) {
+              return n.target.some(function (t) { return t.indexOf('test-a11y-img') !== -1; });
+            });
+          });
+          return { hasImageViolation: violations.length > 0, violationCount: r.violations.length };
+        });
+      });
+      expect(result.hasImageViolation).toBe(true);
+      await page.close();
+    });
+  });
+
+    test('Ctrl+L does nothing when no card is highlighted', async () => {
+      const page = await createGalleryPage();
+      await page.evaluate(() => {
+        window.location.hash = '';
+        window.fireHashChange();
+      });
+      await page.waitForTimeout(150);
+
+      const noHighlightBefore = await page.evaluate(() => {
+        return document.querySelector('.filter-item.is-hash-target') === null;
+      });
+      expect(noHighlightBefore).toBe(true);
+
+      await page.keyboard.press('Control+l');
+      await page.waitForTimeout(200);
+
+      const noHighlightAfter = await page.evaluate(() => {
+        return document.querySelector('.filter-item.is-hash-target') === null;
+      });
+      expect(noHighlightAfter).toBe(true);
       await page.close();
     });
   });

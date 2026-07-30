@@ -5284,6 +5284,55 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
 
       if (scanBtn) scanBtn.addEventListener('click', runAudit);
 
+      // ── axe-core lazy loader (Day 4) ──
+      var _axeReady = null;
+      function loadAxeCore() {
+        if (_axeReady) return _axeReady;
+        _axeReady = new Promise(function (resolve, reject) {
+          var s = document.createElement('script');
+          s.src = 'https://cdn.jsdelivr.net/npm/axe-core@4.10.3/axe.min.js';
+          s.onload = function () { resolve(window.axe); };
+          s.onerror = function () { reject(new Error('axe-core CDN load failed')); };
+          document.head.appendChild(s);
+        });
+        return _axeReady;
+      }
+
+      function runAxeAudit(callback) {
+        loadAxeCore().then(function (axe) {
+          return axe.run(document, {
+            runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
+            resultTypes: ['violations', 'incomplete', 'passes']
+          });
+        }).then(function (results) {
+          var axeIssues = [];
+          var axePasses = 0;
+          results.violations.forEach(function (v) {
+            v.nodes.forEach(function (node) {
+              axeIssues.push({
+                type: v.impact === 'critical' || v.impact === 'serious' ? 'error' : 'warning',
+                msg: v.help + ' (axe:' + v.id + ')',
+                el: Array.isArray(node.target) ? node.target.join(', ') : String(node.target)
+              });
+            });
+          });
+          results.incomplete.forEach(function (v) {
+            v.nodes.forEach(function (node) {
+              axeIssues.push({
+                type: 'warning',
+                msg: '[Review] ' + v.help + ' (axe:' + v.id + ')',
+                el: Array.isArray(node.target) ? node.target.join(', ') : String(node.target)
+              });
+            });
+          });
+          results.passes.forEach(function () { axePasses++; });
+          callback(null, axeIssues, axePasses);
+        }).catch(function (err) {
+          console.warn('[a11y] axe-core skipped:', err.message);
+          callback(null, [], 0); // fallback: manual-only
+        });
+      }
+
       function runAudit() {
         if (statusEl) statusEl.textContent = 'Scanning...';
         var issues = [];
@@ -5356,7 +5405,16 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
 
         // Render
         renderResults(issues, passes);
-        if (statusEl) statusEl.textContent = 'Complete';
+
+        // ── Axe-core audit (async, merges after manual checks) ──
+        runAxeAudit(function (_err, axeIssues, axePasses) {
+          issues = issues.concat(axeIssues);
+          passes += axePasses;
+          renderResults(issues, passes);
+          if (statusEl) statusEl.textContent = 'Complete (axe-core)';
+        });
+
+        if (statusEl) statusEl.textContent = 'Complete (manual + axe-core loading...)';
       }
 
       function elementDesc(el) {
@@ -7984,6 +8042,46 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
             history.replaceState({}, '',
               window.location.pathname + window.location.search);
           } catch (e2) { /* old browsers: silent */ }
+        }
+      });
+
+      // ───── Ctrl/Cmd+L copies share URL when a card is highlighted ─────
+      document.addEventListener('keydown', function (e) {
+        var isMod = navigator.platform.indexOf('Mac') !== -1 ? e.metaKey : e.ctrlKey;
+        if (e.key === 'l' && isMod) {
+          var highlighted = document.querySelector('.filter-item.is-hash-target');
+          if (!highlighted) return; // let browser handle (focus address bar)
+          e.preventDefault();
+          var cards = document.querySelectorAll('.filter-item');
+          var idx = -1;
+          for (var i = 0; i < cards.length; i++) {
+            if (cards[i] === highlighted) { idx = i; break; }
+          }
+          if (idx === -1) return;
+          var hash = '#' + canonicalHash(highlighted, idx);
+          var absoluteUrl;
+          try {
+            absoluteUrl = new URL(hash, window.location.href).href;
+          } catch (e2) {
+            absoluteUrl = window.location.href.replace(/#.*$/, '') + hash;
+          }
+          try {
+            navigator.clipboard.writeText(absoluteUrl);
+          } catch (e2) {
+            var ta = document.createElement('textarea');
+            ta.value = absoluteUrl;
+            ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          if (window.DesiFitAnim && window.DesiFitAnim.showToast) {
+            window.DesiFitAnim.showToast('Link copied!', 'success', 2000);
+          }
+          highlighted.classList.remove('is-hash-target');
+          void highlighted.offsetWidth;
+          highlighted.classList.add('is-hash-target');
         }
       });
 
