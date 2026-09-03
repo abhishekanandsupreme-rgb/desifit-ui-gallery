@@ -47,6 +47,11 @@ desifit/android/key.properties
 # runs (e.g. desifit/settings.hive); never commit them.
 *.hive
 
+# Gallery e2e (Playwright): node_modules, HTML report, and test artifacts
+node_modules/
+playwright-report/
+test-results/
+
 # IDEs
 .idea/
 *.iml

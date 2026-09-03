@@ -1,3 +1,20 @@
+// =============================================================================
+// Security model for the DesiFit Firestore database.
+//
+// THIS FILE is the real security boundary. The Firebase client config that is
+// committed next to the apps (desifit/android/app/google-services.json and
+// desifit/lib/firebase_options.dart) contains only client-side identifiers
+// (API keys, app ids) that ship in the app binary anyway -- they are NOT
+// secrets, so keeping them tracked is fine and intentional. Access control
+// lives exclusively in the rules below. Never commit a service-account key
+// or any other private key; the CI gate tools/check_no_private_keys.js fails
+// the build if one appears.
+//
+// Model: users own their own documents; authenticated users may read shared
+// collections (leaderboard, community hacks) but writes are owner-scoped and
+// community posts must self-declare an authorId equal to the caller's uid.
+// =============================================================================
+
 rules_version = '2';
 
 service cloud.firestore {
