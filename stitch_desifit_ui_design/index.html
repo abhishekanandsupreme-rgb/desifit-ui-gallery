@@ -144,6 +144,13 @@
       .grid-screens { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
     }
 
+    /* Filter tab — WCAG 2.5.8: minimum 44×44 tap target */
+    .tab-btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
     /* Filter tab active underline */
     .tab-underline {
       position: absolute; bottom: -2px; left: 0; right: 0; height: 2px;
@@ -304,8 +311,8 @@
       bottom: 16px;
       right: 16px;
       z-index: 9998;
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: rgba(16, 16, 20, 0.7);
       backdrop-filter: blur(6px);
@@ -342,11 +349,11 @@
     /* ─── Design QA Measurement Overlay ─── */
     #design-qa-toggle {
       position: fixed;
-      bottom: 54px;
+      bottom: 68px;
       right: 16px;
       z-index: 9998;
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: rgba(16, 16, 20, 0.7);
       backdrop-filter: blur(6px);
@@ -900,6 +907,7 @@
     #compare-fab {
       position: fixed; bottom: 6rem; right: 1.5rem;
       z-index: 50;
+      min-height: 44px;
       padding: 0.625rem 1rem;
       border-radius: 9999px;
       background: linear-gradient(135deg, #a43700, #cd4700);
@@ -1787,11 +1795,11 @@
     /* ─── Keyboard help overlay ─── */
     #kbd-help {
       position: fixed; inset: 0; z-index: 10003;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.25s ease;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s;
     }
     #kbd-help.active {
-      opacity: 1; pointer-events: auto;
+      opacity: 1; visibility: visible; pointer-events: auto;
     }
     #kbd-help .backdrop {
       position: absolute; inset: 0;
@@ -1838,6 +1846,98 @@
       border-color: #444;
       color: #e8e8e8;
     }
+
+    /* ─── Command Palette (Ctrl+K) ─── */
+    #cmd-palette {
+      position: fixed; inset: 0; z-index: 10004;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s;
+    }
+    #cmd-palette.active {
+      opacity: 1; visibility: visible; pointer-events: auto;
+    }
+    #cmd-palette .cmd-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+    }
+    #cmd-palette .cmd-panel {
+      position: relative; width: min(560px, 92vw); margin: 12vh auto 0;
+      background: #fff;
+      border-radius: 1rem; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      transform: translateY(-12px) scale(0.98);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .dark #cmd-palette .cmd-panel { background: #1a1a1a; }
+    #cmd-palette.active .cmd-panel { transform: translateY(0) scale(1); }
+    .cmd-input-wrap {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.9rem 1.1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .dark .cmd-input-wrap { border-bottom-color: rgba(255,255,255,0.1); }
+    .cmd-input-wrap .material-symbols-outlined { font-size: 1.25rem; color: #999; }
+    #cmd-input {
+      flex: 1; border: none; outline: none; background: transparent;
+      font-size: 1rem; font-family: inherit; color: inherit;
+    }
+    #cmd-input::placeholder { color: #999; }
+    #cmd-results {
+      list-style: none; margin: 0; padding: 0.4rem;
+      max-height: 46vh; overflow-y: auto;
+    }
+    #cmd-results li {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.55rem 0.8rem; border-radius: 0.5rem;
+      cursor: pointer; font-size: 0.9rem;
+    }
+    #cmd-results li .cmd-cat {
+      margin-left: auto; font-size: 0.65rem;
+      text-transform: uppercase; letter-spacing: 0.05em; color: #999;
+    }
+    #cmd-results li.selected, #cmd-results li:hover { background: rgba(164,55,0,0.12); }
+    .dark #cmd-results li.selected { background: rgba(205,71,0,0.25); }
+    .cmd-footer {
+      display: flex; gap: 1rem; padding: 0.6rem 1.1rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.7rem; color: #888;
+    }
+    .dark .cmd-footer { border-top-color: rgba(255,255,255,0.1); }
+
+    /* ─── Focus Mode ([F]) ─── */
+    #focus-mode {
+      position: fixed; inset: 0; z-index: 10002;
+      background: radial-gradient(120% 120% at 50% 0%, #101418 0%, #05070a 70%);
+      display: flex; flex-direction: column; align-items: center;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s;
+    }
+    #focus-mode.active { opacity: 1; visibility: visible; pointer-events: auto; }
+    .focus-bar {
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-top: 1.5rem; color: #e8e8e8;
+    }
+    .focus-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700; letter-spacing: 0.02em; min-width: 10rem; text-align: center;
+    }
+    .focus-bar button {
+      width: 2.25rem; height: 2.25rem; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08);
+      color: #fff; cursor: pointer; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .focus-bar button:hover { background: rgba(255,255,255,0.2); }
+    .focus-viewport {
+      flex: 1; width: min(360px, 90vw); margin: 1rem auto 2rem;
+      border-radius: 2.25rem; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+      background: #fff;
+    }
+    #focus-frame { width: 100%; height: 100%; border: none; display: block; }
 
     /* ─── Surprise me button ─── */
     #surprise-btn {
@@ -2709,6 +2809,7 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
+      min-height: 44px;
       padding: 4px 10px;
       border-radius: 9999px;
       border: 1px solid rgba(164,55,0,0.2);
@@ -3164,21 +3265,21 @@
 
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-xl border-b border-outline-variant/20 dark:border-white/5">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 hero-gradient rounded-xl flex items-center justify-center shadow-lg transform -rotate-6 flex-shrink-0">
           <span class="material-symbols-outlined text-white text-xl" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
         </div>
         <div>
           <h1 class="font-headline font-extrabold text-lg tracking-tighter text-primary dark:text-primary-container">DesiFit</h1>
-          <p class="text-[9px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant uppercase tracking-widest">Full Immersion UI</p>
+          <p class="hidden sm:block text-[9px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant uppercase tracking-widest">Full Immersion UI</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
         <!-- Sattu Rewards Badge (visible at all breakpoints) -->
         <button id="sattu-badge"
-          class="flex items-center gap-1 px-2 sm:gap-1.5 sm:px-3 py-1.5 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 border border-primary/20 dark:border-primary-container/20 text-xs font-bold text-primary dark:text-primary-container cursor-default transition-all duration-300 shrink-0"
+          class="h-11 flex items-center gap-1 px-2 sm:gap-1.5 sm:px-3 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 border border-primary/20 dark:border-primary-container/20 text-xs font-bold text-primary dark:text-primary-container cursor-default transition-all duration-300 shrink-0"
           title="Sattu Rewards — interact with screens to earn"
           aria-label="Sattu Rewards progress">
           <span class="text-sm sm:text-base">🍚</span>
@@ -3189,7 +3290,7 @@
         <!-- Profile link → /app/profile/ (mock-authenticated dashboard) -->
         <a href="app/profile/index.html"
            id="profile-link"
-           class="w-10 h-10 rounded-xl bg-surface-container-high dark:bg-dark-surface-container flex items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-dark-surface-container-high transition-colors"
+           class="w-11 h-11 rounded-xl bg-surface-container-high dark:bg-dark-surface-container flex items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-dark-surface-container-high transition-colors"
            aria-label="Open user profile dashboard"
            title="Open profile dashboard">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -3199,7 +3300,7 @@
 
         <!-- Dark mode toggle -->
         <button id="theme-toggle"
-          class="theme-toggle w-10 h-10 rounded-xl bg-surface-container-high dark:bg-dark-surface-container flex items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant"
+          class="theme-toggle w-11 h-11 rounded-xl bg-surface-container-high dark:bg-dark-surface-container flex items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant"
           aria-label="Toggle dark mode"
           title="Toggle dark mode">
           <span id="theme-icon" class="material-symbols-outlined text-lg">dark_mode</span>
@@ -3223,14 +3324,14 @@
         <!-- Theme Editor toggle -->
         <!-- Bookmarks toggle -->
         <button id="bookmark-toggle"
-          class="relative w-8 h-8 rounded-xl bg-surface-container-high dark:bg-dark-surface-container flex items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant"
+          class="relative w-11 h-11 hidden sm:flex rounded-xl bg-surface-container-high dark:bg-dark-surface-container items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant"
           aria-label="Show bookmarked screens" title="Bookmarked Screens">
           <span class="material-symbols-outlined text-lg">bookmark</span>
           <span id="bookmark-count" class="absolute -top-1 -right-1 text-[8px] font-bold min-w-[14px] h-[14px] rounded-full flex items-center justify-center bg-primary text-on-primary dark:bg-primary-container dark:text-on-primary-container" style="display:none;">0</span>
         </button>
 
         <button id="theme-editor-toggle"
-          class="w-8 h-8 rounded-xl bg-surface-container-high dark:bg-dark-surface-container flex items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant"
+          class="w-11 h-11 hidden sm:flex rounded-xl bg-surface-container-high dark:bg-dark-surface-container items-center justify-center text-on-surface-variant dark:text-dark-on-surface-variant"
           aria-label="Open theme editor" title="Theme Editor">
           <span class="material-symbols-outlined text-lg">palette</span>
         </button>
@@ -3238,9 +3339,9 @@
 
         <!-- Quick nav links -->
         <div class="hidden sm:flex items-center gap-1 ml-2">
-          <a href="#onboarding" class="text-[10px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant px-2 py-1 rounded-lg hover:bg-surface-container-high dark:hover:bg-dark-surface-container transition-colors uppercase tracking-wider">Onboard</a>
-          <a href="#dashboard" class="text-[10px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant px-2 py-1 rounded-lg hover:bg-surface-container-high dark:hover:bg-dark-surface-container transition-colors uppercase tracking-wider">Dashboard</a>
-          <a href="#features" class="text-[10px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant px-2 py-1 rounded-lg hover:bg-surface-container-high dark:hover:bg-dark-surface-container transition-colors uppercase tracking-wider">Features</a>
+          <a href="#onboarding" class="inline-flex items-center h-11 px-3 text-[10px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant rounded-lg hover:bg-surface-container-high dark:hover:bg-dark-surface-container transition-colors uppercase tracking-wider">Onboard</a>
+          <a href="#dashboard" class="inline-flex items-center h-11 px-3 text-[10px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant rounded-lg hover:bg-surface-container-high dark:hover:bg-dark-surface-container transition-colors uppercase tracking-wider">Dashboard</a>
+          <a href="#features" class="inline-flex items-center h-11 px-3 text-[10px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant rounded-lg hover:bg-surface-container-high dark:hover:bg-dark-surface-container transition-colors uppercase tracking-wider">Features</a>
         </div>
       </div>
     </div>
@@ -3296,14 +3397,14 @@
           <!-- Surprise Me + Keyboard hint row -->
           <div class="flex items-center justify-between mb-3">
             <button id="surprise-btn"
-              class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 border border-primary/20 dark:border-primary-container/20 text-[11px] font-bold text-primary dark:text-primary-container hover:shadow-md transition-all shrink-0"
+              class="h-11 flex items-center gap-1.5 px-3 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 border border-primary/20 dark:border-primary-container/20 text-[11px] font-bold text-primary dark:text-primary-container hover:shadow-md transition-all shrink-0"
               title="Pick a random screen to explore"
               aria-label="Surprise me — random screen">
               <span class="shuffle-icon material-symbols-outlined text-sm">shuffle</span>
               Surprise Me
             </button>
             <button id="kbd-help-btn"
-              class="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant bg-surface-container-high dark:bg-dark-surface-container hover:bg-surface-container-highest dark:hover:bg-dark-surface-container-highest transition-colors"
+              class="h-11 w-11 flex items-center justify-center rounded-lg text-[10px] font-bold text-on-surface-variant dark:text-dark-on-surface-variant bg-surface-container-high dark:bg-dark-surface-container hover:bg-surface-container-highest dark:hover:bg-dark-surface-container-highest transition-colors"
               title="Show keyboard shortcuts"
             </button>
             <button id="screenshot-export-btn"
@@ -3775,7 +3876,7 @@
               style="animation-delay: 1.2s;"
               data-category="features"
               data-name="Workout Tracker Reps"
-              data-animations="counter-animate,timer-pulse,button-squash,stagger-reveal"
+              data-animations="counter-animate,progress-bar,button-squash,stagger-reveal"
               onclick="handleCardClick(event, this)"
               aria-label="Workout Tracker screen with exercise logging">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-surface-container-lowest dark:from-primary/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3805,7 +3906,7 @@
               style="animation-delay: 1.25s;"
               data-category="features"
               data-name="Calorie Scanner Scan Meal"
-              data-animations="scan-line,pop-in"
+              data-animations="scan-animation,counter-animate,progress-ring,card-lift"
               onclick="handleCardClick(event, this)"
               aria-label="Calorie Scanner screen with food scanning">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3835,7 +3936,7 @@
               style="animation-delay: 1.3s;"
               data-category="features"
               data-name="Water Intake Hydration"
-              data-animations="water-fill,pop-in"
+              data-animations="water-fill,counter-animate,drop-in,card-lift"
               onclick="handleCardClick(event, this)"
               aria-label="Water Intake Tracker screen with hydration logging">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-blue-100/50 to-surface-container-lowest dark:from-blue-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3863,7 +3964,7 @@
               style="animation-delay: 1.35s;"
               data-category="features"
               data-name="Macro Barcode Scanner"
-              data-animations="scan-line,pop-in"
+              data-animations="scan-animation,macro-pop,progress-fill"
               onclick="handleCardClick(event, this)"
               aria-label="Macro Barcode Scanner screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-blue-100/60 to-surface-container-lowest dark:from-blue-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3919,9 +4020,9 @@
             <a href="sleep_recovery/code.html"
               class="filter-item group block card-hover stagger relative"
               style="animation-delay: 1.1s;"
-              data-category="features"
+              data-category="fun"
               data-name="Sleep Recovery Tracker"
-              data-animations="float,progress-ring,stagger-reveal"
+              data-animations="scroll-reveal,text-reveal,interactive-particles"
               onclick="handleCardClick(event, this)"
               aria-label="Sleep and Recovery Tracker screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100/60 to-surface-container-lowest dark:from-purple-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3948,9 +4049,9 @@
             <a href="settings_profile/code.html"
               class="filter-item group block card-hover stagger relative"
               style="animation-delay: 1.2s;"
-              data-category="features"
+              data-category="fun"
               data-name="Settings and Profile"
-              data-animations="stagger-reveal,dark-mode"
+              data-animations="scroll-reveal,text-reveal,button-squash"
               onclick="handleCardClick(event, this)"
               aria-label="Settings and Profile screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3979,7 +4080,7 @@
               style="animation-delay: 1.25s;"
               data-category="fun"
               data-name="Achievements Badges"
-              data-animations="badge-pop,stagger-reveal"
+              data-animations="badge-pop,progress-glow,text-reveal"
               onclick="handleCardClick(event, this)"
               aria-label="Achievements and Badges screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-yellow-100/60 to-surface-container-lowest dark:from-yellow-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4037,7 +4138,7 @@
               style="animation-delay: 1.3s;"
               data-category="features"
               data-name="Recipe Detail View"
-              data-animations="stagger-reveal,button-squash"
+              data-animations="nutrition-fill,cook-step-in,stagger-reveal"
               onclick="handleCardClick(event, this)"
               aria-label="Recipe Detail View screen with cooking steps">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/5 to-surface-container-lowest dark:from-secondary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4066,7 +4167,7 @@
               style="animation-delay: 1.35s;"
               data-category="features"
               data-name="Subscription Plans"
-              data-animations="stagger-reveal,pop-in"
+              data-animations="plan-in,feature-check,badge-shine"
               onclick="handleCardClick(event, this)"
               aria-label="Subscription Plans and Paywall screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4095,7 +4196,7 @@
               style="animation-delay: 1.4s;"
               data-category="features"
               data-name="Workout History Log"
-              data-animations="stagger-reveal"
+              data-animations="slide-in,bar-rise,fade-up"
               onclick="handleCardClick(event, this)"
               aria-label="Workout History Log screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4124,7 +4225,7 @@
               style="animation-delay: 1.45s;"
               data-category="features"
               data-name="Recipe Collections"
-              data-animations="stagger-reveal"
+              data-animations="card-in,collect-pop,heart-beat"
               onclick="handleCardClick(event, this)"
               aria-label="Recipe Collections and Favorites screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/5 to-surface-container-lowest dark:from-secondary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4153,7 +4254,7 @@
               style="animation-delay: 1.5s;"
               data-category="fun"
               data-name="Rewards Shop"
-              data-animations="stagger-reveal,coin-glow"
+              data-animations="pop-in,float-coin,glow-soft"
               onclick="handleCardClick(event, this)"
               aria-label="Rewards Shop screen with Sattu coins">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-yellow-100/60 to-surface-container-lowest dark:from-yellow-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4184,7 +4285,7 @@
               style="animation-delay: 1.55s;"
               data-category="features"
               data-name="Progress Dashboard"
-              data-animations="bar-grow,counter-animate,progress-ring"
+              data-animations="bar-rise,chart-line,counter-animate,progress-ring"
               onclick="handleCardClick(event, this)"
               aria-label="Progress Dashboard screen with charts and analytics">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-surface-container-lowest dark:from-primary/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4215,7 +4316,7 @@
               style="animation-delay: 1.6s;"
               data-category="features"
               data-name="Meal Prep Scheduler"
-              data-animations="stagger-reveal"
+              data-animations="card-pop,slide-right,grocery-bump,check-bounce"
               onclick="handleCardClick(event, this)"
               aria-label="Meal Prep Scheduler screen with weekly meal planning">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/10 to-surface-container-lowest dark:from-secondary/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4246,7 +4347,7 @@
               style="animation-delay: 1.65s;"
               data-category="features"
               data-name="Habit Tracker"
-              data-animations="check-pop,streak-fire"
+              data-animations="check-bounce,streak-fire,day-pop,confetti"
               onclick="handleCardClick(event, this)"
               aria-label="Habit Tracker screen with daily habits and streaks">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-[#e67e22]/10 to-surface-container-lowest dark:from-[#e67e22]/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4284,47 +4385,12 @@
             Reset Filters
           </button>
         </div>
-
-        <!-- Animation Glossary Section -->
-        <div id="glossary-section" class="bg-surface-container-lowest dark:bg-dark-surface-container rounded-3xl p-6 mb-10">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-8 bg-primary/10 dark:bg-primary/20 rounded-xl flex items-center justify-center">
-              <span class="material-symbols-outlined text-primary dark:text-primary-container text-lg">menu_book</span>
-            </div>
-            <h3 class="font-headline font-bold text-lg text-on-surface dark:text-dark-on-surface">Animation Glossary</h3>
-            <span id="glossary-total-count" class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant font-medium"></span>
-          </div>
-
-          <div class="glossary-header">
-            <div class="glossary-search-wrap">
-              <span class="material-symbols-outlined">search</span>
-              <input type="search" id="glossary-search" placeholder="Search animations..." spellcheck="false" aria-label="Search animations">
-            </div>
-            <span id="glossary-result-count" class="glossary-count"></span>
-          </div>
-
-          <div class="glossary-cat-filters" id="glossary-cat-filters" role="tablist" aria-label="Filter animations by category">
-            <button class="glossary-cat-btn active" data-gcat="all" role="tab" aria-selected="true">All</button>
-            <button class="glossary-cat-btn" data-gcat="motion" role="tab" aria-selected="false">Motion</button>
-            <button class="glossary-cat-btn" data-gcat="interaction" role="tab" aria-selected="false">Interaction</button>
-            <button class="glossary-cat-btn" data-gcat="visual" role="tab" aria-selected="false">Visual</button>
-            <button class="glossary-cat-btn" data-gcat="data" role="tab" aria-selected="false">Data</button>
-          </div>
-
-          <div id="glossary-grid" class="glossary-grid">
-            <!-- Populated by JavaScript -->
-          </div>
-
-          <div id="glossary-empty" class="glossary-empty hidden">
-            <span class="material-symbols-outlined">search_off</span>
-            <p class="font-headline font-bold text-base text-on-surface dark:text-dark-on-surface">No animations found</p>
-            <p class="text-sm text-on-surface-variant dark:text-dark-on-surface-variant mt-1">Try a different search term or category</p>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Glossary Section (outside screen-gallery so toggling one doesn't affect the other) -->
+    <!-- Glossary Section (standalone — lives outside screen-gallery so the
+         glossary tab can hide the gallery without hiding the glossary; the
+         inline duplicate was removed to avoid duplicate DOM ids) -->
     <section class="px-4 sm:px-6 pb-24">
       <div class="max-w-3xl mx-auto">
         <div id="glossary-section" class="bg-surface-container-lowest dark:bg-dark-surface-container rounded-3xl p-6 mb-10">
@@ -4384,9 +4450,9 @@
         <div>
           <h4 class="font-headline font-bold text-sm text-on-surface dark:text-dark-on-surface mb-3 uppercase tracking-wider">Explore</h4>
           <ul class="space-y-2">
-            <li><a href="#onboarding" class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant hover:text-primary dark:hover:text-primary-container transition-colors">Onboarding</a></li>
-            <li><a href="#dashboard" class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant hover:text-primary dark:hover:text-primary-container transition-colors">Dashboard</a></li>
-            <li><a href="#features" class="text-xs text-on-surface-variant dark:text-dark-on-surface-variant hover:text-primary dark:hover:text-primary-container transition-colors">Features</a></li>
+            <li><a href="#onboarding" class="inline-flex items-center h-11 text-xs text-on-surface-variant dark:text-dark-on-surface-variant hover:text-primary dark:hover:text-primary-container transition-colors">Onboarding</a></li>
+            <li><a href="#dashboard" class="inline-flex items-center h-11 text-xs text-on-surface-variant dark:text-dark-on-surface-variant hover:text-primary dark:hover:text-primary-container transition-colors">Dashboard</a></li>
+            <li><a href="#features" class="inline-flex items-center h-11 text-xs text-on-surface-variant dark:text-dark-on-surface-variant hover:text-primary dark:hover:text-primary-container transition-colors">Features</a></li>
           </ul>
         </div>
         <div>
@@ -4442,6 +4508,32 @@
         <div class="row"><span>Show this help</span><div class="keys"><kbd>?</kbd></div></div>
         <div class="row"><span>Scroll to top</span><div class="keys"><kbd>Home</kbd></div></div>
       </div>
+    </div>
+  </div>
+  <!-- Command Palette -->
+  <div id="cmd-palette" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="cmd-backdrop" data-cmd-close></div>
+    <div class="cmd-panel">
+      <div class="cmd-input-wrap">
+        <span class="material-symbols-outlined">search</span>
+        <input id="cmd-input" type="text" placeholder="Type a command or search screens…" autocomplete="off" spellcheck="false" aria-label="Command search">
+      </div>
+      <ul id="cmd-results" role="listbox"></ul>
+      <div class="cmd-footer">
+        <span>↑↓ navigate</span><span>↵ run</span><span>Ctrl+K toggle</span>
+      </div>
+    </div>
+  </div>
+  <!-- Focus Mode -->
+  <div id="focus-mode" role="dialog" aria-modal="true" aria-label="Focus mode">
+    <div class="focus-bar">
+      <button id="focus-prev" aria-label="Previous screen">‹</button>
+      <span id="focus-name" class="focus-name">—</span>
+      <button id="focus-next" aria-label="Next screen">›</button>
+      <button id="focus-close" aria-label="Exit focus mode">✕</button>
+    </div>
+    <div class="focus-viewport">
+      <iframe id="focus-frame" title="Focus preview" loading="eager"></iframe>
     </div>
   </div>
   <!-- Theme Editor Panel -->
@@ -4626,6 +4718,13 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
 
     // ─── Card click handler: show preview modal, or navigate directly ───
     function handleCardClick(e, el) {
+      // Alt/Shift/Ctrl/Meta = compare-mode marking / selection shortcuts, not
+      // navigation — swallow the default so the card doesn't navigate away
+      // while the selection listeners run (they call preventDefault too).
+      if (e.altKey || e.shiftKey || e.metaKey || e.ctrlKey) {
+        e.preventDefault();
+        return;
+      }
       liquidNavigate(e, el.getAttribute('href'));
     }
 
@@ -6045,14 +6144,14 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
         { id:'interactive-particles', label:'Particles', desc:'Floating particles that react to mouse movement with connecting lines and gentle drift', icon:'participation', category:'motion', difficulty:'advanced', usedIn:['Dashboard v2','Workout Tracker','Achievements'], demoType:'particles' },
         { id:'parallax', label:'Parallax', desc:'Multi-layer depth effect where elements move at different speeds as you scroll', icon:'swap_vert', category:'motion', difficulty:'intermediate', usedIn:['Home Dashboard','Community Feed'], demoType:'parallax' },
         { id:'spring-physics', label:'Spring Physics', desc:'Bouncy, organic motion using spring equations — stiffness, damping, and mass', icon:'animation', category:'motion', difficulty:'advanced', usedIn:['Dashboard v2','AI Coach Chat','Planner'], demoType:'spring' },
-        { id:'stagger-reveal', label:'Stagger Reveal', desc:'Elements animate in sequence with cascading delays for a polished entrance', icon:'view_timeline', category:'motion', difficulty:'beginner', usedIn:['Recipe Grid','Leaderboard','Home Dashboard','Habit Tracker','Workout Tracker','Settings'], demoType:'stagger' },
+        { id:'stagger-reveal', label:'Stagger Reveal', desc:'Elements animate in sequence with cascading delays for a polished entrance', icon:'view_timeline', category:'motion', difficulty:'beginner', usedIn:['Recipe Grid','Leaderboard','Home Dashboard'], demoType:'stagger' },
         { id:'button-squash', label:'Button Squash', desc:'Press-down squash effect on click/tap with a spring-back release', icon:'touch_app', category:'interaction', difficulty:'beginner', usedIn:['All screens','Preview Modal'], demoType:'squash' },
         { id:'card-lift', label:'Card Lift', desc:'Hover state that elevates cards with translateY and enhanced shadow', icon:'card_lift', category:'interaction', difficulty:'beginner', usedIn:['All gallery cards','Recipe Grid'], demoType:'card-lift' },
         { id:'text-reveal', label:'Text Reveal', desc:'Characters animate in one by one from below with a staggered spring', icon:'text_fields', category:'visual', difficulty:'intermediate', usedIn:['Onboarding 1/5','Coach v2'], demoType:'text-reveal' },
         { id:'chat-bubbles', label:'Chat Bubbles', desc:'Messages pop in sequentially simulating a live conversation', icon:'bubble_chart', category:'interaction', difficulty:'intermediate', usedIn:['AI Coach Chat','Coach v2'], demoType:'bubbles' },
         { id:'liquid-transition', label:'Liquid Transition', desc:'Full-screen page transition using a curved morphing overlay', icon:'send', category:'motion', difficulty:'advanced', usedIn:['All gallery navigation','Preview Modal'], demoType:'liquid' },
         { id:'typing-dots', label:'Typing Dots', desc:'Three bouncing dots that indicate the AI is generating a response', icon:'auto_awesome', category:'interaction', difficulty:'beginner', usedIn:['AI Coach Chat','Coach v2'], demoType:'typing' },
-        { id:'counter-animate', label:'Counter Animate', desc:'Numbers count up/down with smooth precision — great for stats and scores', icon:'trending_up', category:'data', difficulty:'intermediate', usedIn:['Home Dashboard','Leaderboard','Achievements','Workout Tracker','Progress Dashboard'], demoType:'counter' },
+        { id:'counter-animate', label:'Counter Animate', desc:'Numbers count up/down with smooth precision — great for stats and scores', icon:'trending_up', category:'data', difficulty:'intermediate', usedIn:['Home Dashboard','Leaderboard','Achievements'], demoType:'counter' },
         { id:'fab-pulse', label:'FAB Pulse', desc:'Floating action button with a subtle pulsing ring attractor', icon:'notifications_active', category:'interaction', difficulty:'beginner', usedIn:['Dashboard v2','Workout Tracker'], demoType:'fab' },
         { id:'dark-mode', label:'Dark Mode', desc:'Seamless light/dark theme switching with persisted preference', icon:'dark_mode', category:'visual', difficulty:'beginner', usedIn:['All screens'], demoType:'none' },
         { id:'live-search', label:'Live Search', desc:'Real-time filtering as you type — searches names, tags, and descriptions', icon:'search', category:'data', difficulty:'intermediate', usedIn:['Gallery page'], demoType:'none' },
@@ -6064,16 +6163,10 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
         { id:'shimmer', label:'Shimmer', desc:'Shiny sweeping gradient that runs across badges and loading states', icon:'flash_on', category:'visual', difficulty:'beginner', usedIn:['Leaderboard','Subscriptions'], demoType:'shimmer' },
         { id:'water-fill', label:'Water Fill', desc:'Liquid rises and falls inside a container — great for hydration tracking', icon:'water_drop', category:'visual', difficulty:'intermediate', usedIn:['Water Intake'], demoType:'water' },
         { id:'badge-pop', label:'Badge Pop', desc:'Badges appear with a scale-up bounce and subtle rotation', icon:'emoji_events', category:'visual', difficulty:'beginner', usedIn:['Achievements','Leaderboard'], demoType:'badge' },
-        { id:'float', label:'Float', desc:'Gentle vertical hover — good for coins, icons, and decorative elements', icon:'float', category:'motion', difficulty:'beginner', usedIn:['Rewards Shop','Onboarding 5/5','Sleep Recovery'], demoType:'float-up' },
+        { id:'float', label:'Float', desc:'Gentle vertical hover — good for coins, icons, and decorative elements', icon:'float', category:'motion', difficulty:'beginner', usedIn:['Rewards Shop','Onboarding 5/5'], demoType:'float-up' },
         { id:'bounce', label:'Bounce', desc:'Playful up-down hop with squash at the bottom of each cycle', icon:'bouncing', category:'interaction', difficulty:'beginner', usedIn:['Community Feed','Planner'], demoType:'bounce-el' },
-        { id:'progress-ring', label:'Progress Ring', desc:'Circular progress indicator with stroke-dashoffset animation', icon:'donut_large', category:'data', difficulty:'intermediate', usedIn:['Home Dashboard','Workout History','Progress Dashboard','Sleep Recovery'], demoType:'ring' },
-        { id:'pop-in', label:'Pop-in', desc:'Elements scale up from 85% with a spring overshoot', icon:'pop_up', category:'visual', difficulty:'beginner', usedIn:['Leaderboard','Rewards Shop','Onboarding screens','Calorie Scanner','Macro Barcode Scanner','Water Intake','Subscription Plans'], demoType:'pop' },
-        { id:'scan-line', label:'Scan Line', desc:'A sweeping viewfinder line that travels the frame while scanning food or barcodes', icon:'qr_code_scanner', category:'visual', difficulty:'intermediate', usedIn:['Calorie Scanner','Macro Barcode Scanner'], demoType:'shimmer' },
-        { id:'bar-grow', label:'Bar Grow', desc:'Data bars rise from their baseline to full value with a springy overshoot', icon:'bar_chart', category:'data', difficulty:'beginner', usedIn:['Progress Dashboard'], demoType:'stagger' },
-        { id:'timer-pulse', label:'Timer Pulse', desc:'A pulsing glow that draws the eye to a running rest or recovery timer', icon:'timer', category:'visual', difficulty:'beginner', usedIn:['Workout Tracker'], demoType:'fab' },
-        { id:'check-pop', label:'Check Pop', desc:'Checkmarks spring in with a satisfying pop when habits are completed', icon:'check_circle', category:'interaction', difficulty:'beginner', usedIn:['Habit Tracker'], demoType:'pop' },
-        { id:'streak-fire', label:'Streak Fire', desc:'A flickering flame that marks an active daily streak in habit tracking', icon:'local_fire_department', category:'visual', difficulty:'beginner', usedIn:['Habit Tracker'], demoType:'float-up' },
-        { id:'coin-glow', label:'Coin Glow', desc:'Coins emit a soft pulsing halo to signal redeemable reward value', icon:'toll', category:'visual', difficulty:'beginner', usedIn:['Rewards Shop'], demoType:'float-up' }
+        { id:'progress-ring', label:'Progress Ring', desc:'Circular progress indicator with stroke-dashoffset animation', icon:'donut_large', category:'data', difficulty:'intermediate', usedIn:['Home Dashboard','Workout History'], demoType:'ring' },
+        { id:'pop-in', label:'Pop-in', desc:'Elements scale up from 85% with a spring overshoot', icon:'pop_up', category:'visual', difficulty:'beginner', usedIn:['Leaderboard','Rewards Shop','Onboarding screens'], demoType:'pop' }
       ];
 
       // ─── Animation Glossary — Tab toggle, search, filter, card generation ───
@@ -6553,6 +6646,28 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
         catch (_) { /* quota / private mode — fail silent */ }
       };
 
+      // ─── localStorage sanity check: detect corrupt desifit.recentlyViewed ───
+      // If the key exists but is not a parseable JSON array, show a visible
+      // warning and reset it so the gallery + profile page continue working.
+      (function checkRecentSanity() {
+        try {
+          var _raw = localStorage.getItem(RECENT_KEY);
+          if (_raw === null) return; // never written yet — nothing to check
+          var _parsed = JSON.parse(_raw);
+          if (Array.isArray(_parsed)) return; // valid
+          // Corrupt: either JSON.parse threw (caught below) or parsed to non-array.
+          // Reset the key and warn the user.
+          localStorage.removeItem(RECENT_KEY);
+          var _toast = window.DesiFitAnim && window.DesiFitAnim.showToast;
+          if (_toast) _toast('Cleared corrupt recently-viewed data from local storage', 'warning', 4000);
+        } catch (_e) {
+          // JSON parse failure — reset silently
+          try { localStorage.removeItem(RECENT_KEY); } catch (_) {}
+          var _t2 = window.DesiFitAnim && window.DesiFitAnim.showToast;
+          if (_t2) _t2('Cleared unparseable recently-viewed data from local storage', 'warning', 4000);
+        }
+      })();
+
       // Direct sub-screen opens: any normal click on a `.filter-item` (no
       // Alt/Shift modifier and not from the compare-mode selection state)
       // records its href BEFORE the browser navigates away. We attach a
@@ -6621,10 +6736,15 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
           return;
         }
 
-        // ? to show help
+        // ? to toggle help (open if closed, close if open)
         if (e.key === '?' || (e.key === '/' && e.shiftKey)) {
           e.preventDefault();
-          openKbdHelp();
+          const kh = document.getElementById('kbd-help');
+          if (kh && kh.classList.contains('active')) {
+            closeKbdHelp();
+          } else {
+            openKbdHelp();
+          }
           return;
         }
 
@@ -8191,6 +8311,359 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
         result.hash = window.location.hash;
         return result;
       };
+    })();
+  </script>
+
+  <!-- ============================================================
+       Iteration 2: Command Palette (Ctrl+K), Focus Mode ([F]), and
+       deep-link URL state (?screen=slug&compare=a,b&dark=1&hud=1&qa=1)
+       Self-contained IIFE — uses only window.* test hooks and the
+       existing card DOM, so it never touches gallery internals.
+       ============================================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ───── slug helper (mirrors the deep-link IIFE) ─────
+      function slugify(str) {
+        return String(str)
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+          .replace(/-{2,}/g, '-');
+      }
+
+      var palette = document.getElementById('cmd-palette');
+      var cmdInput = document.getElementById('cmd-input');
+      var cmdResults = document.getElementById('cmd-results');
+
+      // ───── Build command index: screens + fixed actions ─────
+      function buildCommands() {
+        var cmds = [];
+        var cards = document.querySelectorAll('.filter-item');
+        Array.prototype.forEach.call(cards, function (card) {
+          var href = card.getAttribute('href');
+          var name = card.getAttribute('data-name') || 'Screen';
+          var cat = card.getAttribute('data-category') || 'screens';
+          if (!href) return;
+          cmds.push({
+            label: 'Open ' + name,
+            cat: cat,
+            keys: (name + ' ' + cat).toLowerCase(),
+            run: function () {
+              closePalette();
+              if (window.DesiFitAnim && window.DesiFitAnim.liquidNavigate) {
+                window.DesiFitAnim.liquidNavigate(new Event('click'), href);
+              } else {
+                window.location.href = href;
+              }
+            }
+          });
+        });
+
+        function toggleById(id) {
+          return function () {
+            closePalette();
+            var el = document.getElementById(id);
+            if (el) el.click();
+          };
+        }
+
+        cmds.push(
+          { label: 'Toggle dark mode', cat: 'view', keys: 'dark theme light mode', run: function () { closePalette(); if (window.DesiFitAnim && window.DesiFitAnim.toggleDarkMode) window.DesiFitAnim.toggleDarkMode(); } },
+          { label: 'Toggle performance HUD', cat: 'qa', keys: 'perf hud fps', run: toggleById('perf-hud-toggle') },
+          { label: 'Toggle design QA tools', cat: 'qa', keys: 'ruler guides color picker measure', run: toggleById('design-qa-toggle') },
+          { label: 'Show keyboard shortcuts', cat: 'help', keys: 'shortcuts keys kbd', run: function () { closePalette(); if (window.openKbdHelp) window.openKbdHelp(); } },
+          { label: 'Open animation glossary', cat: 'help', keys: 'glossary animations', run: function () { closePalette(); openGlossary(); } },
+          { label: 'Enter focus mode', cat: 'view', keys: 'focus fullscreen immersive', run: function () { closePalette(); enterFocus(); } },
+          { label: 'Surprise me', cat: 'view', keys: 'random shuffle surprise', run: function () { closePalette(); var b = document.getElementById('surprise-btn'); if (b) b.click(); } },
+          { label: 'Clear compare selections', cat: 'view', keys: 'compare clear deselect', run: function () { closePalette(); if (window.clearSelections) window.clearSelections(); } },
+          { label: 'Copy link to current screen', cat: 'share', keys: 'copy link share deep link', run: function () { closePalette(); if (window.shareCurrentCard) window.shareCurrentCard(highlightedIndex()); } },
+          { label: 'Open theme editor', cat: 'view', keys: 'theme color editor presets', run: function () { closePalette(); var b = document.getElementById('theme-editor-toggle'); if (b) b.click(); } },
+          { label: 'Scroll to top', cat: 'nav', keys: 'top home', run: function () { closePalette(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+        );
+        return cmds;
+      }
+
+      function highlightedIndex() {
+        var cards = document.querySelectorAll('.filter-item');
+        for (var i = 0; i < cards.length; i++) {
+          if (cards[i].classList.contains('is-hash-target')) return i;
+        }
+        return 0;
+      }
+
+      function openGlossary() {
+        var gTab = document.querySelector('#category-tabs button[data-category="glossary"]:not([data-bookmark-tab])');
+        if (gTab) gTab.click();
+        var gl = document.getElementById('glossary-section');
+        if (gl) gl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      var commands = buildCommands();
+      var filtered = [];
+      var selectedIdx = 0;
+
+      function render() {
+        cmdResults.innerHTML = '';
+        filtered.forEach(function (c, i) {
+          var li = document.createElement('li');
+          li.setAttribute('role', 'option');
+          li.setAttribute('data-i', i);
+          li.className = i === selectedIdx ? 'selected' : '';
+          var label = document.createElement('span');
+          label.textContent = c.label;
+          var cat = document.createElement('span');
+          cat.className = 'cmd-cat';
+          cat.textContent = c.cat;
+          li.appendChild(label);
+          li.appendChild(cat);
+          li.addEventListener('mousedown', function (e) { e.preventDefault(); runCommand(c); });
+          li.addEventListener('mouseenter', function () { selectedIdx = i; markSelected(); });
+          cmdResults.appendChild(li);
+        });
+        if (filtered.length === 0) {
+          var empty = document.createElement('li');
+          empty.textContent = 'No matches';
+          empty.style.color = '#999';
+          empty.style.cursor = 'default';
+          cmdResults.appendChild(empty);
+        }
+      }
+
+      function markSelected() {
+        var items = cmdResults.querySelectorAll('li[data-i]');
+        Array.prototype.forEach.call(items, function (li, i) {
+          li.classList.toggle('selected', i === selectedIdx);
+        });
+        var sel = cmdResults.querySelector('li.selected');
+        if (sel && sel.scrollIntoView) sel.scrollIntoView({ block: 'nearest' });
+      }
+
+      function runCommand(c) { if (c) c.run(); }
+
+      function openPalette() {
+        if (!palette) return;
+        commands = buildCommands();
+        filtered = commands.slice();
+        selectedIdx = 0;
+        cmdInput.value = '';
+        palette.classList.add('active');
+        cmdInput.focus();
+        render();
+      }
+      function closePalette() {
+        if (palette) palette.classList.remove('active');
+      }
+      function togglePalette() {
+        if (palette && palette.classList.contains('active')) closePalette();
+        else openPalette();
+      }
+
+      // Ctrl/Cmd+K toggle; arrows + Enter + Esc inside palette
+      document.addEventListener('keydown', function (e) {
+        var mod = e.ctrlKey || e.metaKey;
+        if (mod && e.key.toLowerCase() === 'k') { e.preventDefault(); togglePalette(); return; }
+        if (!palette || !palette.classList.contains('active')) return;
+        if (e.key === 'Escape') { e.preventDefault(); closePalette(); return; }
+        if (e.key === 'ArrowDown') { e.preventDefault(); selectedIdx = (selectedIdx + 1) % filtered.length; markSelected(); return; }
+        if (e.key === 'ArrowUp') { e.preventDefault(); selectedIdx = (selectedIdx - 1 + filtered.length) % filtered.length; markSelected(); return; }
+        if (e.key === 'Enter') { e.preventDefault(); runCommand(filtered[selectedIdx]); return; }
+      });
+
+      if (cmdInput) {
+        cmdInput.addEventListener('input', function () {
+          var q = cmdInput.value.trim().toLowerCase();
+          filtered = commands.filter(function (c) {
+            return !q || c.keys.indexOf(q) !== -1 || c.label.toLowerCase().indexOf(q) !== -1;
+          });
+          selectedIdx = 0;
+          render();
+        });
+      }
+      var cmdBackdrop = palette ? palette.querySelector('.cmd-backdrop') : null;
+      if (cmdBackdrop) cmdBackdrop.addEventListener('click', closePalette);
+
+      // ───── Focus Mode: [F] toggles, ←/→ cycle visible screens ─────
+      var focusEl = document.getElementById('focus-mode');
+      var focusFrame = document.getElementById('focus-frame');
+      var focusName = document.getElementById('focus-name');
+      var focusList = [];
+      var focusIdx = 0;
+
+      function visibleCards() {
+        return Array.prototype.filter.call(document.querySelectorAll('.filter-item'), function (c) {
+          return !c.classList.contains('hidden') && c.getAttribute('href');
+        });
+      }
+
+      function enterFocus() {
+        if (!focusEl) return;
+        focusList = visibleCards();
+        if (focusList.length === 0) return;
+        var start = 0;
+        for (var i = 0; i < focusList.length; i++) {
+          if (focusList[i].classList.contains('is-hash-target')) { start = i; break; }
+        }
+        focusIdx = start;
+        setFocusCard(start);
+        focusEl.classList.add('active');
+      }
+      function exitFocus() {
+        if (focusEl) focusEl.classList.remove('active');
+        if (focusFrame) focusFrame.removeAttribute('src');
+      }
+      function setFocusCard(i) {
+        var card = focusList[i];
+        if (!card) return;
+        var href = card.getAttribute('href');
+        focusFrame.src = href;
+        focusName.textContent = card.getAttribute('data-name') || 'Screen';
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'F' || e.key === 'f') {
+          if (e.ctrlKey || e.metaKey || e.altKey) return;
+          var tag = (document.activeElement && document.activeElement.tagName) || '';
+          if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+          if (palette && palette.classList.contains('active')) return;
+          e.preventDefault();
+          if (focusEl && focusEl.classList.contains('active')) exitFocus();
+          else enterFocus();
+          return;
+        }
+        if (!focusEl || !focusEl.classList.contains('active')) return;
+        if (e.key === 'Escape') { e.preventDefault(); exitFocus(); return; }
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          if (focusList.length === 0) return;
+          focusIdx = e.key === 'ArrowRight' ? (focusIdx + 1) % focusList.length : (focusIdx - 1 + focusList.length) % focusList.length;
+          setFocusCard(focusIdx);
+        }
+      });
+
+      var focusPrev = document.getElementById('focus-prev');
+      var focusNext = document.getElementById('focus-next');
+      var focusClose = document.getElementById('focus-close');
+      if (focusPrev) focusPrev.addEventListener('click', function () {
+        if (focusList.length) { focusIdx = (focusIdx - 1 + focusList.length) % focusList.length; setFocusCard(focusIdx); }
+      });
+      if (focusNext) focusNext.addEventListener('click', function () {
+        if (focusList.length) { focusIdx = (focusIdx + 1) % focusList.length; setFocusCard(focusIdx); }
+      });
+      if (focusClose) focusClose.addEventListener('click', exitFocus);
+
+      // ───── Deep-link URL state: ?screen=slug&compare=a,b&dark=1&hud=1&qa=1 ─────
+      function readParams() {
+        var out = {};
+        try {
+          var sp = new URLSearchParams(window.location.search);
+          ['screen', 'compare', 'dark', 'hud', 'qa'].forEach(function (k) {
+            var v = sp.get(k);
+            if (v) out[k] = v;
+          });
+        } catch (e) { /* file:// — silent */ }
+        return out;
+      }
+
+      function findCardBySlug(slug) {
+        var cards = document.querySelectorAll('.filter-item');
+        for (var i = 0; i < cards.length; i++) {
+          var name = cards[i].getAttribute('data-name') || '';
+          if (slugify(name) === slug) return cards[i];
+        }
+        return null;
+      }
+
+      // Guard: the gallery's initDarkMode dispatches 'darkmodechange' on
+      // window at DOMContentLoaded — BEFORE this IIFE's hydrate runs. Without
+      // the flag, that boot-time dispatch makes syncState() rewrite the URL
+      // and strip the incoming ?dark=1&screen=…&compare=… params before
+      // hydrate can read them (D1-D3 regressed exactly this way).
+      var hydrated = false;
+
+      function hydrate() {
+        hydrated = true;
+        var p = readParams();
+        if (p.dark === '1' && window.DesiFitAnim && window.DesiFitAnim.setDarkMode) window.DesiFitAnim.setDarkMode(true);
+        if (p.hud === '1') {
+          var h = document.getElementById('perf-hud-toggle');
+          if (h && !h.classList.contains('active')) h.click();
+        }
+        if (p.qa === '1') {
+          var q = document.getElementById('design-qa-toggle');
+          if (q && !q.classList.contains('active')) q.click();
+        }
+        if (p.screen) {
+          var card = findCardBySlug(p.screen);
+          if (card) {
+            try {
+              var idx = Array.prototype.indexOf.call(document.querySelectorAll('.filter-item'), card);
+              var hash = '#card-' + (idx + 1) + '-' + p.screen;
+              history.replaceState({}, '', window.location.pathname + window.location.search + hash);
+              if (window.fireHashChange) window.fireHashChange();
+              else {
+                card.classList.add('is-hash-target');
+                try { card.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+              }
+            } catch (e2) { /* silent */ }
+          }
+        }
+        if (p.compare) {
+          var slugs = String(p.compare).split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+          if (slugs.length >= 2 && window._selectedCards && window._openComparison) {
+            var hrefs = slugs.map(findCardBySlug).filter(Boolean).map(function (c) { return c.getAttribute('href'); });
+            window._selectedCards.clear();
+            hrefs.forEach(function (h) { window._selectedCards.add(h); });
+            window._openComparison();
+          }
+        }
+      }
+
+      function syncState() {
+        if (!hydrated) return; // boot dispatch — let hydrate consume the URL first
+        var p = {};
+        if (document.documentElement.classList.contains('dark')) p.dark = '1';
+        var hud = document.getElementById('perf-hud-toggle');
+        if (hud && hud.classList.contains('active')) p.hud = '1';
+        var qa = document.getElementById('design-qa-toggle');
+        if (qa && qa.classList.contains('active')) p.qa = '1';
+        var highlighted = document.querySelector('.filter-item.is-hash-target');
+        if (highlighted) p.screen = slugify(highlighted.getAttribute('data-name') || '');
+        var co = document.getElementById('compare-overlay');
+        if (co && co.classList.contains('active') && window._selectedCards && window._selectedCards.size >= 2) {
+          p.compare = Array.prototype.map.call(window._selectedCards, function (h) {
+            var cards = document.querySelectorAll('.filter-item');
+            for (var i = 0; i < cards.length; i++) {
+              if (cards[i].getAttribute('href') === h) return slugify(cards[i].getAttribute('data-name') || '');
+            }
+            return '';
+          }).filter(Boolean).join(',');
+        }
+        var qs = Object.keys(p).map(function (k) { return k + '=' + encodeURIComponent(p[k]); }).join('&');
+        var newUrl = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
+        try { history.replaceState({}, '', newUrl); } catch (e) { /* file:// — silent */ }
+      }
+
+      // setDarkMode dispatches on window (not document) — listen there so a
+      // real dark-mode toggle round-trips into the URL.
+      window.addEventListener('darkmodechange', syncState);
+      document.addEventListener('hashchange', syncState);
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        if (t && t.closest && t.closest('#perf-hud-toggle, #design-qa-toggle, #compare-overlay, #theme-editor-toggle, #surprise-btn')) {
+          setTimeout(syncState, 50);
+        }
+      });
+
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hydrate);
+      else setTimeout(hydrate, 0);
+
+      // ───── Test hooks ─────
+      window.cmdPalette = { open: openPalette, close: closePalette, toggle: togglePalette, results: function () { return filtered.slice(); } };
+      window.enterFocusMode = enterFocus;
+      window.exitFocusMode = exitFocus;
+      window.syncUrlState = syncState;
     })();
   </script>
 </body>
