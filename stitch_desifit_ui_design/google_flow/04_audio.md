@@ -1,5 +1,11 @@
 # 04 — Audio Prompts (SFX, notifications, music)
 
+> **Why these prompts omit the brand ingredient:** `desifit-modern-craftsman`
+> is a *visual* style reference. Audio prompts translate the brand instead
+> into sound language — saffron warmth, fired-clay mood, tabula/tanpura/santoor
+> timbres, mid-forward mixes for small speakers. Do NOT prepend the visual
+> ingredient here; it would pull the audio toward image styles.
+
 > **How to use:** Google Flow's native audio (Veo 3.1) is strongest when paired
 > **with a video clip** — paste the clip prompt from `03_video.md` and describe
 > the sound in the same Flow message, or ask Flow to "add sound to this clip".

@@ -30,6 +30,8 @@ below references this ingredient by name so all assets share one visual identity
 
 ### Step 3 — Consistency rules (non‑negotiable)
 - **Always** open with: `Using the desifit-modern-craftsman ingredient for style…`
+  (exception: `04_audio.md` prompts translate the brand into sound language and
+  intentionally omit the visual ingredient — see that file's header)
 - **Never** change the hex palette. Saffron `#A43700` / `#CD4700`, Leaf `#2E7D32`,
   Surface `#F9F9F9`, Ink `#1A1C1C`. Dark variants: Stone‑950 `#0C0A09`, Card `#1C1917`.
 - **No‑Line rule:** no 1px borders, no pure black `#000`, no hard grid lines.
