@@ -5,9 +5,12 @@
  * Scans every .dart file under the given roots and verifies that braces,
  * parentheses and brackets are balanced *outside* of string literals and
  * comments (both line and block, single/double/triple-quoted, and raw
- * strings). An unbalanced delimiter at this level means the file cannot
- * compile, and it is the failure mode that line-oriented tools and manual
- * edits most often introduce.
+ * strings). Code inside Dart string interpolations (`'${foo(bar)}'`) is
+ * scanned as code: entering an interpolation pushes the enclosing string
+ * state onto a stack, so nested strings and interpolations inside it are
+ * handled recursively. An unbalanced delimiter at this level means the
+ * file cannot compile, and it is the failure mode that line-oriented
+ * tools and manual edits most often introduce.
  *
  * This is intentionally NOT a substitute for `dart analyze` — it is a cheap,
  * SDK-free first gate that runs in CI before any Flutter tooling is set up.
@@ -38,8 +41,10 @@ function collectDartFiles(root) {
   return out;
 }
 
+const isIdentChar = (c) => c !== undefined && /[A-Za-z0-9_]/.test(c);
+
 /**
- * Comment- and string-aware balance scan.
+ * Comment- and string-aware balance scan with Dart interpolation support.
  * Returns { issues: string[] } with a human-readable entry per problem.
  */
 function scanFile(file) {
@@ -49,9 +54,14 @@ function scanFile(file) {
   let depth = 0;
   let minDepth = 0;
   let line = 1;
-  let state = 'code'; // code | lineComment | blockComment | sq | dq | tq
+  // state: code | lineComment | blockComment | sq | dq | tq
+  // When an interpolation `$ { ... }` is entered, the enclosing string
+  // state is pushed onto stack; interpDepth counts the unclosed `{`s
+  // inside the interpolation (starting at 1 for its own `{`). The
+  // interpolation's own `{`/`}` pair is not counted in `depth`.
+  let state = 'code';
+  const stack = [];
 
-  const isLine = () => (s[i] === '\n');
   let i = 0;
   while (i < n) {
     const c = s[i];
@@ -59,10 +69,11 @@ function scanFile(file) {
     const nxx = s[i + 2];
     if (c === '\n') line++;
     switch (state) {
-      case 'code':
+      case 'code': {
         if (c === '/' && nx === '/') { state = 'lineComment'; i += 2; break; }
         if (c === '/' && nx === '*') { state = 'blockComment'; i += 2; break; }
-        if (c === 'r' && (nx === "'" || nx === '"')) {
+        // Raw strings have no interpolation: skip to the closing quote.
+        if ((c === 'r' || c === 'R') && (nx === "'" || nx === '"')) {
           const q = nx;
           i += 2;
           while (i < n && s[i] !== q) { if (s[i] === '\n') line++; i++; }
@@ -77,8 +88,24 @@ function scanFile(file) {
           if (nx === '"' && nxx === '"') { state = 'tq'; i += 3; } else { state = 'dq'; i++; }
           break;
         }
-        if (c === '{' || c === '(' || c === '[') depth++;
-        else if (c === '}' || c === ')' || c === ']') {
+        if (c === '{' || c === '(' || c === '[') {
+          depth++;
+          if (c === '{' && stack.length > 0) {
+            stack[stack.length - 1].interpDepth++;
+          }
+        } else if (c === '}' || c === ')' || c === ']') {
+          if (c === '}' && stack.length > 0) {
+            const top = stack[stack.length - 1];
+            if (top.interpDepth === 1) {
+              // Closes the interpolation's own `{`: return to the
+              // enclosing string without touching the balance counters.
+              state = top.stringState;
+              stack.pop();
+              i++;
+              break;
+            }
+            top.interpDepth--;
+          }
           depth--;
           if (depth < minDepth) {
             minDepth = depth;
@@ -87,6 +114,7 @@ function scanFile(file) {
         }
         i++;
         break;
+      }
       case 'lineComment':
         if (c === '\n') state = 'code';
         i++;
@@ -95,27 +123,37 @@ function scanFile(file) {
         if (c === '*' && nx === '/') { state = 'code'; i += 2; } else i++;
         break;
       case 'sq':
-        if (c === '\\') { i += 2; break; }
-        if (c === "'") state = 'code';
-        i++;
-        break;
       case 'dq':
+      case 'tq': {
         if (c === '\\') { i += 2; break; }
-        if (c === '"') state = 'code';
-        i++;
-        break;
-      case 'tq':
-        if (c === '\\') { i += 2; break; }
-        if ((c === "'" && nx === "'" && nxx === "'") || (c === '"' && nx === '"' && nxx === '"')) {
+        // Start of a Dart interpolation: switch to code, remember the string.
+        if (c === '$' && nx === '{') {
+          stack.push({ stringState: state, interpDepth: 1 });
+          state = 'code';
+          i += 2;
+          break;
+        }
+        // `$identifier` shorthand — nothing to balance, skip the identifier.
+        if (c === '$' && isIdentChar(nx)) {
+          i += 2;
+          while (isIdentChar(s[i])) i++;
+          break;
+        }
+        if (state === 'sq' && c === "'") { state = 'code'; i++; break; }
+        if (state === 'dq' && c === '"') { state = 'code'; i++; break; }
+        if (state === 'tq' &&
+            ((c === "'" && nx === "'" && nxx === "'") ||
+             (c === '"' && nx === '"' && nxx === '"'))) {
           state = 'code';
           i += 3;
           break;
         }
         i++;
         break;
+      }
     }
   }
-  if (state === 'sq' || state === 'dq' || state === 'tq') {
+  if (stack.length > 0 || state === 'sq' || state === 'dq' || state === 'tq') {
     issues.push(`${file}: unterminated string literal`);
   }
   if (depth !== 0) {
