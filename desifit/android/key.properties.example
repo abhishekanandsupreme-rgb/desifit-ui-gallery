@@ -1,7 +1,36 @@
-# Example signing configurations file for production release builds.
-# Rename this file to 'key.properties' in this directory and fill in your real details.
-# Make sure to keep your real key.properties out of Git (already ignored by default flutter .gitignore).
-
+# =============================================================================
+#  Release signing configuration -- EXAMPLE / TEMPLATE  (safe to commit)
+# =============================================================================
+#
+#  This is the public template for the real file desifit/android/key.properties.
+#  Local release-signing setup:
+#    1. Copy this file to "key.properties" in this directory.
+#    2. Replace every placeholder below with your real values.
+#    3. Put your keystore where `storeFile` points (default: android/app/key.jks).
+#
+#  THE FOUR KEYS BELOW ARE A CONTRACT. They are exactly what
+#  android/app/build.gradle.kts reads in signingConfigs "release", and what the
+#  "Configure Production Signing" step of .github/workflows/android_release.yml
+#  writes. Do not add, rename, or remove keys here without updating both
+#  consumers in lockstep.
+#
+#  Where each value comes from:
+#    storePassword   local: keystore password       CI: secret PLAY_STORE_KEYSTORE_PASSWORD
+#    keyPassword     local: key password            CI: secret PLAY_STORE_KEY_PASSWORD
+#    keyAlias        local: key alias               CI: secret PLAY_STORE_KEY_ALIAS
+#    storeFile       local: path to your .jks       CI: key.jks (decoded from PLAY_STORE_KEYSTORE_BASE64)
+#
+#  SECURITY -- never commit real signing material:
+#    * key.properties and android/app/key.jks are git-ignored (android/.gitignore
+#      plus the root .gitignore rules). If `git status` ever lists them as
+#      untracked, do NOT `git add` them.
+#    * CI never sees your keystore in the repo: the workflow base64-decodes the
+#      secret into android/app/key.jks at build time and the file is never
+#      uploaded or persisted.
+#    * To rotate credentials, update the repository Actions secrets (Settings ->
+#      Secrets and variables -> Actions), never this template.
+#
+#  Placeholders only -- keep this file free of real values:
 storePassword=your_keystore_password
 keyPassword=your_key_password
 keyAlias=your_key_alias

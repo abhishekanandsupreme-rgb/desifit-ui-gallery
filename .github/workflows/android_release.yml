@@ -109,6 +109,9 @@ jobs:
           KEY_PASSWORD: ${{ secrets.PLAY_STORE_KEY_PASSWORD }}
           KEY_ALIAS: ${{ secrets.PLAY_STORE_KEY_ALIAS }}
         run: |
+          # The keys written here must stay in sync with the template at
+          # desifit/android/key.properties.example and with the signingConfigs
+          # block in desifit/android/app/build.gradle.kts.
           if [ -n "$KEYSTORE_BASE64" ]; then
             echo "Decoding Keystore..."
             echo "$KEYSTORE_BASE64" | base64 --decode > android/app/key.jks
