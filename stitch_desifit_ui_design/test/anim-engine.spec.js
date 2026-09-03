@@ -62,6 +62,10 @@ test.afterEach(async () => {
 test.describe('ParticleSystem', () => {
   test('constructor creates instance with default options', async () => {
     const result = await page.evaluate(() => {
+      // Pin the performance tier: default counts (50) are the high-tier values,
+      // and the auto-detected tier depends on the machine's CPU/RAM (CI runners
+      // are often 'medium', where the default is 25).
+      window.DesiFitAnim.setPerformanceTier('high');
       const canvas = document.getElementById('particles-canvas');
       const ps = new window.DesiFitAnim.ParticleSystem(canvas);
       return { maxCount: ps.maxCount, running: ps.running, interactive: ps.interactive, connectDist: ps.connectDist, particlesLength: ps.particles.length };
@@ -439,6 +443,10 @@ test.describe('Dark Mode (Anim Engine)', () => {
 
   test('getParticleCount reduces count when dark mode is active', async () => {
     await page.evaluate(() => {
+      // Pin the performance tier to 'high' (50/30) — on medium-tier CI runners
+      // the light count is 25 and dark 15, which is correct engine behavior
+      // but not what this test asserts.
+      window.DesiFitAnim.setPerformanceTier('high');
       localStorage.setItem('desifit-dark-mode', 'true');
       window.DesiFitAnim.initDarkModeTier();
     });
