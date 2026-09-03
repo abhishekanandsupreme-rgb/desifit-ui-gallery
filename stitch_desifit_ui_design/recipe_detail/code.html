@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .detail-in {
+            animation: detail-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+        @keyframes detail-in {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script>
+(function() {
+  var K = 'desifit-dark-mode';
+  function apply() {
+    try {
+      var dark = localStorage.getItem(K) === 'true';
+      document.documentElement.classList.toggle('dark', dark);
+    } catch(e) {}
+  }
+  apply();
+  window.addEventListener('storage', apply);
+})();
+</script>
+  </head>
+<body class="bg-surface dark:bg-stone-950 font-body text-on-surface dark:text-stone-100 antialiased mb-24">
+<!-- Hero image with back button -->
+<section class="relative h-72 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed via-orange-200 to-surface-container-low">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 70% 30%, rgba(164,55,0,0.7), transparent 45%);"></div>
+<!-- Illustration -->
+<div class="absolute right-6 bottom-8 w-40 h-40 rounded-3xl bg-white/60 backdrop-blur flex items-center justify-center rotate-6">
+<span class="material-symbols-outlined text-primary text-6xl" style="font-variation-settings: 'FILL' 1;">rice_bowl</span>
+</div>
+</div>
+<div class="absolute top-0 left-0 right-0 flex items-center justify-between px-4 pt-4">
+<span class="w-10 h-10 rounded-full bg-black/40 backdrop-blur flex items-center justify-center text-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+</span>
+<span class="w-10 h-10 rounded-full bg-black/40 backdrop-blur flex items-center justify-center text-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</span>
+</div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[9px] font-bold uppercase tracking-wider">High Protein</span>
+<span class="px-2.5 py-1 rounded-full bg-black/25 backdrop-blur text-white text-[9px] font-bold uppercase tracking-wider">Budget Pick</span>
+</div>
+</div>
+</section>
+<main class="px-4 max-w-2xl mx-auto -mt-8 relative z-10">
+<!-- Title + meta -->
+<section class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_8px_32px_rgba(0,0,0,0.06)] detail-in">
+<h1 class="font-headline text-2xl font-extrabold tracking-tight">Masoor Dal Tadka</h1>
+<div class="flex flex-wrap gap-2 mt-3">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low dark:bg-stone-800/60 text-on-surface-variant dark:text-stone-400">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-[10px] font-bold">25 min</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low dark:bg-stone-800/60 text-on-surface-variant dark:text-stone-400">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+<span class="text-[10px] font-bold">310 kcal</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low dark:bg-stone-800/60 text-on-surface-variant dark:text-stone-400">
+<span class="material-symbols-outlined text-sm">nutrition</span>
+<span class="text-[10px] font-bold">18g protein</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low dark:bg-stone-800/60 text-on-surface-variant dark:text-stone-400">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span class="text-[10px] font-bold">₹28</span>
+</div>
+</div>
+</section>
+<!-- Ingredients -->
+<section class="mt-6 detail-in" style="animation-delay: 0.1s;">
+<div class="flex items-center justify-between mb-3">
+<h2 class="font-headline font-bold text-lg">Ingredients</h2>
+<div class="flex items-center gap-1 bg-surface-container-lowest dark:bg-stone-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+<button class="w-7 h-7 rounded-full bg-surface-container-high dark:bg-stone-800 flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="text-xs font-extrabold w-6 text-center">2</span>
+<button class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 ml-1">servings</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.04)] space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-600 text-base">grain</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Masoor Dal</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">100g · ₹18</p>
+</div>
+<span class="text-[10px] font-bold text-secondary">24g protein</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-600 text-base">kitchen</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Onion + Tomato</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">1 + 1 · ₹12</p>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant dark:text-stone-400">1g protein</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-yellow-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-yellow-600 text-base">water_drop</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Ghee (1 tsp)</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">5g · ₹8</p>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant dark:text-stone-400">0g protein</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600 text-base">eco</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Coriander + Spices</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">Handful · ₹3</p>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant dark:text-stone-400">1g protein</span>
+</div>
+</div>
+</section>
+<!-- Steps -->
+<section class="mt-6 detail-in" style="animation-delay: 0.2s;">
+<h2 class="font-headline font-bold text-lg mb-3">Instructions</h2>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.04)] space-y-4">
+<div class="flex gap-3">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary text-xs font-extrabold flex items-center justify-center shrink-0">1</div>
+<p class="text-sm text-on-surface-variant dark:text-stone-400 leading-relaxed">Pressure cook dal with turmeric and salt for 3 whistles.</p>
+</div>
+<div class="flex gap-3">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary text-xs font-extrabold flex items-center justify-center shrink-0">2</div>
+<p class="text-sm text-on-surface-variant dark:text-stone-400 leading-relaxed">Temper ghee with cumin, garlic, and dry chillies till fragrant.</p>
+</div>
+<div class="flex gap-3">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary text-xs font-extrabold flex items-center justify-center shrink-0">3</div>
+<p class="text-sm text-on-surface-variant dark:text-stone-400 leading-relaxed">Pour tadka over dal, simmer 5 min, garnish with coriander.</p>
+</div>
+</div>
+</section>
+<!-- Budget tip -->
+<section class="mt-6 detail-in" style="animation-delay: 0.3s;">
+<div class="flex items-start gap-3 bg-secondary-fixed/50 rounded-2xl p-4">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant" style="font-variation-settings: 'FILL' 1;">tip</span>
+<div>
+<p class="text-xs font-bold text-on-secondary-fixed-variant">Jugaad Tip</p>
+<p class="text-[11px] text-on-secondary-fixed-variant/80 mt-0.5 leading-relaxed">Buy dal in 1kg packs — costs 40% less than 500g packs. Pair with rice for a complete protein.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom CTA -->
+<footer class="fixed bottom-0 left-0 w-full px-4 pb-6 pt-4 bg-gradient-to-t from-surface dark:from-stone-950 via-surface/95 dark:via-stone-950/95 to-transparent dark:to-transparent">
+<button class="w-full py-4 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold active:scale-[0.98] transition-transform shadow-[0_8px_24px_rgba(164,55,0,0.25)]">
+Add to Today's Plan
+</button>
+</footer>
+</body></html>

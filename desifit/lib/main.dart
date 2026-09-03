@@ -71,7 +71,7 @@ void main() async {
 }
 
 class DesiFitApp extends StatelessWidget {
-  const DesiFitApp({Key? key}) : super(key: key);
+  const DesiFitApp({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/theme.dart';
 
 class LeaderboardScreen extends StatelessWidget {
-  const LeaderboardScreen({Key? key}) : super(key: key);
+  const LeaderboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class LeaderboardScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.15),
+                    color: AppColors.primary.withValues(alpha: 0.15),
                     blurRadius: 16,
                     offset: const Offset(0, 8),
                   )
@@ -67,7 +67,7 @@ class LeaderboardScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white.withOpacity(0.8),
+                            color: Colors.white.withValues(alpha: 0.8),
                             letterSpacing: 1.5,
                           ),
                         ),
@@ -79,7 +79,7 @@ class LeaderboardScreen extends StatelessWidget {
                         const SizedBox(height: 6),
                         Text(
                           '850 XP • Rank #3 of 42',
-                          style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.9), fontWeight: FontWeight.w500),
+                          style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.9), fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -87,7 +87,7 @@ class LeaderboardScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text(
@@ -121,11 +121,11 @@ class LeaderboardScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   decoration: BoxDecoration(
                     color: isMe 
-                        ? AppColors.primary.withOpacity(0.08) 
+                        ? AppColors.primary.withValues(alpha: 0.08) 
                         : (index % 2 == 0 ? AppColors.surfaceContainerLowest : AppColors.surfaceContainerLow),
                     borderRadius: BorderRadius.circular(16),
                     border: isMe 
-                        ? Border.all(color: AppColors.primary.withOpacity(0.2), width: 1.5)
+                        ? Border.all(color: AppColors.primary.withValues(alpha: 0.2), width: 1.5)
                         : null,
                   ),
                   child: Row(
@@ -167,7 +167,7 @@ class LeaderboardScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 8,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.onSurfaceVariant.withOpacity(0.7),
+                                color: AppColors.onSurfaceVariant.withValues(alpha: 0.7),
                                 letterSpacing: 0.5,
                               ),
                             ),

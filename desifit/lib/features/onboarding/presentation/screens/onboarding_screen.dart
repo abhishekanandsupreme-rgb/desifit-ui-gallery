@@ -6,7 +6,7 @@ import '../../../../core/state/app_state.dart';
 import '../../../../core/network/analytics_service.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({Key? key}) : super(key: key);
+  const OnboardingScreen({super.key});
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -79,7 +79,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 height: 320,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.primary.withOpacity(0.08),
+                  color: AppColors.primary.withValues(alpha: 0.08),
                 ),
               ),
             ),
@@ -175,7 +175,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _buildPageLayout(
       context: context,
       badgeText: state.translate('SWADESHI STRENGTH'),
-      badgeColor: AppColors.primary.withOpacity(0.12),
+      badgeColor: AppColors.primary.withValues(alpha: 0.12),
       badgeTextColor: AppColors.primary,
       titleRich: RichText(
         text: TextSpan(
@@ -185,7 +185,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 color: AppColors.onSurface,
               ),
           children: [
-            TextSpan(text: state.translate("India's First Desi Workout") + "\n"),
+            TextSpan(text: '${state.translate("India's First Desi Workout")}\n'),
             TextSpan(
               text: state.translate("& Calisthenics App"),
               style: const TextStyle(
@@ -229,7 +229,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: 180,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.primary.withOpacity(0.08),
+                color: AppColors.primary.withValues(alpha: 0.08),
               ),
             ),
           ),
@@ -245,12 +245,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               margin: const EdgeInsets.all(20),
               padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
               decoration: BoxDecoration(
-                color: AppColors.surfaceContainerLowest.withOpacity(0.9),
+                color: AppColors.surfaceContainerLowest.withValues(alpha: 0.9),
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: Colors.white.withOpacity(0.6)),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.6)),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.04),
+                    color: AppColors.primary.withValues(alpha: 0.04),
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                   ),
@@ -281,7 +281,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     context,
                     state,
                     icon: Icons.brightness_high_outlined,
-                    iconBg: Colors.amber.withOpacity(0.12),
+                    iconBg: Colors.amber.withValues(alpha: 0.12),
                     iconColor: Colors.amber[800]!,
                     title: 'Desi Workouts',
                     desc: 'Hanuman Dand, Sapate, Gada Swings & more',
@@ -291,7 +291,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     context,
                     state,
                     icon: Icons.accessibility_new,
-                    iconBg: AppColors.secondaryContainer.withOpacity(0.4),
+                    iconBg: AppColors.secondaryContainer.withValues(alpha: 0.4),
                     iconColor: AppColors.secondary,
                     title: 'Dorm Calisthenics',
                     desc: 'Zero-cost bodyweight progression guides',
@@ -301,7 +301,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     context,
                     state,
                     icon: Icons.fitness_center,
-                    iconBg: Colors.red.withOpacity(0.1),
+                    iconBg: Colors.red.withValues(alpha: 0.1),
                     iconColor: Colors.red[800]!,
                     title: 'Gym Workout Split',
                     desc: 'Organized routines in separate categories',
@@ -311,7 +311,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     context,
                     state,
                     icon: Icons.onetwothree,
-                    iconBg: Colors.blue.withOpacity(0.1),
+                    iconBg: Colors.blue.withValues(alpha: 0.1),
                     iconColor: Colors.blue[800]!,
                     title: 'Reps & Calories Counter',
                     desc: 'Track reps and estimate calorie burn live',
@@ -377,7 +377,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _buildPageLayout(
       context: context,
       badgeText: 'Fueling India',
-      badgeColor: AppColors.secondaryContainer.withOpacity(0.6),
+      badgeColor: AppColors.secondaryContainer.withValues(alpha: 0.6),
       badgeTextColor: AppColors.secondary,
       titleRich: RichText(
         text: TextSpan(
@@ -430,7 +430,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _buildPageLayout(
       context: context,
       badgeText: 'Hostel Cooking',
-      badgeColor: AppColors.primaryContainer.withOpacity(0.1),
+      badgeColor: AppColors.primaryContainer.withValues(alpha: 0.1),
       badgeTextColor: AppColors.primary,
       titleRich: RichText(
         text: TextSpan(
@@ -468,7 +468,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       visual: _buildCardMock(
         context,
         icon: Icons.bolt,
-        iconBg: AppColors.primaryContainer.withOpacity(0.15),
+        iconBg: AppColors.primaryContainer.withValues(alpha: 0.15),
         iconColor: AppColors.primary,
         tag: 'Hostel Hack',
         title: 'Kettle Soy Pulao in 10 mins',
@@ -481,7 +481,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _buildPageLayout(
       context: context,
       badgeText: 'AI Coach',
-      badgeColor: Colors.blue.withOpacity(0.1),
+      badgeColor: Colors.blue.withValues(alpha: 0.1),
       badgeTextColor: Colors.blue,
       titleRich: RichText(
         text: TextSpan(
@@ -579,7 +579,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _buildPageLayout(
       context: context,
       badgeText: 'Jugaad Core',
-      badgeColor: AppColors.secondaryContainer.withOpacity(0.6),
+      badgeColor: AppColors.secondaryContainer.withValues(alpha: 0.6),
       badgeTextColor: AppColors.secondary,
       titleRich: RichText(
         text: TextSpan(
@@ -613,7 +613,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       visual: _buildCardMock(
         context,
         icon: Icons.people_outline,
-        iconBg: AppColors.secondaryContainer.withOpacity(0.3),
+        iconBg: AppColors.secondaryContainer.withValues(alpha: 0.3),
         iconColor: AppColors.secondary,
         tag: 'Trending Hack',
         title: '"Hostel Oats with Desi Jaggery"',
@@ -633,7 +633,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppColors.primaryContainer.withOpacity(0.1),
+              color: AppColors.primaryContainer.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Text(
@@ -667,7 +667,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             decoration: BoxDecoration(
               color: AppColors.surfaceContainerLow,
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: AppColors.outlineVariant.withOpacity(0.3)),
+              border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -709,7 +709,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             decoration: BoxDecoration(
               color: AppColors.surfaceContainerLow,
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: AppColors.outlineVariant.withOpacity(0.3)),
+              border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -780,7 +780,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppColors.secondaryContainer.withOpacity(0.6),
+              color: AppColors.secondaryContainer.withValues(alpha: 0.6),
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Text(
@@ -807,8 +807,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             style: TextStyle(color: AppColors.onSurfaceVariant, fontSize: 14, height: 1.5),
           ),
           const SizedBox(height: 24),
-          
-          ...goals.map((g) {
+
+          RadioGroup<String>(
+            groupValue: _selectedGoalInput,
+            onChanged: (val) {
+              setState(() {
+                _selectedGoalInput = val!;
+              });
+            },
+            child: Column(
+              children: [
+                ...goals.map((g) {
             final isSelected = _selectedGoalInput == g['title'];
             return GestureDetector(
               onTap: () {
@@ -821,10 +830,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 margin: const EdgeInsets.only(bottom: 16),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.primaryContainer.withOpacity(0.08) : AppColors.surfaceContainerLow,
+                  color: isSelected ? AppColors.primaryContainer.withValues(alpha: 0.08) : AppColors.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
-                    color: isSelected ? AppColors.primary : AppColors.outlineVariant.withOpacity(0.3),
+                    color: isSelected ? AppColors.primary : AppColors.outlineVariant.withValues(alpha: 0.3),
                     width: isSelected ? 2 : 1,
                   ),
                 ),
@@ -853,7 +862,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                 decoration: BoxDecoration(
-                                  color: isSelected ? AppColors.primary.withOpacity(0.1) : AppColors.surfaceContainerHighest,
+                                  color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : AppColors.surfaceContainerHighest,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
@@ -877,19 +886,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     Radio<String>(
                       value: g['title']!,
-                      groupValue: _selectedGoalInput,
-                      activeColor: AppColors.primary,
-                      onChanged: (val) {
-                        setState(() {
-                          _selectedGoalInput = val!;
-                        });
-                      },
                     ),
                   ],
                 ),
               ),
             );
-          }).toList(),
+              }),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -944,7 +949,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(0.1),
+              color: Colors.blue.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Text(
@@ -976,7 +981,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   decoration: BoxDecoration(
                     color: AppColors.surfaceContainerLow,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: AppColors.outlineVariant.withOpacity(0.3)),
+                    border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -991,7 +996,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: bmiColor.withOpacity(0.15),
+                          color: bmiColor.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -1010,7 +1015,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   decoration: BoxDecoration(
                     color: AppColors.surfaceContainerLow,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: AppColors.outlineVariant.withOpacity(0.3)),
+                    border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -1038,7 +1043,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             decoration: BoxDecoration(
               color: AppColors.surfaceContainerLow,
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: AppColors.outlineVariant.withOpacity(0.3)),
+              border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1050,7 +1055,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
-                        color: AppColors.secondary.withOpacity(0.15),
+                        color: AppColors.secondary.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
@@ -1097,7 +1102,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             decoration: BoxDecoration(
               color: AppColors.surfaceContainerLow,
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: AppColors.outlineVariant.withOpacity(0.3)),
+              border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1163,7 +1168,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _buildPageLayout(
       context: context,
       badgeText: 'FitCraft',
-      badgeColor: AppColors.primaryContainer.withOpacity(0.1),
+      badgeColor: AppColors.primaryContainer.withValues(alpha: 0.1),
       badgeTextColor: AppColors.primary,
       titleRich: RichText(
         text: TextSpan(
@@ -1204,7 +1209,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         decoration: BoxDecoration(
           color: AppColors.surfaceContainerLowest,
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: AppColors.outlineVariant.withOpacity(0.2)),
+          border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.2)),
         ),
         child: Stack(
           alignment: Alignment.center,
@@ -1239,10 +1244,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             state.updateBodyMetrics(_weightInput, _heightInput, _selectedGoalInput);
                           }
                           await state.loginWithGoogle();
-                          if (mounted) {
-                            AnalyticsService.logEvent('onboarding_complete', {'method': 'google'});
-                            Navigator.pushReplacementNamed(context, AppRoutes.mainShell);
-                          }
+                          if (!context.mounted) return;
+                          AnalyticsService.logEvent('onboarding_complete', {'method': 'google'});
+                          Navigator.pushReplacementNamed(context, AppRoutes.mainShell);
                         } catch (e) {
                           setState(() {
                             _isLoadingAuth = false;
@@ -1257,7 +1261,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                            color: AppColors.outlineVariant.withOpacity(0.3),
+                            color: AppColors.outlineVariant.withValues(alpha: 0.3),
                             width: 1,
                           ),
                         ),
@@ -1516,7 +1520,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
           Center(
-            child: Icon(icon, size: 80, color: iconColor.withOpacity(0.2)),
+            child: Icon(icon, size: 80, color: iconColor.withValues(alpha: 0.2)),
           ),
           Positioned(
             bottom: 24,
@@ -1525,9 +1529,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.surfaceContainerLowest.withOpacity(0.85),
+                color: AppColors.surfaceContainerLowest.withValues(alpha: 0.85),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withOpacity(0.2)),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
               ),
               child: Row(
                 children: [

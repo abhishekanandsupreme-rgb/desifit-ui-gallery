@@ -6,7 +6,7 @@ import '../../../../core/network/analytics_service.dart';
 import '../widgets/guest_prompt_widget.dart';
 
 class ProgressScanScreen extends StatefulWidget {
-  const ProgressScanScreen({Key? key}) : super(key: key);
+  const ProgressScanScreen({super.key});
 
   @override
   State<ProgressScanScreen> createState() => _ProgressScanScreenState();
@@ -91,7 +91,7 @@ class _ProgressScanScreenState extends State<ProgressScanScreen> with SingleTick
                 color: AppColors.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(28),
                 border: Border.all(
-                  color: AppColors.outlineVariant.withOpacity(0.15),
+                  color: AppColors.outlineVariant.withValues(alpha: 0.15),
                 ),
               ),
               child: Stack(
@@ -132,10 +132,10 @@ class _ProgressScanScreenState extends State<ProgressScanScreen> with SingleTick
                   // Blur & Scanning Indicator
                   if (state.isAnalyzingPhoto)
                     Container(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withValues(alpha: 0.1),
                       child: Center(
                         child: Card(
-                          color: Colors.black.withOpacity(0.75),
+                          color: Colors.black.withValues(alpha: 0.75),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -263,10 +263,10 @@ class _ProgressScanScreenState extends State<ProgressScanScreen> with SingleTick
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryContainer.withOpacity(0.08),
+                  color: AppColors.primaryContainer.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
-                    color: AppColors.primaryContainer.withOpacity(0.18),
+                    color: AppColors.primaryContainer.withValues(alpha: 0.18),
                     width: 1.2,
                   ),
                 ),
@@ -353,13 +353,13 @@ class _ProgressScanScreenState extends State<ProgressScanScreen> with SingleTick
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? AppColors.primary.withOpacity(0.1)
+                              ? AppColors.primary.withValues(alpha: 0.1)
                               : AppColors.surfaceContainerLow,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             color: isSelected
                                 ? AppColors.primary
-                                : AppColors.outlineVariant.withOpacity(0.2),
+                                : AppColors.outlineVariant.withValues(alpha: 0.2),
                             width: isSelected ? 1.8 : 1,
                           ),
                         ),
@@ -394,7 +394,7 @@ class _ProgressScanScreenState extends State<ProgressScanScreen> with SingleTick
       if (state.isGuest)
         Positioned.fill(
           child: Container(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             padding: const EdgeInsets.all(24.0),
             child: const Center(
               child: GuestPromptWidget(
@@ -421,12 +421,12 @@ class _ProgressScanScreenState extends State<ProgressScanScreen> with SingleTick
       decoration: BoxDecoration(
         color: AppColors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+        border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
       ),
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: color.withOpacity(0.1),
+            backgroundColor: color.withValues(alpha: 0.1),
             radius: 18,
             child: Icon(icon, color: color, size: 18),
           ),
@@ -489,7 +489,7 @@ class _ScanGridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final gridPaint = Paint()
-      ..color = Colors.greenAccent.withOpacity(0.15)
+      ..color = Colors.greenAccent.withValues(alpha: 0.15)
       ..strokeWidth = 0.8;
     
     // Draw vertical grid lines
@@ -521,7 +521,7 @@ class _ScanGridPainter extends CustomPainter {
       ..strokeWidth = 3.5;
     
     final glowPaint = Paint()
-      ..color = Colors.greenAccent.withOpacity(0.3)
+      ..color = Colors.greenAccent.withValues(alpha: 0.3)
       ..strokeWidth = 12.0
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
 

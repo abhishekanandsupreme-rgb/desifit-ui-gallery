@@ -39,10 +39,10 @@ class CelebrationOverlay extends StatefulWidget {
   final String message;
 
   const CelebrationOverlay({
-    Key? key,
+    super.key,
     required this.title,
     required this.message,
-  }) : super(key: key);
+  });
 
   @override
   State<CelebrationOverlay> createState() => _CelebrationOverlayState();
@@ -142,7 +142,7 @@ class _CelebrationOverlayState extends State<CelebrationOverlay>
     final state = Provider.of<AppState>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: Colors.black.withOpacity(0.4),
+      backgroundColor: Colors.black.withValues(alpha: 0.4),
       body: Stack(
         children: [
           // 1. Confetti Custom Paint
@@ -167,13 +167,13 @@ class _CelebrationOverlayState extends State<CelebrationOverlay>
                     borderRadius: BorderRadius.circular(28),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withOpacity(0.3),
+                        color: AppColors.primary.withValues(alpha: 0.3),
                         blurRadius: 32,
                         offset: const Offset(0, 16),
                       ),
                     ],
                     border: Border.all(
-                      color: AppColors.primary.withOpacity(0.2),
+                      color: AppColors.primary.withValues(alpha: 0.2),
                       width: 2,
                     ),
                   ),
@@ -186,10 +186,10 @@ class _CelebrationOverlayState extends State<CelebrationOverlay>
                         height: 80,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: AppColors.primary.withOpacity(0.1),
+                          color: AppColors.primary.withValues(alpha: 0.1),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.15),
+                              color: AppColors.primary.withValues(alpha: 0.15),
                               blurRadius: 16,
                               spreadRadius: 4,
                             )

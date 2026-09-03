@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .drop-fill {
+            animation: drop-rise 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+            transform-origin: bottom;
+        }
+        @keyframes drop-rise {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+        .glass-pop {
+            animation: glass-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+        @keyframes glass-pop {
+            0% { transform: scale(0.85) translateY(10px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .wave {
+            animation: wave-move 3s ease-in-out infinite;
+        }
+        @keyframes wave-move {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script>
+(function() {
+  var K = 'desifit-dark-mode';
+  function apply() {
+    try {
+      var dark = localStorage.getItem(K) === 'true';
+      document.documentElement.classList.toggle('dark', dark);
+    } catch(e) {}
+  }
+  apply();
+  window.addEventListener('storage', apply);
+})();
+</script>
+  </head>
+<body class="bg-surface dark:bg-stone-950 font-body text-on-surface dark:text-stone-100 antialiased mb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">arrow_back</span>
+<span class="text-xl font-bold text-[#E65100] dark:text-[#FF8A50] font-headline tracking-tight">Hydration</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">notifications</span>
+</div>
+</header>
+<main class="pt-16 px-4 max-w-2xl mx-auto">
+<!-- Water gauge hero -->
+<section class="mt-6 mb-6">
+<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0077be] to-[#0a6aa8] p-6 text-white">
+<div class="absolute top-[-20%] right-[-5%] wave">
+<span class="material-symbols-outlined text-6xl text-white/25" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<div class="absolute bottom-[-30%] left-[-10%] w-52 h-52 rounded-full bg-white/10 blur-2xl"></div>
+<div class="flex items-center justify-between relative">
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-white/80">Today's Intake</p>
+<p class="text-5xl font-extrabold font-headline tracking-tight mt-1">1.4<span class="text-2xl">L</span></p>
+<p class="text-xs text-white/80 mt-1 font-medium">Goal: 2L · 70% complete</p>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">local_drink</span>
+</div>
+<span class="text-[9px] font-bold text-white/80">7 of 10 glasses</span>
+</div>
+</div>
+<div class="mt-5 relative">
+<div class="h-3 rounded-full bg-white/20 overflow-hidden">
+<div class="h-full w-[70%] rounded-full bg-white drop-fill" style="animation-delay: 0.2s;"></div>
+</div>
+<div class="flex justify-between mt-1.5 text-[9px] font-bold text-white/80">
+<span>600ml</span>
+<span>1.4L now</span>
+<span>2L goal</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick add buttons -->
+<section class="mb-6">
+<div class="flex gap-3">
+<button class="flex-1 py-4 rounded-2xl bg-surface-container-lowest dark:bg-stone-900 shadow-[0_4px_16px_rgba(0,0,0,0.04)] flex flex-col items-center gap-1 active:scale-95 transition-transform glass-pop">
+<span class="material-symbols-outlined text-sky-500 text-xl" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<span class="text-sm font-extrabold font-headline">250ml</span>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider">Small</span>
+</button>
+<button class="flex-1 py-4 rounded-2xl bg-surface-container-lowest dark:bg-stone-900 shadow-[0_4px_16px_rgba(0,0,0,0.04)] flex flex-col items-center gap-1 active:scale-95 transition-transform glass-pop" style="animation-delay: 0.08s;">
+<span class="material-symbols-outlined text-sky-500 text-xl" style="font-variation-settings: 'FILL' 1;">local_drink</span>
+<span class="text-sm font-extrabold font-headline">500ml</span>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider">Glass</span>
+</button>
+<button class="flex-1 py-4 rounded-2xl bg-surface-container-lowest dark:bg-stone-900 shadow-[0_4px_16px_rgba(0,0,0,0.04)] flex flex-col items-center gap-1 active:scale-95 transition-transform glass-pop" style="animation-delay: 0.16s;">
+<span class="material-symbols-outlined text-sky-500 text-xl" style="font-variation-settings: 'FILL' 1;">water_full</span>
+<span class="text-sm font-extrabold font-headline">1L</span>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider">Bottle</span>
+</button>
+</div>
+</section>
+<!-- Timeline -->
+<section class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_4px_20px_rgba(164,55,0,0.04)] mb-6">
+<h2 class="font-headline font-bold mb-4">Today's Log</h2>
+<div class="space-y-3.5">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sky-600 text-base">local_drink</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">500ml Glass</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">8:45 PM · after dinner</p>
+</div>
+<span class="text-xs font-bold text-on-surface-variant dark:text-stone-400">500ml</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sky-600 text-base">water_drop</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">250ml Glass</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">6:30 PM · pre-workout</p>
+</div>
+<span class="text-xs font-bold text-on-surface-variant dark:text-stone-400">250ml</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sky-600 text-base">local_drink</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">500ml Glass</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">1:15 PM · with lunch</p>
+</div>
+<span class="text-xs font-bold text-on-surface-variant dark:text-stone-400">500ml</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sky-600 text-base">water_drop</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">250ml Glass</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">10:00 AM · mid-morning</p>
+</div>
+<span class="text-xs font-bold text-on-surface-variant dark:text-stone-400">250ml</span>
+</div>
+</div>
+</section>
+<!-- Weekly chart -->
+<section class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_4px_20px_rgba(164,55,0,0.04)]">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline font-bold">Last 7 Days</h2>
+<span class="text-[10px] font-bold text-sky-600 uppercase tracking-widest">View Report</span>
+</div>
+<div class="flex items-end justify-between gap-2 h-24">
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-sky-500 to-sky-300 rounded-lg" style="height: 55%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">M</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-sky-500 to-sky-300 rounded-lg" style="height: 70%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">T</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-sky-500 to-sky-300 rounded-lg" style="height: 60%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">W</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-sky-500 to-sky-300 rounded-lg" style="height: 85%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">T</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-sky-500 to-sky-300 rounded-lg" style="height: 90%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">F</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-sky-500 to-sky-300 rounded-lg" style="height: 100%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">S</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-[#0077be] to-[#4db3e8] rounded-lg" style="height: 70%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">S</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-2 pb-4 pt-2 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[11px] font-medium font-headline">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[11px] font-medium font-headline">Recipes</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#FFCCBC] dark:bg-[#A43700]/30 text-[#A43700] dark:text-[#FFCCBC] rounded-2xl px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<span class="text-[11px] font-medium font-headline">Hydration</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[11px] font-medium font-headline">Profile</span>
+</a>
+</nav>
+</body></html>

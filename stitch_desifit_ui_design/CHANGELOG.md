@@ -11,6 +11,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Day 6] — 2026-08-03
+
+### Changed
+- **Compare overlay accuracy pass** — the 15 screens built on Day 5 still carried generic placeholder animation tags on their gallery cards (`scan-animation`, `macro-pop`, `progress-bar`, `bar-rise`, `chart-line`, `drop-in`, `scroll-reveal`, etc.) that existed nowhere in the canonical `ALL_ANIMATIONS` glossary, so the compare overlay rendered every animation tag as *missing* for those cards. Each card's `data-animations` now lists only canonical IDs that match what its screen actually ships:
+  - **workout_tracker** → `counter-animate,timer-pulse,button-squash,stagger-reveal` (rep counter, pulsing rest timer, squash steppers, staggered set list)
+  - **calorie_scanner** / **macro_scanner** → `scan-line,pop-in` (sweeping viewfinder line + result pop-in)
+  - **water_intake** → `water-fill,pop-in` (rising drop fill + quick-add glass pop)
+  - **sleep_recovery** → `float,progress-ring,stagger-reveal` (floating moon, sleep-score ring, staggered sections)
+  - **settings_profile** → `stagger-reveal,dark-mode` (staggered rows + shipped dark variant)
+  - **achievements** → `badge-pop,stagger-reveal`
+  - **recipe_detail** → `stagger-reveal,button-squash` (stepper squash)
+  - **subscription_plans** → `stagger-reveal,pop-in`
+  - **workout_history** / **recipe_collections** / **meal_prep_scheduler** → `stagger-reveal`
+  - **rewards_shop** → `stagger-reveal,coin-glow` (glowing coin halo)
+  - **progress_dashboard** → `bar-grow,counter-animate,progress-ring` (growing protein bars, stat counters, budget ring)
+  - **habit_tracker** → `check-pop,streak-fire` (checkmark pop + flickering streak flame)
+- **Six new canonical animation types** added to `ALL_ANIMATIONS` so the compare overlay and glossary can represent the Day-5 screens accurately: `scan-line`, `bar-grow`, `timer-pulse`, `check-pop`, `streak-fire`, `coin-glow` — each with label, description, Material icon, category, difficulty, `usedIn` list, and a glossary demo (reusing existing demo types). Glossary count grows 26 → 32 types.
+- `usedIn` arrays refreshed for existing entries (`stagger-reveal`, `counter-animate`, `progress-ring`, `pop-in`, `float`, `shimmer`) to name the new screens that ship them.
+- **Category badges corrected** — `sleep_recovery` and `settings_profile` moved `fun` → `features` (they ship sleep-tracking and account settings, not gamification), matching the card's filter category to its screen. `progress_dashboard` stays `features` per its dashboard-section placement.
+- Added `test/validate_tags.mjs` — a Node script asserting every card's `data-animations` tokens resolve to canonical `ALL_ANIMATIONS` ids (all 30 cards pass), so future screens can't reintroduce orphan tags.
+
+---
+
+## [Day 5] — 2026-08-03
+
+### Added
+- Completed the full 30-screen gallery — built 15 missing standalone screens as self-contained `code.html` files, each matching the "Modern Craftsman" design language (Material 3 tokens, saffron→leaf gradient CTAs, glassmorphism bottom nav, no-line hierarchy) and its gallery-card metadata:
+  - **Progress Dashboard** — weekly protein bars, budget ring + spend breakdown, weight trend chart.
+  - **Meal Prep Scheduler** — day strip, meal slots with drag indicators, weekly coverage + budget meters.
+  - **Habit Tracker** — 7-day check-in strip, streak flames, per-habit check buttons.
+  - **Achievements Badges** — level hero card, XP progress, 3×3 locked/unlocked badge grid.
+  - **Calorie Scanner** — camera viewfinder with corner brackets + animated scan line, AI thali result card with macro bars, recent scans.
+  - **Macro Barcode Scanner** — barcode viewfinder with laser sweep, scanned-product macro tiles, ₹-per-gram verdict, scan history.
+  - **Water Intake** — hydration hero with progress bar, 250ml/500ml/1L quick-add, daily log timeline, 7-day chart.
+  - **Recipe Collections** — featured gradient collection hero, saved collection list, create-collection CTA.
+  - **Recipe Detail** — hero with back/save, meta chips (time/kcal/protein/cost), servings stepper, ingredients, numbered steps, jugaad tip.
+  - **Rewards Shop** — Sattu balance hero with glowing coin, coupon/merch/donation reward grid, earn-how strip.
+  - **Settings & Profile** — profile card with verified badge, goal stats, grouped account/preferences/privacy/about rows with toggles.
+  - **Sleep Recovery** — sleep-score ring hero, stage breakdown, 7-night bars, coach's recovery note.
+  - **Subscription Plans** — monthly/yearly toggle, Free / Champ (featured gradient) / Ghar tier cards, trust strip.
+  - **Workout History** — session summary stats, date-grouped workout log with PR + volume chips, filter chips.
+  - **Workout Tracker (Reps)** — active-exercise rep stepper, 60s rest timer, exercise checklist with done/in-progress/up-next states.
+- Every new screen ships with staggered entrance animations (`.badge-pop`, `.scan-line`, `.bar-grow`, `.drop-fill`, `.rep-pop`, etc.) and active-press micro-interactions consistent with the existing 15 screens.
+
+---
+
 ## [Day 3] — 2026-07-30
 
 ### Added

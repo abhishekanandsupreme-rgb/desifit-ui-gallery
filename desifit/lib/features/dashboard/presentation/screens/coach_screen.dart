@@ -8,7 +8,7 @@ import '../../../../core/network/openrouter_service.dart';
 import '../../../../core/ads/ad_service.dart';
 
 class CoachScreen extends StatefulWidget {
-  const CoachScreen({Key? key}) : super(key: key);
+  const CoachScreen({super.key});
 
   @override
   State<CoachScreen> createState() => _CoachScreenState();
@@ -170,7 +170,7 @@ class _CoachScreenState extends State<CoachScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.secondary.withOpacity(0.15),
+                  color: AppColors.secondary.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.check_circle_rounded, color: AppColors.secondary, size: 48),
@@ -270,7 +270,7 @@ class _CoachScreenState extends State<CoachScreen> {
     showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       builder: (BuildContext context) {
         return Center(
           child: ClipRRect(
@@ -283,15 +283,15 @@ class _CoachScreenState extends State<CoachScreen> {
                   width: MediaQuery.of(context).size.width * 0.85,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.12),
+                    color: Colors.white.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       width: 1.5,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
+                        color: Colors.black.withValues(alpha: 0.25),
                         blurRadius: 24,
                         offset: const Offset(0, 8),
                       ),
@@ -303,10 +303,10 @@ class _CoachScreenState extends State<CoachScreen> {
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.2),
+                          color: AppColors.primary.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: AppColors.primary.withOpacity(0.4),
+                            color: AppColors.primary.withValues(alpha: 0.4),
                             width: 1.5,
                           ),
                         ),
@@ -482,15 +482,15 @@ class _CoachScreenState extends State<CoachScreen> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.primary.withOpacity(0.08),
-                        AppColors.primaryContainer.withOpacity(0.02),
+                        AppColors.primary.withValues(alpha: 0.08),
+                        AppColors.primaryContainer.withValues(alpha: 0.02),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: AppColors.primary.withOpacity(0.15),
+                      color: AppColors.primary.withValues(alpha: 0.15),
                       width: 1,
                     ),
                   ),
@@ -499,7 +499,7 @@ class _CoachScreenState extends State<CoachScreen> {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.12),
+                          color: AppColors.primary.withValues(alpha: 0.12),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(Icons.assignment_ind_rounded, color: AppColors.primary, size: 22),
@@ -557,10 +557,10 @@ class _CoachScreenState extends State<CoachScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   decoration: BoxDecoration(
-                    color: Colors.amber.withOpacity(0.08),
+                    color: Colors.amber.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: Colors.amber.withOpacity(0.3),
+                      color: Colors.amber.withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),
@@ -634,12 +634,12 @@ class _CoachScreenState extends State<CoachScreen> {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
+                    color: Colors.black.withValues(alpha: 0.04),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
                 ],
-                border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+                border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               child: Row(
@@ -703,7 +703,7 @@ class _CoachScreenState extends State<CoachScreen> {
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.onSurfaceVariant.withOpacity(0.8),
+                            color: AppColors.onSurfaceVariant.withValues(alpha: 0.8),
                             fontFamily: 'Plus Jakarta Sans',
                           ),
                         ),
@@ -713,7 +713,7 @@ class _CoachScreenState extends State<CoachScreen> {
                           child: Icon(
                             Icons.flag_outlined,
                             size: 13,
-                            color: AppColors.onSurfaceVariant.withOpacity(0.5),
+                            color: AppColors.onSurfaceVariant.withValues(alpha: 0.5),
                           ),
                         ),
                       ],
@@ -755,7 +755,7 @@ class _CoachScreenState extends State<CoachScreen> {
             const SizedBox(width: 8),
             CircleAvatar(
               radius: 16,
-              backgroundColor: AppColors.primary.withOpacity(0.1),
+              backgroundColor: AppColors.primary.withValues(alpha: 0.1),
               backgroundImage: Provider.of<AppState>(context, listen: false).currentUser?.photoUrl.isNotEmpty == true
                   ? NetworkImage(Provider.of<AppState>(context, listen: false).currentUser!.photoUrl)
                   : null,

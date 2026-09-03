@@ -1,39 +1,32 @@
 import 'dart:io';
 
-import 'package:desifit/core/state/state_index.dart';
-import 'package:desifit/features/dashboard/presentation/widgets/ayurvedic_recovery_card.dart';
-import 'package:desifit/features/dashboard/presentation/widgets/budget_summary_card.dart';
-import 'package:desifit/features/dashboard/presentation/widgets/dashboard_header.dart';
-import 'package:desifit/features/dashboard/presentation/widgets/fitness_stories_tray.dart';
-import 'package:desifit/features/dashboard/presentation/widgets/my_health_card.dart';
-import 'package:desifit/features/dashboard/presentation/widgets/progress_cards.dart';
-import 'package:desifit/features/dashboard/presentation/widgets/quick_actions_grid.dart';
-import 'package:desifit/features/dashboard/presentation/widgets/wearable_sync_card.dart';
+import 'package:desifit/core/state/app_state.dart';
+import 'package:desifit/features/dashboard/presentation/widgets/badges_dialog.dart';
+import 'package:desifit/features/dashboard/presentation/widgets/celebration_overlay.dart';
+import 'package:desifit/features/dashboard/presentation/widgets/flashcard_widget.dart';
+import 'package:desifit/features/dashboard/presentation/widgets/matka_hydration_widget.dart';
+import 'package:desifit/features/dashboard/presentation/widgets/guest_prompt_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
-Widget _wrapWithProviders(Widget child) => MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => AuthState()..loadFromCache()),
-      ChangeNotifierProvider(create: (_) => NutritionState()..loadFromCache()),
-      ChangeNotifierProvider(create: (_) => WorkoutState()..loadFromCache()),
-      ChangeNotifierProvider(create: (_) => HealthState()..loadFromCache()),
-      ChangeNotifierProvider(create: (_) => GamificationState()..loadFromCache()),
-      ChangeNotifierProvider(create: (_) => AiState()..loadFromCache()),
-    ],
-    child: MaterialApp(
-      theme: ThemeData.light(),
-      home: Scaffold(body: child),
-    ),
-  );
+/// Wraps a widget with a single [AppState] provider and MaterialApp shell.
+Widget _wrapWithApp(Widget child) => ChangeNotifierProvider<AppState>(
+      create: (_) => AppState(),
+      child: MaterialApp(
+        theme: ThemeData.light(),
+        home: Scaffold(body: child),
+      ),
+    );
 
 void main() {
   setUpAll(() async {
+    // Use a temp directory for Hive, matching the pattern in app_state_test.dart.
     final tempDir = Directory.systemTemp.createTempSync();
     Hive.init(tempDir.path);
-    
+
+    // Open every box that LocalStorage or AppState may touch during construction.
     await Hive.openBox('settings');
     await Hive.openBox('recipes_cache');
     await Hive.openBox('meals_cache');
@@ -44,100 +37,147 @@ void main() {
     await Hive.openBox('progress_photos_cache');
   });
 
-  group('Dashboard Widgets Tests', () {
-    testWidgets('DashboardHeader renders greeting and streak', (tester) async {
-      await tester.pumpWidget(_wrapWithProviders(
-        const SizedBox(height: 200, child: DashboardHeader()),
-      ));
-      // Use pump() — dashboard widgets may have animated decorations
-      await tester.pump(const Duration(milliseconds: 100));
-
-      expect(find.text('Hello, Champ!'), findsOneWidget);
-    });
-
-    testWidgets('ProteinProgressCard displays protein progress', (tester) async {
-      // Wrap in Column to provide Flex parent for Expanded inside _MetricRing
-      await tester.pumpWidget(_wrapWithProviders(
-        const SizedBox(height: 200, child: Column(children: [ProteinProgressCard()])),
-      ));
-      await tester.pump();
-
-      expect(find.text('Protein'), findsOneWidget);
-    });
-
-    testWidgets('CaloriesProgressCard displays calorie progress', (tester) async {
-      await tester.pumpWidget(_wrapWithProviders(
-        const SizedBox(height: 200, child: Column(children: [CaloriesProgressCard()])),
-      ));
-      await tester.pump();
-
-      expect(find.text('Calories'), findsOneWidget);
-    });
-
-    testWidgets('BudgetSummaryCard displays budget info', (tester) async {
-      await tester.pumpWidget(_wrapWithProviders(
-        const SizedBox(height: 200, child: BudgetSummaryCard()),
-      ));
-      await tester.pump();
-
-      expect(find.text('Daily Budget Left'), findsOneWidget);
-    });
-
-    testWidgets('MyHealthCard shows setup prompt when no metrics', (tester) async {
-      await tester.pumpWidget(_wrapWithProviders(
-        const SizedBox(height: 200, child: MyHealthCard()),
-      ));
-      await tester.pump();
-
-      expect(find.text('Setup Health Profile'), findsOneWidget);
-    });
-
-    testWidgets('WearableSyncCard shows connect button when not synced', (tester) async {
-      await tester.pumpWidget(_wrapWithProviders(
-        const SizedBox(height: 200, child: WearableSyncCard()),
-      ));
-      await tester.pump();
-
-      expect(find.text('CONNECT WEARABLE & SYNC'), findsOneWidget);
-    });
-
-    testWidgets('QuickActionsGrid renders tool cards', (tester) async {
-      await tester.pumpWidget(_wrapWithProviders(
-        const SizedBox(
-          height: 500,
-          child: SingleChildScrollView(child: QuickActionsGrid()),
+  // ---------------------------------------------------------------
+  // BadgesDialog
+  // ---------------------------------------------------------------
+  group('BadgesDialog', () {
+    testWidgets('renders header and streak card', (tester) async {
+      await tester.pumpWidget(
+        _wrapWithApp(
+          const BadgesDialog(),
         ),
-      ));
-      // Cards have infinite bob animations; use pump() with sufficient time
-      // for entry animations (15 cards × 50ms stagger + 500ms entry)
-      await tester.pump(const Duration(seconds: 2));
+      );
+      await tester.pump();
 
-      expect(find.text('Sasta Protein'), findsOneWidget);
-      expect(find.text('Grocery Plan'), findsOneWidget);
-      expect(find.text('Akhada Sandbox'), findsOneWidget);
-      expect(find.byType(GridView), findsOneWidget);
+      expect(find.text('🏆 Badges & Achievements'), findsOneWidget);
+      expect(find.text('0 Day Sattu Streak'), findsOneWidget);
     });
 
-    testWidgets('AyurvedicRecoveryCard shows recovery advice', (tester) async {
-      await tester.pumpWidget(_wrapWithProviders(
-        const SizedBox(
-          height: 500,
-          child: SingleChildScrollView(child: AyurvedicRecoveryCard()),
+    testWidgets('shows all five badge names', (tester) async {
+      await tester.pumpWidget(_wrapWithApp(const BadgesDialog()));
+      await tester.pump();
+
+      expect(find.text('Sattu Scholar'), findsOneWidget);
+      expect(find.text('Protein Pro'), findsOneWidget);
+      expect(find.text('Loha Lath'), findsOneWidget);
+      expect(find.text('Paisa Bachau'), findsOneWidget);
+      expect(find.text('Sattu Samrat'), findsOneWidget);
+    });
+
+    testWidgets('shows simulator controls', (tester) async {
+      await tester.pumpWidget(_wrapWithApp(const BadgesDialog()));
+      await tester.pump();
+
+      expect(find.text('Simulate +1 Day'), findsOneWidget);
+      expect(find.text('Reset All'), findsOneWidget);
+    });
+
+    testWidgets('badge toggle increments earned badges', (tester) async {
+      await tester.pumpWidget(_wrapWithApp(const BadgesDialog()));
+      await tester.pump();
+
+      // Tap the first badge card (Sattu Scholar) to earn it.
+      final badgeTile = find.byType(InkWell).first;
+      await tester.tap(badgeTile);
+      await tester.pumpAndSettle();
+
+      // A snackbar should confirm the earned badge.
+      expect(find.text('Earned Sattu Scholar badge!'), findsOneWidget);
+
+      // The check-circle icon should now appear (badge is earned).
+      expect(find.byIcon(Icons.check), findsOneWidget);
+    });
+  });
+
+  // ---------------------------------------------------------------
+  // CelebrationOverlay
+  // ---------------------------------------------------------------
+  group('CelebrationOverlay', () {
+    testWidgets('displays title and message', (tester) async {
+      await tester.pumpWidget(
+        _wrapWithApp(
+          const CelebrationOverlay(
+            title: '🔥 Streak Saved!',
+            message: 'Your Sattu Streak was rescued!',
+          ),
         ),
-      ));
+      );
+      await tester.pump(const Duration(milliseconds: 500));
+
+      expect(find.text('🔥 Streak Saved!'), findsOneWidget);
+      expect(find.text('Your Sattu Streak was rescued!'), findsOneWidget);
+      expect(find.text('SHABAASH! 🤝'), findsOneWidget);
+    });
+  });
+
+  // ---------------------------------------------------------------
+  // MatkaHydrationWidget
+  // ---------------------------------------------------------------
+  group('MatkaHydrationWidget', () {
+    testWidgets('shows header and default water target', (tester) async {
+      await tester.pumpWidget(_wrapWithApp(const MatkaHydrationWidget()));
       await tester.pump();
 
-      expect(find.text('Ayurvedic Recovery Advisor'), findsOneWidget);
+      expect(find.text('Desi Hydration'), findsOneWidget);
+      expect(find.text('0 / 2000 ml'), findsOneWidget);
     });
 
-    testWidgets('FitnessStoriesTray shows story circles', (tester) async {
-      await tester.pumpWidget(_wrapWithProviders(
-        const SizedBox(height: 400, child: FitnessStoriesTray()),
-      ));
+    testWidgets('shows all drink chips', (tester) async {
+      await tester.pumpWidget(_wrapWithApp(const MatkaHydrationWidget()));
       await tester.pump();
 
-      expect(find.text('FITNESS STORIES'), findsOneWidget);
-      expect(find.byType(ListView), findsOneWidget);
+      expect(find.text('💧 Water'), findsOneWidget);
+      expect(find.text('🥛 Chaas'), findsOneWidget);
+      expect(find.text('🥛 Lassi'), findsOneWidget);
+      expect(find.text('🌾 Sattu Drink'), findsOneWidget);
+      expect(find.text('🥥 Coconut'), findsOneWidget);
+    });
+
+    testWidgets('tapping Water chip updates total', (tester) async {
+      await tester.pumpWidget(_wrapWithApp(const MatkaHydrationWidget()));
+      await tester.pump();
+
+      // Tap the Water chip (+250 ml).
+      await tester.tap(find.text('💧 Water'));
+      await tester.pumpAndSettle();
+
+      // The displayed total should now reflect 250 ml.
+      expect(find.text('250 / 2000 ml'), findsOneWidget);
+    });
+  });
+
+  // ---------------------------------------------------------------
+  // GuestPromptWidget
+  // ---------------------------------------------------------------
+  group('GuestPromptWidget', () {
+    testWidgets('displays title and description', (tester) async {
+      await tester.pumpWidget(
+        _wrapWithApp(
+          const GuestPromptWidget(
+            title: 'Sign In to Unlock',
+            description: 'Create an account to save your progress.',
+          ),
+        ),
+      );
+      await tester.pump();
+
+      expect(find.text('Sign In to Unlock'), findsOneWidget);
+      expect(find.text('Create an account to save your progress.'), findsOneWidget);
+      expect(find.text('Sign In with Google'), findsOneWidget);
+    });
+  });
+
+  // ---------------------------------------------------------------
+  // FlashcardWidget
+  // ---------------------------------------------------------------
+  group('FlashcardWidget', () {
+    testWidgets('renders flashcard front with flip prompt', (tester) async {
+      await tester.pumpWidget(_wrapWithApp(const FlashcardWidget()));
+      // Allow animations to settle.
+      await tester.pump(const Duration(seconds: 1));
+
+      // The default flashcard should show the "TAP TO FLIP" hint.
+      expect(find.text('TAP TO FLIP'), findsOneWidget);
     });
   });
 }

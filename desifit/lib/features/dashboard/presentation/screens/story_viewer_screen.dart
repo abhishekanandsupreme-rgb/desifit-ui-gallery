@@ -6,7 +6,7 @@ import '../../../../core/state/app_state.dart';
 class StoryViewerScreen extends StatefulWidget {
   final int initialIndex;
 
-  const StoryViewerScreen({Key? key, required this.initialIndex}) : super(key: key);
+  const StoryViewerScreen({super.key, required this.initialIndex});
 
   @override
   State<StoryViewerScreen> createState() => _StoryViewerScreenState();
@@ -100,8 +100,8 @@ class _StoryViewerScreenState extends State<StoryViewerScreen> with SingleTicker
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    story.gradient[0].withOpacity(0.9),
-                    story.gradient[1].withOpacity(0.95),
+                    story.gradient[0].withValues(alpha: 0.9),
+                    story.gradient[1].withValues(alpha: 0.95),
                     Colors.black,
                   ],
                   stops: const [0.0, 0.4, 1.0],
@@ -193,7 +193,7 @@ class _StoryViewerScreenState extends State<StoryViewerScreen> with SingleTicker
                       child: Container(
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.08),
+                          color: Colors.white.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(24),
                           border: Border.all(color: Colors.white10),
                         ),

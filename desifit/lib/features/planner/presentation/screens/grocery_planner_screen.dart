@@ -5,7 +5,7 @@ import '../../../../core/theme/theme.dart';
 import '../../../../core/state/app_state.dart';
 
 class GroceryPlannerScreen extends StatefulWidget {
-  const GroceryPlannerScreen({Key? key}) : super(key: key);
+  const GroceryPlannerScreen({super.key});
 
   @override
   State<GroceryPlannerScreen> createState() => _GroceryPlannerScreenState();

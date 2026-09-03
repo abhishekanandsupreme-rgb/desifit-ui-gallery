@@ -223,6 +223,7 @@ class _AuraSyncDashboardState extends State<AuraSyncDashboard> with TickerProvid
 
   void _initAcousticAndSmartHome() {
     _acousticSub = _acousticService.decibelStream.listen((db) {
+      if (!mounted) return;
       setState(() {
         _decibels = db;
       });
@@ -232,6 +233,7 @@ class _AuraSyncDashboardState extends State<AuraSyncDashboard> with TickerProvid
     });
 
     _acousticService.startMonitoring().then((_) {
+      if (!mounted) return;
       setState(() {
         _isMicMonitoring = _acousticService.isMonitoring;
       });
@@ -248,6 +250,7 @@ class _AuraSyncDashboardState extends State<AuraSyncDashboard> with TickerProvid
 
   void _initNativeBridge() {
     _nativeBridgeSub = _nativeBridge.sensorStream.listen((data) {
+      if (!mounted) return;
       setState(() {
         if (data.containsKey('light')) {
           _light = data['light']!;
@@ -285,6 +288,7 @@ class _AuraSyncDashboardState extends State<AuraSyncDashboard> with TickerProvid
 
   Future<void> _loadHistory() async {
     final history = await _dbService.getAllScanLogs();
+    if (!mounted) return;
     setState(() {
       _scanHistory = history;
     });
@@ -294,10 +298,12 @@ class _AuraSyncDashboardState extends State<AuraSyncDashboard> with TickerProvid
     try {
       await _visionService.init();
       if (_visionService.isCameraInitialized) {
+        if (!mounted) return;
         setState(() {
           _cameraAvailable = true;
         });
         _objectSub = _visionService.detectedObjectsStream.listen((objects) {
+          if (!mounted) return;
           setState(() {
             _detectedObjects = objects;
           });
@@ -335,6 +341,7 @@ class _AuraSyncDashboardState extends State<AuraSyncDashboard> with TickerProvid
   void _startPhysicalSensors() {
     try {
       _magSub = _sensorService.magnetometerStream.listen((eventMagnitude) {
+        if (!mounted) return;
         setState(() {
           _rawMagnetometerVal = math.sqrt(eventMagnitude);
           // If magnetometer value is high, feed it into VOC/EMI telemetry
@@ -556,11 +563,13 @@ class _AuraSyncDashboardState extends State<AuraSyncDashboard> with TickerProvid
       telemetryPayload: payload,
     );
 
+    if (!mounted) return;
     setState(() {
       _isLoading = false;
     });
 
     if (result['success'] == true) {
+      if (!mounted) return;
       setState(() {
         _recommendations = result['cards'];
       });

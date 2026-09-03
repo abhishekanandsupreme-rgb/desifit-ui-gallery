@@ -5,7 +5,7 @@ import '../../../../core/theme/theme.dart';
 import '../../../../core/state/app_state.dart';
 
 class MatkaHydrationWidget extends StatefulWidget {
-  const MatkaHydrationWidget({Key? key}) : super(key: key);
+  const MatkaHydrationWidget({super.key});
 
   @override
   State<MatkaHydrationWidget> createState() => _MatkaHydrationWidgetState();
@@ -44,12 +44,12 @@ class _MatkaHydrationWidgetState extends State<MatkaHydrationWidget>
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: AppColors.outlineVariant.withOpacity(0.2),
+            color: AppColors.outlineVariant.withValues(alpha: 0.2),
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.04),
+              color: AppColors.primary.withValues(alpha: 0.04),
               blurRadius: 16,
               offset: const Offset(0, 4),
             ),
@@ -215,11 +215,11 @@ class _MatkaHydrationWidgetState extends State<MatkaHydrationWidget>
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: const Color(0xFF2B8CD4).withOpacity(0.15),
+            color: const Color(0xFF2B8CD4).withValues(alpha: 0.15),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.02),
+              color: Colors.black.withValues(alpha: 0.02),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -278,11 +278,11 @@ class MatkaWaterPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final waterPaint = Paint()
-      ..color = const Color(0xFF3498DB).withOpacity(0.85) // Wave Blue
+      ..color = const Color(0xFF3498DB).withValues(alpha: 0.85) // Wave Blue
       ..style = PaintingStyle.fill;
 
     final highlightPaint = Paint()
-      ..color = Colors.white.withOpacity(0.2)
+      ..color = Colors.white.withValues(alpha: 0.2)
       ..style = PaintingStyle.fill;
 
     // Draw clay pot body shape (Matka)
@@ -336,7 +336,7 @@ class MatkaWaterPainter extends CustomPainter {
 
       // Add simple bubbles or details inside water
       if (waterPercentage > 0.3) {
-        final bubblePaint = Paint()..color = Colors.white.withOpacity(0.4);
+        final bubblePaint = Paint()..color = Colors.white.withValues(alpha: 0.4);
         canvas.drawCircle(Offset(w * 0.3, h * 0.75), 2.5, bubblePaint);
         canvas.drawCircle(Offset(w * 0.7, h * 0.65), 1.5, bubblePaint);
         canvas.drawCircle(Offset(w * 0.55, h * 0.8), 3.0, bubblePaint);

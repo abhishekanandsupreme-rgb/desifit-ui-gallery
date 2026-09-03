@@ -8,7 +8,7 @@ import '../../../../core/network/analytics_service.dart';
 import '../widgets/guest_prompt_widget.dart';
 
 class ProgressReportScreen extends StatefulWidget {
-  const ProgressReportScreen({Key? key}) : super(key: key);
+  const ProgressReportScreen({super.key});
 
   @override
   State<ProgressReportScreen> createState() => _ProgressReportScreenState();
@@ -48,7 +48,7 @@ class _ProgressReportScreenState extends State<ProgressReportScreen> {
                 decoration: BoxDecoration(
                   color: AppColors.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.outlineVariant.withOpacity(0.3)),
+                  border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
                 ),
                 child: SelectableText(
                   cardText,
@@ -171,7 +171,7 @@ class _ProgressReportScreenState extends State<ProgressReportScreen> {
                 decoration: BoxDecoration(
                   color: AppColors.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+                  border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
                 ),
                 child: CustomPaint(
                   painter: _LineChartPainter(
@@ -203,7 +203,7 @@ class _ProgressReportScreenState extends State<ProgressReportScreen> {
                 decoration: BoxDecoration(
                   color: AppColors.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+                  border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
                 ),
                 child: CustomPaint(
                   painter: _BarChartPainter(
@@ -277,7 +277,7 @@ class _ProgressReportScreenState extends State<ProgressReportScreen> {
       if (state.isGuest)
         Positioned.fill(
           child: Container(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             padding: const EdgeInsets.all(24.0),
             child: const Center(
               child: GuestPromptWidget(
@@ -305,7 +305,7 @@ class _ProgressReportScreenState extends State<ProgressReportScreen> {
       decoration: BoxDecoration(
         color: AppColors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+        border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,7 +317,7 @@ class _ProgressReportScreenState extends State<ProgressReportScreen> {
                 title.toUpperCase(),
                 style: const TextStyle(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold),
               ),
-              Icon(icon, color: color.withOpacity(0.4), size: 18),
+              Icon(icon, color: color.withValues(alpha: 0.4), size: 18),
             ],
           ),
           const SizedBox(height: 12),
@@ -362,7 +362,7 @@ class _LineChartPainter extends CustomPainter {
 
     // Draw grid horizontal lines
     final gridPaint = Paint()
-      ..color = Colors.black.withOpacity(0.05)
+      ..color = Colors.black.withValues(alpha: 0.05)
       ..strokeWidth = 1;
     for (int i = 0; i < 4; i++) {
       final y = size.height * (i / 3);
@@ -372,7 +372,7 @@ class _LineChartPainter extends CustomPainter {
     // Draw target reference line
     final targetY = size.height - (targetValue / maxVal) * size.height;
     final targetPaint = Paint()
-      ..color = lineColor.withOpacity(0.2)
+      ..color = lineColor.withValues(alpha: 0.2)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     canvas.drawLine(Offset(0, targetY), Offset(size.width, targetY), targetPaint);
@@ -408,7 +408,7 @@ class _LineChartPainter extends CustomPainter {
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [lineColor.withOpacity(0.25), lineColor.withOpacity(0.0)],
+        colors: [lineColor.withValues(alpha: 0.25), lineColor.withValues(alpha: 0.0)],
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
     canvas.drawPath(fillPath, fillPaint);
 
@@ -479,7 +479,7 @@ class _BarChartPainter extends CustomPainter {
     // Draw target line
     final targetY = size.height - (targetValue / maxVal) * size.height;
     final targetPaint = Paint()
-      ..color = barColor.withOpacity(0.2)
+      ..color = barColor.withValues(alpha: 0.2)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     canvas.drawLine(Offset(0, targetY), Offset(size.width, targetY), targetPaint);
