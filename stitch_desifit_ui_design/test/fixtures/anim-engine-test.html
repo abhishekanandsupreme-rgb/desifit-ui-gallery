@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#a43700"/>
   <title>Anim Engine Test</title>
   <style>
     body { min-height: 2000px; padding: 20px; font-family: sans-serif; }
@@ -14,7 +15,8 @@
     .card-lift { padding: 20px; margin: 10px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
     .float-gentle { width: 50px; height: 50px; background: orange; border-radius: 50%; }
     .fab-pulse { width: 60px; height: 60px; background: #a43700; border-radius: 50%; }
-    .filter-item { padding: 10px; margin: 5px; border: 1px solid #ccc; }
+    .filter-item { padding: 10px; margin: 5px; border: 1px solid #ccc; position: relative; }
+    .card-preview-wrap { height: 80px; background: #f5f5f5; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
     .ripple-btn { padding: 12px 24px; background: #a43700; color: white; border: none; border-radius: 8px; cursor: pointer; }
     #back-to-top { position: fixed; bottom: 20px; right: 20px; padding: 10px; background: #333; color: white; }
     #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: red; width: 0%; }
@@ -27,9 +29,77 @@
     .text-reveal { font-size: 24px; font-weight: bold; }
     #liquid-overlay { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg, #a43700, #cd4700); transform: translateY(100%); transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1); pointer-events: none; }
     #liquid-overlay.active { transform: translateY(0); }
+    .hidden { display: none !important; }
+
+    /* ── v3 / v4 animation targets ── */
+    .water-fill { width: 240px; height: 160px; position: relative; background: #eef4ee; border-radius: 12px; overflow: hidden; }
+    .water-fill-level { position: absolute; left: 0; right: 0; bottom: 0; height: 100%; }
+    .fire-flame { width: 200px; height: 140px; position: relative; background: #1a1210; border-radius: 12px; }
+    .morph-shape { width: 200px; height: 100px; }
+    .morph-shape svg { width: 100%; height: 100%; }
+    .breath-circle { width: 160px; height: 160px; position: relative; text-align: center; }
+    .breath-circle-ring { width: 120px; height: 120px; margin: 0 auto; border-radius: 50%; background: radial-gradient(circle, #a43700 0%, #cd4700 70%, transparent 71%); }
+    .breath-circle-label { margin-top: 8px; font-weight: 600; }
+    .flip-card { width: 200px; height: 120px; perspective: 1000px; cursor: pointer; position: relative; }
+    .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+    .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back { position: absolute; inset: 0; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; }
+    .flip-card-back { transform: rotateY(180deg); background: #a43700; color: white; }
+    .card-tilt { width: 220px; height: 140px; background: #faf5f0; border-radius: 12px; }
+    .stagger-children > div { height: 36px; margin: 6px 0; background: #eee; border-radius: 6px; }
+    .shimmer-placeholder { width: 280px; height: 20px; background: #eee; border-radius: 6px; }
+    .skeleton-loader { width: 240px; height: 16px; margin: 6px 0; background: #eee; }
+    .skeleton-loader.skeleton-circle { width: 48px; height: 48px; border-radius: 50%; }
+    .skeleton-loader.skeleton-text { width: 200px; height: 12px; }
+    .card-carousel { display: flex; gap: 16px; }
+    .card-carousel > div { width: 140px; height: 100px; background: #eee; border-radius: 12px; flex: 0 0 auto; }
+    .magnetic-hover { width: 120px; height: 120px; background: #a43700; border-radius: 16px; }
+    .scroll-timeline { position: relative; padding: 10px 0; }
+    .timeline-step { height: 44px; margin: 10px 0; background: #f2ede8; border-radius: 8px; display: flex; align-items: center; padding: 0 12px; }
+
+    /* ── QA tool panels ── */
+    .device-toggle-group { display: none; gap: 8px; margin: 8px 0; }
+    .device-toggle-btn { padding: 6px 14px; border: 1px solid #ccc; border-radius: 8px; background: white; cursor: pointer; }
+    .device-toggle-btn.active { background: #a43700; color: white; border-color: #a43700; }
+    #preview-modal { display: none; }
+    .device-frame-wrap { position: relative; }
+    .device-bezel { border: 3px solid #222; border-radius: 18px; background: #111; padding: 8px; }
+    .device-notch { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); width: 40px; height: 6px; background: #000; border-radius: 4px; }
+    .device-label { text-align: center; font-size: 12px; margin-top: 6px; color: #555; }
+    #console-panel, #a11y-panel { display: none; margin-top: 8px; border: 1px solid #ddd; border-radius: 10px; padding: 10px; background: white; }
+    #console-panel.visible, #a11y-panel.visible { display: block; }
+    #console-entries { max-height: 120px; overflow: auto; font-family: monospace; font-size: 12px; }
+    .console-empty { color: #999; padding: 8px; }
+    .console-entry { padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+    .ce-type { font-weight: 700; margin-right: 6px; }
+    #vrm-overlay { display: none; position: fixed; inset: 0; z-index: 9000; background: rgba(0,0,0,0.7); padding: 20px; }
+    #vrm-overlay.active { display: block; }
+    #vrm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+    .vrm-card { background: white; border-radius: 12px; overflow: hidden; }
+    .vrm-preview { height: 120px; background: #eee; }
+    .vrm-name { font-weight: 700; padding: 8px; }
+    #theme-editor-panel { display: none; position: fixed; right: 20px; top: 80px; z-index: 9500; width: 320px; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: 20px; }
+    #theme-editor-panel.open { display: block; }
+    #theme-editor-panel label { display: block; font-size: 12px; margin-top: 8px; }
+    #theme-editor-panel input[type="color"] { width: 100%; height: 32px; border: none; padding: 0; }
+    .preset-swatch { display: inline-block; width: 28px; height: 28px; border-radius: 8px; margin: 4px; cursor: pointer; border: 2px solid transparent; }
+    .preset-swatch.active { border-color: #a43700; }
+    #ss-gallery-overlay { display: none; position: fixed; inset: 0; z-index: 9600; background: rgba(0,0,0,0.75); padding: 20px; }
+    #ss-gallery-overlay.active { display: block; }
+    #ss-gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
+    .ss-gallery-card { background: white; border-radius: 12px; padding: 10px; text-align: center; }
+    .ss-gallery-card img { max-width: 100%; height: auto; border-radius: 8px; }
+    .ss-card-label { font-size: 12px; margin: 6px 0; font-weight: 600; }
+    .ss-card-dl { display: block; color: #a43700; cursor: pointer; font-size: 12px; }
+    .spinner, .capturing-label { display: none; }
+    .bookmark-btn { position: absolute; top: 6px; right: 6px; background: none; border: none; cursor: pointer; font-size: 18px; }
+    .bookmark-btn.bookmarked { color: #a43700; }
   </style>
 </head>
 <body>
+  <h1>Animation Engine Test Fixture</h1>
+  <h2>Track 1: Core Animation Targets</h2>
+
   <canvas id="particles-canvas" style="width:400px;height:300px;"></canvas>
 
   <div class="stagger-item" data-name="test-item-1">Item 1</div>
@@ -74,10 +144,6 @@
     <button>Inactive</button>
   </nav>
 
-  <div class="filter-item" data-category="features" data-name="Test Feature">Feature</div>
-  <div class="filter-item" data-category="dashboard" data-name="Test Dashboard">Dashboard</div>
-  <div class="filter-item" data-category="fun" data-name="Test Fun">Fun</div>
-
   <input id="screen-search" type="text" placeholder="Search..." />
 
   <div id="category-tabs">
@@ -86,12 +152,702 @@
     <button data-category="dashboard" class="tab-btn bg-surface-container-highest text-on-surface-variant">Dashboard</button>
   </div>
 
-  <button id="back-to-top" class="opacity-0 pointer-events-none">Back to Top</button>
-  <button class="ripple-btn">Ripple Me</button>
+  <button id="saved-tab" class="tab-btn bg-surface-container-highest text-on-surface-variant" data-bookmark-tab="true">Saved</button>
+  <button id="bookmark-toggle" class="tab-btn bg-surface-container-highest text-on-surface-variant">★ Bookmarks</button>
+  <span id="bookmark-count" class="bookmark-count-badge">0</span>
+  <div id="no-results" class="hidden"><p>No results found.</p></div>
 
   <div id="scroll-progress"></div>
   <div id="liquid-overlay"></div>
+  <button id="back-to-top" class="opacity-0 pointer-events-none">Back to Top</button>
+  <button class="ripple-btn">Ripple Me</button>
 
+  <!-- ════════ Track 3 / 4 filter cards (9 cards → VRM 9 / screenshot 4) ════════ -->
+  <div class="filter-item" data-name="Feature One" data-category="features">
+    <div class="card-preview-wrap">Feature One preview</div>
+  </div>
+  <div class="filter-item" data-name="Dashboard One" data-category="dashboard">
+    <div class="card-preview-wrap">Dashboard One preview</div>
+  </div>
+  <div class="filter-item" data-name="Feature Two" data-category="features">
+    <div class="card-preview-wrap">Feature Two preview</div>
+  </div>
+  <div class="filter-item" data-name="देसीFit प्रोटीन 💪 & रेसिपी <3" data-category="recipes">
+    <div class="card-preview-wrap">Hindi recipe preview</div>
+  </div>
+  <div class="filter-item" data-name="Workout One" data-category="workout"></div>
+  <div class="filter-item" data-name="Planner One" data-category="planner"></div>
+  <div class="filter-item" data-name="Fun One" data-category="fun"></div>
+  <div class="filter-item" data-name="Meal One" data-category="meal"></div>
+  <div class="filter-item" data-name="Progress One" data-category="progress"></div>
+
+  <!-- ════════ Track 3 / 4 animation targets ════════ -->
+  <h2>Track 3 / 4 Animation Targets</h2>
+
+  <div class="water-fill"><div class="water-fill-level" data-target="0.6"></div></div>
+  <div class="fire-flame"></div>
+  <div class="morph-shape">
+    <svg viewBox="0 0 200 100">
+      <path d="M10,50 C40,10 90,10 100,50 C110,90 160,90 190,50" data-morph-to="M10,50 C40,80 90,80 100,50 C110,20 160,20 190,50"/>
+    </svg>
+  </div>
+  <div class="breath-circle">
+    <div class="breath-circle-ring"></div>
+    <div class="breath-circle-label">Ready</div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">Front</div>
+      <div class="flip-card-back">Back</div>
+    </div>
+  </div>
+  <div class="card-tilt">Tilt Me</div>
+  <div class="stagger-children"><div>C1</div><div>C2</div><div>C3</div></div>
+  <div class="shimmer-placeholder"></div>
+  <a class="smooth-anchor-link" href="#anchor-target-1">Smooth Link</a>
+  <div id="anchor-target-1" style="height:40px;">Anchor Target 1</div>
+  <a class="smooth-anchor-hash" href="#">Hash Only</a>
+  <div id="swipe-target" style="width:300px;height:120px;background:#f2ede8;border-radius:12px;"></div>
+  <div class="skeleton-loader" data-skeleton="rect"></div>
+  <div class="skeleton-loader skeleton-circle"></div>
+  <div class="skeleton-loader skeleton-text"></div>
+  <div class="card-carousel"><div>A</div><div>B</div><div>C</div></div>
+  <div class="magnetic-hover"></div>
+  <div class="scroll-timeline">
+    <div class="timeline-step">Step 1</div>
+    <div class="timeline-step">Step 2</div>
+    <div class="timeline-step">Step 3</div>
+  </div>
+
+  <!-- ════════ Track 3 / 4 QA tools ════════ -->
+  <h2>QA Tools</h2>
+
+  <div class="device-toggle-group">
+    <button class="device-toggle-btn" data-device="none">None</button>
+    <button class="device-toggle-btn" data-device="mobile">Mobile</button>
+    <button class="device-toggle-btn" data-device="desktop">Desktop</button>
+  </div>
+  <div id="preview-modal"><div class="modal-content">Preview content</div></div>
+
+  <button id="theme-editor-toggle">Theme Editor</button>
+  <div id="theme-editor-panel">
+    <button id="theme-editor-close">✕ Close</button>
+    <div class="preset-swatch" data-theme="desifit" style="background:#a43700;" title="DesiFit"></div>
+    <div class="preset-swatch" data-theme="midnight" style="background:#1a237e;" title="Midnight"></div>
+    <div class="preset-swatch" data-theme="forest" style="background:#2e7d32;" title="Forest"></div>
+    <div class="preset-swatch" data-theme="sunset" style="background:#e65100;" title="Sunset"></div>
+    <div class="preset-swatch" data-theme="ocean" style="background:#01579b;" title="Ocean"></div>
+    <div class="preset-swatch" data-theme="lavender" style="background:#6a1b9a;" title="Lavender"></div>
+    <div class="preset-swatch" data-theme="mono" style="background:#424242;" title="Mono"></div>
+    <div class="preset-swatch" data-theme="retro" style="background:#bf360c;" title="Retro"></div>
+    <label for="color-primary">Primary</label><input type="color" id="color-primary"/><span id="hex-primary"></span>
+    <label for="color-secondary">Secondary</label><input type="color" id="color-secondary"/><span id="hex-secondary"></span>
+    <label for="color-tertiary">Tertiary</label><input type="color" id="color-tertiary"/><span id="hex-tertiary"></span>
+    <label for="color-surface">Surface</label><input type="color" id="color-surface"/><span id="hex-surface"></span>
+    <label for="color-surface-dark">Surface Dark</label><input type="color" id="color-surface-dark"/><span id="hex-surface-dark"></span>
+    <label for="color-text">Text</label><input type="color" id="color-text"/><span id="hex-text"></span>
+    <label for="color-text-dark">Text Dark</label><input type="color" id="color-text-dark"/><span id="hex-text-dark"></span>
+    <label for="color-primary-light">Primary Light</label><input type="color" id="color-primary-light"/><span id="hex-primary-light"></span>
+    <label for="color-primary-dark">Primary Dark</label><input type="color" id="color-primary-dark"/><span id="hex-primary-dark"></span>
+    <div style="margin-top:12px;">
+      <button id="theme-reset-btn">Reset</button>
+      <button id="theme-save-btn">Save</button>
+    </div>
+  </div>
+  <div id="theme-editor-backdrop"></div>
+
+  <button id="console-toggle">Console Monitor</button>
+  <div id="console-panel">
+    <div id="console-entries"><div class="console-empty">No console messages captured yet.</div></div>
+    <button id="console-clear-btn">Clear</button>
+  </div>
+
+  <button id="vrm-toggle">Visual Regression Matrix</button>
+  <div id="vrm-overlay">
+    <button id="vrm-close">✕ Close</button>
+    <span id="vrm-count"></span>
+    <div id="vrm-grid"></div>
+  </div>
+
+  <button id="a11y-toggle">A11y Audit</button>
+  <div id="a11y-panel">
+    <button id="a11y-scan-btn">Scan</button>
+    <span id="a11y-status"></span>
+    <span>Errors: <span id="a11y-errors">0</span></span>
+    <span>Warnings: <span id="a11y-warnings">0</span></span>
+    <span>Passes: <span id="a11y-passes">0</span></span>
+    <div id="a11y-results"></div>
+  </div>
+
+  <button id="screenshot-export-btn" aria-label="Export screenshots" title="Export screenshots">
+    <span class="spinner"></span>
+    <span class="capturing-label">Capturing…</span>
+    📸 Export
+  </button>
+  <div id="ss-progress"><div id="ss-progress-fill" style="height:4px;width:0%;background:#a43700;"></div><span id="ss-progress-text"></span></div>
+  <div id="ss-gallery-overlay">
+    <button id="ss-gallery-close">✕ Close</button>
+    <button id="ss-download-all">Download All</button>
+    <button id="ss-export-again">Recapture</button>
+    <div id="ss-gallery-grid"></div>
+  </div>
+  <div id="ss-gallery-backdrop"></div>
+
+  <!-- ════════ Scripts ════════ -->
+  <script src="../../desifit-text-utils.js"></script>
   <script src="../../animation-engine.js"></script>
+
+  <script>
+    // Offline html2canvas stub so screenshot-export tests are deterministic.
+    if (!window.html2canvas) {
+      window.html2canvas = function() {
+        return Promise.resolve({
+          toDataURL: function() { return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='; }
+        });
+      };
+    }
+  </script>
+
+  <script>
+    // ════════════ Track 3: Screen Bookmarks (index.html IIFE replica) ════════════
+    (function initBookmarks() {
+      var STORAGE_KEY = 'desifit-bookmarks';
+      var bookmarks = [];
+      try {
+        var saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) bookmarks = JSON.parse(saved);
+      } catch(e) {}
+
+      function save() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks)); } catch(e) {}
+        updateUI();
+      }
+
+      function isBookmarked(name) {
+        return bookmarks.indexOf(name) !== -1;
+      }
+
+      function toggleBookmark(name) {
+        var idx = bookmarks.indexOf(name);
+        if (idx === -1) bookmarks.push(name);
+        else bookmarks.splice(idx, 1);
+        save();
+      }
+
+      function injectBookmarkButtons() {
+        document.querySelectorAll('.filter-item').forEach(function(card) {
+          if (card.querySelector('.bookmark-btn')) return;
+          var name = card.dataset.name;
+          if (!name) return;
+          var btn = document.createElement('button');
+          btn.className = 'bookmark-btn' + (isBookmarked(name) ? ' bookmarked' : '');
+          btn.setAttribute('aria-label', isBookmarked(name) ? 'Remove ' + name + ' from bookmarks' : 'Bookmark ' + name);
+          btn.setAttribute('data-bookmark-name', name);
+          btn.textContent = '🔖';
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var n = this.dataset.bookmarkName;
+            toggleBookmark(n);
+            var isNow = isBookmarked(n);
+            this.classList.toggle('bookmarked', isNow);
+            this.setAttribute('aria-label', isNow ? 'Remove ' + n + ' from bookmarks' : 'Bookmark ' + n);
+          });
+          card.appendChild(btn);
+        });
+      }
+
+      function updateUI() {
+        document.querySelectorAll('.bookmark-btn').forEach(function(btn) {
+          var name = btn.dataset.bookmarkName;
+          var isBm = isBookmarked(name);
+          btn.classList.toggle('bookmarked', isBm);
+          btn.setAttribute('aria-label', isBm ? 'Remove ' + name + ' from bookmarks' : 'Bookmark ' + name);
+        });
+        var countEl = document.getElementById('bookmark-count');
+        if (countEl) {
+          countEl.textContent = bookmarks.length;
+          countEl.style.display = bookmarks.length > 0 ? 'inline-block' : 'none';
+        }
+      }
+
+      // Saved tab filtering
+      document.addEventListener('click', function(e) {
+        var tab = e.target.closest('[data-bookmark-tab="true"]');
+        if (tab) {
+          e.preventDefault();
+          e.stopPropagation();
+          document.querySelectorAll('.tab-btn').forEach(function(t) {
+            t.classList.remove('bg-primary', 'text-on-primary');
+            t.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+          });
+          tab.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+          tab.classList.add('bg-primary', 'text-on-primary');
+          var searchInput = document.getElementById('screen-search');
+          if (searchInput) { searchInput.value = ''; searchInput.dispatchEvent(new Event('input')); }
+          document.querySelectorAll('.filter-item').forEach(function(c) { c.classList.remove('bookmark-hidden'); });
+          document.querySelectorAll('.filter-item').forEach(function(card) {
+            var name = card.dataset.name;
+            if (!name) return;
+            card.classList.toggle('bookmark-hidden', !isBookmarked(name));
+          });
+          var noResults = document.getElementById('no-results');
+          if (noResults) {
+            var anyVisible = false;
+            document.querySelectorAll('.filter-item').forEach(function(c) {
+              if (!c.classList.contains('bookmark-hidden')) anyVisible = true;
+            });
+            noResults.classList.toggle('hidden', anyVisible);
+            if (!anyVisible) {
+              var msg = noResults.querySelector('p');
+              if (msg) msg.textContent = 'No bookmarked screens yet.';
+            }
+          }
+        }
+      });
+
+      var bmToggle = document.getElementById('bookmark-toggle');
+      if (bmToggle) {
+        bmToggle.addEventListener('click', function() {
+          var savedTab = document.getElementById('saved-tab');
+          if (savedTab) savedTab.click();
+        });
+      }
+
+      injectBookmarkButtons();
+      updateUI();
+    })();
+  </script>
+
+  <script>
+    // ════════════ Track 3: Device Frames (index.html IIFE replica) ════════════
+    (function initDeviceFrames() {
+      var deviceBtns = document.querySelectorAll('.device-toggle-btn');
+      var toggleGroup = document.querySelector('.device-toggle-group');
+      if (!deviceBtns.length || !toggleGroup) return;
+      toggleGroup.style.display = 'flex';
+
+      function applyDeviceFrame(device) {
+        document.querySelectorAll('.device-frame-wrap').forEach(function(w) {
+          var parent = w.parentNode;
+          while (w.firstChild) parent.insertBefore(w.firstChild, w);
+          w.remove();
+        });
+        if (device === 'none') return;
+        var previewEl = document.querySelector('#preview-modal > div:last-child');
+        if (previewEl) {
+          var wrap = document.createElement('div');
+          wrap.className = 'device-frame-wrap ' + device;
+          var bezel = document.createElement('div');
+          bezel.className = 'device-bezel';
+          var notch = document.createElement('div');
+          notch.className = 'device-notch';
+          var label = document.createElement('div');
+          label.className = 'device-label';
+          label.textContent = device === 'mobile' ? 'Mobile' : 'Desktop';
+          while (previewEl.firstChild) bezel.appendChild(previewEl.firstChild);
+          if (device !== 'desktop') bezel.appendChild(notch);
+          wrap.appendChild(bezel);
+          wrap.appendChild(label);
+          previewEl.appendChild(wrap);
+        }
+      }
+
+      deviceBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          deviceBtns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          applyDeviceFrame(btn.dataset.device);
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    // ════════════ Track 3: Theme Editor (index.html IIFE replica) ════════════
+    (function initThemeEditor() {
+      var panel = document.getElementById('theme-editor-panel');
+      var backdrop = document.getElementById('theme-editor-backdrop');
+      var toggleBtn = document.getElementById('theme-editor-toggle');
+      var closeBtn = document.getElementById('theme-editor-close');
+      var resetBtn = document.getElementById('theme-reset-btn');
+      var saveBtn = document.getElementById('theme-save-btn');
+      if (!panel) return;
+
+      var THEME_PRESETS = {
+        desifit:  { primary:'#a43700', secondary:'#2e7d32', tertiary:'#005ab7', surface:'#f9f9f9', surfaceDark:'#121212', text:'#1a1c1c', textDark:'#e8e8e8', primaryLight:'#cd4700', primaryDark:'#ff8a50' },
+        midnight: { primary:'#1a237e', secondary:'#283593', tertiary:'#1565c0', surface:'#f5f5f5', surfaceDark:'#0d0d1a', text:'#1a1c1c', textDark:'#c5cae9', primaryLight:'#283593', primaryDark:'#7986cb' },
+        forest:   { primary:'#2e7d32', secondary:'#1b5e20', tertiary:'#00695c', surface:'#f1f8e9', surfaceDark:'#0d1a0d', text:'#1a1c1c', textDark:'#a5d6a7', primaryLight:'#43a047', primaryDark:'#66bb6a' },
+        sunset:   { primary:'#e65100', secondary:'#d81b60', tertiary:'#f57f17', surface:'#fff8e1', surfaceDark:'#1a0d0d', text:'#1a1c1c', textDark:'#ffcc80', primaryLight:'#ff6d00', primaryDark:'#ffab40' },
+        ocean:    { primary:'#01579b', secondary:'#006064', tertiary:'#0277bd', surface:'#e1f5fe', surfaceDark:'#00131a', text:'#1a1c1c', textDark:'#80deea', primaryLight:'#0277bd', primaryDark:'#4dd0e1' },
+        lavender: { primary:'#6a1b9a', secondary:'#ad1457', tertiary:'#4a148c', surface:'#f3e5f5', surfaceDark:'#12001a', text:'#1a1c1c', textDark:'#ce93d8', primaryLight:'#8e24aa', primaryDark:'#ba68c8' },
+        mono:     { primary:'#424242', secondary:'#616161', tertiary:'#757575', surface:'#fafafa', surfaceDark:'#121212', text:'#212121', textDark:'#e0e0e0', primaryLight:'#616161', primaryDark:'#9e9e9e' },
+        retro:    { primary:'#bf360c', secondary:'#f57f17', tertiary:'#e65100', surface:'#fff3e0', surfaceDark:'#1a0d00', text:'#1a1c1c', textDark:'#ffb74d', primaryLight:'#d84315', primaryDark:'#ff8a65' }
+      };
+
+      function loadThemeVars(themeColors) {
+        for (var key in themeColors) {
+          var input = document.getElementById('color-' + key);
+          var hex = document.getElementById('hex-' + key);
+          if (input) input.value = themeColors[key];
+          if (hex) hex.textContent = themeColors[key];
+        }
+      }
+
+      function applyThemeToCSS(colors) {
+        var r = document.documentElement;
+        r.style.setProperty('--theme-primary', colors.primary || '#a43700');
+        r.style.setProperty('--theme-secondary', colors.secondary || '#2e7d32');
+        r.style.setProperty('--theme-tertiary', colors.tertiary || '#005ab7');
+        r.style.setProperty('--theme-surface', colors.surface || '#f9f9f9');
+        r.style.setProperty('--theme-surface-dark', colors.surfaceDark || '#121212');
+        r.style.setProperty('--theme-text', colors.text || '#1a1c1c');
+        r.style.setProperty('--theme-text-dark', colors.textDark || '#e8e8e8');
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.content = colors.primary || '#a43700';
+        var liquidOverlay = document.getElementById('liquid-overlay');
+        if (liquidOverlay) liquidOverlay.style.background = 'linear-gradient(135deg, ' + colors.primary + ', ' + (colors.primaryLight || colors.primary) + ')';
+        var scrollProgress = document.getElementById('scroll-progress');
+        if (scrollProgress) scrollProgress.style.background = 'linear-gradient(90deg, ' + colors.primary + ', ' + (colors.primaryLight || colors.primary) + ', ' + colors.secondary + ')';
+      }
+
+      function saveTheme(colors) {
+        try { localStorage.setItem('desifit-theme', JSON.stringify(colors)); } catch(e) {}
+      }
+
+      function loadSavedTheme() {
+        try {
+          var saved = localStorage.getItem('desifit-theme');
+          if (saved) {
+            var colors = JSON.parse(saved);
+            loadThemeVars(colors);
+            applyThemeToCSS(colors);
+            markActivePreset(colors);
+            return true;
+          }
+        } catch(e) {}
+        return false;
+      }
+
+      function markActivePreset(colors) {
+        document.querySelectorAll('.preset-swatch').forEach(function(el) {
+          el.classList.remove('active');
+          var presetName = el.dataset.theme;
+          if (presetName && THEME_PRESETS[presetName]) {
+            var preset = THEME_PRESETS[presetName];
+            var match = true;
+            for (var key in preset) {
+              if (colors[key] !== preset[key]) { match = false; break; }
+            }
+            if (match) el.classList.add('active');
+          }
+        });
+      }
+
+      function collectColors() {
+        return {
+          primary: document.getElementById('color-primary').value,
+          secondary: document.getElementById('color-secondary').value,
+          tertiary: document.getElementById('color-tertiary').value,
+          surface: document.getElementById('color-surface').value,
+          surfaceDark: document.getElementById('color-surface-dark').value,
+          text: document.getElementById('color-text').value,
+          textDark: document.getElementById('color-text-dark').value,
+          primaryLight: document.getElementById('color-primary-light').value,
+          primaryDark: document.getElementById('color-primary-dark').value
+        };
+      }
+
+      function readSavedThemeOrDefault() {
+        if (!loadSavedTheme()) {
+          loadThemeVars(THEME_PRESETS.desifit);
+          applyThemeToCSS(THEME_PRESETS.desifit);
+          markActivePreset(THEME_PRESETS.desifit);
+        }
+      }
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
+          panel.classList.add('open');
+          if (backdrop) backdrop.classList.add('visible');
+          readSavedThemeOrDefault();
+        });
+      }
+      function closeThemeEditor() {
+        panel.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('visible');
+      }
+      if (closeBtn) closeBtn.addEventListener('click', closeThemeEditor);
+      if (backdrop) backdrop.addEventListener('click', closeThemeEditor);
+
+      document.querySelectorAll('#theme-editor-panel input[type="color"]').forEach(function(input) {
+        input.addEventListener('input', function() {
+          var colors = collectColors();
+          applyThemeToCSS(colors);
+          markActivePreset(colors);
+          var hexId = this.id.replace('color-', 'hex-');
+          var hexEl = document.getElementById(hexId);
+          if (hexEl) hexEl.textContent = this.value;
+        });
+      });
+
+      document.querySelectorAll('.preset-swatch').forEach(function(el) {
+        el.addEventListener('click', function() {
+          var name = this.dataset.theme;
+          if (name && THEME_PRESETS[name]) {
+            var colors = THEME_PRESETS[name];
+            loadThemeVars(colors);
+            applyThemeToCSS(colors);
+            document.querySelectorAll('.preset-swatch').forEach(function(s) { s.classList.remove('active'); });
+            el.classList.add('active');
+          }
+        });
+      });
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+          var colors = THEME_PRESETS.desifit;
+          loadThemeVars(colors);
+          applyThemeToCSS(colors);
+          document.querySelectorAll('.preset-swatch').forEach(function(s) { s.classList.remove('active'); });
+          var ds = document.querySelector('[data-theme="desifit"]');
+          if (ds) ds.classList.add('active');
+          localStorage.removeItem('desifit-theme');
+        });
+      }
+
+      if (saveBtn) {
+        saveBtn.addEventListener('click', function() {
+          saveTheme(collectColors());
+          saveBtn.textContent = '✓ Saved!';
+          setTimeout(function() { saveBtn.textContent = 'Save'; }, 1500);
+        });
+      }
+
+      readSavedThemeOrDefault();
+    })();
+  </script>
+
+  <script>
+    // ════════════ Track 4: Console Error Monitor (index.html IIFE replica) ════════════
+    (function initConsoleMonitor() {
+      var entries = document.getElementById('console-entries');
+      var toggle = document.getElementById('console-toggle');
+      var panel = document.getElementById('console-panel');
+      var clearBtn = document.getElementById('console-clear-btn');
+      if (!entries) return;
+
+      var consoleEntries = [];
+
+      function addEntry(type, args) {
+        var msg = Array.prototype.map.call(args, function(a) {
+          try { return typeof a === 'object' ? JSON.stringify(a) : String(a); }
+          catch(e) { return String(a); }
+        }).join(' ');
+        if (msg === '[object Object]') {
+          try { msg = JSON.stringify(args[0]); } catch(e) {}
+        }
+        consoleEntries.push({ type: type, message: msg, time: new Date().toLocaleTimeString() });
+        if (consoleEntries.length > 50) consoleEntries.shift();
+        renderEntries();
+        if (toggle) toggle.classList.add('has-errors');
+      }
+
+      function renderEntries() {
+        if (consoleEntries.length === 0) {
+          entries.innerHTML = '<div class="console-empty">No console messages captured yet.</div>';
+          if (toggle) toggle.classList.remove('has-errors');
+          return;
+        }
+        entries.innerHTML = consoleEntries.map(function(e) {
+          return '<div class="console-entry"><span class="ce-time">' + e.time + '</span> <span class="ce-type ' + e.type + '">' + e.type + '</span> <div class="ce-msg">' + escapeHtml(e.message) + '</div></div>';
+        }).join('');
+      }
+
+      function escapeHtml(s) {
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(s));
+        return div.innerHTML;
+      }
+
+      var origError = console.error;
+      console.error = function() { addEntry('error', arguments); origError.apply(console, arguments); };
+      var origWarn = console.warn;
+      console.warn = function() { addEntry('warn', arguments); origWarn.apply(console, arguments); };
+      var origLog = console.log;
+      console.log = function() { addEntry('info', arguments); origLog.apply(console, arguments); };
+
+      window.addEventListener('error', function(e) {
+        addEntry('error', [e.message]);
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+        addEntry('error', [e.reason ? (e.reason.message || String(e.reason)) : 'Unhandled rejection']);
+      });
+
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          panel.classList.toggle('visible');
+          toggle.classList.toggle('active', panel.classList.contains('visible'));
+        });
+      }
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+          consoleEntries = [];
+          renderEntries();
+        });
+      }
+    })();
+  </script>
+
+  <script>
+    // ════════════ Track 4: Visual Regression Matrix (index.html IIFE replica) ════════════
+    (function initVrm() {
+      var overlay = document.getElementById('vrm-overlay');
+      var toggle = document.getElementById('vrm-toggle');
+      var closeBtn = document.getElementById('vrm-close');
+      var grid = document.getElementById('vrm-grid');
+      if (!overlay || !grid) return;
+
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          overlay.classList.toggle('active');
+          toggle.classList.toggle('active', overlay.classList.contains('active'));
+          if (overlay.classList.contains('active')) loadVrm();
+        });
+      }
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function() { overlay.classList.remove('active'); if (toggle) toggle.classList.remove('active'); });
+      }
+      document.addEventListener('keydown', function vrmEsc(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+          overlay.classList.remove('active');
+          if (toggle) toggle.classList.remove('active');
+        }
+      });
+
+      function loadVrm() {
+        var cards = document.querySelectorAll('.filter-item');
+        var count = document.getElementById('vrm-count');
+        if (count) count.textContent = cards.length + ' screens';
+        if (!cards.length) {
+          grid.innerHTML = '<div class="vrm-status">No screens found.</div>';
+          return;
+        }
+        var html = '';
+        cards.forEach(function(card, idx) {
+          var name = card.dataset.name || 'Screen';
+          var category = card.dataset.category || 'uncategorized';
+          html += '<div class="vrm-card" data-idx="' + idx + '">' +
+            '<div class="vrm-preview">' + name + '</div>' +
+            '<div class="vrm-name">' + name.replace(/</g, '&lt;') + '</div>' +
+            '<div class="vrm-cat">' + category + '</div></div>';
+        });
+        grid.innerHTML = html;
+      }
+    })();
+  </script>
+
+  <script>
+    // ════════════ Track 4: Accessibility Audit (index.html IIFE replica, CDN-free) ════════════
+    (function initA11yAudit() {
+      var panel = document.getElementById('a11y-panel');
+      var toggle = document.getElementById('a11y-toggle');
+      var resultsEl = document.getElementById('a11y-results');
+      var scanBtn = document.getElementById('a11y-scan-btn');
+      var errCount = document.getElementById('a11y-errors');
+      var warnCount = document.getElementById('a11y-warnings');
+      var passCount = document.getElementById('a11y-passes');
+      var statusEl = document.getElementById('a11y-status');
+      if (!resultsEl) return;
+
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          panel.classList.toggle('visible');
+          toggle.classList.toggle('active', panel.classList.contains('visible'));
+          if (panel.classList.contains('visible')) runAudit();
+        });
+      }
+      if (scanBtn) scanBtn.addEventListener('click', runAudit);
+
+      function elementDesc(el) {
+        var desc = el.tagName.toLowerCase();
+        if (el.id) desc += '#' + el.id;
+        if (el.textContent && el.textContent.trim().length < 30) desc += ' "' + el.textContent.trim() + '"';
+        return desc;
+      }
+
+      function runAudit() {
+        if (statusEl) statusEl.textContent = 'Scanning...';
+        var issues = [];
+        var passes = 0;
+
+        // 1. Missing alt text on images
+        document.querySelectorAll('img:not([aria-hidden="true"])').forEach(function(img) {
+          var alt = img.getAttribute('alt');
+          if (alt === null) issues.push({ type: 'error', msg: 'Image missing alt attribute', el: elementDesc(img) });
+          else if (alt.trim() === '') issues.push({ type: 'warning', msg: 'Image has empty alt text', el: elementDesc(img) });
+        });
+        if (document.querySelectorAll('img[alt]').length > 0) passes++;
+
+        // 2. Interactive elements for accessible names
+        ['button', 'a', 'input', 'select', 'textarea'].forEach(function(tag) {
+          document.querySelectorAll(tag + ':not([aria-hidden="true"])').forEach(function(el) {
+            if (!el.getAttribute('aria-label') && !el.getAttribute('aria-labelledby') && !el.textContent.trim()) {
+              var type = el.getAttribute('type');
+              if (tag === 'input' && (type === 'hidden' || type === 'submit' || type === 'button')) return;
+              if (tag === 'a' && !el.getAttribute('href')) return;
+              issues.push({ type: 'warning', msg: tag + ' has no accessible name', el: elementDesc(el) });
+            }
+          });
+        });
+        passes++;
+
+        // 3. Heading hierarchy
+        var headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        var prevLevel = 0;
+        headings.forEach(function(h) {
+          var level = parseInt(h.tagName.slice(1)) || 0;
+          if (prevLevel > 0 && level > prevLevel + 1) {
+            issues.push({ type: 'warning', msg: 'Heading level skipped: ' + h.tagName, el: elementDesc(h) });
+          }
+          prevLevel = level;
+        });
+        if (headings.length > 0) passes++;
+
+        // 4. Form labels
+        document.querySelectorAll('input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="reset"])').forEach(function(input) {
+          var id = input.getAttribute('id');
+          var hasLabel = id && document.querySelector('label[for="' + id + '"]');
+          if (!hasLabel && !input.getAttribute('aria-label') && !input.getAttribute('aria-labelledby') && !input.getAttribute('placeholder')) {
+            issues.push({ type: 'error', msg: 'Input missing label', el: elementDesc(input) });
+          }
+        });
+        if (document.querySelectorAll('label, [aria-label]').length > 0) passes++;
+
+        // 5. Focusable elements
+        var focusableCount = document.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])').length;
+        if (focusableCount > 0) passes++;
+
+        renderResults(issues, passes);
+        if (statusEl) statusEl.textContent = 'Complete';
+      }
+
+      function renderResults(issues, passes) {
+        var errors = issues.filter(function(i) { return i.type === 'error'; }).length;
+        var warnings = issues.filter(function(i) { return i.type === 'warning'; }).length;
+        if (errCount) errCount.textContent = errors;
+        if (warnCount) warnCount.textContent = warnings;
+        if (passCount) passCount.textContent = passes;
+        if (issues.length === 0) {
+          resultsEl.innerHTML = '<div class="a11y-item pass">No issues found. Great a11y!</div>';
+          return;
+        }
+        resultsEl.innerHTML = issues.map(function(i) {
+          var icon = i.type === 'error' ? '✗' : '⚠';
+          return '<div class="a11y-item ' + i.type + '">' + icon + ' ' + i.msg + ' <em>' + (i.el || '') + '</em></div>';
+        }).join('');
+      }
+    })();
+  </script>
 </body>
 </html>

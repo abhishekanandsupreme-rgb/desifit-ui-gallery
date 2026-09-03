@@ -290,7 +290,7 @@
   /* ═══════════════════════════════════════════
      2. SPRING PHYSICS
      ═══════════════════════════════════════════ */
-  function springAnimate(el, props, { stiffness = 180, damping = 12, mass = 1, onComplete } = {}) {
+  function springAnimate(el, props, { stiffness = 180, damping = 12, mass = 1, settleThreshold = 0.01, onComplete } = {}) {
     if (!isMotionSafe()) {
       // Skip spring animation, just apply final values
       for (const key in props) {
@@ -328,7 +328,17 @@
 
         el.style[key] = starts[key] + (key.includes('scale') || key.includes('opacity') ? '' : 'px');
 
-        if (Math.abs(velocities[key]) > 0.1 || Math.abs(displacement) > 0.5) settled = false;
+        // Settle when BOTH the remaining distance and the velocity are tiny,
+        // measured AFTER the integration step. The precision is configurable
+        // per call via settleThreshold (default 0.01) — px-heavy transforms can
+        // opt into a looser band (e.g. 0.5px) without weakening opacity
+        // convergence. (The old check measured the pre-step displacement
+        // against a coarse 0.5-unit band — so a spring starting exactly
+        // 0.5 units from target, e.g. opacity 1 -> 0.5, could declare itself
+        // settled on the first frame under fast rAF and call onComplete
+        // without ever animating.)
+        const remaining = targets[key] - starts[key];
+        if (Math.abs(velocities[key]) > 0.1 || Math.abs(remaining) > settleThreshold) settled = false;
       }
 
       if (!settled) rafId = requestAnimationFrame(step);
@@ -2337,6 +2347,230 @@
   }
 
   /* ═══════════════════════════════════════════
+     SCREENSHOT EXPORT ENGINE
+     ═══════════════════════════════════════════ */
+  var _ssWired = false;
+  function initScreenshotExport() {
+    // String helpers come from the shared DesifFitTextUtils helper so the
+    // iframe gallery and the test fixture cannot drift. Fail loudly if the
+    // helper script 404'd so a path typo isn't masked by a downstream crash.
+    if (!window.DesifFitTextUtils) {
+      throw new Error('desifit-text-utils.js failed to load - check the <script src> path');
+    }
+    var htmlEncode = window.DesifFitTextUtils.htmlEncode;
+    var sanitizeFilename = window.DesifFitTextUtils.sanitizeFilename;
+    var btn = document.getElementById('screenshot-export-btn');
+    var progress = document.getElementById('ss-progress');
+    var progressFill = document.getElementById('ss-progress-fill');
+    var progressText = document.getElementById('ss-progress-text');
+    var overlay = document.getElementById('ss-gallery-overlay');
+    var grid = document.getElementById('ss-gallery-grid');
+    var closeBtn = document.getElementById('ss-gallery-close');
+    var backdrop = document.getElementById('ss-gallery-backdrop');
+    var downloadAll = document.getElementById('ss-download-all');
+    var recapture = document.getElementById('ss-export-again');
+
+    var capturedShots = [];
+    var cancelled = false;
+
+    // ─── Dynamically load html2canvas (or use a pre-provided stub) ───
+    function loadHtml2Canvas(cb) {
+      if (window.html2canvas) { cb(); return; }
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+      s.onload = cb;
+      s.onerror = function() {
+        cb(new Error('Failed to load html2canvas'));
+      };
+      document.head.appendChild(s);
+    }
+
+    // ─── Start capture ───
+    function startCapture() {
+      if (!btn || btn.classList.contains('capturing')) return;
+      cancelled = false;
+      btn.classList.add('capturing');
+      if (progress) progress.classList.add('visible');
+      if (progressFill) progressFill.style.width = '0%';
+      if (progressText) progressText.textContent = 'Loading…';
+
+      loadHtml2Canvas(function(err) {
+        if (err) {
+          if (progress) progress.classList.remove('visible');
+          if (btn) btn.classList.remove('capturing');
+          if (progressText) progressText.textContent = 'Failed to load capture library';
+          return;
+        }
+        captureAll();
+      });
+    }
+
+    // ─── Capture all visible filter-items ───
+    function captureAll() {
+      if (!btn || !overlay) return;
+      var items = document.querySelectorAll('.filter-item:not(.hidden)');
+      if (items.length === 0) {
+        if (progress) progress.classList.remove('visible');
+        if (btn) btn.classList.remove('capturing');
+        if (progressText) progressText.textContent = 'No visible screens to capture';
+        return;
+      }
+
+      capturedShots = [];
+      var total = items.length;
+      var done = 0;
+
+      function captureNext(idx) {
+        if (cancelled) return;
+        if (idx >= total) {
+          onComplete();
+          return;
+        }
+
+        var item = items[idx];
+        var name = item.getAttribute('data-name') || 'Screen ' + (idx + 1);
+        var preview = item.querySelector('.card-preview-wrap');
+        if (!preview) {
+          done++;
+          if (progressFill) progressFill.style.width = ((done / total) * 100) + '%';
+          if (progressText) progressText.textContent = done + ' / ' + total;
+          captureNext(idx + 1);
+          return;
+        }
+
+        if (progressText) progressText.textContent = 'Capturing "' + name + '" (' + (idx + 1) + ' / ' + total + ')';
+
+        // Temporarily ensure the element is visible for capture
+        var origOverflow = preview.style.overflow;
+        preview.style.overflow = 'visible';
+
+        try {
+          window.html2canvas(preview, {
+            useCORS: true,
+            allowTaint: true,
+            scale: 1,
+            backgroundColor: null,
+            logging: false,
+          }).then(function(canvas) {
+            preview.style.overflow = origOverflow;
+            var dataUrl = canvas.toDataURL('image/png');
+            capturedShots.push({ name: name, dataUrl: dataUrl, canvas: canvas });
+            done++;
+            if (progressFill) progressFill.style.width = ((done / total) * 100) + '%';
+            if (progressText) progressText.textContent = done + ' / ' + total;
+            captureNext(idx + 1);
+          }).catch(function() {
+            preview.style.overflow = origOverflow;
+            done++;
+            if (progressFill) progressFill.style.width = ((done / total) * 100) + '%';
+            if (progressText) progressText.textContent = done + ' / ' + total;
+            captureNext(idx + 1);
+          });
+        } catch(e) {
+          preview.style.overflow = origOverflow;
+          done++;
+          if (progressFill) progressFill.style.width = ((done / total) * 100) + '%';
+          if (progressText) progressText.textContent = done + ' / ' + total;
+          captureNext(idx + 1);
+        }
+      }
+
+      captureNext(0);
+    }
+
+    // ─── On complete ───
+    function onComplete() {
+      if (progress) progress.classList.remove('visible');
+      if (btn) btn.classList.remove('capturing');
+      if (capturedShots.length === 0) {
+        if (progressText) progressText.textContent = 'No screenshots captured';
+        return;
+      }
+      showGallery();
+    }
+
+    // ─── Show result gallery ───
+    function showGallery() {
+      if (!overlay || !grid) return;
+      grid.innerHTML = capturedShots.map(function(shot, i) {
+        return '<div class="ss-gallery-card" style="animation:pop-in 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards;animation-delay:' + (i * 0.04) + 's">' +
+          '<img src="' + shot.dataUrl + '" alt="' + htmlEncode(shot.name) + '" loading="lazy"/>' +
+          '<div class="ss-card-label">' + htmlEncode(shot.name) + '</div>' +
+          '<a class="ss-card-dl" data-idx="' + i + '">⬇ Download PNG</a>' +
+          '</div>';
+      }).join('');
+
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // ─── Download individual ───
+    function downloadShot(idx) {
+      var shot = capturedShots[idx];
+      if (!shot) return;
+      var link = document.createElement('a');
+      link.download = (sanitizeFilename(shot.name) || 'screen-' + idx) + '.png';
+      link.href = shot.dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // ─── Download all ───
+    function downloadAllShots() {
+      if (capturedShots.length === 0) return;
+      if (capturedShots.length === 1) {
+        downloadShot(0);
+        return;
+      }
+      capturedShots.forEach(function(shot, i) {
+        setTimeout(function() {
+          var link = document.createElement('a');
+          link.download = (sanitizeFilename(shot.name) || 'screen-' + i) + '.png';
+          link.href = shot.dataUrl;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }, i * 300);
+      });
+    }
+
+    // ─── Close gallery ───
+    function closeGallery() {
+      if (!overlay) return;
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      cancelled = true;
+    }
+
+    // ─── Event wiring (idempotent) ───
+    if (!_ssWired) {
+      _ssWired = true;
+      if (btn) btn.addEventListener('click', startCapture);
+      if (closeBtn) closeBtn.addEventListener('click', closeGallery);
+      if (backdrop) backdrop.addEventListener('click', closeGallery);
+      if (recapture) recapture.addEventListener('click', function() { closeGallery(); setTimeout(startCapture, 300); });
+      if (downloadAll) downloadAll.addEventListener('click', downloadAllShots);
+      if (grid) {
+        grid.addEventListener('click', function(e) {
+          var dl = e.target.closest('.ss-card-dl');
+          if (dl) {
+            var idx = parseInt(dl.dataset.idx, 10);
+            if (!isNaN(idx)) downloadShot(idx);
+          }
+        });
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay && overlay.classList.contains('active')) {
+          closeGallery();
+        }
+      });
+    }
+
+    return { htmlEncode: htmlEncode, sanitizeFilename: sanitizeFilename };
+  }
+
+  /* ═══════════════════════════════════════════
      PUBLIC API
      ═══════════════════════════════════════════ */
   window.DesiFitAnim = {
@@ -2435,8 +2669,14 @@
     // CSS injection
     injectKeyframes,
 
+    // Screenshot export (also exposed as a global for tests/gallery)
+    initScreenshotExport,
+
     COLORS,
   };
+
+  // Global alias so callers can use window.initScreenshotExport() directly.
+  window.initScreenshotExport = initScreenshotExport;
 
   // Auto-detect performance and inject keyframes on load
   detectPerformanceTier();

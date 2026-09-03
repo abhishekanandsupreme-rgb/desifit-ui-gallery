@@ -2,8 +2,11 @@
  * Playwright Configuration for DesiFit UI Tests
  *
  * Parallel model:
- *   - fullyParallel: lets Playwright run tests within a single spec file concurrently.
- *   - workers: 6 locally (CPU-bound headless Chromium), 2 in CI (avoids OOM in containers).
+ *   - Files run in parallel across workers (workers: 6 locally, 2 in CI), but
+ *     tests within a file run sequentially: screen-nav.spec.js reuses ONE
+ *     shared page across every test in the file, which races under
+ *     fullyParallel (each test would run in its own worker slot).
+ *   - anim-engine.spec.js creates a fresh page per test, so it is unaffected.
  *
  * Reporter:
  *   - CI: `dot` (one progress char per test) + `html` artifact for job attachments.
@@ -18,7 +21,7 @@ const isCI = !!process.env.CI;
 module.exports = defineConfig({
   testDir: './test',
   testMatch: '**/*.spec.js',
-  fullyParallel: true,
+  fullyParallel: false,
   workers: isCI ? 2 : 6,
   // Per-test timeout (120s) is the slow ceiling; globalTimeout caps total run.
   timeout: 120000,
