@@ -31,7 +31,12 @@ desifit/android/key.properties
 # Secrets and keys
 *.keystore
 *.jks
-*.env
+
+# Env files: hide dotenv files (including the .local/.production/.staging
+# variants that carry real secrets) but never a committed .env.example template.
+.env
+.env.*
+!.env.example
 
 # No blanket *.properties rule: it silently hides committed config files
 # such as android/gradle.properties. Android secrets (local.properties,
