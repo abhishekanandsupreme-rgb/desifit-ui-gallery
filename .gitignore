@@ -31,8 +31,12 @@ desifit/android/key.properties
 # Secrets and keys
 *.keystore
 *.jks
-*.properties
 *.env
+
+# No blanket *.properties rule: it silently hides committed config files
+# such as android/gradle.properties. Android secrets (local.properties,
+# key.properties, keystores) are ignored by each app's android/.gitignore
+# and the explicit rules above.
 
 # IDEs
 .idea/
