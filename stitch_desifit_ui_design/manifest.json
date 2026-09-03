@@ -1,0 +1,36 @@
+{
+  "name": "DesiFit — Full Immersion UI Gallery",
+  "short_name": "DesiFit UI",
+  "description": "Explore 30 immersive DesiFit screens — onboarding, dashboards, AI coach, recipes, community, workout tracker, progress dashboard, meal planner, habit tracker, and more — with particles, parallax, spring physics, and micro-interactions.",
+  "start_url": "index.html?utm_source=pwa",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#f9f9f9",
+  "theme_color": "#a43700",
+  "orientation": "any",
+  "scope": "./",
+  "id": "/",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='none' stroke='%23a43700' stroke-width='6'/%3E%3Cpath d='M35 50C35 41.7157 41.7157 35 50 35C58.2843 35 65 41.7157 65 50' stroke='%23cd4700' stroke-width='4' fill='none'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23a43700'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='none' stroke='%23a43700' stroke-width='6'/%3E%3Cpath d='M35 50C35 41.7157 41.7157 35 50 35C58.2843 35 65 41.7157 65 50' stroke='%23cd4700' stroke-width='4' fill='none'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23a43700'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "health", "fitness", "utilities", "productivity"],
+  "lang": "en",
+  "dir": "ltr",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

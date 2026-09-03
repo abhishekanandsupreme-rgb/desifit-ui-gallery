@@ -56,6 +56,34 @@ jobs:
         working-directory: AuraSync
         run: flutter test
 
+  # Headless-Chromium e2e for the 30-screen HTML gallery: exercises the
+  # animation engine API (anim-engine.spec.js) and per-screen nav + dark
+  # mode (screen-nav.spec.js) against the real index.html and fixtures.
+  gallery-e2e:
+    name: Test gallery screens (Playwright)
+    needs: syntax-gate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: stitch_desifit_ui_design
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run gallery tests
+        run: npx playwright test
+
   build:
     name: Build Release AAB
     needs: syntax-gate

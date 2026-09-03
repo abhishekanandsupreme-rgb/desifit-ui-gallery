@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>DesiFit — Profile</title>
+
+<!-- Inter only, per the brief. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+
+<!--
+  FLAG: Tailwind CDN used intentionally for no-build constraint.
+  Console warning ("should not be used in production") is expected.
+  The page is a demo, not a production surface.
+-->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          background:    'hsl(var(--background))',
+          foreground:    'hsl(var(--foreground))',
+          primary:       { DEFAULT: 'hsl(var(--primary))',       foreground: 'hsl(var(--primary-foreground))' },
+          secondary:     { DEFAULT: 'hsl(var(--secondary))',     foreground: 'hsl(var(--secondary-foreground))' },
+          muted:         { DEFAULT: 'hsl(var(--muted))',         foreground: 'hsl(var(--muted-foreground))' },
+          accent:        { DEFAULT: 'hsl(var(--accent))',        foreground: 'hsl(var(--accent-foreground))' },
+          destructive:   { DEFAULT: 'hsl(var(--destructive))',   foreground: 'hsl(var(--destructive-foreground))' },
+          border:        'hsl(var(--border))',
+          input:         'hsl(var(--input))',
+          ring:          'hsl(var(--ring))',
+          card:          { DEFAULT: 'hsl(var(--card))',          foreground: 'hsl(var(--card-foreground))' },
+          saffron:       '#c95a2c'
+        },
+        borderRadius: {
+          md: '6px'
+        },
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+          mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
+        }
+      }
+    }
+  };
+</script>
+
+<link rel="stylesheet" href="app.css"/>
+</head>
+<body class="bg-background text-foreground antialiased">
+
+<!-- =========================  HEADER  ========================= -->
+<header class="border-b border-border">
+  <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="flex items-center gap-3" aria-label="Back to gallery">
+        <!-- Inline lucide-style arrow-left (no network) -->
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+        </svg>
+        <span class="mono-label">desifit · profile</span>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="btn btn-ghost btn-sm">Gallery</a>
+      <button class="dark-toggle switch" data-state="off" aria-label="Toggle dark mode">
+        <span class="switch-knob"></span>
+      </button>
+      <span class="mono-label hidden sm:inline">Dark</span>
+    </div>
+  </div>
+</header>
+
+<!-- =========================  APP MOUNT  ========================= -->
+<main id="app-mount" class="px-6 py-10">
+  <!-- rendered by profile.js -->
+</main>
+
+<!-- =========================  DEMO BANNER  ========================= -->
+<!-- appended by profile.js so it sits at the bottom and is non-blocking -->
+
+<!-- =========================  SCRIPTS  ========================= -->
+<script src="auth-mock.js"></script>
+<script src="profile.js"></script>
+</body>
+</html>
