@@ -8,10 +8,10 @@ class ArticleReaderScreen extends StatefulWidget {
   final VoidCallback onBookmarkToggle;
 
   const ArticleReaderScreen({
-    Key? key,
+    super.key,
     required this.article,
     required this.onBookmarkToggle,
-  }) : super(key: key);
+  });
 
   @override
   State<ArticleReaderScreen> createState() => _ArticleReaderScreenState();
@@ -288,7 +288,7 @@ class _ArticleReaderScreenState extends State<ArticleReaderScreen> {
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withValues(alpha: 0.5),
                   ),
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white, size: 20),
@@ -300,7 +300,7 @@ class _ArticleReaderScreenState extends State<ArticleReaderScreen> {
                     margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.black.withOpacity(0.5),
+                      color: Colors.black.withValues(alpha: 0.5),
                     ),
                     child: IconButton(
                       icon: Icon(
@@ -326,9 +326,9 @@ class _ArticleReaderScreenState extends State<ArticleReaderScreen> {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              Colors.black.withOpacity(0.4),
+                              Colors.black.withValues(alpha: 0.4),
                               Colors.transparent,
-                              Colors.black.withOpacity(0.6),
+                              Colors.black.withValues(alpha: 0.6),
                             ],
                           ),
                         ),
@@ -352,10 +352,10 @@ class _ArticleReaderScreenState extends State<ArticleReaderScreen> {
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
                               color: widget.article.category == 'Gym Hacks'
-                                  ? AppColors.primary.withOpacity(0.1)
+                                  ? AppColors.primary.withValues(alpha: 0.1)
                                   : (widget.article.category == 'Ayurvedic'
-                                      ? AppColors.secondary.withOpacity(0.1)
-                                      : Colors.blue.shade900.withOpacity(0.1)),
+                                      ? AppColors.secondary.withValues(alpha: 0.1)
+                                      : Colors.blue.shade900.withValues(alpha: 0.1)),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
@@ -490,10 +490,10 @@ class _ArticleReaderScreenState extends State<ArticleReaderScreen> {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.secondary.withOpacity(0.07),
+        color: AppColors.secondary.withValues(alpha: 0.07),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: AppColors.secondary.withOpacity(0.15),
+          color: AppColors.secondary.withValues(alpha: 0.15),
           width: 1,
         ),
       ),
@@ -544,12 +544,12 @@ class _ArticleReaderScreenState extends State<ArticleReaderScreen> {
         color: AppColors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: AppColors.outlineVariant.withOpacity(0.15),
+          color: AppColors.outlineVariant.withValues(alpha: 0.15),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.01),
+            color: Colors.black.withValues(alpha: 0.01),
             blurRadius: 10,
             offset: const Offset(0, 4),
           )
@@ -597,19 +597,19 @@ class _ArticleReaderScreenState extends State<ArticleReaderScreen> {
             
             if (_quizAnswered) {
               if (idx == quiz.correctAnswerIndex) {
-                optionBg = AppColors.secondary.withOpacity(0.12);
-                optionBorder = AppColors.secondary.withOpacity(0.4);
+                optionBg = AppColors.secondary.withValues(alpha: 0.12);
+                optionBorder = AppColors.secondary.withValues(alpha: 0.4);
                 textOptionColor = AppColors.secondary;
                 optionIcon = Icons.check_circle_outline;
               } else if (_selectedQuizIndex == idx) {
-                optionBg = const Color(0xFFBA1A1A).withOpacity(0.1);
-                optionBorder = const Color(0xFFBA1A1A).withOpacity(0.3);
+                optionBg = const Color(0xFFBA1A1A).withValues(alpha: 0.1);
+                optionBorder = const Color(0xFFBA1A1A).withValues(alpha: 0.3);
                 textOptionColor = const Color(0xFFBA1A1A);
                 optionIcon = Icons.error_outline;
               }
             } else if (_selectedQuizIndex == idx) {
-              optionBg = AppColors.primary.withOpacity(0.1);
-              optionBorder = AppColors.primary.withOpacity(0.4);
+              optionBg = AppColors.primary.withValues(alpha: 0.1);
+              optionBorder = AppColors.primary.withValues(alpha: 0.4);
             }
             
             return Padding(
@@ -726,8 +726,8 @@ class _ArticleReaderScreenState extends State<ArticleReaderScreen> {
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
           colors: [
-            AppColors.background.withOpacity(0.95),
-            AppColors.background.withOpacity(0.8),
+            AppColors.background.withValues(alpha: 0.95),
+            AppColors.background.withValues(alpha: 0.8),
             Colors.transparent,
           ],
         ),
@@ -742,13 +742,13 @@ class _ArticleReaderScreenState extends State<ArticleReaderScreen> {
             borderRadius: BorderRadius.circular(32),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.08),
+                color: Colors.black.withValues(alpha: 0.08),
                 blurRadius: 20,
                 offset: const Offset(0, 4),
               ),
             ],
             border: Border.all(
-              color: AppColors.outlineVariant.withOpacity(0.15),
+              color: AppColors.outlineVariant.withValues(alpha: 0.15),
               width: 1,
             ),
           ),

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .barcode-laser {
+            animation: laser-move 1.6s ease-in-out infinite;
+        }
+        @keyframes laser-move {
+            0%, 100% { top: 20%; }
+            50% { top: 80%; }
+        }
+        .product-pop {
+            animation: product-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+        @keyframes product-pop {
+            0% { transform: translateY(24px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script>
+(function() {
+  var K = 'desifit-dark-mode';
+  function apply() {
+    try {
+      var dark = localStorage.getItem(K) === 'true';
+      document.documentElement.classList.toggle('dark', dark);
+    } catch(e) {}
+  }
+  apply();
+  window.addEventListener('storage', apply);
+})();
+</script>
+  </head>
+<body class="bg-surface dark:bg-stone-950 font-body text-on-surface dark:text-stone-100 antialiased mb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">arrow_back</span>
+<span class="text-xl font-bold text-[#E65100] dark:text-[#FF8A50] font-headline tracking-tight">Scan Barcode</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">history</span>
+</div>
+</header>
+<main class="pt-16 max-w-2xl mx-auto">
+<!-- Scanner Viewport -->
+<section class="relative h-[300px] bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 overflow-hidden mx-4 rounded-3xl">
+<div class="absolute inset-0 opacity-15" style="background-image: radial-gradient(circle at 50% 30%, rgba(0,119,190,0.5), transparent 50%);"></div>
+<!-- Barcode graphic -->
+<div class="absolute inset-x-16 top-1/2 -translate-y-1/2 h-20 bg-white/10 rounded-2xl backdrop-blur-sm flex items-center justify-center overflow-hidden">
+<div class="flex gap-[3px] items-stretch h-12">
+<div class="w-[3px] bg-white rounded-full"></div>
+<div class="w-[5px] bg-white rounded-full"></div>
+<div class="w-[2px] bg-white/70 rounded-full"></div>
+<div class="w-[4px] bg-white rounded-full"></div>
+<div class="w-[2px] bg-white/60 rounded-full"></div>
+<div class="w-[6px] bg-white rounded-full"></div>
+<div class="w-[3px] bg-white/80 rounded-full"></div>
+<div class="w-[2px] bg-white/50 rounded-full"></div>
+<div class="w-[5px] bg-white rounded-full"></div>
+<div class="w-[3px] bg-white/70 rounded-full"></div>
+<div class="w-[2px] bg-white rounded-full"></div>
+<div class="w-[4px] bg-white/90 rounded-full"></div>
+<div class="w-[3px] bg-white/60 rounded-full"></div>
+<div class="w-[6px] bg-white rounded-full"></div>
+<div class="w-[2px] bg-white/50 rounded-full"></div>
+<div class="w-[4px] bg-white rounded-full"></div>
+</div>
+</div>
+<!-- Laser line -->
+<div class="barcode-laser absolute left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-sky-400 to-transparent shadow-[0_0_12px_rgba(0,119,190,0.9)]"></div>
+<!-- Corner brackets -->
+<div class="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-sky-300/80 rounded-tl-lg"></div>
+<div class="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-sky-300/80 rounded-tr-lg"></div>
+<div class="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-sky-300/80 rounded-bl-lg"></div>
+<div class="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-sky-300/80 rounded-br-lg"></div>
+<!-- Hint -->
+<p class="absolute bottom-3 left-0 right-0 text-center text-white/70 text-[10px] font-semibold tracking-wide">Align the barcode inside the frame</p>
+</section>
+<!-- Scanned Product -->
+<section class="px-4 -mt-8 relative z-10 product-pop">
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+<div class="flex items-start gap-4">
+<div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sky-600 text-2xl">package_2</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h2 class="font-headline font-bold">Fortune Soya Chunks</h2>
+<span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container uppercase tracking-wider">High Protein</span>
+</div>
+<p class="text-xs text-on-surface-variant dark:text-stone-400 mt-0.5">200g pack · ₹95</p>
+</div>
+</div>
+<div class="flex gap-3 mt-4">
+<div class="flex-1 bg-surface-container-low dark:bg-stone-800/60 rounded-2xl p-3 text-center">
+<p class="text-lg font-extrabold font-headline text-primary">52g</p>
+<p class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider">Protein</p>
+</div>
+<div class="flex-1 bg-surface-container-low dark:bg-stone-800/60 rounded-2xl p-3 text-center">
+<p class="text-lg font-extrabold font-headline">23g</p>
+<p class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider">Carbs</p>
+</div>
+<div class="flex-1 bg-surface-container-low dark:bg-stone-800/60 rounded-2xl p-3 text-center">
+<p class="text-lg font-extrabold font-headline">3.2g</p>
+<p class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider">Fat</p>
+</div>
+<div class="flex-1 bg-surface-container-low dark:bg-stone-800/60 rounded-2xl p-3 text-center">
+<p class="text-lg font-extrabold font-headline">354</p>
+<p class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider">kcal/100g</p>
+</div>
+</div>
+<!-- Value verdict -->
+<div class="mt-4 flex items-center gap-3 bg-secondary-fixed/60 rounded-2xl p-3">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant" style="font-variation-settings: 'FILL' 1;">verified</span>
+<p class="text-xs font-semibold text-on-secondary-fixed-variant flex-1">
+₹1.83 per gram of protein — <span class="font-bold">best value in shop</span>
+</p>
+</div>
+<div class="flex gap-3 mt-4">
+<button class="flex-1 py-3.5 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold text-sm active:scale-95 transition-transform">
+Log to Tracker
+</button>
+<button class="w-12 h-12 rounded-2xl bg-surface-container-low dark:bg-stone-800/60 flex items-center justify-center text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bookmark_add</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Recent scans -->
+<section class="px-4 mt-6">
+<div class="flex justify-between items-end mb-3">
+<h3 class="font-headline font-bold text-lg">Scan History</h3>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">See All</span>
+</div>
+<div class="space-y-2.5">
+<div class="flex items-center gap-3 bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-3 shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
+<div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-600 text-lg">grain</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Chana Dal</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">500g · ₹78</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">20g</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">protein/100g</p>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-3 shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
+<div class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-600 text-lg">spa</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Peanuts (Roasted)</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">250g · ₹45</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-primary">26g</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">protein/100g</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>

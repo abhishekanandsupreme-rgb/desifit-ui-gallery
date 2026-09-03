@@ -5,7 +5,7 @@ import '../../../../core/theme/theme.dart';
 import '../../../../core/state/app_state.dart';
 
 class FlashcardWidget extends StatefulWidget {
-  const FlashcardWidget({Key? key}) : super(key: key);
+  const FlashcardWidget({super.key});
 
   @override
   State<FlashcardWidget> createState() => _FlashcardWidgetState();
@@ -82,10 +82,10 @@ class _FlashcardWidgetState extends State<FlashcardWidget> with SingleTickerProv
       decoration: BoxDecoration(
         color: AppColors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+        border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.02),
+            color: Colors.black.withValues(alpha: 0.02),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -100,7 +100,7 @@ class _FlashcardWidgetState extends State<FlashcardWidget> with SingleTickerProv
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryContainer.withOpacity(0.1),
+                  color: AppColors.primaryContainer.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -149,12 +149,12 @@ class _FlashcardWidgetState extends State<FlashcardWidget> with SingleTickerProv
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.secondaryContainer.withOpacity(0.15),
+        color: AppColors.secondaryContainer.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.secondary.withOpacity(0.2)),
+        border: Border.all(color: AppColors.secondary.withValues(alpha: 0.2)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.secondary.withOpacity(0.04),
+            color: AppColors.secondary.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),

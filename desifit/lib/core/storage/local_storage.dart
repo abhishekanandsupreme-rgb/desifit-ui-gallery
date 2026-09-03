@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import '../state/app_state.dart';
+import '../state/models.dart';
 import '../../features/health_feed/domain/models/article.dart';
 
 

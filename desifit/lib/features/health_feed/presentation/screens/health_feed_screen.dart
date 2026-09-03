@@ -7,7 +7,7 @@ import 'article_reader_screen.dart';
 import '../../../../core/ads/banner_ad_widget.dart';
 
 class HealthFeedScreen extends StatefulWidget {
-  const HealthFeedScreen({Key? key}) : super(key: key);
+  const HealthFeedScreen({super.key});
 
   @override
   State<HealthFeedScreen> createState() => _HealthFeedScreenState();
@@ -50,8 +50,6 @@ class _HealthFeedScreenState extends State<HealthFeedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    
     final state = Provider.of<AppState>(context);
     final List<DesiArticle> articles = state.desiArticles;
     
@@ -179,10 +177,10 @@ class _HealthFeedScreenState extends State<HealthFeedScreen> {
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.04),
+                      color: Colors.white.withValues(alpha: 0.04),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.1),
+                        color: Colors.white.withValues(alpha: 0.1),
                         width: 1,
                       ),
                     ),
@@ -330,13 +328,13 @@ class _HealthFeedScreenState extends State<HealthFeedScreen> {
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.04),
+              color: AppColors.primary.withValues(alpha: 0.04),
               blurRadius: 24,
               offset: const Offset(0, 8),
             ),
           ],
           border: Border.all(
-            color: AppColors.outlineVariant.withOpacity(0.15),
+            color: AppColors.outlineVariant.withValues(alpha: 0.15),
             width: 1,
           ),
         ),
@@ -364,7 +362,7 @@ class _HealthFeedScreenState extends State<HealthFeedScreen> {
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        Colors.black.withOpacity(0.4),
+                        Colors.black.withValues(alpha: 0.4),
                       ],
                     ),
                   ),
@@ -573,13 +571,13 @@ class _HealthFeedScreenState extends State<HealthFeedScreen> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.02),
+              color: AppColors.primary.withValues(alpha: 0.02),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
           border: Border.all(
-            color: AppColors.outlineVariant.withOpacity(0.15),
+            color: AppColors.outlineVariant.withValues(alpha: 0.15),
             width: 1,
           ),
         ),
@@ -609,10 +607,10 @@ class _HealthFeedScreenState extends State<HealthFeedScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                     decoration: BoxDecoration(
                       color: article.category == 'Gym Hacks'
-                          ? AppColors.primary.withOpacity(0.9)
+                          ? AppColors.primary.withValues(alpha: 0.9)
                           : (article.category == 'Ayurvedic'
-                              ? AppColors.secondary.withOpacity(0.9)
-                              : Colors.blue.shade800.withOpacity(0.9)),
+                              ? AppColors.secondary.withValues(alpha: 0.9)
+                              : Colors.blue.shade800.withValues(alpha: 0.9)),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
@@ -725,13 +723,13 @@ class _HealthFeedScreenState extends State<HealthFeedScreen> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.02),
+              color: AppColors.primary.withValues(alpha: 0.02),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
           ],
           border: Border.all(
-            color: AppColors.outlineVariant.withOpacity(0.15),
+            color: AppColors.outlineVariant.withValues(alpha: 0.15),
             width: 1,
           ),
         ),
@@ -756,7 +754,7 @@ class _HealthFeedScreenState extends State<HealthFeedScreen> {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Colors.black.withOpacity(0.3),
+                          Colors.black.withValues(alpha: 0.3),
                         ],
                       ),
                     ),
@@ -791,7 +789,7 @@ class _HealthFeedScreenState extends State<HealthFeedScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
+                        color: Colors.black.withValues(alpha: 0.6),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
@@ -898,11 +896,10 @@ class _AnimatedCategoryChip extends StatefulWidget {
   final VoidCallback onTap;
 
   const _AnimatedCategoryChip({
-    Key? key,
     required this.label,
     required this.isSelected,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   State<_AnimatedCategoryChip> createState() => _AnimatedCategoryChipState();
@@ -953,7 +950,7 @@ class _AnimatedCategoryChipState extends State<_AnimatedCategoryChip>
             border: Border.all(
               color: widget.isSelected
                   ? Colors.transparent
-                  : AppColors.outlineVariant.withOpacity(0.1),
+                  : AppColors.outlineVariant.withValues(alpha: 0.1),
               width: 1,
             ),
           ),
@@ -979,10 +976,9 @@ class _ScalePressable extends StatefulWidget {
   final VoidCallback onTap;
 
   const _ScalePressable({
-    Key? key,
     required this.child,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   State<_ScalePressable> createState() => _ScalePressableState();
@@ -1035,12 +1031,11 @@ class _AnimatedBookmarkButton extends StatefulWidget {
   final double size;
 
   const _AnimatedBookmarkButton({
-    Key? key,
     required this.isBookmarked,
     required this.onTap,
     this.lightBg = true,
     this.size = 36,
-  }) : super(key: key);
+  });
 
   @override
   State<_AnimatedBookmarkButton> createState() => _AnimatedBookmarkButtonState();
@@ -1089,9 +1084,9 @@ class _AnimatedBookmarkButtonState extends State<_AnimatedBookmarkButton>
             shape: BoxShape.circle,
             color: widget.lightBg
                 ? AppColors.surfaceContainerLow
-                : Colors.black.withOpacity(0.5),
+                : Colors.black.withValues(alpha: 0.5),
             border: widget.lightBg
-                ? Border.all(color: AppColors.outlineVariant.withOpacity(0.15), width: 1)
+                ? Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15), width: 1)
                 : null,
           ),
           child: Icon(

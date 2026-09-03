@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .badge-pop {
+            animation: badge-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+        @keyframes badge-pop {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .no-scrollbar {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script>
+(function() {
+  var K = 'desifit-dark-mode';
+  function apply() {
+    try {
+      var dark = localStorage.getItem(K) === 'true';
+      document.documentElement.classList.toggle('dark', dark);
+    } catch(e) {}
+  }
+  apply();
+  window.addEventListener('storage', apply);
+})();
+</script>
+  </head>
+<body class="bg-surface dark:bg-stone-950 font-body text-on-surface dark:text-stone-100 antialiased mb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">arrow_back</span>
+<span class="text-xl font-bold text-[#E65100] dark:text-[#FF8A50] font-headline tracking-tight">Badges</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">filter_list</span>
+</div>
+</header>
+<main class="pt-16 px-4 max-w-2xl mx-auto">
+<!-- Hero: Level Card -->
+<section class="mt-6 mb-6">
+<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-container p-6 text-on-primary">
+<div class="absolute top-[-30%] right-[-10%] w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-primary-fixed/80">Champ Level</p>
+<p class="text-3xl font-extrabold font-headline tracking-tight">Iron Roti</p>
+</div>
+<div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center badge-pop">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+</div>
+<div class="h-2.5 rounded-full bg-white/20 overflow-hidden">
+<div class="h-full w-[72%] rounded-full bg-gradient-to-r from-secondary-fixed to-white"></div>
+</div>
+<div class="flex justify-between mt-2 text-xs font-semibold">
+<span>720 XP</span>
+<span>1,000 XP to Steel Daal</span>
+</div>
+</div>
+</section>
+<!-- Category Tabs -->
+<section class="mb-6">
+<div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary text-xs font-bold whitespace-nowrap">All</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest dark:bg-stone-900 border border-outline-variant dark:border-stone-700/30 text-on-surface-variant dark:text-stone-400 text-xs font-bold whitespace-nowrap">Streaks</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest dark:bg-stone-900 border border-outline-variant dark:border-stone-700/30 text-on-surface-variant dark:text-stone-400 text-xs font-bold whitespace-nowrap">Protein</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest dark:bg-stone-900 border border-outline-variant dark:border-stone-700/30 text-on-surface-variant dark:text-stone-400 text-xs font-bold whitespace-nowrap">Budget</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest dark:bg-stone-900 border border-outline-variant dark:border-stone-700/30 text-on-surface-variant dark:text-stone-400 text-xs font-bold whitespace-nowrap">Habits</button>
+</div>
+</section>
+<!-- Badge Grid -->
+<section class="grid grid-cols-3 gap-3">
+<!-- Unlocked: 7-Day Streak -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.05s;">
+<div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-amber-500" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">7-Day Streak</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">Unlocked</p>
+</div>
+<!-- Unlocked: 100g Day -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.1s;">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">nutrition</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">100g Day</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">Unlocked</p>
+</div>
+<!-- Locked: Budget Ninja -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center opacity-60 shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.15s;">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high dark:bg-stone-800 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-stone-400">savings</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">Budget Ninja</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">2/7 days</p>
+</div>
+<!-- Locked: Early Bird -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center opacity-60 shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.2s;">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high dark:bg-stone-800 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-stone-400">wb_twilight</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">Early Bird</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">Locked</p>
+</div>
+<!-- Unlocked: First Meal Log -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.25s;">
+<div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-orange-500" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">First Meal Log</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">Unlocked</p>
+</div>
+<!-- Locked: Gym Rat -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center opacity-60 shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.3s;">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high dark:bg-stone-800 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-stone-400">fitness_center</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">Gym Rat</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">12/30</p>
+</div>
+<!-- Locked: Hydration Hero -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center opacity-60 shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.35s;">
+<div class="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-sky-500">water_drop</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">Hydration Hero</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">Locked</p>
+</div>
+<!-- Unlocked: Community Star -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.4s;">
+<div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-violet-500" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">Community Star</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">Unlocked</p>
+</div>
+<!-- Locked: Marathon -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center opacity-60 shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.45s;">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high dark:bg-stone-800 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-stone-400">directions_run</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">Marathon</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">Locked</p>
+</div>
+<!-- Locked: Sattu Master -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex flex-col items-center text-center opacity-60 shadow-[0_4px_20px_rgba(164,55,0,0.04)] badge-pop" style="animation-delay: 0.5s;">
+<div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-amber-600">local_cafe</span>
+</div>
+<p class="text-[10px] font-bold leading-tight">Sattu Master</p>
+<p class="text-[8px] text-on-surface-variant dark:text-stone-400 mt-0.5">18/30</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-2 pb-4 pt-2 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[11px] font-medium font-headline">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[11px] font-medium font-headline">Recipes</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#FFCCBC] dark:bg-[#A43700]/30 text-[#A43700] dark:text-[#FFCCBC] rounded-2xl px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+<span class="text-[11px] font-medium font-headline">Badges</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-[11px] font-medium font-headline">Planner</span>
+</a>
+</nav>
+</body></html>

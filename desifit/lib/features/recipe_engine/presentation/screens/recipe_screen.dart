@@ -8,7 +8,7 @@ import '../../../../core/network/analytics_service.dart';
 import '../../../../core/ads/ad_service.dart';
 
 class RecipeScreen extends StatefulWidget {
-  const RecipeScreen({Key? key}) : super(key: key);
+  const RecipeScreen({super.key});
 
   @override
   State<RecipeScreen> createState() => _RecipeScreenState();
@@ -183,7 +183,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
                 side: BorderSide(
-                  color: isActive ? Colors.transparent : AppColors.outlineVariant.withOpacity(0.3),
+                  color: isActive ? Colors.transparent : AppColors.outlineVariant.withValues(alpha: 0.3),
                 ),
               ),
               onSelected: (selected) {
@@ -386,7 +386,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
             height: 120,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(0.08),
+              color: Colors.blue.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
@@ -416,7 +416,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
             height: 120,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.secondaryContainer.withOpacity(0.2),
+              color: AppColors.secondaryContainer.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
@@ -514,7 +514,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: AppColors.primaryContainer.withOpacity(0.12),
+                        color: AppColors.primaryContainer.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
@@ -614,10 +614,10 @@ class _RecipeScreenState extends State<RecipeScreen> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.amber.withOpacity(0.08),
+                    color: Colors.amber.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: Colors.amber.withOpacity(0.3),
+                      color: Colors.amber.withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),
@@ -815,7 +815,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
     showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       builder: (BuildContext context) {
         return Center(
           child: ClipRRect(
@@ -828,15 +828,15 @@ class _RecipeScreenState extends State<RecipeScreen> {
                   width: MediaQuery.of(context).size.width * 0.85,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.12),
+                    color: Colors.white.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       width: 1.5,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
+                        color: Colors.black.withValues(alpha: 0.25),
                         blurRadius: 24,
                         offset: const Offset(0, 8),
                       ),
@@ -848,9 +848,9 @@ class _RecipeScreenState extends State<RecipeScreen> {
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.2),
+                          color: AppColors.primary.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.primary.withOpacity(0.4), width: 1.5),
+                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.4), width: 1.5),
                         ),
                         child: const Icon(
                           Icons.play_circle_filled,

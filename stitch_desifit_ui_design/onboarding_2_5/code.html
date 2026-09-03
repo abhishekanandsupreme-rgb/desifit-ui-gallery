@@ -89,6 +89,19 @@
       min-height: max(884px, 100dvh);
     }
   </style>
+  <script>
+(function() {
+  var K = 'desifit-dark-mode';
+  function apply() {
+    try {
+      var dark = localStorage.getItem(K) === 'true';
+      document.documentElement.classList.toggle('dark', dark);
+    } catch(e) {}
+  }
+  apply();
+  window.addEventListener('storage', apply);
+})();
+</script>
   </head>
 <body class="bg-surface text-on-surface min-h-screen flex flex-col">
 <header class="fixed top-0 w-full z-50 bg-[#F9F9F9]/80 backdrop-blur-xl flex items-center justify-between px-6 h-16">

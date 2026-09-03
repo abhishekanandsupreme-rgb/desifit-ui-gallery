@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ring-anim {
+            transition: stroke-dashoffset 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .bar-grow {
+            animation: bar-grow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+            transform-origin: bottom;
+        }
+        @keyframes bar-grow {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+        .count-up {
+            animation: count-up 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+        @keyframes count-up {
+            0% { transform: translateY(8px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script>
+(function() {
+  var K = 'desifit-dark-mode';
+  function apply() {
+    try {
+      var dark = localStorage.getItem(K) === 'true';
+      document.documentElement.classList.toggle('dark', dark);
+    } catch(e) {}
+  }
+  apply();
+  window.addEventListener('storage', apply);
+})();
+</script>
+  </head>
+<body class="bg-surface dark:bg-stone-950 font-body text-on-surface dark:text-stone-100 antialiased mb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">menu</span>
+<span class="text-xl font-bold text-[#E65100] dark:text-[#FF8A50] font-headline tracking-tight">Progress</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">more_vert</span>
+</div>
+</header>
+<main class="pt-16 px-4 max-w-2xl mx-auto">
+<!-- Summary Stats -->
+<section class="mt-6 grid grid-cols-3 gap-3 mb-6">
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 text-center shadow-[0_4px_16px_rgba(0,0,0,0.04)] count-up">
+<p class="text-2xl font-extrabold font-headline text-primary">92%</p>
+<p class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider mt-1">Goal Adherence</p>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 text-center shadow-[0_4px_16px_rgba(0,0,0,0.04)] count-up" style="animation-delay: 0.1s;">
+<p class="text-2xl font-extrabold font-headline">21</p>
+<p class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider mt-1">Day Streak</p>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 text-center shadow-[0_4px_16px_rgba(0,0,0,0.04)] count-up" style="animation-delay: 0.2s;">
+<p class="text-2xl font-extrabold font-headline text-secondary">+2.4kg</p>
+<p class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider mt-1">Lean Mass</p>
+</div>
+</section>
+<!-- Weekly Protein Chart -->
+<section class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_4px_20px_rgba(164,55,0,0.04)] mb-6">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="font-headline font-bold">Weekly Protein</h2>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">grams per day · goal 60g</p>
+</div>
+<span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container">On track</span>
+</div>
+<div class="flex items-end justify-between gap-2 h-32">
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-28 bar-grow" style="animation-delay: 0.05s;">
+<div class="bg-gradient-to-t from-primary to-primary-container rounded-lg" style="height: 63%;"></div>
+</div>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400">M</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-28 bar-grow" style="animation-delay: 0.1s;">
+<div class="bg-gradient-to-t from-primary to-primary-container rounded-lg" style="height: 78%;"></div>
+</div>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400">T</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-28 bar-grow" style="animation-delay: 0.15s;">
+<div class="bg-gradient-to-t from-primary to-primary-container rounded-lg" style="height: 71%;"></div>
+</div>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400">W</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-28 bar-grow" style="animation-delay: 0.2s;">
+<div class="bg-gradient-to-t from-primary to-primary-container rounded-lg" style="height: 88%;"></div>
+</div>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400">T</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-28 bar-grow" style="animation-delay: 0.25s;">
+<div class="bg-gradient-to-t from-primary to-primary-container rounded-lg" style="height: 66%;"></div>
+</div>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400">F</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-28 bar-grow" style="animation-delay: 0.3s;">
+<div class="bg-gradient-to-t from-primary to-primary-container rounded-lg" style="height: 92%;"></div>
+</div>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400">S</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-28 bar-grow" style="animation-delay: 0.35s;">
+<div class="bg-gradient-to-t from-secondary to-secondary-container rounded-lg" style="height: 74%;"></div>
+</div>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400">S</span>
+</div>
+</div>
+<div class="flex justify-between mt-3 text-[10px] font-bold text-on-surface-variant dark:text-stone-400">
+<span>Avg 44g/day</span>
+<span class="text-secondary">+12% vs last week</span>
+</div>
+</section>
+<!-- Budget Ring -->
+<section class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_4px_20px_rgba(164,55,0,0.04)] mb-6">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="font-headline font-bold">Budget Health</h2>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">weekly spend vs ₹700 cap</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative w-32 h-32 shrink-0">
+<svg class="w-full h-full" viewBox="0 0 100 100">
+<circle class="text-surface-container-high" cx="50" cy="50" fill="transparent" r="42" stroke="currentColor" stroke-width="10"></circle>
+<circle class="text-primary ring-anim" cx="50" cy="50" fill="transparent" r="42" stroke="currentColor" stroke-dasharray="263.9" stroke-dashoffset="79" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-extrabold font-headline">₹482</span>
+<span class="text-[9px] font-bold text-on-surface-variant dark:text-stone-400 uppercase tracking-wider">of ₹700</span>
+</div>
+</div>
+<div class="flex-1 space-y-2.5">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-base">restaurant</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between text-[10px] font-bold">
+<span class="text-on-surface-variant dark:text-stone-400">Food</span>
+<span>₹402</span>
+</div>
+<div class="h-1.5 rounded-full bg-surface-container-high dark:bg-stone-800 mt-1 overflow-hidden">
+<div class="h-full w-[83%] bg-gradient-to-r from-primary to-primary-container"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant text-base">local_shipping</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between text-[10px] font-bold">
+<span class="text-on-surface-variant dark:text-stone-400">Groceries</span>
+<span>₹80</span>
+</div>
+<div class="h-1.5 rounded-full bg-surface-container-high dark:bg-stone-800 mt-1 overflow-hidden">
+<div class="h-full w-[40%] bg-gradient-to-r from-secondary to-secondary-container"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Weight Trend -->
+<section class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_4px_20px_rgba(164,55,0,0.04)]">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="font-headline font-bold">Weight Trend</h2>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">last 6 weeks</p>
+</div>
+<div class="flex gap-1">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low dark:bg-stone-800/60 text-on-surface-variant dark:text-stone-400 text-[10px] font-bold">kg</button>
+<button class="px-3 py-1.5 rounded-full bg-primary text-on-primary text-[10px] font-bold">lb</button>
+</div>
+</div>
+<div class="flex items-end justify-between gap-2 h-28">
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-24 bar-grow" style="animation-delay: 0.05s;">
+<div class="bg-gradient-to-t from-stone-400 to-stone-300 rounded-lg" style="height: 95%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">W1</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-24 bar-grow" style="animation-delay: 0.1s;">
+<div class="bg-gradient-to-t from-stone-400 to-stone-300 rounded-lg" style="height: 93%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">W2</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-24 bar-grow" style="animation-delay: 0.15s;">
+<div class="bg-gradient-to-t from-stone-400 to-stone-300 rounded-lg" style="height: 90%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">W3</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-24 bar-grow" style="animation-delay: 0.2s;">
+<div class="bg-gradient-to-t from-stone-400 to-stone-300 rounded-lg" style="height: 88%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">W4</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-24 bar-grow" style="animation-delay: 0.25s;">
+<div class="bg-gradient-to-t from-secondary to-secondary-container rounded-lg" style="height: 86%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">W5</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-24 bar-grow" style="animation-delay: 0.3s;">
+<div class="bg-gradient-to-t from-secondary to-secondary-container rounded-lg" style="height: 84%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">W6</span>
+</div>
+</div>
+<div class="flex justify-between mt-3 text-[10px] font-bold text-on-surface-variant dark:text-stone-400">
+<span>58.2 kg</span>
+<span class="text-secondary">−1.6 kg total</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-2 pb-4 pt-2 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[11px] font-medium font-headline">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[11px] font-medium font-headline">Recipes</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#FFCCBC] dark:bg-[#A43700]/30 text-[#A43700] dark:text-[#FFCCBC] rounded-2xl px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<span class="text-[11px] font-medium font-headline">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[11px] font-medium font-headline">Profile</span>
+</a>
+</nav>
+</body></html>

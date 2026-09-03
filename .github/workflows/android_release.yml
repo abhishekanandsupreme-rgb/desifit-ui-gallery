@@ -8,8 +8,23 @@ on:
       - 'v*'
 
 jobs:
+  # SDK-free first gate: catches unbalanced delimiters in any Dart file
+  # before the expensive JDK/Flutter build steps run. Fails the release if
+  # the tree cannot even parse. This is not a substitute for `flutter analyze`
+  # (see the Analyze Project step) — it is a cheap structural pre-check.
+  syntax-gate:
+    name: Dart syntax balance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Check Dart bracket balance (desifit + AuraSync)
+        run: node tools/check_dart_syntax.js
+
   build:
     name: Build Release AAB
+    needs: syntax-gate
     runs-on: ubuntu-latest
 
     steps:
@@ -45,7 +60,7 @@ jobs:
       # Step 5: Run Static Code Analysis (optional check)
       - name: Analyze Project
         working-directory: desifit
-        run: flutter analyze || true
+        run: flutter analyze
 
       # Step 5.5: Configure Production Release Signing (if secrets are set)
       - name: Configure Production Signing

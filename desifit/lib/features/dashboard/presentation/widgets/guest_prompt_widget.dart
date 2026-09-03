@@ -10,10 +10,10 @@ class GuestPromptWidget extends StatefulWidget {
   final String description;
 
   const GuestPromptWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   State<GuestPromptWidget> createState() => _GuestPromptWidgetState();
@@ -33,10 +33,10 @@ class _GuestPromptWidgetState extends State<GuestPromptWidget> {
         child: Container(
           padding: const EdgeInsets.all(24.0),
           decoration: BoxDecoration(
-            color: AppColors.surface.withOpacity(0.85),
+            color: AppColors.surface.withValues(alpha: 0.85),
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
-              color: AppColors.primary.withOpacity(0.15),
+              color: AppColors.primary.withValues(alpha: 0.15),
               width: 1.5,
             ),
           ),
@@ -46,7 +46,7 @@ class _GuestPromptWidgetState extends State<GuestPromptWidget> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -90,6 +90,7 @@ class _GuestPromptWidgetState extends State<GuestPromptWidget> {
                       await state.loginWithGoogle();
                       AnalyticsService.logEvent('login_from_guest_prompt', {'screen': widget.title});
                     } catch (e) {
+                      if (!context.mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Login failed: $e')),
                       );
@@ -109,7 +110,7 @@ class _GuestPromptWidgetState extends State<GuestPromptWidget> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                       side: BorderSide(
-                        color: AppColors.outlineVariant.withOpacity(0.3),
+                        color: AppColors.outlineVariant.withValues(alpha: 0.3),
                         width: 1.2,
                       ),
                     ),

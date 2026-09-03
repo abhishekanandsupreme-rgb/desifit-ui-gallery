@@ -7,7 +7,7 @@ import '../../../../core/network/openrouter_service.dart';
 import '../../../../core/ads/ad_service.dart';
 
 class CalorieCounterScreen extends StatefulWidget {
-  const CalorieCounterScreen({Key? key}) : super(key: key);
+  const CalorieCounterScreen({super.key});
 
   @override
   State<CalorieCounterScreen> createState() => _CalorieCounterScreenState();
@@ -89,7 +89,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
     showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       builder: (BuildContext context) {
         return Center(
           child: ClipRRect(
@@ -102,15 +102,15 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                   width: MediaQuery.of(context).size.width * 0.85,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.12),
+                    color: Colors.white.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       width: 1.5,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
+                        color: Colors.black.withValues(alpha: 0.25),
                         blurRadius: 24,
                         offset: const Offset(0, 8),
                       ),
@@ -122,9 +122,9 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.2),
+                          color: AppColors.primary.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.primary.withOpacity(0.4), width: 1.5),
+                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.4), width: 1.5),
                         ),
                         child: const Icon(
                           Icons.play_circle_filled,
@@ -220,13 +220,10 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
-    final clampedTextScaleFactor = mediaQueryData.textScaleFactor.clamp(1.0, 1.3);
     final clampedTextScaler = mediaQueryData.textScaler.clamp(minScaleFactor: 1.0, maxScaleFactor: 1.3);
 
     return MediaQuery(
       data: mediaQueryData.copyWith(
-        // ignore: deprecated_member_use
-        textScaleFactor: clampedTextScaleFactor,
         textScaler: clampedTextScaler,
       ),
       child: Scaffold(
@@ -235,14 +232,15 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
+            tooltip: 'Back',
             icon: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -289,8 +287,8 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    AppColors.primary.withOpacity(0.08),
-                    AppColors.secondary.withOpacity(0.03),
+                    AppColors.primary.withValues(alpha: 0.08),
+                    AppColors.secondary.withValues(alpha: 0.03),
                     AppColors.background,
                   ],
                   begin: Alignment.topCenter,
@@ -308,10 +306,10 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                           margin: const EdgeInsets.only(bottom: 16),
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                           decoration: BoxDecoration(
-                            color: AppColors.primary.withOpacity(0.08),
+                            color: AppColors.primary.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color: AppColors.primary.withOpacity(0.2),
+                              color: AppColors.primary.withValues(alpha: 0.2),
                               width: 1,
                             ),
                           ),
@@ -349,6 +347,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                                   try {
                                     await state.loginWithGoogle();
                                   } catch (e) {
+                                    if (!context.mounted) return;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text('Login failed: $e')),
                                     );
@@ -377,9 +376,9 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                             margin: const EdgeInsets.only(bottom: 12),
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
-                              color: Colors.orange.withOpacity(0.12),
+                              color: Colors.orange.withValues(alpha: 0.12),
                               borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.orange.withOpacity(0.3), width: 1),
+                              border: Border.all(color: Colors.orange.withValues(alpha: 0.3), width: 1),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -484,10 +483,10 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.outlineVariant.withOpacity(0.12), width: 1.2),
+        border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.12), width: 1.2),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.02),
+            color: Colors.black.withValues(alpha: 0.02),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -626,10 +625,10 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.outlineVariant.withOpacity(0.12), width: 1.2),
+        border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.12), width: 1.2),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.02),
+            color: Colors.black.withValues(alpha: 0.02),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -727,7 +726,11 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
       children: slots.map((slot) {
         final isSelected = _selectedSlot == slot;
         return Expanded(
-          child: GestureDetector(
+          child: Semantics(
+            button: true,
+            selected: isSelected,
+            label: slot + (isSelected ? ' selected' : '. Select meal slot'),
+            child: GestureDetector(
             onTap: () {
               setState(() {
                 _selectedSlot = slot;
@@ -740,13 +743,13 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                 color: isSelected ? AppColors.primary : Colors.white,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: isSelected ? AppColors.primary : AppColors.outlineVariant.withOpacity(0.2),
+                  color: isSelected ? AppColors.primary : AppColors.outlineVariant.withValues(alpha: 0.2),
                   width: 1.2,
                 ),
                 boxShadow: isSelected
                     ? [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.15),
+                          color: AppColors.primary.withValues(alpha: 0.15),
                           blurRadius: 6,
                           offset: const Offset(0, 3),
                         )
@@ -765,6 +768,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
               ),
             ),
           ),
+          ),
         );
       }).toList(),
     );
@@ -776,7 +780,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.outlineVariant.withOpacity(0.12), width: 1.2),
+        border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.12), width: 1.2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -791,6 +795,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
               prefixIcon: const Icon(Icons.search, color: Colors.grey),
               suffixIcon: _searchController.text.isNotEmpty
                   ? IconButton(
+                      tooltip: 'Clear search',
                       icon: const Icon(Icons.clear, color: Colors.grey),
                       onPressed: () {
                         _searchController.clear();
@@ -824,7 +829,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
               child: ListView.separated(
                 shrinkWrap: true,
                 itemCount: _searchResults.length,
-                separatorBuilder: (_, __) => Divider(color: Colors.grey.shade100, height: 1),
+                separatorBuilder: (_, _) => Divider(color: Colors.grey.shade100, height: 1),
                 itemBuilder: (context, index) {
                   final food = _searchResults[index];
                   return ListTile(
@@ -858,9 +863,9 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.04),
+                color: AppColors.primary.withValues(alpha: 0.04),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.primary.withOpacity(0.1), width: 1),
+                border: Border.all(color: AppColors.primary.withValues(alpha: 0.1), width: 1),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -885,6 +890,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                         ),
                       ),
                       IconButton(
+                        tooltip: 'Remove selected food',
                         icon: const Icon(Icons.cancel, color: Colors.grey, size: 20),
                         onPressed: () {
                           setState(() {
@@ -907,6 +913,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                       Row(
                         children: [
                           IconButton(
+                            tooltip: 'Decrease portion',
                             icon: const Icon(Icons.remove_circle_outline, color: AppColors.primary),
                             onPressed: () {
                               if (_portionMultiplier > 0.25) {
@@ -921,6 +928,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                             style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14),
                           ),
                           IconButton(
+                            tooltip: 'Increase portion',
                             icon: const Icon(Icons.add_circle_outline, color: AppColors.primary),
                             onPressed: () {
                               setState(() {
@@ -975,11 +983,17 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                       
                       // Hostel quick calculation: estimate cost based on database category averages or ₹0 if custom
                       double cost = 0.0;
-                      if (_selectedFood!.category == 'Protein') cost = 15.0 * _portionMultiplier;
-                      else if (_selectedFood!.category == 'Dairy') cost = 12.0 * _portionMultiplier;
-                      else if (_selectedFood!.category == 'Grain') cost = 5.0 * _portionMultiplier;
-                      else if (_selectedFood!.category == 'Meal') cost = 30.0 * _portionMultiplier;
-                      else cost = 10.0 * _portionMultiplier;
+                      if (_selectedFood!.category == 'Protein') {
+                        cost = 15.0 * _portionMultiplier;
+                      } else if (_selectedFood!.category == 'Dairy') {
+                        cost = 12.0 * _portionMultiplier;
+                      } else if (_selectedFood!.category == 'Grain') {
+                        cost = 5.0 * _portionMultiplier;
+                      } else if (_selectedFood!.category == 'Meal') {
+                        cost = 30.0 * _portionMultiplier;
+                      } else {
+                        cost = 10.0 * _portionMultiplier;
+                      }
 
                       state.addFoodWithCalories(
                         name,
@@ -1059,10 +1073,10 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                   pressElevation: 2,
                   backgroundColor: Colors.white,
                   surfaceTintColor: Colors.transparent,
-                  shadowColor: Colors.black.withOpacity(0.05),
+                  shadowColor: Colors.black.withValues(alpha: 0.05),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
-                    side: BorderSide(color: AppColors.outlineVariant.withOpacity(0.2), width: 1.2),
+                    side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.2), width: 1.2),
                   ),
                   avatar: const Text('⚡', style: TextStyle(fontSize: 12)),
                   label: Text(
@@ -1132,10 +1146,10 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.primary.withOpacity(0.15), width: 1.2),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.15), width: 1.2),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.02),
+            color: AppColors.primary.withValues(alpha: 0.02),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -1149,7 +1163,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: const Text('🤖', style: TextStyle(fontSize: 18)),
@@ -1228,9 +1242,9 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.secondary.withOpacity(0.04),
+                color: AppColors.secondary.withValues(alpha: 0.04),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.secondary.withOpacity(0.12), width: 1),
+                border: Border.all(color: AppColors.secondary.withValues(alpha: 0.12), width: 1),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1262,6 +1276,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                             onPressed: () => _showReportCalorieDialog(context),
                           ),
                           IconButton(
+                            tooltip: 'Dismiss AI estimate',
                             icon: const Icon(Icons.cancel, color: Colors.grey, size: 18),
                             onPressed: () {
                               setState(() {
@@ -1288,9 +1303,9 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.amber.withOpacity(0.06),
+                      color: Colors.amber.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.amber.withOpacity(0.2), width: 0.8),
+                      border: Border.all(color: Colors.amber.withValues(alpha: 0.2), width: 0.8),
                     ),
                     child: Row(
                       children: const [
@@ -1363,7 +1378,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.outlineVariant.withOpacity(0.12), width: 1.2),
+          border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.12), width: 1.2),
         ),
         child: Center(
           child: Column(
@@ -1392,7 +1407,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: BorderSide(color: AppColors.outlineVariant.withOpacity(0.1), width: 1),
+            side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.1), width: 1),
           ),
           child: ListTile(
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -1413,16 +1428,17 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                   children: [
                     _buildMiniBadge('kcal', meal.calories.toInt().toString(), Colors.grey.shade100, Colors.grey.shade700),
                     const SizedBox(width: 4),
-                    _buildMiniBadge('P', '${meal.protein.toInt()}g', AppColors.primary.withOpacity(0.08), AppColors.primary),
+                    _buildMiniBadge('P', '${meal.protein.toInt()}g', AppColors.primary.withValues(alpha: 0.08), AppColors.primary),
                     const SizedBox(width: 4),
-                    _buildMiniBadge('C', '${meal.carbs.toInt()}g', Colors.blue.withOpacity(0.08), Colors.blue.shade700),
+                    _buildMiniBadge('C', '${meal.carbs.toInt()}g', Colors.blue.withValues(alpha: 0.08), Colors.blue.shade700),
                     const SizedBox(width: 4),
-                    _buildMiniBadge('F', '${meal.fat.toInt()}g', Colors.amber.withOpacity(0.08), Colors.amber.shade700),
+                    _buildMiniBadge('F', '${meal.fat.toInt()}g', Colors.amber.withValues(alpha: 0.08), Colors.amber.shade700),
                   ],
                 )
               ],
             ),
             trailing: IconButton(
+              tooltip: 'Delete meal',
               icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
               onPressed: () {
                 // Delete meal

@@ -15,7 +15,7 @@ import '../widgets/celebration_overlay.dart';
 import '../../../../core/notifications/notification_service.dart';
 
 class MainShell extends StatefulWidget {
-  const MainShell({Key? key}) : super(key: key);
+  const MainShell({super.key});
 
   @override
   State<MainShell> createState() => _MainShellState();
@@ -122,7 +122,7 @@ class _MainShellState extends State<MainShell> {
                         style: const TextStyle(fontSize: 12),
                       ),
                       value: isHinglish,
-                      activeColor: AppColors.primary,
+                      activeThumbColor: AppColors.primary,
                       onChanged: (val) {
                         setDialogState(() {
                           isHinglish = val;
@@ -142,7 +142,7 @@ class _MainShellState extends State<MainShell> {
                         style: const TextStyle(fontSize: 12),
                       ),
                       value: NotificationService.areNotificationsEnabled(),
-                      activeColor: AppColors.primary,
+                      activeThumbColor: AppColors.primary,
                       onChanged: (val) async {
                         await NotificationService.setNotificationsEnabled(val);
                         setDialogState(() {});
@@ -263,7 +263,7 @@ class _MainShellState extends State<MainShell> {
                 padding: const EdgeInsets.only(right: 16.0, left: 8),
                 child: CircleAvatar(
                   radius: 16,
-                  backgroundColor: AppColors.primary.withOpacity(0.1),
+                  backgroundColor: AppColors.primary.withValues(alpha: 0.1),
                   backgroundImage: state.currentUser?.photoUrl.isNotEmpty == true
                       ? NetworkImage(state.currentUser!.photoUrl)
                       : null,
@@ -299,10 +299,10 @@ class _MainShellState extends State<MainShell> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.15),
+                          color: AppColors.primary.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: AppColors.primary.withOpacity(0.4),
+                            color: AppColors.primary.withValues(alpha: 0.4),
                             width: 1.5,
                           ),
                         ),
@@ -354,17 +354,17 @@ class _MainShellState extends State<MainShell> {
       margin: const EdgeInsets.only(left: 12, right: 12, bottom: 20),
       height: 76,
       decoration: BoxDecoration(
-        color: const Color(0xFFFDF5F2).withOpacity(0.85), // Blended warm cream-saffron tint
+        color: const Color(0xFFFDF5F2).withValues(alpha: 0.85), // Blended warm cream-saffron tint
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.12),
+            color: AppColors.primary.withValues(alpha: 0.12),
             blurRadius: 24,
             offset: const Offset(0, -6),
           ),
         ],
         border: Border.all(
-          color: AppColors.outlineVariant.withOpacity(0.35), // Blended saffron outline
+          color: AppColors.outlineVariant.withValues(alpha: 0.35), // Blended saffron outline
           width: 1.5,
         ),
       ),
@@ -413,7 +413,7 @@ class _MainShellState extends State<MainShell> {
           boxShadow: isActive
               ? [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.3),
+                    color: AppColors.primary.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 3),
                   ),
@@ -428,7 +428,7 @@ class _MainShellState extends State<MainShell> {
             children: [
               Icon(
                 isActive ? filledIcon : outlineIcon,
-                color: isActive ? Colors.white : AppColors.onSurfaceVariant.withOpacity(0.65),
+                color: isActive ? Colors.white : AppColors.onSurfaceVariant.withValues(alpha: 0.65),
                 size: 22,
               ),
               const SizedBox(height: 3),
@@ -441,7 +441,7 @@ class _MainShellState extends State<MainShell> {
                   fontSize: 9,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Plus Jakarta Sans',
-                  color: isActive ? Colors.white : AppColors.onSurfaceVariant.withOpacity(0.65),
+                  color: isActive ? Colors.white : AppColors.onSurfaceVariant.withValues(alpha: 0.65),
                   height: 1.1,
                 ),
               ),

@@ -4,7 +4,7 @@ import '../../../../core/theme/theme.dart';
 import '../../../../core/state/app_state.dart';
 
 class PlannerScreen extends StatefulWidget {
-  const PlannerScreen({Key? key}) : super(key: key);
+  const PlannerScreen({super.key});
 
   @override
   State<PlannerScreen> createState() => _PlannerScreenState();
@@ -82,7 +82,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
                           boxShadow: isSelected
                               ? [
                                   BoxShadow(
-                                    color: AppColors.primary.withOpacity(0.2),
+                                    color: AppColors.primary.withValues(alpha: 0.2),
                                     blurRadius: 8,
                                     offset: const Offset(0, 4),
                                   )
@@ -133,12 +133,12 @@ class _PlannerScreenState extends State<PlannerScreen> {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.02),
+                          color: Colors.black.withValues(alpha: 0.02),
                           blurRadius: 10,
                           offset: const Offset(0, 2),
                         )
                       ],
-                      border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+                      border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,12 +176,12 @@ class _PlannerScreenState extends State<PlannerScreen> {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.02),
+                          color: Colors.black.withValues(alpha: 0.02),
                           blurRadius: 10,
                           offset: const Offset(0, 2),
                         )
                       ],
-                      border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+                      border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -297,20 +297,20 @@ class _PlannerScreenState extends State<PlannerScreen> {
   Widget _buildMealSlotItem(BuildContext context, MealLog meal) {
     Color slotColor = AppColors.primary;
     IconData slotIcon = Icons.restaurant;
-    Color slotBg = AppColors.primaryContainer.withOpacity(0.12);
+    Color slotBg = AppColors.primaryContainer.withValues(alpha: 0.12);
 
     if (meal.slot == 'Lunch') {
       slotColor = AppColors.secondary;
       slotIcon = Icons.lunch_dining;
-      slotBg = AppColors.secondaryContainer.withOpacity(0.3);
+      slotBg = AppColors.secondaryContainer.withValues(alpha: 0.3);
     } else if (meal.slot == 'Dinner') {
       slotColor = Colors.blue;
       slotIcon = Icons.dinner_dining;
-      slotBg = Colors.blue.withOpacity(0.12);
+      slotBg = Colors.blue.withValues(alpha: 0.12);
     } else if (meal.slot == 'Snack') {
       slotColor = Colors.amber[800]!;
       slotIcon = Icons.cookie;
-      slotBg = Colors.amber[100]!.withOpacity(0.5);
+      slotBg = Colors.amber[100]!.withValues(alpha: 0.5);
     }
 
     return Card(
@@ -426,7 +426,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
                   
                   // Meal Slot Selector
                   DropdownButtonFormField<String>(
-                    value: selectedSlot,
+                    initialValue: selectedSlot,
                     decoration: InputDecoration(
                       labelText: 'Meal Slot',
                       filled: true,

@@ -39,11 +39,9 @@ class AppTheme {
         secondaryContainer: AppColors.secondaryContainer,
         error: Color(0xFFBA1A1A),
         onError: Color(0xFFFFFFFF),
-        background: AppColors.background,
-        onBackground: AppColors.onSurface,
         surface: AppColors.surface,
         onSurface: AppColors.onSurface,
-        surfaceVariant: AppColors.surfaceContainerHighest,
+        surfaceContainerHighest: AppColors.surfaceContainerHighest,
         onSurfaceVariant: AppColors.onSurfaceVariant,
         outline: AppColors.outline,
         outlineVariant: AppColors.outlineVariant,
@@ -56,7 +54,7 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
-            color: AppColors.outlineVariant.withOpacity(0.15),
+            color: AppColors.outlineVariant.withValues(alpha: 0.15),
             width: 1,
           ),
         ),

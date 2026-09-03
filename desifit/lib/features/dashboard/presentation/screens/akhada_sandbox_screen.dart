@@ -5,7 +5,7 @@ import '../../../../core/theme/theme.dart';
 import '../../../../core/state/app_state.dart';
 
 class AkhadaSandboxScreen extends StatefulWidget {
-  const AkhadaSandboxScreen({Key? key}) : super(key: key);
+  const AkhadaSandboxScreen({super.key});
 
   @override
   State<AkhadaSandboxScreen> createState() => _AkhadaSandboxScreenState();
@@ -151,7 +151,7 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
                 side: BorderSide(
-                  color: AppColors.outlineVariant.withOpacity(0.2),
+                  color: AppColors.outlineVariant.withValues(alpha: 0.2),
                   width: 1.2,
                 ),
               ),
@@ -205,7 +205,7 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           border: Border.all(
-                                            color: AppColors.primary.withOpacity(1.0 - val),
+                                            color: AppColors.primary.withValues(alpha: 1.0 - val),
                                             width: 2,
                                           ),
                                         ),
@@ -216,7 +216,7 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           border: Border.all(
-                                            color: AppColors.secondary.withOpacity(1.0 - val),
+                                            color: AppColors.secondary.withValues(alpha: 1.0 - val),
                                             width: 1.5,
                                           ),
                                         ),
@@ -232,9 +232,9 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
                               height: 150,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.orange.withOpacity(0.08),
+                                color: Colors.orange.withValues(alpha: 0.08),
                                 border: Border.all(
-                                  color: Colors.orange.withOpacity(0.2),
+                                  color: Colors.orange.withValues(alpha: 0.2),
                                   width: 2,
                                 ),
                               ),
@@ -360,11 +360,11 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? item['color'].withOpacity(0.08)
+                          ? item['color'].withValues(alpha: 0.08)
                           : AppColors.surfaceContainerLow,
                       borderRadius: BorderRadius.circular(18),
                       border: Border.all(
-                        color: isSelected ? item['color'] : AppColors.outlineVariant.withOpacity(0.2),
+                        color: isSelected ? item['color'] : AppColors.outlineVariant.withValues(alpha: 0.2),
                         width: isSelected ? 2.0 : 1.0,
                       ),
                     ),
@@ -380,8 +380,8 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
                               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                               decoration: BoxDecoration(
                                 color: isSelected
-                                    ? item['color'].withOpacity(0.2)
-                                    : Colors.grey.withOpacity(0.12),
+                                    ? item['color'].withValues(alpha: 0.2)
+                                    : Colors.grey.withValues(alpha: 0.12),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
@@ -432,10 +432,10 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
 
   Widget _buildIntroductionCard(AppState state) {
     return Card(
-      color: AppColors.primary.withOpacity(0.06),
+      color: AppColors.primary.withValues(alpha: 0.06),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
-        side: BorderSide(color: AppColors.primary.withOpacity(0.2), width: 1.2),
+        side: BorderSide(color: AppColors.primary.withValues(alpha: 0.2), width: 1.2),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -498,7 +498,7 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
         side: BorderSide(
-          color: AppColors.outlineVariant.withOpacity(0.2),
+          color: AppColors.outlineVariant.withValues(alpha: 0.2),
           width: 1.0,
         ),
       ),
@@ -509,7 +509,7 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
             Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: eq['color'].withOpacity(0.12),
+                  backgroundColor: eq['color'].withValues(alpha: 0.12),
                   radius: 28,
                   child: Text(eq['emoji'], style: const TextStyle(fontSize: 28)),
                 ),
@@ -543,7 +543,7 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.orange.withOpacity(0.12),
+                    color: Colors.orange.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -575,9 +575,9 @@ class _AkhadaSandboxScreenState extends State<AkhadaSandboxScreen>
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.06),
+                  color: Colors.red.withValues(alpha: 0.06),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.red.withOpacity(0.15)),
+                  border: Border.all(color: Colors.red.withValues(alpha: 0.15)),
                 ),
                 child: Row(
                   children: [
@@ -633,7 +633,7 @@ class AkhadaEquipmentPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final glossPaint = Paint()
-      ..color = Colors.white.withOpacity(0.18)
+      ..color = Colors.white.withValues(alpha: 0.18)
       ..style = PaintingStyle.fill;
 
     if (type.contains('Gada')) {
@@ -697,7 +697,7 @@ class AkhadaEquipmentPainter extends CustomPainter {
 
       // Draw wood ring detail lines
       final ringPaint = Paint()
-        ..color = Colors.black.withOpacity(0.15)
+        ..color = Colors.black.withValues(alpha: 0.15)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2.0;
       canvas.drawLine(Offset(w * 0.3, h * 0.45), Offset(w * 0.7, h * 0.45), ringPaint);
