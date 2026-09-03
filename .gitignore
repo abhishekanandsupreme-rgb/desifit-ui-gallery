@@ -43,6 +43,10 @@ desifit/android/key.properties
 # key.properties, keystores) are ignored by each app's android/.gitignore
 # and the explicit rules above.
 
+# Hive cache databases (user data): created at the app root during local
+# runs (e.g. desifit/settings.hive); never commit them.
+*.hive
+
 # IDEs
 .idea/
 *.iml
