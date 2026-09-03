@@ -6,11 +6,32 @@ on:
       - main
     tags:
       - 'v*'
+  # Run the cheap checks (syntax gate + analyze) on every PR. The release
+  # build steps below are gated to push events so PRs only run the checks.
+  pull_request:
 
 jobs:
+  # SDK-free first gate: catches unbalanced delimiters in any Dart file
+  # before the expensive JDK/Flutter build steps run. Fails the release if
+  # the tree cannot even parse. This is not a substitute for `flutter analyze`
+  # (see the Analyze Project step) — it is a cheap structural pre-check.
+  syntax-gate:
+    name: Dart syntax balance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Check Dart bracket balance (desifit + AuraSync)
+        run: node tools/check_dart_syntax.js
+
   build:
     name: Build Release AAB
+    needs: syntax-gate
     runs-on: ubuntu-latest
+    # On PRs this job runs only through `flutter analyze`; the release
+    # signing/build/upload steps carry `if: github.event_name == 'push'`.
+    # Push events also include version tags (v*), so the release still builds.
 
     steps:
       # Step 1: Check out the repository
@@ -45,10 +66,11 @@ jobs:
       # Step 5: Run Static Code Analysis (optional check)
       - name: Analyze Project
         working-directory: desifit
-        run: flutter analyze || true
+        run: flutter analyze
 
       # Step 5.5: Configure Production Release Signing (if secrets are set)
       - name: Configure Production Signing
+        if: github.event_name == 'push'
         working-directory: desifit
         env:
           KEYSTORE_BASE64: ${{ secrets.PLAY_STORE_KEYSTORE_BASE64 }}
@@ -71,6 +93,7 @@ jobs:
       # Step 6: Build Android App Bundle (AAB) with Obfuscation
       # Note: inject your OpenRouter key dynamically using secret variables if available
       - name: Build Release Bundle
+        if: github.event_name == 'push'
         working-directory: desifit
         env:
           OPENROUTER_KEY: ${{ secrets.OPENROUTER_API_KEY }}
@@ -79,6 +102,7 @@ jobs:
 
       # Step 7: Archive the compiled build artifact
       - name: Upload Android Release Artifact
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: desifit-release-bundle

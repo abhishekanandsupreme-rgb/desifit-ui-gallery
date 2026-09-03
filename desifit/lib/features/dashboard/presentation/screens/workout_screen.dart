@@ -10,7 +10,7 @@ import '../../../../core/ads/banner_ad_widget.dart';
 import '../../../../core/network/analytics_service.dart';
 
 class WorkoutScreen extends StatefulWidget {
-  const WorkoutScreen({Key? key}) : super(key: key);
+  const WorkoutScreen({super.key});
 
   @override
   State<WorkoutScreen> createState() => _WorkoutScreenState();
@@ -77,9 +77,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
     
     if (args is String && _selectedModality == null) {
       _selectedModality = args;
-    } else if (_selectedModality == null) {
-      _selectedModality = 'All';
     }
+    _selectedModality ??= 'All';
     
     if (_selectedSplit == null) {
       _selectedSplit = state.selectedWorkoutSplit ?? 'Push/Pull/Legs';
@@ -87,13 +86,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
     }
 
     final mediaQueryData = MediaQuery.of(context);
-    final clampedTextScaleFactor = mediaQueryData.textScaleFactor.clamp(1.0, 1.3);
     final clampedTextScaler = mediaQueryData.textScaler.clamp(minScaleFactor: 1.0, maxScaleFactor: 1.3);
 
     return MediaQuery(
       data: mediaQueryData.copyWith(
-        // ignore: deprecated_member_use
-        textScaleFactor: clampedTextScaleFactor,
         textScaler: clampedTextScaler,
       ),
       child: Scaffold(
@@ -201,7 +197,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                   avatar: Icon(mod['icon'] as IconData, size: 16, color: isSelected ? AppColors.primary : AppColors.onSurfaceVariant),
                   label: Text(state.translate(mod['label'] as String)),
                   selected: isSelected,
-                  selectedColor: AppColors.primaryContainer.withOpacity(0.2),
+                  selectedColor: AppColors.primaryContainer.withValues(alpha: 0.2),
                   backgroundColor: AppColors.surfaceContainerLow,
                   labelStyle: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -211,7 +207,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                     side: BorderSide(
-                      color: isSelected ? AppColors.primary : AppColors.outlineVariant.withOpacity(0.3),
+                      color: isSelected ? AppColors.primary : AppColors.outlineVariant.withValues(alpha: 0.3),
                     ),
                   ),
                   onSelected: (selected) {
@@ -273,7 +269,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                     ],
                   ),
                   selected: isSelected,
-                  selectedColor: AppColors.primaryContainer.withOpacity(0.2),
+                  selectedColor: AppColors.primaryContainer.withValues(alpha: 0.2),
                   backgroundColor: AppColors.surfaceContainerLow,
                   labelStyle: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -283,7 +279,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                     side: BorderSide(
-                      color: isSelected ? AppColors.primary : AppColors.outlineVariant.withOpacity(0.3),
+                      color: isSelected ? AppColors.primary : AppColors.outlineVariant.withValues(alpha: 0.3),
                     ),
                   ),
                   onSelected: (selected) {
@@ -325,7 +321,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                   child: ChoiceChip(
                     label: Text(state.translate(subTabName)),
                     selected: isSelected,
-                    selectedColor: AppColors.secondaryContainer.withOpacity(0.2),
+                    selectedColor: AppColors.secondaryContainer.withValues(alpha: 0.2),
                     backgroundColor: AppColors.surfaceContainerLow,
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -335,7 +331,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                       side: BorderSide(
-                        color: isSelected ? AppColors.secondary : AppColors.outlineVariant.withOpacity(0.3),
+                        color: isSelected ? AppColors.secondary : AppColors.outlineVariant.withValues(alpha: 0.3),
                       ),
                     ),
                     onSelected: (selected) {
@@ -405,7 +401,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                           child: Row(
                             children: [
                               CircleAvatar(
-                                backgroundColor: AppColors.primaryContainer.withOpacity(0.1),
+                                backgroundColor: AppColors.primaryContainer.withValues(alpha: 0.1),
                                 child: Icon(workout.icon, color: AppColors.primary),
                               ),
                               const SizedBox(width: 16),
@@ -447,10 +443,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                           decoration: BoxDecoration(
                                             color: workout.category == 'Gym'
-                                                ? AppColors.primary.withOpacity(0.15)
+                                                ? AppColors.primary.withValues(alpha: 0.15)
                                                 : (workout.category == 'Desi'
-                                                    ? Colors.amber.withOpacity(0.15)
-                                                    : AppColors.secondary.withOpacity(0.15)),
+                                                    ? Colors.amber.withValues(alpha: 0.15)
+                                                    : AppColors.secondary.withValues(alpha: 0.15)),
                                             borderRadius: BorderRadius.circular(6),
                                           ),
                                           child: Text(
@@ -482,10 +478,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                 decoration: BoxDecoration(
                                   color: workout.difficulty == 'Hard'
-                                      ? Colors.red.withOpacity(0.1)
+                                      ? Colors.red.withValues(alpha: 0.1)
                                       : (workout.difficulty == 'Medium'
-                                          ? Colors.orange.withOpacity(0.1)
-                                          : Colors.green.withOpacity(0.1)),
+                                          ? Colors.orange.withValues(alpha: 0.1)
+                                          : Colors.green.withValues(alpha: 0.1)),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Text(
@@ -514,10 +510,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.04),
+            color: Colors.white.withValues(alpha: 0.04),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               width: 1,
             ),
           ),
@@ -771,7 +767,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                             height: 100,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: AppColors.primaryContainer.withOpacity(0.15),
+                              color: AppColors.primaryContainer.withValues(alpha: 0.15),
                               border: Border.all(color: AppColors.primary, width: 2),
                             ),
                             child: Icon(
@@ -877,7 +873,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                     _buildWebLinkButton(
                       context, 
                       'YouTube Search', 
-                      'https://www.youtube.com/results?search_query=${Uri.encodeComponent(workout.name + " tutorial")}',
+                      'https://www.youtube.com/results?search_query=${Uri.encodeComponent('${workout.name} tutorial')}',
                       Icons.play_circle_outline,
                       Colors.red,
                     ),
@@ -1060,7 +1056,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
                 decoration: BoxDecoration(
                   color: AppColors.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.outlineVariant.withOpacity(0.3)),
+                  border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
                 ),
                 child: SelectableText(
                   cardText,
@@ -1112,7 +1108,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
         style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
       ),
       backgroundColor: AppColors.surfaceContainerLow,
-      side: BorderSide(color: AppColors.outlineVariant.withOpacity(0.3)),
+      side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       onPressed: () => _launchURL(context, url),
     );
@@ -1122,21 +1118,25 @@ class _WorkoutScreenState extends State<WorkoutScreen> with SingleTickerProvider
     try {
       final Uri url = Uri.parse(urlString);
       if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Could not launch $urlString')),
-        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Could not launch $urlString')),
+          );
+        }
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error opening link: $e')),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error opening link: $e')),
+        );
+      }
     }
   }
 }
 
 class TempoPacerWidget extends StatefulWidget {
   final String tempo;
-  const TempoPacerWidget({Key? key, required this.tempo}) : super(key: key);
+  const TempoPacerWidget({super.key, required this.tempo});
 
   @override
   State<TempoPacerWidget> createState() => _TempoPacerWidgetState();
@@ -1234,10 +1234,10 @@ class _TempoPacerWidgetState extends State<TempoPacerWidget> {
       decoration: BoxDecoration(
         color: AppColors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: phaseColor.withOpacity(0.3), width: 1.5),
+        border: Border.all(color: phaseColor.withValues(alpha: 0.3), width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: phaseColor.withOpacity(0.05),
+            color: phaseColor.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           )
@@ -1253,7 +1253,7 @@ class _TempoPacerWidgetState extends State<TempoPacerWidget> {
               value: percent,
               strokeWidth: 3.5,
               valueColor: AlwaysStoppedAnimation<Color>(phaseColor),
-              backgroundColor: phaseColor.withOpacity(0.1),
+              backgroundColor: phaseColor.withValues(alpha: 0.1),
             ),
           ),
           const SizedBox(width: 16),

@@ -4,7 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ad_service.dart';
 
 class BannerAdWidget extends StatefulWidget {
-  const BannerAdWidget({Key? key}) : super(key: key);
+  const BannerAdWidget({super.key});
 
   @override
   State<BannerAdWidget> createState() => _BannerAdWidgetState();
@@ -64,19 +64,19 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
-              const Color(0xFFE05C2B).withOpacity(0.12),
-              const Color(0xFFE05C2B).withOpacity(0.04),
+              const Color(0xFFE05C2B).withValues(alpha: 0.12),
+              const Color(0xFFE05C2B).withValues(alpha: 0.04),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           border: Border.all(
-            color: const Color(0xFFE05C2B).withOpacity(0.25),
+            color: const Color(0xFFE05C2B).withValues(alpha: 0.25),
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -120,7 +120,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
                     'AdMob active (Publisher: pub-4656039342175944)',
                     style: TextStyle(
                       fontSize: 9,
-                      color: Colors.white.withOpacity(0.6),
+                      color: Colors.white.withValues(alpha: 0.6),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -129,7 +129,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
             ),
             Icon(
               Icons.chevron_right,
-              color: const Color(0xFFE05C2B).withOpacity(0.8),
+              color: const Color(0xFFE05C2B).withValues(alpha: 0.8),
               size: 16,
             ),
             const SizedBox(width: 12),

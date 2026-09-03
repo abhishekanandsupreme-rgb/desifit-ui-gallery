@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shop-in {
+            animation: shop-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+        @keyframes shop-in {
+            0% { transform: translateY(16px) scale(0.97); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        .coin-glow {
+            animation: coin-glow 2s ease-in-out infinite;
+        }
+        @keyframes coin-glow {
+            0%, 100% { box-shadow: 0 0 0 rgba(230,168,0,0); }
+            50% { box-shadow: 0 0 18px rgba(230,168,0,0.45); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script>
+(function() {
+  var K = 'desifit-dark-mode';
+  function apply() {
+    try {
+      var dark = localStorage.getItem(K) === 'true';
+      document.documentElement.classList.toggle('dark', dark);
+    } catch(e) {}
+  }
+  apply();
+  window.addEventListener('storage', apply);
+})();
+</script>
+  </head>
+<body class="bg-surface dark:bg-stone-950 font-body text-on-surface dark:text-stone-100 antialiased mb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">arrow_back</span>
+<span class="text-xl font-bold text-[#E65100] dark:text-[#FF8A50] font-headline tracking-tight">Sattu Shop</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">local_mall</span>
+</div>
+</header>
+<main class="pt-16 px-4 max-w-2xl mx-auto">
+<!-- Balance hero -->
+<section class="mt-6 mb-6 shop-in">
+<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-600 to-amber-700 p-6 text-white">
+<div class="absolute top-[-30%] right-[-10%] w-44 h-44 rounded-full bg-white/15 blur-2xl"></div>
+<div class="absolute bottom-[-40%] left-[-5%] w-48 h-48 rounded-full bg-black/10 blur-2xl"></div>
+<div class="relative">
+<div class="flex items-center justify-between mb-4">
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-amber-100/90">Your Balance</p>
+<p class="text-4xl font-extrabold font-headline tracking-tight">2,450 <span class="text-xl">Sattu</span></p>
+</div>
+<div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center coin-glow">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">redeem</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-semibold text-amber-100/80">Earn 120 more for a ₹50 coupon</span>
+<div class="h-2 w-40 rounded-full bg-white/25 overflow-hidden">
+<div class="h-full w-[78%] rounded-full bg-white"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories -->
+<section class="mb-6">
+<div class="flex gap-2 overflow-x-auto pb-1">
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary text-xs font-bold whitespace-nowrap">All</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest dark:bg-stone-900 border border-outline-variant dark:border-stone-700/30/30 text-on-surface-variant dark:text-stone-400 text-xs font-bold whitespace-nowrap">Coupons</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest dark:bg-stone-900 border border-outline-variant dark:border-stone-700/30/30 text-on-surface-variant dark:text-stone-400 text-xs font-bold whitespace-nowrap">Merch</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest dark:bg-stone-900 border border-outline-variant dark:border-stone-700/30/30 text-on-surface-variant dark:text-stone-400 text-xs font-bold whitespace-nowrap">Food</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest dark:bg-stone-900 border border-outline-variant dark:border-stone-700/30/30 text-on-surface-variant dark:text-stone-400 text-xs font-bold whitespace-nowrap">Donations</button>
+</div>
+</section>
+<!-- Rewards grid -->
+<section class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.04)] shop-in">
+<div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-orange-600" style="font-variation-settings: 'FILL' 1;">local_cafe</span>
+</div>
+<p class="text-sm font-bold leading-tight">Free Sattu Glass</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400 mt-1">Any partner café</p>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs font-extrabold text-amber-600">500</span>
+<button class="px-3 py-1.5 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary text-[10px] font-bold active:scale-95 transition-transform">Redeem</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.04)] shop-in" style="animation-delay: 0.08s;">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">sell</span>
+</div>
+<p class="text-sm font-bold leading-tight">₹50 Grocery Coupon</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400 mt-1">BigBasket / DMart</p>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs font-extrabold text-amber-600">2,570</span>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low dark:bg-stone-800/60 text-on-surface-variant dark:text-stone-400 text-[10px] font-bold">Locked</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.04)] shop-in" style="animation-delay: 0.16s;">
+<div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-violet-600" style="font-variation-settings: 'FILL' 1;">checkroom</span>
+</div>
+<p class="text-sm font-bold leading-tight">DesiFit T-Shirt</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400 mt-1">Organic cotton</p>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs font-extrabold text-amber-600">3,200</span>
+<button class="px-3 py-1.5 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary text-[10px] font-bold active:scale-95 transition-transform">Redeem</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.04)] shop-in" style="animation-delay: 0.24s;">
+<div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-green-700" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</div>
+<p class="text-sm font-bold leading-tight">Feed a Child</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400 mt-1">Donate to Akshaya Patra</p>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs font-extrabold text-amber-600">400</span>
+<button class="px-3 py-1.5 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary text-[10px] font-bold active:scale-95 transition-transform">Donate</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.04)] shop-in" style="animation-delay: 0.32s;">
+<div class="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-sky-600" style="font-variation-settings: 'FILL' 1;">lunch_dining</span>
+</div>
+<p class="text-sm font-bold leading-tight">Protein Shaker</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400 mt-1">700ml, leak-proof</p>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs font-extrabold text-amber-600">1,800</span>
+<button class="px-3 py-1.5 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary text-[10px] font-bold active:scale-95 transition-transform">Redeem</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 shadow-[0_4px_16px_rgba(0,0,0,0.04)] shop-in" style="animation-delay: 0.4s;">
+<div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-amber-600" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+<p class="text-sm font-bold leading-tight">Streak Shield</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400 mt-1">Protects 1 day streak</p>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs font-extrabold text-amber-600">750</span>
+<button class="px-3 py-1.5 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary text-[10px] font-bold active:scale-95 transition-transform">Redeem</button>
+</div>
+</div>
+</section>
+<!-- Earn strip -->
+<section class="mt-6">
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.04)]">
+<div class="w-11 h-11 rounded-xl bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">How to earn Sattu</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">Log meals (+20) · Streaks (+50/day) · Refer a friend (+300)</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant dark:text-stone-400">chevron_right</span>
+</div>
+</section>
+</main>
+</body></html>

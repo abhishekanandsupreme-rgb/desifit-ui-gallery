@@ -59,12 +59,12 @@ final List<BadgeMetadata> allBadges = [
 ];
 
 class BadgesDialog extends StatelessWidget {
-  const BadgesDialog({Key? key}) : super(key: key);
+  const BadgesDialog({super.key});
 
   static void show(BuildContext context) {
     showDialog(
       context: context,
-      barrierColor: Colors.black.withOpacity(0.4),
+      barrierColor: Colors.black.withValues(alpha: 0.4),
       builder: (context) => const BadgesDialog(),
     );
   }
@@ -80,10 +80,10 @@ class BadgesDialog extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.surfaceContainerLowest.withOpacity(0.85),
+              color: AppColors.surfaceContainerLowest.withValues(alpha: 0.85),
               borderRadius: BorderRadius.circular(28),
               border: Border.all(
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withValues(alpha: 0.3),
                 width: 1.5,
               ),
             ),
@@ -122,10 +122,10 @@ class BadgesDialog extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: AppColors.primary.withOpacity(0.08),
+                              color: AppColors.primary.withValues(alpha: 0.08),
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
-                                color: AppColors.primary.withOpacity(0.2),
+                                color: AppColors.primary.withValues(alpha: 0.2),
                                 width: 1,
                               ),
                             ),
@@ -167,6 +167,7 @@ class BadgesDialog extends StatelessWidget {
                                       await state.loginWithGoogle();
                                       if (context.mounted) Navigator.pop(context);
                                     } catch (e) {
+                                      if (!context.mounted) return;
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(content: Text('Login failed: $e')),
                                       );
@@ -180,7 +181,7 @@ class BadgesDialog extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                       side: BorderSide(
-                                        color: AppColors.outlineVariant.withOpacity(0.3),
+                                        color: AppColors.outlineVariant.withValues(alpha: 0.3),
                                         width: 1,
                                       ),
                                     ),
@@ -227,7 +228,7 @@ class BadgesDialog extends StatelessWidget {
                               end: Alignment.bottomRight,
                             ),
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.orange.withOpacity(0.2)),
+                            border: Border.all(color: Colors.orange.withValues(alpha: 0.2)),
                           ),
                           child: Row(
                             children: [
@@ -297,18 +298,18 @@ class BadgesDialog extends StatelessWidget {
                                 duration: const Duration(milliseconds: 300),
                                 decoration: BoxDecoration(
                                   color: isEarned 
-                                      ? Colors.white.withOpacity(0.9) 
-                                      : Colors.grey.withOpacity(0.12),
+                                      ? Colors.white.withValues(alpha: 0.9) 
+                                      : Colors.grey.withValues(alpha: 0.12),
                                   borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
                                     color: isEarned 
-                                        ? badge.gradientColors.first.withOpacity(0.5) 
-                                        : Colors.grey.withOpacity(0.2),
+                                        ? badge.gradientColors.first.withValues(alpha: 0.5) 
+                                        : Colors.grey.withValues(alpha: 0.2),
                                     width: isEarned ? 2.0 : 1.0,
                                   ),
                                   boxShadow: isEarned ? [
                                     BoxShadow(
-                                      color: badge.gradientColors.first.withOpacity(0.2),
+                                      color: badge.gradientColors.first.withValues(alpha: 0.2),
                                       blurRadius: 10,
                                       offset: const Offset(0, 4),
                                     )
@@ -338,7 +339,7 @@ class BadgesDialog extends StatelessWidget {
                                                     ),
                                               boxShadow: isEarned ? [
                                                 BoxShadow(
-                                                  color: badge.gradientColors.first.withOpacity(0.3),
+                                                  color: badge.gradientColors.first.withValues(alpha: 0.3),
                                                   blurRadius: 8,
                                                   offset: const Offset(0, 3),
                                                 )

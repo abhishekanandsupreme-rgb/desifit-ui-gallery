@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .coll-card {
+            animation: coll-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+        @keyframes coll-in {
+            0% { transform: translateY(16px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script>
+(function() {
+  var K = 'desifit-dark-mode';
+  function apply() {
+    try {
+      var dark = localStorage.getItem(K) === 'true';
+      document.documentElement.classList.toggle('dark', dark);
+    } catch(e) {}
+  }
+  apply();
+  window.addEventListener('storage', apply);
+})();
+</script>
+  </head>
+<body class="bg-surface dark:bg-stone-950 font-body text-on-surface dark:text-stone-100 antialiased mb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">arrow_back</span>
+<span class="text-xl font-bold text-[#E65100] dark:text-[#FF8A50] font-headline tracking-tight">Collections</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">search</span>
+</div>
+</header>
+<main class="pt-16 px-4 max-w-2xl mx-auto">
+<!-- Featured collection -->
+<section class="mt-6 mb-6 coll-card">
+<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-secondary to-[#14501c] p-6 text-on-primary">
+<div class="absolute top-[-30%] right-[-10%] w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
+<div class="absolute bottom-[-40%] left-[-10%] w-48 h-48 rounded-full bg-black/10 blur-2xl"></div>
+<div class="flex items-start justify-between relative">
+<div class="max-w-[70%]">
+<p class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed/90">Featured Collection</p>
+<h1 class="font-headline text-2xl font-extrabold tracking-tight mt-1 leading-tight">Protein Under<br/>₹100/Day</h1>
+<p class="text-xs text-on-primary/80 mt-2 font-medium">12 recipes · avg 28g protein</p>
+</div>
+<div class="w-14 h-14 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">savings</span>
+</div>
+</div>
+<div class="flex gap-2 mt-5 relative">
+<span class="px-2.5 py-1 rounded-full bg-white/15 backdrop-blur text-[9px] font-bold uppercase tracking-wider">Meal Prep</span>
+<span class="px-2.5 py-1 rounded-full bg-white/15 backdrop-blur text-[9px] font-bold uppercase tracking-wider">High Protein</span>
+</div>
+</div>
+</section>
+<!-- Collection list -->
+<section class="space-y-3">
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.04)] coll-card" style="animation-delay: 0.08s;">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">egg</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Breakfast Basics</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">8 recipes · avg 22g protein</p>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant dark:text-stone-400">
+<span class="text-[10px] font-bold">6 saved</span>
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.04)] coll-card" style="animation-delay: 0.16s;">
+<div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-orange-600" style="font-variation-settings: 'FILL' 1;">local_pizza</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Desi Snacks</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">14 recipes · avg 18g protein</p>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant dark:text-stone-400">
+<span class="text-[10px] font-bold">9 saved</span>
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.04)] coll-card" style="animation-delay: 0.24s;">
+<div class="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sky-600" style="font-variation-settings: 'FILL' 1;">set_meal</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">No-Cook Meals</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">6 recipes · hosteller friendly</p>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant dark:text-stone-400">
+<span class="text-[10px] font-bold">4 saved</span>
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.04)] coll-card" style="animation-delay: 0.32s;">
+<div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-violet-600" style="font-variation-settings: 'FILL' 1;">nightlight</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Light Dinners</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">10 recipes · avg 25g protein</p>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant dark:text-stone-400">
+<span class="text-[10px] font-bold">7 saved</span>
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest dark:bg-stone-900 rounded-2xl p-4 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.04)] coll-card" style="animation-delay: 0.4s;">
+<div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-amber-600" style="font-variation-settings: 'FILL' 1;">local_cafe</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Sattu Recipes</p>
+<p class="text-[10px] text-on-surface-variant dark:text-stone-400">5 recipes · super cheap protein</p>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant dark:text-stone-400">
+<span class="text-[10px] font-bold">11 saved</span>
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Create collection -->
+<section class="mt-4">
+<button class="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-surface-container-low dark:bg-stone-800/60 text-on-surface-variant dark:text-stone-400 font-headline font-bold text-sm active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">add</span>
+Create Collection
+</button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-2 pb-4 pt-2 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[11px] font-medium font-headline">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#FFCCBC] dark:bg-[#A43700]/30 text-[#A43700] dark:text-[#FFCCBC] rounded-2xl px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span class="text-[11px] font-medium font-headline">Collections</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="text-[11px] font-medium font-headline">Coach</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[11px] font-medium font-headline">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -38,7 +38,7 @@ class StapleIngredient {
 }
 
 class SastaProteinCalculatorScreen extends StatefulWidget {
-  const SastaProteinCalculatorScreen({Key? key}) : super(key: key);
+  const SastaProteinCalculatorScreen({super.key});
 
   @override
   State<SastaProteinCalculatorScreen> createState() => _SastaProteinCalculatorScreenState();
@@ -346,10 +346,10 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                 decoration: BoxDecoration(
                   color: AppColors.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(28),
-                  border: Border.all(color: AppColors.outlineVariant.withOpacity(0.2)),
+                  border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.2)),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.02),
+                      color: Colors.black.withValues(alpha: 0.02),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     )
@@ -466,7 +466,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
     return Container(
       height: 44,
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerHighest.withOpacity(0.5),
+        color: AppColors.surfaceContainerHighest.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Padding(
@@ -474,7 +474,11 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
         child: Row(
           children: [
             Expanded(
-              child: GestureDetector(
+              child: Semantics(
+                button: true,
+                selected: _isVegOnly,
+                label: 'Veg Only diet',
+                child: GestureDetector(
                 onTap: () => _onCategoryChanged(true),
                 child: Container(
                   decoration: BoxDecoration(
@@ -483,7 +487,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                     boxShadow: _isVegOnly
                         ? [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
+                              color: Colors.black.withValues(alpha: 0.04),
                               blurRadius: 4,
                               offset: const Offset(0, 2),
                             )
@@ -512,9 +516,14 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                   ),
                 ),
               ),
+              ),
             ),
             Expanded(
-              child: GestureDetector(
+              child: Semantics(
+                button: true,
+                selected: !_isVegOnly,
+                label: 'Include Non-Veg diet',
+                child: GestureDetector(
                 onTap: () => _onCategoryChanged(false),
                 child: Container(
                   decoration: BoxDecoration(
@@ -523,7 +532,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                     boxShadow: !_isVegOnly
                         ? [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
+                              color: Colors.black.withValues(alpha: 0.04),
                               blurRadius: 4,
                               offset: const Offset(0, 2),
                             )
@@ -552,6 +561,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                   ),
                 ),
               ),
+              ),
             ),
           ],
         ),
@@ -566,7 +576,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
         decoration: BoxDecoration(
           color: AppColors.surfaceContainerLowest,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+          border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
         ),
         child: Column(
           children: [
@@ -620,9 +630,9 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primary.withOpacity(0.04),
+        color: AppColors.primary.withValues(alpha: 0.04),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.primary.withOpacity(0.1)),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.1)),
       ),
       padding: const EdgeInsets.all(12),
       child: Row(
@@ -666,7 +676,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
       color: AppColors.surfaceContainerLowest,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: AppColors.outlineVariant.withOpacity(0.15)),
+        side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.15)),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 12.0),
@@ -684,8 +694,8 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: ing.isNonVeg
-                              ? Colors.red.shade50.withOpacity(0.6)
-                              : Colors.green.shade50.withOpacity(0.6),
+                              ? Colors.red.shade50.withValues(alpha: 0.6)
+                              : Colors.green.shade50.withValues(alpha: 0.6),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -718,7 +728,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: qty > 0 ? AppColors.primaryContainer.withOpacity(0.2) : AppColors.surfaceContainerHighest.withOpacity(0.3),
+                    color: qty > 0 ? AppColors.primaryContainer.withValues(alpha: 0.2) : AppColors.surfaceContainerHighest.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
@@ -738,6 +748,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
             Row(
               children: [
                 IconButton(
+                  tooltip: 'Decrease quantity',
                   onPressed: () {
                     if (qty > ing.minVal) {
                       setState(() {
@@ -746,7 +757,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                     }
                   },
                   icon: const Icon(Icons.remove_circle_outline, size: 20),
-                  color: qty > 0 ? AppColors.primary : AppColors.onSurfaceVariant.withOpacity(0.5),
+                  color: qty > 0 ? AppColors.primary : AppColors.onSurfaceVariant.withValues(alpha: 0.5),
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
                 ),
@@ -754,9 +765,9 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                   child: SliderTheme(
                     data: SliderThemeData(
                       activeTrackColor: AppColors.primary,
-                      inactiveTrackColor: AppColors.surfaceContainerHighest.withOpacity(0.5),
+                      inactiveTrackColor: AppColors.surfaceContainerHighest.withValues(alpha: 0.5),
                       thumbColor: AppColors.primary,
-                      overlayColor: AppColors.primary.withOpacity(0.12),
+                      overlayColor: AppColors.primary.withValues(alpha: 0.12),
                       trackHeight: 4,
                       thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
                       overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
@@ -775,6 +786,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                   ),
                 ),
                 IconButton(
+                  tooltip: 'Increase quantity',
                   onPressed: () {
                     if (qty < ing.maxVal) {
                       setState(() {
@@ -832,7 +844,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
       padding: const EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 24),
       decoration: BoxDecoration(
         color: AppColors.surfaceContainerLowest,
-        border: Border.all(color: AppColors.outlineVariant.withOpacity(0.2)),
+        border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.2)),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(28),
           topRight: Radius.circular(28),
@@ -848,8 +860,8 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: AppColors.surfaceContainerHighest.withOpacity(0.5),
-                disabledForegroundColor: AppColors.onSurfaceVariant.withOpacity(0.5),
+                disabledBackgroundColor: AppColors.surfaceContainerHighest.withValues(alpha: 0.5),
+                disabledForegroundColor: AppColors.onSurfaceVariant.withValues(alpha: 0.5),
                 minimumSize: const Size.fromHeight(56),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -893,7 +905,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
               topLeft: Radius.circular(32),
               topRight: Radius.circular(32),
             ),
-            border: Border.all(color: AppColors.outlineVariant.withOpacity(0.2)),
+            border: Border.all(color: AppColors.outlineVariant.withValues(alpha: 0.2)),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: Column(
@@ -906,7 +918,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
                   width: 40,
                   height: 5,
                   decoration: BoxDecoration(
-                    color: AppColors.outlineVariant.withOpacity(0.5),
+                    color: AppColors.outlineVariant.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -1014,7 +1026,7 @@ class _SastaProteinCalculatorScreenState extends State<SastaProteinCalculatorScr
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          side: BorderSide(color: AppColors.outlineVariant.withOpacity(0.3)),
+          side: BorderSide(color: AppColors.outlineVariant.withValues(alpha: 0.3)),
           foregroundColor: AppColors.onSurface,
         ),
         child: Column(
@@ -1061,7 +1073,7 @@ class _SastaScoreDialPainter extends CustomPainter {
 
     // Draw background arc (gray half circle)
     final Paint bgPaint = Paint()
-      ..color = AppColors.surfaceContainerHighest.withOpacity(0.4)
+      ..color = AppColors.surfaceContainerHighest.withValues(alpha: 0.4)
       ..strokeWidth = 14
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;

@@ -87,11 +87,11 @@ class AuthService {
         return userModel;
       }
     } catch (e) {
-      print('Firebase/Google Auth failed: $e.');
+      debugPrint('Firebase/Google Auth failed: $e.');
       // Only fallback to simulator in debug mode, on localhost, or if explicitly requested.
       // In production/release (on actual domains), propagation is required to avoid data cross-contamination.
       if (kDebugMode || _isLocalHost || forceSimulate) {
-        print('Falling back to simulator mode.');
+        debugPrint('Falling back to simulator mode.');
         return _runSimulation();
       }
       rethrow;
@@ -118,7 +118,7 @@ class AuthService {
       await _auth.signOut();
       await _googleSignIn.signOut();
     } catch (e) {
-      print('Sign out error (ignored for simulator): $e');
+      debugPrint('Sign out error (ignored for simulator): $e');
     }
     _clearUserCache();
   }
@@ -129,7 +129,7 @@ class AuthService {
       try {
         return UserModel.fromJson(map);
       } catch (e) {
-        print('Error reading cached user: $e');
+        debugPrint('Error reading cached user: $e');
       }
     }
     return null;

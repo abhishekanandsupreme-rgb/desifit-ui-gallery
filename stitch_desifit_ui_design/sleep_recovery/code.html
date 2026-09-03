@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#a0f399",
+                        "on-secondary-container": "#217128",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#005ab7",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "tertiary-fixed": "#d7e2ff",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-primary-fixed": "#380d00",
+                        "secondary": "#1b6d24",
+                        "primary-container": "#cd4700",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#8f7066",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#fefcff",
+                        "tertiary-container": "#0072e4",
+                        "secondary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-primary": "#ffb59a",
+                        "primary": "#a43700",
+                        "on-tertiary-fixed-variant": "#00458f",
+                        "surface-tint": "#a83900",
+                        "primary-fixed-dim": "#ffb59a",
+                        "primary-fixed": "#ffdbcf",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed-dim": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#001b3f",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "outline-variant": "#e3bfb2",
+                        "secondary-fixed": "#a3f69c",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sleep-ring {
+            transition: stroke-dashoffset 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .sleep-in {
+            animation: sleep-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+        @keyframes sleep-in {
+            0% { transform: translateY(18px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .moon-float {
+            animation: moon-float 4s ease-in-out infinite;
+        }
+        @keyframes moon-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(6deg); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script>
+(function() {
+  var K = 'desifit-dark-mode';
+  function apply() {
+    try {
+      var dark = localStorage.getItem(K) === 'true';
+      document.documentElement.classList.toggle('dark', dark);
+    } catch(e) {}
+  }
+  apply();
+  window.addEventListener('storage', apply);
+})();
+</script>
+  </head>
+<body class="bg-surface dark:bg-stone-950 font-body text-on-surface dark:text-stone-100 antialiased mb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FAFAFA] dark:bg-stone-950 flex justify-between items-center px-4 py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">arrow_back</span>
+<span class="text-xl font-bold text-[#E65100] dark:text-[#FF8A50] font-headline tracking-tight">Sleep</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-600 dark:text-stone-400">more_vert</span>
+</div>
+</header>
+<main class="pt-16 px-4 max-w-2xl mx-auto">
+<!-- Sleep score hero -->
+<section class="mt-6 mb-6">
+<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#3d2c6e] to-[#6a5acd] p-6 text-white">
+<div class="absolute top-[-20%] right-[-5%]">
+<span class="material-symbols-outlined moon-float text-6xl text-white/30" style="font-variation-settings: 'FILL' 1;">bedtime</span>
+</div>
+<div class="absolute bottom-[-25%] left-[-10%] w-48 h-48 rounded-full bg-white/5 blur-2xl"></div>
+<div class="flex items-center gap-6 relative">
+<div class="relative w-28 h-28 shrink-0">
+<svg class="w-full h-full" viewBox="0 0 100 100">
+<circle class="text-white/15" cx="50" cy="50" fill="transparent" r="42" stroke="currentColor" stroke-width="9"></circle>
+<circle class="text-white sleep-ring" cx="50" cy="50" fill="transparent" r="42" stroke="currentColor" stroke-dasharray="263.9" stroke-dashoffset="53" stroke-linecap="round" stroke-width="9"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-extrabold font-headline">84</span>
+<span class="text-[9px] font-bold uppercase tracking-widest text-white/70">Sleep Score</span>
+</div>
+</div>
+<div>
+<p class="font-headline text-lg font-bold">Great Recovery</p>
+<p class="text-xs text-white/70 mt-1">7h 24m asleep</p>
+<p class="text-xs text-white/70 mt-0.5">Bed 11:02 PM · Up 6:26 AM</p>
+<div class="flex items-center gap-1 mt-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="text-[10px] font-bold text-white/80">+6 vs yesterday</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stage breakdown -->
+<section class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_4px_20px_rgba(164,55,0,0.04)] mb-6 sleep-in">
+<h2 class="font-headline font-bold mb-4">Sleep Stages</h2>
+<div class="space-y-3.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-violet-600 text-lg">bedtime</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between text-xs font-bold mb-1">
+<span>Deep Sleep</span>
+<span>1h 52m · 25%</span>
+</div>
+<div class="h-2 rounded-full bg-surface-container-high dark:bg-stone-800 overflow-hidden">
+<div class="h-full w-[25%] rounded-full bg-gradient-to-r from-[#6a5acd] to-[#8b7ae0]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sky-600 text-lg">visibility</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between text-xs font-bold mb-1">
+<span>REM</span>
+<span>1h 30m · 20%</span>
+</div>
+<div class="h-2 rounded-full bg-surface-container-high dark:bg-stone-800 overflow-hidden">
+<div class="h-full w-[20%] rounded-full bg-gradient-to-r from-sky-500 to-sky-300"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-amber-600 text-lg">light_mode</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between text-xs font-bold mb-1">
+<span>Light Sleep</span>
+<span>3h 58m · 53%</span>
+</div>
+<div class="h-2 rounded-full bg-surface-container-high dark:bg-stone-800 overflow-hidden">
+<div class="h-full w-[53%] rounded-full bg-gradient-to-r from-amber-500 to-amber-300"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7-day overview -->
+<section class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_4px_20px_rgba(164,55,0,0.04)] mb-6 sleep-in" style="animation-delay: 0.1s;">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline font-bold">Last 7 Nights</h2>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">View Report</span>
+</div>
+<div class="flex items-end justify-between gap-2 h-24">
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-violet-500 to-violet-300 rounded-lg" style="height: 80%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">M</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-violet-500 to-violet-300 rounded-lg" style="height: 70%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">T</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-violet-500 to-violet-300 rounded-lg" style="height: 88%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">W</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-violet-500 to-violet-300 rounded-lg" style="height: 62%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">T</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-violet-500 to-violet-300 rounded-lg" style="height: 76%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">F</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-violet-500 to-violet-300 rounded-lg" style="height: 91%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">S</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="w-full bg-surface-container-high dark:bg-stone-800 rounded-lg overflow-hidden flex flex-col justify-end h-20">
+<div class="bg-gradient-to-t from-[#6a5acd] to-[#8b7ae0] rounded-lg" style="height: 84%;"></div>
+</div>
+<span class="text-[8px] font-bold text-on-surface-variant dark:text-stone-400">S</span>
+</div>
+</div>
+</section>
+<!-- Recovery tip -->
+<section class="bg-surface-container-lowest dark:bg-stone-900 rounded-3xl p-5 shadow-[0_4px_20px_rgba(164,55,0,0.04)] sleep-in" style="animation-delay: 0.2s;">
+<div class="flex items-center justify-between mb-3">
+<h2 class="font-headline font-bold">Coach's Note</h2>
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">tips_and_updates</span>
+</div>
+<p class="text-sm text-on-surface-variant dark:text-stone-400 leading-relaxed">Your deep sleep is up 12% this week. Skip the late chai to protect it — caffeine after 4 PM can cut deep sleep by a third.</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-2 pb-4 pt-2 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-4px_20px_rgba(164,55,0,0.08)]">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[11px] font-medium font-headline">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[11px] font-medium font-headline">Recipes</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#FFCCBC] dark:bg-[#A43700]/30 text-[#A43700] dark:text-[#FFCCBC] rounded-2xl px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bedtime</span>
+<span class="text-[11px] font-medium font-headline">Sleep</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[11px] font-medium font-headline">Profile</span>
+</a>
+</nav>
+</body></html>
