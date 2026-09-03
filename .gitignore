@@ -7,22 +7,6 @@
 .pub/
 build/
 
-desifit/.dart_tool/
-desifit/.flutter-plugins
-desifit/.flutter-plugins-dependencies
-desifit/.packages
-desifit/.pub-cache/
-desifit/.pub/
-desifit/build/
-
-AuraSync/.dart_tool/
-AuraSync/.flutter-plugins
-AuraSync/.flutter-plugins-dependencies
-AuraSync/.packages
-AuraSync/.pub-cache/
-AuraSync/.pub/
-AuraSync/build/
-
 # Android Local Config
 desifit/android/local.properties
 desifit/android/app/key.jks
@@ -51,9 +35,6 @@ desifit/android/key.properties
 .idea/
 *.iml
 .vscode/
-desifit/.idea/
-desifit/*.iml
-desifit/.vscode/
 
 # Operating System
 .DS_Store
