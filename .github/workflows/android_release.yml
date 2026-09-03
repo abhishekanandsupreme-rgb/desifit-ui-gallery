@@ -6,7 +6,7 @@ on:
       - main
     tags:
       - 'v*'
-  # Run the cheap checks (syntax gate + analyze) on every PR. The release
+  # Run the cheap checks (syntax gate + analyze + AuraSync tests) on every PR. The release
   # build steps below are gated to push events so PRs only run the checks.
   pull_request:
 
@@ -24,6 +24,37 @@ jobs:
 
       - name: Check Dart bracket balance (desifit + AuraSync)
         run: node tools/check_dart_syntax.js
+
+  # Flutter analyze + full test suite for AuraSync. Until this job existed,
+  # AuraSync was only syntax-gated (SDK-free bracket balance), which cannot
+  # catch type errors or failing tests -- the same class of regression that
+  # silently broke the desifit release build. Runs on pushes to main/tags and
+  # on every pull request.
+  aura-checks:
+    name: Analyze & Test AuraSync
+    needs: syntax-gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        working-directory: AuraSync
+        run: flutter pub get
+
+      - name: Analyze Project
+        working-directory: AuraSync
+        run: flutter analyze
+
+      - name: Run Tests
+        working-directory: AuraSync
+        run: flutter test
 
   build:
     name: Build Release AAB
