@@ -25,6 +25,12 @@ jobs:
       - name: Check Dart bracket balance (desifit + AuraSync)
         run: node tools/check_dart_syntax.js
 
+      - name: Check signing-template drift
+        run: node tools/check_signing_template.js
+
+      - name: Check for private-key material
+        run: node tools/check_no_private_keys.js
+
   # Flutter analyze + full test suite for AuraSync. Until this job existed,
   # AuraSync was only syntax-gated (SDK-free bracket balance), which cannot
   # catch type errors or failing tests -- the same class of regression that
