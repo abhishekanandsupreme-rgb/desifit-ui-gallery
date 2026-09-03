@@ -99,6 +99,12 @@ jobs:
         working-directory: desifit
         run: flutter analyze
 
+      # Step 5.25: Run the desifit widget/unit test suite. Ungated so it
+      # runs on every PR and push, matching the AuraSync test gate.
+      - name: Run Tests
+        working-directory: desifit
+        run: flutter test
+
       # Step 5.5: Configure Production Release Signing (if secrets are set)
       - name: Configure Production Signing
         if: github.event_name == 'push'
