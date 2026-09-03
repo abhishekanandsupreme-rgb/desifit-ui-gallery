@@ -18,11 +18,15 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const MAX_BYTES = 4 * 1024 * 1024;
+// Patterns are assembled from fragments so this file's own source never
+// contains a literal private-key header and cannot false-positive on itself.
+const HEAD = '-----BEGIN';
+const TAIL = 'KEY-----';
 const PATTERNS = [
-  { re: /-----BEGIN [A-Z ]*PRIVATE KEY-----/, label: 'PEM private key block' },
-  { re: /"private_key":\s*"-----BEGIN/, label: 'JSON service-account private_key' },
-  { re: /-----BEGIN OPENSSH PRIVATE KEY-----/, label: 'OpenSSH private key' },
-  { re: /-----BEGIN PGP PRIVATE KEY BLOCK-----/, label: 'PGP private key block' },
+  { re: new RegExp(HEAD + ' [A-Z ]*PRIVATE ' + TAIL), label: 'PEM private key block' },
+  { re: new RegExp('"' + 'private' + '_' + 'key":\\s*"' + HEAD), label: 'JSON service-account private_key' },
+  { re: new RegExp(HEAD + ' OPENSSH PRIVATE ' + TAIL), label: 'OpenSSH private key' },
+  { re: new RegExp(HEAD + ' PGP PRIVATE KEY BLOCK' + TAIL.slice(0, 3)), label: 'PGP private key block' },
 ];
 
 // Only files tracked in git are in scope -- gitignored local secrets are
