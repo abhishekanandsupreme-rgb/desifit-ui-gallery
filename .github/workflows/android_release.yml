@@ -84,8 +84,30 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          # Key on the lockfile so browser downloads survive across runs;
+          # a cache hit skips the apt/dl.google.com fetch that flaked on
+          # 2026-09-03 (mirror mid-sync, exit 100) before any test ran.
+          key: playwright-browsers-${{ runner.os }}-${{ hashFiles('stitch_desifit_ui_design/package-lock.json') }}
+
+      - name: Install Chromium (cold cache: deps + browser, with retry)
+        if: steps.pw-cache.outputs.cache-hit != 'true'
+        run: |
+          ok=0
+          for i in 1 2 3; do
+            if npx playwright install --with-deps chromium; then ok=1; break; fi
+            echo "browser install attempt $i failed (transient mirror/network); retrying in 10s"
+            sleep 10
+          done
+          [ "$ok" = "1" ] || { echo "browser install failed after 3 attempts"; exit 1; }
+
+      - name: Verify Chromium (warm cache)
+        if: steps.pw-cache.outputs.cache-hit == 'true'
+        run: npx playwright install chromium
 
       - name: Run gallery tests
         run: npx playwright test
