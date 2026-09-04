@@ -30,6 +30,9 @@ module.exports = defineConfig({
   use: {
     headless: true,
     viewport: { width: 1280, height: 800 },
+    // A trace is recorded only when a test fails its first attempt and
+    // retries -- exactly the flaky case CI needs evidence for.
+    trace: 'on-first-retry',
   },
   reporter: isCI
     ? [['dot'], ['html', { outputFolder: 'playwright-report', open: 'never' }]]

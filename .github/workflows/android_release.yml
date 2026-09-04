@@ -147,6 +147,19 @@ jobs:
       - name: Run gallery tests
         run: npx playwright test
 
+      # Evidence for red runs: Playwright writes test-results/ (with the
+      # on-first-retry trace) next to the config; upload it whenever the
+      # job fails so a triple-red never fails without artifacts to read.
+      - name: Upload test results and traces (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: stitch_desifit_ui_design/test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+
   build:
     name: Build Release AAB
     needs: syntax-gate
