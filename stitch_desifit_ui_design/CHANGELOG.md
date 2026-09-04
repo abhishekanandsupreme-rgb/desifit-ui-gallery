@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Playwright suite gated in CI** — `test/anim-engine.spec.js` and `test/screen-nav.spec.js`
+  (≈158 tests) now run headless on every push and PR via the `gallery-e2e` job: browsers
+  are cached and install-retried, tests retry twice on flake, and traces + test results
+  upload as artifacts on failure.
+
+### Fixed
+- **Suite record corrected** — entries below reference a `visual-regression.spec.js` and a
+  three-spec layout that describe the author’s pre-merge snapshot and were never part of
+  this repository’s tracked suite. The tracked suite is the two spec files above plus
+  `test-utils.js` (console-error monitor + screen-comparison helpers) and
+  `test/validate_tags.mjs`; the older entries are kept for history.
+
+
 ---
 
 ## [Day 6] — 2026-08-03
