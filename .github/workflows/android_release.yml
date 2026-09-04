@@ -94,7 +94,7 @@ jobs:
           # 2026-09-03 (mirror mid-sync, exit 100) before any test ran.
           key: playwright-browsers-${{ runner.os }}-${{ hashFiles('stitch_desifit_ui_design/package-lock.json') }}
 
-      - name: Install Chromium (cold cache: deps + browser, with retry)
+      - name: "Install Chromium (cold cache: deps + browser, with retry)"
         if: steps.pw-cache.outputs.cache-hit != 'true'
         run: |
           ok=0
