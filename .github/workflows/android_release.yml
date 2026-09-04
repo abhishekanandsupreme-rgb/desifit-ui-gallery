@@ -31,6 +31,41 @@ jobs:
       - name: Check for private-key material
         run: node tools/check_no_private_keys.js
 
+      # A malformed workflow file fails CI *silently* (zero jobs, no log) - as
+      # happened 2026-09-03 with an unquoted colon in a step name. actionlint
+      # parses the YAML and expression syntax up front, so a bad file fails
+      # this gate loudly instead of killing every job at validation time.
+      - name: Cache actionlint binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/actionlint
+          key: actionlint-v1.7.12
+
+      - name: Lint workflow files with actionlint
+        shell: bash
+        run: |
+          set -euo pipefail
+          ACL_DIR="$HOME/.cache/actionlint"
+          ACL="$ACL_DIR/actionlint"
+          if [ ! -x "$ACL" ]; then
+            mkdir -p "$ACL_DIR"
+            ok=0
+            for i in 1 2 3; do
+              if curl -fsSL --retry 3 -o "$ACL_DIR/actionlint.tar.gz" \
+                "https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_x86_64.tar.gz"; then
+                ok=1
+                break
+              fi
+              echo "actionlint download attempt $i failed (transient network); retrying in 10s"
+              sleep 10
+            done
+            [ "$ok" = "1" ] || { echo "actionlint download failed after 3 attempts"; exit 1; }
+            tar -xzf "$ACL_DIR/actionlint.tar.gz" -C "$ACL_DIR"
+            rm -f "$ACL_DIR/actionlint.tar.gz"
+          fi
+          "$ACL" .github/workflows/
+
+
   # Flutter analyze + full test suite for AuraSync. Until this job existed,
   # AuraSync was only syntax-gated (SDK-free bracket balance), which cannot
   # catch type errors or failing tests -- the same class of regression that
