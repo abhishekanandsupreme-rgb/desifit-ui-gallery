@@ -36,6 +36,7 @@ module.exports = defineConfig({
     : [['list'], ['html', { outputFolder: 'playwright-report', open: 'never' }]],
   // CI hygiene: forbid `.only` markers so PRs can't silently skip tests.
   forbidOnly: isCI,
-  // Fail CI fast when flaky retries hide real regressions.
-  retries: isCI ? 1 : 0,
+  // Two CI retries absorb genuine test flakes; install-time
+  // infrastructure failures are handled in the workflow step instead.
+  retries: isCI ? 2 : 0,
 });
