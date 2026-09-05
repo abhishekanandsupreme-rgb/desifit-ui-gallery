@@ -1,12 +1,21 @@
 #!/usr/bin/env bash
 #
-# Pre-push hook: lints .github/workflows with the pinned actionlint before a
-# push reaches CI, where a broken workflow file fails *silently* (zero-job
-# run, no log). Enabled per-clone with `make install-hooks` (sets
+# Pre-push hook: local mirror of every gate in the CI syntax-gate job
+# (.github/workflows/android_release.yml), so breakage is caught before a
+# push reaches CI. Enabled per-clone with `make install-hooks` (sets
 # core.hooksPath to this directory).
 #
-# Skips the lint when the pushed commits do not touch workflow files, so
-# unrelated pushes stay fast. Always lints on new branches or when the remote
+#   - actionlint on .github/workflows/*   — a broken workflow file fails CI
+#     *silently* (zero-job run, no log), so it must never leave the machine
+#   - node tools/check_dart_syntax.js     — Dart bracket balance (SDK-free)
+#   - node tools/check_signing_template.js — signing-key contract across
+#     key.properties.example / build.gradle.kts / the release workflow
+#   - node tools/check_no_private_keys.js — private-key material scan
+#
+# Each gate runs only when the pushed range touches the files it guards, so
+# unrelated pushes stay fast. The private-key scan covers *every* tracked
+# file by design (a key can hide in any file type), so it runs on any push
+# with changes. Always runs everything on new branches or when the remote
 # tip is unknown locally, to never false-negative.
 
 set -euo pipefail
@@ -15,6 +24,9 @@ REPO_ROOT="$(git rev-parse --show-toplevel)"
 LINT_SCRIPT="${REPO_ROOT}/tools/lint_workflows.sh"
 
 need_lint=0
+need_dart=0
+need_signing=0
+need_secrets=0
 
 # git feeds the hook one line per ref being pushed:
 #   <local ref> <local sha> <remote ref> <remote sha>
@@ -22,34 +34,68 @@ need_lint=0
 while read -r local_ref local_sha remote_ref remote_sha; do
   [ -n "${local_ref:-}" ] || continue
 
-  # Branch deletion: nothing to lint.
+  # Branch deletion: nothing to check.
   if [ "${local_sha}" = "0000000000000000000000000000000000000000" ]; then
     continue
   fi
 
   # New branch (remote tip all-zero) or remote tip unknown locally: cannot
-  # compute a cheap range, so lint to be safe.
+  # compute a cheap range, so run every gate to be safe.
   if [ "${remote_sha}" = "0000000000000000000000000000000000000000" ] \
     || ! git cat-file -e "${remote_sha}^{commit}" 2>/dev/null; then
     need_lint=1
+    need_dart=1
+    need_signing=1
+    need_secrets=1
     break
   fi
 
-  if git diff --name-only "${remote_sha}".."${local_sha}" 2>/dev/null \
-    | grep -q '^\.github/workflows/'; then
+  changed="$(git diff --name-only "${remote_sha}".."${local_sha}" 2>/dev/null || true)"
+  [ -n "${changed}" ] || continue
+
+  # Any change triggers the repo-wide private-key scan.
+  need_secrets=1
+  if printf '%s\n' "${changed}" | grep -q '^\.github/workflows/'; then
     need_lint=1
-    break
+  fi
+  if printf '%s\n' "${changed}" | grep -q '\.dart$'; then
+    need_dart=1
+  fi
+  if printf '%s\n' "${changed}" \
+    | grep -qE '^(desifit/android/key\.properties\.example|desifit/android/app/build\.gradle\.kts|\.github/workflows/android_release\.yml)$'; then
+    need_signing=1
   fi
 done
 
-if [ "${need_lint}" = "0" ]; then
+if [ "${need_lint}" = "0" ] && [ "${need_dart}" = "0" ] \
+  && [ "${need_signing}" = "0" ] && [ "${need_secrets}" = "0" ]; then
   exit 0
 fi
 
-if [ ! -f "${LINT_SCRIPT}" ]; then
-  echo "pre-push: ${LINT_SCRIPT} missing; skipping workflow lint" >&2
-  exit 0
+if [ "${need_lint}" = "1" ]; then
+  if [ ! -f "${LINT_SCRIPT}" ]; then
+    echo "pre-push: ${LINT_SCRIPT} missing; skipping workflow lint" >&2
+  else
+    echo "pre-push: workflow files changed — running actionlint (CI parity)..."
+    bash "${LINT_SCRIPT}"
+  fi
 fi
 
-echo "pre-push: workflow files changed — running actionlint (CI parity)..."
-bash "${LINT_SCRIPT}"
+if [ "${need_dart}" = "1" ] || [ "${need_signing}" = "1" ] || [ "${need_secrets}" = "1" ]; then
+  if ! command -v node >/dev/null 2>&1; then
+    echo "pre-push: node not found; skipping Node gates" >&2
+  else
+    if [ "${need_dart}" = "1" ]; then
+      echo "pre-push: Dart files changed — running check_dart_syntax.js (CI parity)..."
+      node "${REPO_ROOT}/tools/check_dart_syntax.js"
+    fi
+    if [ "${need_signing}" = "1" ]; then
+      echo "pre-push: signing contract changed — running check_signing_template.js (CI parity)..."
+      node "${REPO_ROOT}/tools/check_signing_template.js"
+    fi
+    if [ "${need_secrets}" = "1" ]; then
+      echo "pre-push: file changes detected — running check_no_private_keys.js (CI parity)..."
+      node "${REPO_ROOT}/tools/check_no_private_keys.js"
+    fi
+  fi
+fi
