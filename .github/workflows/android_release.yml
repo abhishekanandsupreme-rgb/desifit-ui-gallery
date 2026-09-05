@@ -226,10 +226,12 @@ jobs:
             echo "Decoding Keystore..."
             echo "$KEYSTORE_BASE64" | base64 --decode > android/app/key.jks
             echo "Writing key.properties..."
-            echo "storePassword=$KEYSTORE_PASSWORD" > android/key.properties
-            echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
-            echo "keyAlias=$KEY_ALIAS" >> android/key.properties
-            echo "storeFile=key.jks" >> android/key.properties
+            {
+              echo "storePassword=$KEYSTORE_PASSWORD"
+              echo "keyPassword=$KEY_PASSWORD"
+              echo "keyAlias=$KEY_ALIAS"
+              echo "storeFile=key.jks"
+            } > android/key.properties
           else
             echo "No signing secrets found. Building with debug signature fallback."
           fi
