@@ -20,40 +20,18 @@ test.afterAll(async () => {
   if (browser) await browser.close();
 });
 
-// Shared page: one browser page reused across every test in this file.
-// Each beforeEach resets state with a cheap localStorage.clear() + reload
-// instead of creating a fresh page (~2.8s/test -> ~40ms/test).
-//
-// Tests tagged '@pure' only call page.evaluate() (no DOM mutation, no
-// navigation), so we skip the fixture reload for them and for the test after
-// them — the reload only runs when this test is impure or the previous test
-// was impure. localStorage is still cleared so engine reads stay clean.
+// Deterministic reset: every test gets a fresh page + fixture load.
+// The previous shared-page/@pure skip-reload optimization let impure
+// tests leak DOM/async state into the next pure test (the flake class
+// seen in run 33795179439). The full reload costs ~0.4s/test.
 let page;
-let dirty = true; // first test always loads fresh
-let lastWasPure = false;
 
 test.beforeEach(async () => {
-  const pure = test.info().tags.includes('@pure');
-  lastWasPure = pure;
-  if (!page) {
-    page = await browser.newPage();
-    await page.setViewportSize({ width: 1280, height: 800 });
-  }
-  // localStorage persists across same-origin navigations, so always clear it.
-  // On the very first test the page is about:blank — the SecurityError is
-  // swallowed and the goto below loads a clean fixture anyway.
-  await page.evaluate(() => localStorage.clear()).catch(() => {});
-  if (!pure || dirty) {
-    await page.goto(FIXTURE_PATH, { waitUntil: 'domcontentloaded', timeout: 15000 });
-    await page.waitForFunction(() => typeof window.DesiFitAnim !== 'undefined', {}, { timeout: 60000 });
-    dirty = false;
-  }
-});
-
-test.afterEach(async () => {
-  // Impure tests may leave DOM/engine state behind, and a failed pure test
-  // may have poisoned the page too — force a reload in either case.
-  dirty = !lastWasPure || test.info().status !== 'passed';
+  if (page) await page.close().catch(() => {});
+  page = await browser.newPage();
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto(FIXTURE_PATH, { waitUntil: 'domcontentloaded', timeout: 15000 });
+  await page.waitForFunction(() => typeof window.DesiFitAnim !== 'undefined', {}, { timeout: 60000 });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════

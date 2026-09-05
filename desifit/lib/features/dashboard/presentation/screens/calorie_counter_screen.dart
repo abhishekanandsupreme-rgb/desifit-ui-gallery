@@ -826,7 +826,11 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
             const SizedBox(height: 12),
             Container(
               constraints: const BoxConstraints(maxHeight: 180),
-              child: ListView.separated(
+              // Material so ListTiles paint ink on it instead of the
+              // decorated ancestor hiding it (debug-mode assertion).
+              child: Material(
+                type: MaterialType.transparency,
+                child: ListView.separated(
                 shrinkWrap: true,
                 itemCount: _searchResults.length,
                 separatorBuilder: (_, _) => Divider(color: Colors.grey.shade100, height: 1),
@@ -854,6 +858,7 @@ class _CalorieCounterScreenState extends State<CalorieCounterScreen> {
                   );
                 },
               ),
+            ),
             ),
           ],
 

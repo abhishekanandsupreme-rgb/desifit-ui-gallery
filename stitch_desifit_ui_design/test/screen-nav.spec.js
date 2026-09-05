@@ -20,20 +20,16 @@ test.afterAll(async () => {
   if (browser) await browser.close();
 });
 
-// Shared page: one browser page reused across every test in this file.
-// Each beforeEach resets state with a cheap localStorage.clear() + reload
-// instead of creating a fresh page (~3.2s/test -> ~0.5s/test).
+// Deterministic reset: every test gets a fresh page + fixture load.
+// The previous shared-page/@pure skip-reload optimization let impure
+// tests leak DOM/async state into the next pure test (the flake class
+// seen in run 33795179439). The full reload costs ~0.5s/test.
 let page;
-let dirty = true; // first test always loads fresh
-let lastWasPure = false;
 
-async function resetPage(url, waitForGlobal) {
-  if (!page) {
-    page = await browser.newPage();
-    await page.setViewportSize({ width: 1280, height: 800 });
-  } else {
-    await page.evaluate(() => localStorage.clear()).catch(() => {});
-  }
+async function loadFixture(url, waitForGlobal) {
+  if (page) await page.close().catch(() => {});
+  page = await browser.newPage();
+  await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto(url, { waitUntil: 'networkidle', timeout: 15000 });
   if (waitForGlobal) {
     await page.waitForFunction((g) => typeof window[g] !== 'undefined', waitForGlobal, { timeout: 60000 });
@@ -41,37 +37,10 @@ async function resetPage(url, waitForGlobal) {
 }
 
 test.beforeEach(async () => {
-  // Tests tagged '@pure' only read the injected nav/DOM (no DOM mutation, no
-  // navigation), so consecutive pure tests skip the fixture reload — the
-  // reload only runs when this test is impure or the previous test was
-  // impure. localStorage is still cleared so nav reads stay clean.
-  // The 'Gallery page guard' describe navigates the shared page to the real
-  // index.html via its own beforeEach, so its SCREEN_NAV fixture reload is
-  // pure waste and is skipped too.
-  const pure = test.info().tags.includes('@pure');
   const galleryGuard = test.info().titlePath.some((t) => t === 'Gallery page guard');
-  lastWasPure = pure || galleryGuard;
-  if (!page) {
-    page = await browser.newPage();
-    await page.setViewportSize({ width: 1280, height: 800 });
+  if (!galleryGuard) {
+    await loadFixture(SCREEN_NAV_PATH, 'DesiFitNav');
   }
-  // localStorage persists across same-origin navigations, so always clear it.
-  // On the very first test the page is about:blank — the SecurityError is
-  // swallowed and the goto below loads a clean fixture anyway.
-  await page.evaluate(() => localStorage.clear()).catch(() => {});
-  if (!(pure || galleryGuard) || dirty) {
-    if (!galleryGuard) {
-      await page.goto(SCREEN_NAV_PATH, { waitUntil: 'networkidle', timeout: 15000 });
-      await page.waitForFunction((g) => typeof window[g] !== 'undefined', 'DesiFitNav', { timeout: 60000 });
-    }
-    dirty = false;
-  }
-});
-
-test.afterEach(async () => {
-  // Impure tests may leave nav/DOM state behind, and a failed pure test may
-  // have poisoned the page too — force a reload in either case.
-  dirty = !lastWasPure || test.info().status !== 'passed';
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -212,7 +181,7 @@ test.describe('injectScreenNav', () => {
 test.describe('Gallery page guard', () => {
   // This test targets the real gallery (index.html), not the fixture.
   test.beforeEach(async () => {
-    await resetPage(GALLERY_PATH, false);
+    await loadFixture(GALLERY_PATH);
   });
   test('screen-nav does NOT inject nav on index.html gallery page', async () => {
     await page.waitForTimeout(1000);
