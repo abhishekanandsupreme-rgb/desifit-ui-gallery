@@ -1,4 +1,7 @@
 # Flutter/Dart
+# Local Flutter SDK bootstrap (tools/bootstrap_flutter.sh); .flutter-version
+# itself stays tracked.
+.sdk/
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
