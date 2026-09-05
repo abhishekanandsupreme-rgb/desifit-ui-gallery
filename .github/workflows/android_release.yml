@@ -63,7 +63,7 @@ jobs:
             tar -xzf "$ACL_DIR/actionlint.tar.gz" -C "$ACL_DIR"
             rm -f "$ACL_DIR/actionlint.tar.gz"
           fi
-          find .github/workflows -maxdepth 1 \( -name "*.yml" -o -name "*.yaml" \) -exec "$ACL" {} +
+          find .github/workflows -maxdepth 1 \( -name "*.yml" -o -name "*.yaml" \) -exec "$ACL" -config-file .github/actionlint.yaml {} +
 
 
   # Flutter analyze + full test suite for AuraSync. Until this job existed,
