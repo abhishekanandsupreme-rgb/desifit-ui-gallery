@@ -1,0 +1,24 @@
+# Workflow-lint policy for the actionlint gate (syntax-gate job in
+# .github/workflows/android_release.yml).
+#
+# actionlint checks two classes of issues in workflow files:
+#
+#   1. Structural checks: YAML syntax, workflow schema, `${{ }}` expressions,
+#      runner labels, action versions, etc. These ALWAYS fail the gate.
+#      This is the gate's core purpose: catching files GitHub would reject
+#      silently (e.g. the historical unquoted-colon step name that killed CI
+#      with a zero-job run and no log).
+#
+#   2. Shellcheck findings on `run:` scripts. Policy by severity:
+#      - error / warning -> FAIL. Real defects (broken logic, unquoted
+#        expansions, unchecked `cd`, etc.).
+#      - style / info    -> ignored. Cosmetic. Pre-existing noise in a script
+#        that a change merely touches must not redden the pipeline. Fix such
+#        findings opportunistically in the PR that touches the line, and do
+#        not weaken this regex to hide error/warning findings.
+#
+# The regex below matches only shellcheck findings whose severity is style or
+# info (message form: "shellcheck reported issue in this script:
+# SC####:(style|info):line:col: ..."). Everything else still fails the gate.
+ignore:
+  - 'shellcheck reported issue in this script: [A-Z0-9]+:(style|info):.+'
