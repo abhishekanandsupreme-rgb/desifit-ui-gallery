@@ -78,6 +78,23 @@ syntax-gate job will do to a branch before opening the PR.
   the app binary anyway; access control lives in `firestore.rules` (owner-only
   writes). Never commit a service-account key — the gate will fail you.
 
+## Running the Flutter suites locally
+
+The Flutter SDK version is pinned once, in `.flutter-version`, and three
+consumers stay in sync with it (enforced by `tools/check_flutter_pin.js`
+in CI): the local bootstrap, and both `Set up Flutter` steps in the release
+workflow. To run the desifit/AuraSync suites on the exact tooling CI uses:
+
+```bash
+make bootstrap-flutter   # downloads + installs the pinned SDK into .sdk/ (cached)
+make test-desifit        # pub get + flutter test (auto-bootstraps the SDK first)
+make test-aurasync       # same, for AuraSync
+```
+
+The SDK lives under `.sdk/` (git-ignored); the downloaded archive is kept in
+`.sdk/downloads/` so deleting the SDK tree and re-bootstrapping skips the
+network. CI pins the same version, so local results transfer.
+
 ## Running the gallery tests locally
 
 ```bash

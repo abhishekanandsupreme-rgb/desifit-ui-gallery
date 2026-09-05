@@ -1,5 +1,6 @@
 # Shell scripts, git hooks, and the Makefile must stay LF on checkout even
 # with core.autocrlf=true (the repo's default), or bash/make choke on CRLF.
 tools/lint_workflows.sh text eol=lf
+tools/bootstrap_flutter.sh text eol=lf
 .githooks/pre-push text eol=lf
 Makefile text eol=lf
