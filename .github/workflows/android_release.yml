@@ -247,7 +247,7 @@ jobs:
         # (pyftsubset) crashes with exit 255 on the GitHub Actions runner
         # (IconTreeShakerException), independent of app code.
         run: |
-          flutter build appbundle --release --obfuscate --split-debug-info=build/app/outputs/symbols --no-tree-shake-icons --dart-define=OPENROUTER_API_KEY=$OPENROUTER_KEY
+          flutter build appbundle --release --obfuscate --split-debug-info=build/app/outputs/symbols --no-tree-shake-icons --dart-define=OPENROUTER_API_KEY="$OPENROUTER_KEY"
 
       # Step 7: Archive the compiled build artifact
       - name: Upload Android Release Artifact
