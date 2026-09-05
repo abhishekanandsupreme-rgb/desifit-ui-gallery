@@ -31,6 +31,41 @@ jobs:
       - name: Check for private-key material
         run: node tools/check_no_private_keys.js
 
+      # A malformed workflow file fails CI *silently* (zero jobs, no log) - as
+      # happened 2026-09-03 with an unquoted colon in a step name. actionlint
+      # parses the YAML and expression syntax up front, so a bad file fails
+      # this gate loudly instead of killing every job at validation time.
+      - name: Cache actionlint binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/actionlint
+          key: actionlint-v1.7.12
+
+      - name: Lint workflow files with actionlint
+        shell: bash
+        run: |
+          set -euo pipefail
+          ACL_DIR="$HOME/.cache/actionlint"
+          ACL="$ACL_DIR/actionlint"
+          if [ ! -x "$ACL" ]; then
+            mkdir -p "$ACL_DIR"
+            ok=0
+            for i in 1 2 3; do
+              if curl -fsSL --retry 3 -o "$ACL_DIR/actionlint.tar.gz" \
+                "https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz"; then
+                ok=1
+                break
+              fi
+              echo "actionlint download attempt $i failed (transient network); retrying in 10s"
+              sleep 10
+            done
+            [ "$ok" = "1" ] || { echo "actionlint download failed after 3 attempts"; exit 1; }
+            tar -xzf "$ACL_DIR/actionlint.tar.gz" -C "$ACL_DIR"
+            rm -f "$ACL_DIR/actionlint.tar.gz"
+          fi
+          find .github/workflows -maxdepth 1 \( -name "*.yml" -o -name "*.yaml" \) -exec "$ACL" {} +
+
+
   # Flutter analyze + full test suite for AuraSync. Until this job existed,
   # AuraSync was only syntax-gated (SDK-free bracket balance), which cannot
   # catch type errors or failing tests -- the same class of regression that
@@ -112,6 +147,19 @@ jobs:
       - name: Run gallery tests
         run: npx playwright test
 
+      # Evidence for red runs: Playwright writes test-results/ (with the
+      # on-first-retry trace) next to the config; upload it whenever the
+      # job fails so a triple-red never fails without artifacts to read.
+      - name: Upload test results and traces (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: stitch_desifit_ui_design/test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+
   build:
     name: Build Release AAB
     needs: syntax-gate
@@ -178,10 +226,12 @@ jobs:
             echo "Decoding Keystore..."
             echo "$KEYSTORE_BASE64" | base64 --decode > android/app/key.jks
             echo "Writing key.properties..."
-            echo "storePassword=$KEYSTORE_PASSWORD" > android/key.properties
-            echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
-            echo "keyAlias=$KEY_ALIAS" >> android/key.properties
-            echo "storeFile=key.jks" >> android/key.properties
+            {
+              echo "storePassword=$KEYSTORE_PASSWORD"
+              echo "keyPassword=$KEY_PASSWORD"
+              echo "keyAlias=$KEY_ALIAS"
+              echo "storeFile=key.jks"
+            } > android/key.properties
           else
             echo "No signing secrets found. Building with debug signature fallback."
           fi
@@ -197,7 +247,7 @@ jobs:
         # (pyftsubset) crashes with exit 255 on the GitHub Actions runner
         # (IconTreeShakerException), independent of app code.
         run: |
-          flutter build appbundle --release --obfuscate --split-debug-info=build/app/outputs/symbols --no-tree-shake-icons --dart-define=OPENROUTER_API_KEY=$OPENROUTER_KEY
+          flutter build appbundle --release --obfuscate --split-debug-info=build/app/outputs/symbols --no-tree-shake-icons --dart-define=OPENROUTER_API_KEY="$OPENROUTER_KEY"
 
       # Step 7: Archive the compiled build artifact
       - name: Upload Android Release Artifact
