@@ -72,17 +72,28 @@ case "${EXTRACT}" in
     tar -xJf "${ARCHIVE_PATH}" -C "${DEST}" --strip-components=1
     ;;
   unzip)
-    # Archives contain a top-level flutter/ directory; strip it so DEST *is*
-    # the SDK root (bin/ lives directly under DEST).
-    TMP_EXTRACT="${DEST}.extracting"
-    rm -rf "${TMP_EXTRACT}"
-    mkdir -p "${TMP_EXTRACT}"
-    unzip -oq "${ARCHIVE_PATH}" -d "${TMP_EXTRACT}"
-    inner="$(find "${TMP_EXTRACT}" -maxdepth 1 -mindepth 1 -type d | head -1)"
-    [ -n "${inner}" ] || { echo "bootstrap: unexpected archive layout" >&2; exit 1; }
-    # Move contents up one level (mv across the same volume is instant).
-    (shopt -s dotglob; mv "${TMP_EXTRACT}"/*/* "${DEST}/" 2>/dev/null || mv "${inner}"/* "${DEST}/")
-    rm -rf "${TMP_EXTRACT}"
+    # Windows-only. Prefer the OS-bundled bsdtar (libarchive) when present:
+    # it extracts the same zip several times faster than Info-ZIP unzip,
+    # which on a slow disk with antivirus scanning can take an hour.
+    BSDTAR=""
+    for cand in /c/Windows/System32/tar.exe /mnt/c/Windows/System32/tar.exe; do
+      [ -f "${cand}" ] && BSDTAR="${cand}" && break
+    done
+    if [ -n "${BSDTAR}" ]; then
+      # --strip-components=1 drops the archive's top-level flutter/ dir so
+      # DEST *is* the SDK root (bin/ lives directly under DEST).
+      "${BSDTAR}" -xf "${ARCHIVE_PATH}" -C "${DEST}" --strip-components=1
+    else
+      TMP_EXTRACT="${DEST}.extracting"
+      rm -rf "${TMP_EXTRACT}"
+      mkdir -p "${TMP_EXTRACT}"
+      unzip -oq "${ARCHIVE_PATH}" -d "${TMP_EXTRACT}"
+      inner="$(find "${TMP_EXTRACT}" -maxdepth 1 -mindepth 1 -type d | head -1)"
+      [ -n "${inner}" ] || { echo "bootstrap: unexpected archive layout" >&2; exit 1; }
+      # Move contents up one level (mv across the same volume is instant).
+      (shopt -s dotglob; mv "${TMP_EXTRACT}"/*/* "${DEST}/" 2>/dev/null || mv "${inner}"/* "${DEST}/")
+      rm -rf "${TMP_EXTRACT}"
+    fi
     ;;
 esac
 
