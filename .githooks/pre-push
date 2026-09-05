@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#
+# Pre-push hook: lints .github/workflows with the pinned actionlint before a
+# push reaches CI, where a broken workflow file fails *silently* (zero-job
+# run, no log). Enabled per-clone with `make install-hooks` (sets
+# core.hooksPath to this directory).
+#
+# Skips the lint when the pushed commits do not touch workflow files, so
+# unrelated pushes stay fast. Always lints on new branches or when the remote
+# tip is unknown locally, to never false-negative.
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+LINT_SCRIPT="${REPO_ROOT}/tools/lint_workflows.sh"
+
+need_lint=0
+
+# git feeds the hook one line per ref being pushed:
+#   <local ref> <local sha> <remote ref> <remote sha>
+# (all-zero sha = branch created / deleted on the remote side)
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -n "${local_ref:-}" ] || continue
+
+  # Branch deletion: nothing to lint.
+  if [ "${local_sha}" = "0000000000000000000000000000000000000000" ]; then
+    continue
+  fi
+
+  # New branch (remote tip all-zero) or remote tip unknown locally: cannot
+  # compute a cheap range, so lint to be safe.
+  if [ "${remote_sha}" = "0000000000000000000000000000000000000000" ] \
+    || ! git cat-file -e "${remote_sha}^{commit}" 2>/dev/null; then
+    need_lint=1
+    break
+  fi
+
+  if git diff --name-only "${remote_sha}".."${local_sha}" 2>/dev/null \
+    | grep -q '^\.github/workflows/'; then
+    need_lint=1
+    break
+  fi
+done
+
+if [ "${need_lint}" = "0" ]; then
+  exit 0
+fi
+
+if [ ! -f "${LINT_SCRIPT}" ]; then
+  echo "pre-push: ${LINT_SCRIPT} missing; skipping workflow lint" >&2
+  exit 0
+fi
+
+echo "pre-push: workflow files changed — running actionlint (CI parity)..."
+bash "${LINT_SCRIPT}"
