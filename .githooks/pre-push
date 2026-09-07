@@ -27,6 +27,7 @@ need_lint=0
 need_dart=0
 need_signing=0
 need_secrets=0
+need_manifest=0
 
 # git feeds the hook one line per ref being pushed:
 #   <local ref> <local sha> <remote ref> <remote sha>
@@ -47,6 +48,7 @@ while read -r local_ref local_sha remote_ref remote_sha; do
     need_dart=1
     need_signing=1
     need_secrets=1
+    need_manifest=1
     break
   fi
 
@@ -65,10 +67,15 @@ while read -r local_ref local_sha remote_ref remote_sha; do
     | grep -qE '^(desifit/android/key\.properties\.example|desifit/android/app/build\.gradle\.kts|\.github/workflows/android_release\.yml)$'; then
     need_signing=1
   fi
+  if printf '%s\n' "${changed}" \
+    | grep -qE '^stitch_desifit_ui_design/(index\.html|google_flow/asset_manifest\.json|google_flow/0[0-4]_.*\.md)$'; then
+    need_manifest=1
+  fi
 done
 
 if [ "${need_lint}" = "0" ] && [ "${need_dart}" = "0" ] \
-  && [ "${need_signing}" = "0" ] && [ "${need_secrets}" = "0" ]; then
+  && [ "${need_signing}" = "0" ] && [ "${need_secrets}" = "0" ] \
+  && [ "${need_manifest}" = "0" ]; then
   exit 0
 fi
 
@@ -96,6 +103,10 @@ if [ "${need_dart}" = "1" ] || [ "${need_signing}" = "1" ] || [ "${need_secrets}
     if [ "${need_secrets}" = "1" ]; then
       echo "pre-push: file changes detected — running check_no_private_keys.js (CI parity)..."
       node "${REPO_ROOT}/tools/check_no_private_keys.js"
+    fi
+    if [ "${need_manifest}" = "1" ]; then
+      echo "pre-push: gallery/asset-pack files changed — running check_asset_manifest.js (CI parity)..."
+      node "${REPO_ROOT}/tools/check_asset_manifest.js"
     fi
   fi
 fi

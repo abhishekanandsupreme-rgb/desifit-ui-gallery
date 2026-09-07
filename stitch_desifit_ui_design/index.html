@@ -772,6 +772,23 @@
       color: #b0a8a0;
       border-color: rgba(255,255,255,0.1);
     }
+    .compare-card .asset-tags {
+      display: flex; flex-wrap: wrap; gap: 0.25rem;
+      margin-top: 0.375rem;
+    }
+    .compare-card .asset-tag {
+      font-size: 0.5rem; font-weight: 700; text-transform: uppercase;
+      padding: 0.125rem 0.375rem;
+      border-radius: 9999px;
+      color: #2e7d32;
+      background: rgba(46,125,50,0.10);
+      border: 1px solid rgba(46,125,50,0.25);
+    }
+    .dark .compare-card .asset-tag {
+      color: #a5d6a7;
+      background: rgba(46,125,50,0.16);
+      border-color: rgba(165,214,167,0.3);
+    }
     .compare-card .anim-tag.has {
       background: rgba(164,55,0,0.08);
       border-color: rgba(164,55,0,0.3);
@@ -2636,6 +2653,13 @@
       background: rgba(164,55,0,0.15);
       color: rgba(255,255,255,0.6);
     }
+    #vrm-overlay .vrm-card .vrm-info .vrm-asset-tag {
+      font-size: 0.4375rem; font-weight: 700; text-transform: uppercase;
+      padding: 0.0625rem 0.3125rem;
+      border-radius: 4px;
+      background: rgba(46,125,50,0.25);
+      color: rgba(165,214,167,0.85);
+    }
     #vrm-overlay .vrm-status {
       text-align: center; color: rgba(255,255,255,0.4);
       font-size: 0.875rem; padding: 2rem;
@@ -3446,13 +3470,13 @@
               Fun
               <span class="tab-underline"></span>
             </button>
-            <button             <button data-category="all" role="tab" aria-selected="false"
+            <button data-category="all" role="tab" aria-selected="false"
               class="tab-btn px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-surface-container-highest dark:bg-dark-surface-container text-on-surface-variant dark:text-dark-on-surface-variant hover:bg-surface-container-high dark:hover:bg-dark-surface-container-high transition-all duration-200 relative" id="saved-tab" data-bookmark-tab="true">
               <span class="material-symbols-outlined text-[14px] align-text-bottom mr-0.5">bookmark</span>
               Saved
               <span class="tab-underline"></span>
             </button>
-            <button data-category="glossary" role="tab"data-category="glossary" role="tab" aria-selected="false"
+            <button data-category="glossary" role="tab" aria-selected="false"
               class="tab-btn px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-surface-container-highest dark:bg-dark-surface-container text-on-surface-variant dark:text-dark-on-surface-variant hover:bg-surface-container-high dark:hover:bg-dark-surface-container-high transition-all duration-200 relative">
               <span class="material-symbols-outlined text-[14px] align-text-bottom mr-0.5">menu_book</span>
               Glossary
@@ -3483,6 +3507,7 @@
               data-category="onboarding"
               data-name="Eat Like a King Onboarding 1/5"
               data-animations="interactive-particles,stagger-reveal,card-lift"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Eat Like a King onboarding screen 1 of 5">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-b from-primary/10 to-surface-container-lowest dark:from-primary/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative">
@@ -3510,6 +3535,7 @@
               data-category="onboarding"
               data-name="Electric Kettle Onboarding 2/5"
               data-animations="stagger-reveal,button-squash,fab-pulse"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Electric Kettle onboarding screen 2 of 5">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-b from-secondary/10 to-surface-container-lowest dark:from-secondary/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative">
@@ -3537,6 +3563,7 @@
               data-category="onboarding"
               data-name="Coach Bheem Onboarding 3/5"
               data-animations="interactive-particles,stagger-reveal,card-lift,text-reveal"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Coach Bheem onboarding screen 3 of 5">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-b from-primary-container/10 to-surface-container-lowest dark:from-primary-container/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative">
@@ -3564,6 +3591,7 @@
               data-category="onboarding"
               data-name="Jugaad Community Onboarding 4/5"
               data-animations="stagger-reveal,chat-bubbles,liquid-transition"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Jugaad Community onboarding screen 4 of 5">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-b from-secondary-container/20 to-surface-container-lowest dark:from-secondary-container/30 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative">
@@ -3591,6 +3619,7 @@
               data-category="onboarding"
               data-name="Hulk Up Onboarding 5/5"
               data-animations="interactive-particles,stagger-reveal,spring-physics,counter-animate"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Hulk Up onboarding screen 5 of 5">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-b from-primary/20 to-surface-container-lowest dark:from-primary/30 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative">
@@ -3631,6 +3660,7 @@
               data-category="dashboard"
               data-name="Home Dashboard Gauges Quick Add"
               data-animations="parallax,card-lift,dark-mode"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Home Dashboard with gauges and quick add">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-surface-container-lowest to-surface-container-low dark:from-dark-surface-container dark:to-dark-surface border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3660,6 +3690,7 @@
               data-category="dashboard"
               data-name="Dashboard v2 Conic Progress FAB"
               data-animations="spring-physics,fab-pulse,counter-animate"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Dashboard v2 with conic progress and FAB">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-surface-container-lowest to-surface-container-low dark:from-dark-surface-container dark:to-dark-surface border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3702,6 +3733,7 @@
               data-category="features"
               data-name="AI Coach Chat Spring Bubbles"
               data-animations="interactive-particles,chat-bubbles,typing-dots,spring-physics,card-lift"
+              data-assets="image"
               onclick="handleCardClick(event, this)"
               aria-label="AI Coach Chat screen with spring bubbles">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3731,6 +3763,7 @@
               data-category="features"
               data-name="Coach v2 Bento Recipe"
               data-animations="spring-physics,card-lift,stagger-reveal"
+              data-assets="image"
               onclick="handleCardClick(event, this)"
               aria-label="Coach v2 screen with bento cards">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3760,6 +3793,7 @@
               data-category="features"
               data-name="Recipe Engine Filter Chips"
               data-animations="counter-animate,button-squash,live-search"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Recipe Engine screen with filter chips">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/5 to-surface-container-lowest dark:from-secondary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3789,6 +3823,7 @@
               data-category="features"
               data-name="Recipe Grid Card Grid"
               data-animations="card-lift,stagger-reveal,dark-mode"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Recipe Grid screen with card grid">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/5 to-surface-container-lowest dark:from-secondary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3818,6 +3853,7 @@
               data-category="features"
               data-name="Community Feed Likes"
               data-animations="chat-bubbles,spring-physics,liquid-transition"
+              data-assets="image"
               onclick="handleCardClick(event, this)"
               aria-label="Community Feed screen with likes">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary-container/5 to-surface-container-lowest dark:from-primary-container/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3847,6 +3883,7 @@
               data-category="features"
               data-name="Budget Grocery List"
               data-animations="counter-animate,liquid-transition,button-squash"
+              data-assets="image"
               onclick="handleCardClick(event, this)"
               aria-label="Budget Groceries screen with fly-to-cart">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3877,6 +3914,7 @@
               data-category="features"
               data-name="Workout Tracker Reps"
               data-animations="counter-animate,progress-bar,button-squash,stagger-reveal"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Workout Tracker screen with exercise logging">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-surface-container-lowest dark:from-primary/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3907,6 +3945,7 @@
               data-category="features"
               data-name="Calorie Scanner Scan Meal"
               data-animations="scan-animation,counter-animate,progress-ring,card-lift"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Calorie Scanner screen with food scanning">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3937,6 +3976,7 @@
               data-category="features"
               data-name="Water Intake Hydration"
               data-animations="water-fill,counter-animate,drop-in,card-lift"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Water Intake Tracker screen with hydration logging">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-blue-100/50 to-surface-container-lowest dark:from-blue-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3965,6 +4005,7 @@
               data-category="features"
               data-name="Macro Barcode Scanner"
               data-animations="scan-animation,macro-pop,progress-fill"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Macro Barcode Scanner screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-blue-100/60 to-surface-container-lowest dark:from-blue-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -3994,6 +4035,7 @@
               data-category="fun"
               data-name="Leaderboard Podium Ranks"
               data-animations="stagger-reveal,text-reveal,fab-pulse"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Leaderboard screen with podium and ranks">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-surface-container-lowest dark:from-primary/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4023,6 +4065,7 @@
               data-category="fun"
               data-name="Sleep Recovery Tracker"
               data-animations="scroll-reveal,text-reveal,interactive-particles"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Sleep and Recovery Tracker screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100/60 to-surface-container-lowest dark:from-purple-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4052,6 +4095,7 @@
               data-category="fun"
               data-name="Settings and Profile"
               data-animations="scroll-reveal,text-reveal,button-squash"
+              data-assets="audio,icon,image"
               onclick="handleCardClick(event, this)"
               aria-label="Settings and Profile screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4081,6 +4125,7 @@
               data-category="fun"
               data-name="Achievements Badges"
               data-animations="badge-pop,progress-glow,text-reveal"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Achievements and Badges screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-yellow-100/60 to-surface-container-lowest dark:from-yellow-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4110,6 +4155,7 @@
               data-category="features"
               data-name="Planner Weekly Meals"
               data-animations="spring-physics,button-squash,counter-animate,live-search"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Weekly Planner screen with meal planning">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/5 to-surface-container-lowest dark:from-secondary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4139,6 +4185,7 @@
               data-category="features"
               data-name="Recipe Detail View"
               data-animations="nutrition-fill,cook-step-in,stagger-reveal"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Recipe Detail View screen with cooking steps">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/5 to-surface-container-lowest dark:from-secondary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4168,6 +4215,7 @@
               data-category="features"
               data-name="Subscription Plans"
               data-animations="plan-in,feature-check,badge-shine"
+              data-assets="icon"
               onclick="handleCardClick(event, this)"
               aria-label="Subscription Plans and Paywall screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4197,6 +4245,7 @@
               data-category="features"
               data-name="Workout History Log"
               data-animations="slide-in,bar-rise,fade-up"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Workout History Log screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-surface-container-lowest dark:from-primary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4226,6 +4275,7 @@
               data-category="features"
               data-name="Recipe Collections"
               data-animations="card-in,collect-pop,heart-beat"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Recipe Collections and Favorites screen">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/5 to-surface-container-lowest dark:from-secondary/10 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4255,6 +4305,7 @@
               data-category="fun"
               data-name="Rewards Shop"
               data-animations="pop-in,float-coin,glow-soft"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Rewards Shop screen with Sattu coins">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-yellow-100/60 to-surface-container-lowest dark:from-yellow-900/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4286,6 +4337,7 @@
               data-category="features"
               data-name="Progress Dashboard"
               data-animations="bar-rise,chart-line,counter-animate,progress-ring"
+              data-assets="image"
               onclick="handleCardClick(event, this)"
               aria-label="Progress Dashboard screen with charts and analytics">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-surface-container-lowest dark:from-primary/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4317,6 +4369,7 @@
               data-category="features"
               data-name="Meal Prep Scheduler"
               data-animations="card-pop,slide-right,grocery-bump,check-bounce"
+              data-assets="audio,image"
               onclick="handleCardClick(event, this)"
               aria-label="Meal Prep Scheduler screen with weekly meal planning">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/10 to-surface-container-lowest dark:from-secondary/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -4348,6 +4401,7 @@
               data-category="features"
               data-name="Habit Tracker"
               data-animations="check-bounce,streak-fire,day-pop,confetti"
+              data-assets="audio,image,video"
               onclick="handleCardClick(event, this)"
               aria-label="Habit Tracker screen with daily habits and streaks">
               <div class="aspect-[9/16] card-preview-wrap rounded-2xl overflow-hidden bg-gradient-to-br from-[#e67e22]/10 to-surface-container-lowest dark:from-[#e67e22]/20 dark:to-dark-surface-container border border-outline-variant/10 dark:border-white/5 relative p-4 flex flex-col justify-between">
@@ -5318,6 +5372,10 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
           var animTags = anims ? anims.split(',').slice(0, 3).map(function(a) {
             return '<span class="vrm-anim-tag">' + a.trim() + '</span>';
           }).join('') : '';
+          var assetKinds = (card.dataset.assets || '').split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+          var assetTags = assetKinds.map(function(a) {
+            return '<span class="vrm-asset-tag vrm-asset-' + a + '">' + a + '</span>';
+          }).join('');
 
           html += '<div class="vrm-card" onclick="window.open(\'' + href.replace(/'/g, "\'") + '\', \'_blank\')" title="' + name.replace(/"/g, '&quot;') + '">' +
             '<div class="vrm-preview">' +
@@ -5326,6 +5384,7 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
             '<div class="vrm-info">' +
               '<div class="vrm-name">' + name.replace(/</g, '&lt;') + '</div>' +
               '<div class="vrm-cat">' + category.replace(/</g, '&lt;') + '</div>' +
+              (assetTags ? '<div class="vrm-anims">' + assetTags + '</div>' : '') +
               (animTags ? '<div class="vrm-anims">' + animTags + '</div>' : '') +
             '</div></div>';
         });
@@ -6464,6 +6523,7 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
           href: href,
           icon: (card.querySelector('.material-symbols-outlined') || {}).textContent || 'smartphone',
           animations: (card.dataset.animations || '').split(',').map(s => s.trim()).filter(Boolean),
+          assets: (card.dataset.assets || '').split(',').map(s => s.trim()).filter(Boolean),
           bgGradient: key ? gradMap[key] : 'linear-gradient(135deg, #a43700, #cd4700)'
         };
       }
@@ -6531,6 +6591,9 @@ window.DesiFitAnim={ParticleSystem,springAnimate,initStaggerReveal,initParallax,
             '<div class="info-area">' +
               '<div class="name">' + safeName + '</div>' +
               '<span class="category-badge">' + sanitize(data.category) + '</span>' +
+              (data.assets && data.assets.length
+                ? '<div class="asset-tags">' + data.assets.map(a => '<span class="asset-tag asset-' + sanitize(a) + '">' + sanitize(a) + '</span>').join('') + '</div>'
+                : '') +
               '<div class="anim-tags" data-card-idx="' + idx + '">';
 
           // Render animation tags
