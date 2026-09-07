@@ -210,3 +210,78 @@ test.describe('Dark mode persistence', () => {
     expect(result.stored).toBe(true);
   });
 });
+
+// ═══════════════════════════════════════════════════════════════════
+// 6. Asset manifest wiring (data-assets -> QA overlay + compare overlay)
+// ═══════════════════════════════════════════════════════════════════
+test.describe('Asset manifest wiring', () => {
+  const VALID_KINDS = ['image', 'video', 'audio', 'icon'];
+
+  test.beforeEach(async () => {
+    // No waitForGlobal: index.html does not load screen-nav.js, so DesiFitNav
+    // never appears here — waiting for it hangs the suite.
+    await loadFixture(GALLERY_PATH);
+    // The first-visit tour overlay (#tour-overlay.active) intercepts pointer
+    // events, blocking clicks on gallery chrome. Seed the completion flag and
+    // reload so the tour never starts (deterministic, no 800ms race).
+    await page.evaluate(() => localStorage.setItem('desifit-tour-complete', 'true'));
+    await page.reload({ waitUntil: 'networkidle' });
+  });
+
+  test('all 30 gallery cards carry valid data-assets kinds', async () => {
+    const result = await page.evaluate((valid) => {
+      const cards = document.querySelectorAll('.filter-item');
+      const bad = [];
+      let withAssets = 0;
+      cards.forEach((card) => {
+        const raw = card.dataset.assets || '';
+        const kinds = raw.split(',').map((s) => s.trim()).filter(Boolean);
+        if (raw) withAssets++;
+        for (const k of kinds) {
+          if (!valid.includes(k)) bad.push(card.dataset.name + ' -> ' + k);
+        }
+      });
+      return { total: cards.length, withAssets, bad };
+    }, VALID_KINDS);
+    expect(result.total).toBe(30);
+    expect(result.withAssets).toBe(30);
+    expect(result.bad).toEqual([]);
+  });
+
+  test('QA (VRM) overlay renders one asset chip per card kind', async () => {
+    await page.click('#vrm-toggle');
+    await page.waitForSelector('#vrm-overlay.active', { timeout: 10000 });
+    await page.waitForSelector('#vrm-grid .vrm-card', { timeout: 15000 });
+    const result = await page.evaluate(() => {
+      const cards = document.querySelectorAll('#vrm-grid .vrm-card');
+      let chips = 0;
+      cards.forEach((c) => { chips += c.querySelectorAll('.vrm-asset-tag').length; });
+      const expected = Array.from(document.querySelectorAll('.filter-item'))
+        .reduce((n, card) => n + (card.dataset.assets || '').split(',').filter(Boolean).length, 0);
+      return { cards: cards.length, chips, expected };
+    });
+    expect(result.cards).toBe(30);
+    expect(result.chips).toBe(result.expected);
+    expect(result.chips).toBeGreaterThan(0);
+  });
+
+  test('compare overlay shows asset tags mirroring card data-assets', async () => {
+    const result = await page.evaluate(() => {
+      const cards = Array.from(document.querySelectorAll('.filter-item'));
+      const two = cards.slice(0, 2);
+      window._selectedCards.clear();
+      two.forEach((c) => window._selectedCards.add(c.getAttribute('href')));
+      window._openComparison();
+      const overlay = document.getElementById('compare-overlay');
+      if (!overlay) return { opened: false };
+      const tags = Array.from(overlay.querySelectorAll('.compare-card'));
+      const mirrored = tags.map((cc) => ({
+        tags: Array.from(cc.querySelectorAll('.asset-tag')).map((t) => t.textContent.trim()),
+      }));
+      const expected = two.map((c) => (c.dataset.assets || '').split(',').map((s) => s.trim()).filter(Boolean));
+      return { opened: true, mirrored, expected };
+    });
+    expect(result.opened).toBe(true);
+    expect(result.mirrored).toEqual(result.expected.map((kinds) => ({ tags: kinds })));
+  });
+});

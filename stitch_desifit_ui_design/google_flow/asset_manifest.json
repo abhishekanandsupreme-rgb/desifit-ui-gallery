@@ -1,0 +1,913 @@
+{
+  "version": 1,
+  "description": "DesiFit x Google Flow asset manifest. Maps every gallery screen to the Flow prompts that generate its media (images, video, audio, icons), per google_flow/00-04 specs. Sections reference exact spec-file headings. Validated by tools/check_asset_manifest.js against index.html cards.",
+  "howToUse": "Open google_flow/README.md. Run 00_brand_anchor.md first and save the ingredient 'desifit-modern-craftsman'. Then generate per-screen assets in the order below; 'section' points at the exact prompt block in the spec file.",
+  "ingredient": "desifit-modern-craftsman",
+  "shared": {
+    "brand_anchor": {
+      "spec": "00_brand_anchor.md",
+      "prompts": [
+        {
+          "prompt": "master-style-moodboard",
+          "section": "1. Master Style Prompt (paste verbatim into Flow)",
+          "ratio": "16:9"
+        },
+        {
+          "prompt": "texture-jute",
+          "section": "3. Texture library (subtle backgrounds for heroes)",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "texture-clay",
+          "section": "3. Texture library (subtle backgrounds for heroes)",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "texture-silk",
+          "section": "3. Texture library (subtle backgrounds for heroes)",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "texture-foliage",
+          "section": "3. Texture library (subtle backgrounds for heroes)",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "glass-panel-swatch",
+          "section": "4. Glassmorphism hero swatch",
+          "ratio": "1:1"
+        }
+      ]
+    },
+    "icon_sheets": {
+      "spec": "02_icons_graphics.md",
+      "prompts": [
+        {
+          "prompt": "app-icon-tiffin-dumbbell",
+          "section": "1. App icon",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "tab-bar-set-5",
+          "section": "2. Tab-bar icon set (5 icons — one sprite sheet)",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "feature-set-16",
+          "section": "3. Feature icon set (16 icons — sprite sheet 4x4)",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "progress-ring-72",
+          "section": "4. Progress-ring / gauge graphics",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "bar-chart-3-variants",
+          "section": "5. Bar-chart graphics (3 variants)",
+          "ratio": "16:9"
+        },
+        {
+          "prompt": "sparkline-trend",
+          "section": "6. Sparkline / trend graphic",
+          "ratio": "16:9"
+        },
+        {
+          "prompt": "badge-chip-graphics",
+          "section": "7. Badge & chip graphics",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "reward-coin-coupon",
+          "section": "8. Reward coin & coupon graphics",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "decorative-graphics",
+          "section": "9. Decorative graphics",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "texture-gradient-tiles",
+          "section": "10. Texture & gradient tiles (reuse from 00, §3)",
+          "ratio": "1:1"
+        }
+      ]
+    },
+    "effect_overlays": {
+      "spec": "02_icons_graphics.md",
+      "prompts": [
+        {
+          "prompt": "overlay-scan-line",
+          "section": "11. Effect overlays (raster, for compositing in code) — Scan-line overlay (calorie / macro scanner)",
+          "usedBy": [
+            "calorie_scanner",
+            "macro_scanner"
+          ]
+        },
+        {
+          "prompt": "overlay-confetti",
+          "section": "11. Effect overlays (raster, for compositing in code) — Confetti burst overlay (achievements / habit completion)",
+          "usedBy": [
+            "achievements",
+            "habit_tracker"
+          ]
+        },
+        {
+          "prompt": "overlay-shimmer",
+          "section": "11. Effect overlays (raster, for compositing in code) — Shimmer sweep overlay (subscription / rewards)",
+          "usedBy": [
+            "subscription_plans",
+            "rewards_shop"
+          ]
+        },
+        {
+          "prompt": "overlay-glass-panel",
+          "section": "11. Effect overlays (raster, for compositing in code) — Glass panel overlay (floating nav)",
+          "usedBy": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "video_plates": {
+      "spec": "03_video.md",
+      "prompts": [
+        {
+          "prompt": "liquid-page-transition",
+          "section": "6. Transitions & brand plates — Liquid page-transition plate",
+          "ratio": "1:1"
+        },
+        {
+          "prompt": "brand-intro-plate",
+          "section": "6. Transitions & brand plates — Brand intro plate (16:9, 4s)",
+          "ratio": "16:9"
+        },
+        {
+          "prompt": "device-frame-marketing",
+          "section": "6. Transitions & brand plates — Device-frame marketing loop (16:9, 10s)",
+          "ratio": "16:9"
+        }
+      ]
+    },
+    "sfx_common": {
+      "spec": "04_audio.md",
+      "prompts": [
+        {
+          "prompt": "sfx-tap-primary",
+          "section": "1. UI interaction SFX (short, warm, non-annoying) — Button tap (primary)"
+        },
+        {
+          "prompt": "sfx-tap-secondary",
+          "section": "1. UI interaction SFX (short, warm, non-annoying) — Button tap (secondary / ghost)"
+        },
+        {
+          "prompt": "sfx-error",
+          "section": "1. UI interaction SFX (short, warm, non-annoying) — Error / cannot-do"
+        },
+        {
+          "prompt": "sfx-app-notification",
+          "section": "5. Brand audio — App notification (general)"
+        },
+        {
+          "prompt": "sfx-brand-intro-chime",
+          "section": "5. Brand audio — Brand intro chime (matches 03 §6 brand plate)"
+        }
+      ]
+    }
+  },
+  "screens": {
+    "onboarding_1_5": {
+      "name": "Eat Like a King Onboarding 1/5",
+      "category": "onboarding",
+      "assets": {
+        "image": [
+          {
+            "prompt": "hero-thali",
+            "section": "Eat Like a King (hero)",
+            "spec": "01_images.md",
+            "ratio": "9:16"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "hero-cinemagraph",
+            "section": "Eat Like a King",
+            "spec": "03_video.md",
+            "ratio": "9:16"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-monsoon-morning",
+            "section": "4. Music beds (per screen mood) — Welcome / onboarding — \"Monsoon Morning\" (70 BPM)",
+            "spec": "04_audio.md"
+          },
+          {
+            "prompt": "loop-thali-simmer",
+            "section": "3. Ambient & effect loops — Thali simmer (onboarding 1/5)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "onboarding_2_5": {
+      "name": "Electric Kettle Onboarding 2/5",
+      "category": "onboarding",
+      "assets": {
+        "image": [
+          {
+            "prompt": "hero-kettle-macro",
+            "section": "Electric Kettle (hostel macro)",
+            "spec": "01_images.md",
+            "ratio": "9:16"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "hero-cinemagraph",
+            "section": "Electric Kettle",
+            "spec": "03_video.md",
+            "ratio": "9:16"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-monsoon-morning",
+            "section": "4. Music beds (per screen mood) — Welcome / onboarding — \"Monsoon Morning\" (70 BPM)",
+            "spec": "04_audio.md"
+          },
+          {
+            "prompt": "loop-kettle-boil",
+            "section": "3. Ambient & effect loops — Boiling kettle (onboarding 2/5)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "onboarding_3_5": {
+      "name": "Coach Bheem Onboarding 3/5",
+      "category": "onboarding",
+      "assets": {
+        "image": [
+          {
+            "prompt": "avatar-coach-bheem",
+            "section": "Coach Bheem (AI coach avatar)",
+            "spec": "01_images.md",
+            "ratio": "1:1",
+            "note": "reusable ingredient 'coach-bheem'"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-monsoon-morning",
+            "section": "4. Music beds (per screen mood) — Welcome / onboarding — \"Monsoon Morning\" (70 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "onboarding_4_5": {
+      "name": "Jugaad Community Onboarding 4/5",
+      "category": "onboarding",
+      "assets": {
+        "image": [
+          {
+            "prompt": "hero-jugaad-collage",
+            "section": "Jugaad Community (collage)",
+            "spec": "01_images.md",
+            "ratio": "9:16"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-monsoon-morning",
+            "section": "4. Music beds (per screen mood) — Welcome / onboarding — \"Monsoon Morning\" (70 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "onboarding_5_5": {
+      "name": "Hulk Up Onboarding 5/5",
+      "category": "onboarding",
+      "assets": {
+        "image": [
+          {
+            "prompt": "hero-pullup",
+            "section": "Hulk Up (gym hero)",
+            "spec": "01_images.md",
+            "ratio": "9:16"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "hero-cinemagraph",
+            "section": "Hulk Up",
+            "spec": "03_video.md",
+            "ratio": "9:16"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-monsoon-morning",
+            "section": "4. Music beds (per screen mood) — Welcome / onboarding — \"Monsoon Morning\" (70 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "home_dashboard_1": {
+      "name": "Home Dashboard Gauges Quick Add",
+      "category": "dashboard",
+      "assets": {
+        "image": [
+          {
+            "prompt": "hero-gauges-backdrop",
+            "section": "Gauges hero backdrop",
+            "spec": "01_images.md",
+            "ratio": "16:9"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "ambient-loop",
+            "section": "Gauges loop",
+            "spec": "03_video.md",
+            "ratio": "16:9"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-fired-clay-focus",
+            "section": "4. Music beds (per screen mood) — Dashboard — \"Fired Clay Focus\" (90 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "home_dashboard_2": {
+      "name": "Dashboard v2 Conic Progress FAB",
+      "category": "dashboard",
+      "assets": {
+        "image": [
+          {
+            "prompt": "conic-fab-backdrop",
+            "section": "Conic-progress FAB backdrop",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "ambient-loop",
+            "section": "Conic ring loop",
+            "spec": "03_video.md",
+            "ratio": "16:9"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-fired-clay-focus",
+            "section": "4. Music beds (per screen mood) — Dashboard — \"Fired Clay Focus\" (90 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "ai_dietitian_chat_1": {
+      "name": "AI Coach Chat Spring Bubbles",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "chat-ambient-bg",
+            "section": "Chat ambient background",
+            "spec": "01_images.md",
+            "ratio": "9:16"
+          }
+        ]
+      }
+    },
+    "ai_dietitian_chat_2": {
+      "name": "Coach v2 Bento Recipe",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "bento-recipe-collage",
+            "section": "Coach Bheem bento collage",
+            "spec": "01_images.md",
+            "ratio": "4:5"
+          }
+        ]
+      }
+    },
+    "recipe_engine_1": {
+      "name": "Recipe Engine Filter Chips",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "dish-photo-set-8",
+            "section": "Dish photo set (generate 8, one per chip)",
+            "spec": "01_images.md",
+            "ratio": "4:5"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "paneer-sizzle-loop",
+            "section": "Paneer sizzle (thumbnail loop)",
+            "spec": "03_video.md",
+            "ratio": "4:3"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-kitchen-jugaad",
+            "section": "4. Music beds (per screen mood) — Recipe / cooking — \"Kitchen Jugaad\" (80 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "recipe_engine_2": {
+      "name": "Recipe Grid Card Grid",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "recipe-card-grid",
+            "section": "Recipe card grid (reuse set)",
+            "spec": "01_images.md",
+            "ratio": "4:5",
+            "note": "reuses recipe_engine_1 dish set"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-kitchen-jugaad",
+            "section": "4. Music beds (per screen mood) — Recipe / cooking — \"Kitchen Jugaad\" (80 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "recipe_detail": {
+      "name": "Recipe Detail View",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "masoor-dal-hero",
+            "section": "Masoor Dal Tadka hero",
+            "spec": "01_images.md",
+            "ratio": "4:3"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "dal-pour-sizzle",
+            "section": "Masoor Dal Tadka pour",
+            "spec": "03_video.md",
+            "ratio": "4:3"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-kitchen-jugaad",
+            "section": "4. Music beds (per screen mood) — Recipe / cooking — \"Kitchen Jugaad\" (80 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "recipe_collections": {
+      "name": "Recipe Collections",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "collection-covers-3",
+            "section": "Collection covers (3 covers)",
+            "spec": "01_images.md",
+            "ratio": "4:5"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-kitchen-jugaad",
+            "section": "4. Music beds (per screen mood) — Recipe / cooking — \"Kitchen Jugaad\" (80 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "community_feed": {
+      "name": "Community Feed Likes",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "post-images-3",
+            "section": "Post images (3 posts)",
+            "spec": "01_images.md",
+            "ratio": "16:9"
+          },
+          {
+            "prompt": "member-avatars-5",
+            "section": "Member avatars (5 avatars)",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ]
+      }
+    },
+    "budget_groceries": {
+      "name": "Budget Grocery List",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "grocery-products-8",
+            "section": "Grocery product shots (8 products)",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ]
+      }
+    },
+    "workout_tracker": {
+      "name": "Workout Tracker Reps",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "exercise-icon-tile",
+            "section": "Exercise icon tile",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-steel-and-sweat",
+            "section": "4. Music beds (per screen mood) — Workout — \"Steel & Sweat\" (128 BPM)",
+            "spec": "04_audio.md"
+          },
+          {
+            "prompt": "sfx-stepper-tap",
+            "section": "1. UI interaction SFX (short, warm, non-annoying) — Stepper tap (workout rep counter)",
+            "spec": "04_audio.md"
+          },
+          {
+            "prompt": "sfx-rest-timer-end",
+            "section": "2. Feedback & success sounds — Rest-timer end (workout tracker)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "workout_history": {
+      "name": "Workout History Log",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "pr-sparkline-backdrop",
+            "section": "PR sparkline backdrop",
+            "spec": "01_images.md",
+            "ratio": "16:9"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-steel-and-sweat",
+            "section": "4. Music beds (per screen mood) — Workout — \"Steel & Sweat\" (128 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "progress_dashboard": {
+      "name": "Progress Dashboard",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "protein-bars-backdrop",
+            "section": "Weekly protein bars backdrop",
+            "spec": "01_images.md",
+            "ratio": "16:9"
+          }
+        ]
+      }
+    },
+    "calorie_scanner": {
+      "name": "Calorie Scanner Scan Meal",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "thali-scan-target",
+            "section": "Dal Chawal Thali scan target",
+            "spec": "01_images.md",
+            "ratio": "4:3"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "scan-line-loop",
+            "section": "Scan-line sweep loop",
+            "spec": "03_video.md",
+            "ratio": "1:1"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "sfx-scan-success",
+            "section": "2. Feedback & success sounds — Scan success (calorie / barcode scanner)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "macro_scanner": {
+      "name": "Macro Barcode Scanner",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "barcode-pack-target",
+            "section": "Barcode + pack target",
+            "spec": "01_images.md",
+            "ratio": "4:3"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "sfx-scan-success",
+            "section": "2. Feedback & success sounds — Scan success (calorie / barcode scanner)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "water_intake": {
+      "name": "Water Intake Hydration",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "hydration-hero",
+            "section": "Hydration hero",
+            "spec": "01_images.md",
+            "ratio": "9:16"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "glass-fill-loop",
+            "section": "Glass filling loop",
+            "spec": "03_video.md",
+            "ratio": "1:1"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "loop-water-pour",
+            "section": "3. Ambient & effect loops — Water pour loop (water intake)",
+            "spec": "04_audio.md"
+          },
+          {
+            "prompt": "sfx-hydration-reminder",
+            "section": "5. Brand audio — Hydration reminder (water intake)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "leaderboard": {
+      "name": "Leaderboard Podium Ranks",
+      "category": "fun",
+      "assets": {
+        "image": [
+          {
+            "prompt": "podium-backdrop",
+            "section": "Podium backdrop",
+            "spec": "01_images.md",
+            "ratio": "16:9"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-ghar-champ-swagger",
+            "section": "4. Music beds (per screen mood) — Rewards / leaderboard — \"Ghar-Champ Swagger\" (100 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "rewards_shop": {
+      "name": "Rewards Shop",
+      "category": "fun",
+      "assets": {
+        "image": [
+          {
+            "prompt": "coin-rewards-flatlay",
+            "section": "Coin & rewards flat-lay",
+            "spec": "01_images.md",
+            "ratio": "16:9"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "sfx-reward-coin",
+            "section": "2. Feedback & success sounds — Reward coin (rewards shop)",
+            "spec": "04_audio.md"
+          },
+          {
+            "prompt": "bed-ghar-champ-swagger",
+            "section": "4. Music beds (per screen mood) — Rewards / leaderboard — \"Ghar-Champ Swagger\" (100 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "achievements": {
+      "name": "Achievements Badges",
+      "category": "fun",
+      "assets": {
+        "image": [
+          {
+            "prompt": "badge-icons-9",
+            "section": "Badge icons (9 badges)",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "confetti-burst",
+            "section": "Confetti burst",
+            "spec": "03_video.md",
+            "ratio": "1:1"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "sfx-achievement-unlock",
+            "section": "2. Feedback & success sounds — Achievement unlock (badge earned)",
+            "spec": "04_audio.md"
+          },
+          {
+            "prompt": "sfx-confetti-burst",
+            "section": "2. Feedback & success sounds — Confetti burst (with celebration clip)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "sleep_recovery": {
+      "name": "Sleep Recovery Tracker",
+      "category": "fun",
+      "assets": {
+        "image": [
+          {
+            "prompt": "moon-float-hero",
+            "section": "Moon float hero",
+            "spec": "01_images.md",
+            "ratio": "9:16"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-night-clay",
+            "section": "4. Music beds (per screen mood) — Sleep — \"Night Clay\" (50 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "settings_profile": {
+      "name": "Settings and Profile",
+      "category": "fun",
+      "assets": {
+        "image": [
+          {
+            "prompt": "avatar-arjun",
+            "section": "Profile avatar (Arjun)",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ],
+        "icon": [
+          {
+            "prompt": "preference-row-icons-5",
+            "section": "Preference row icons (5 icons)",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "sfx-toggle",
+            "section": "1. UI interaction SFX (short, warm, non-annoying) — Toggle switch (settings)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "subscription_plans": {
+      "name": "Subscription Plans",
+      "category": "features",
+      "assets": {
+        "icon": [
+          {
+            "prompt": "tier-icons-3",
+            "section": "Tier icons (Desi / Champ / Ghar)",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ]
+      }
+    },
+    "weekly_jugaad_planner": {
+      "name": "Planner Weekly Meals",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "hack-sticky-notes",
+            "section": "Hack sticky notes",
+            "spec": "01_images.md",
+            "ratio": "16:9"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-paper-and-plan",
+            "section": "4. Music beds (per screen mood) — Focus / planner — \"Paper & Plan\" (85 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "meal_prep_scheduler": {
+      "name": "Meal Prep Scheduler",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "meal-container-tiles-7",
+            "section": "Meal container tiles (7 tiles)",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "bed-paper-and-plan",
+            "section": "4. Music beds (per screen mood) — Focus / planner — \"Paper & Plan\" (85 BPM)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    },
+    "habit_tracker": {
+      "name": "Habit Tracker",
+      "category": "features",
+      "assets": {
+        "image": [
+          {
+            "prompt": "streak-flame-accent",
+            "section": "Streak flame accent",
+            "spec": "01_images.md",
+            "ratio": "1:1"
+          }
+        ],
+        "video": [
+          {
+            "prompt": "streak-flame-flicker",
+            "section": "Streak flame flicker",
+            "spec": "03_video.md",
+            "ratio": "1:1"
+          }
+        ],
+        "audio": [
+          {
+            "prompt": "loop-streak-flame",
+            "section": "3. Ambient & effect loops — Streak flame flicker (habit tracker)",
+            "spec": "04_audio.md"
+          },
+          {
+            "prompt": "sfx-success-chime",
+            "section": "2. Feedback & success sounds — Success chime (habit checked / goal hit)",
+            "spec": "04_audio.md"
+          }
+        ]
+      }
+    }
+  }
+}

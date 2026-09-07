@@ -34,6 +34,13 @@ jobs:
       - name: Check Flutter pin drift
         run: node tools/check_flutter_pin.js
 
+      # asset_manifest.json is the machine-readable contract between the
+      # Google Flow prompt pack (google_flow/00-04), the 30 gallery cards,
+      # and their data-assets chips. Renaming a spec heading, adding a screen,
+      # or retitling a card without updating the manifest fails here.
+      - name: Check asset manifest ↔ gallery ↔ spec pack
+        run: node tools/check_asset_manifest.js
+
       # A malformed workflow file fails CI *silently* (zero jobs, no log) - as
       # happened 2026-09-03 with an unquoted colon in a step name. actionlint
       # parses the YAML and expression syntax up front, so a bad file fails
