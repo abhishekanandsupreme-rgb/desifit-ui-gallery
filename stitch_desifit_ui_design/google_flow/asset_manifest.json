@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "description": "DesiFit x Google Flow asset manifest. Maps every gallery screen to the Flow prompts that generate its media (images, video, audio, icons), per google_flow/00-04 specs. Sections reference exact spec-file headings. Validated by tools/check_asset_manifest.js against index.html cards.",
+  "version": 2,
+  "description": "DesiFit x Google Flow asset manifest. Maps every gallery screen to the Flow prompts that generate its media (images, video, audio, icons), per google_flow/00-04 specs. Sections reference exact spec-file headings. File backing is tracked in assets/registry.json (tools/register_assets.js) and enforced by tools/check_asset_files.js. Validated by tools/check_asset_manifest.js against index.html cards.",
   "howToUse": "Open google_flow/README.md. Run 00_brand_anchor.md first and save the ingredient 'desifit-modern-craftsman'. Then generate per-screen assets in the order below; 'section' points at the exact prompt block in the spec file.",
   "ingredient": "desifit-modern-craftsman",
   "shared": {
@@ -37,7 +37,8 @@
           "section": "4. Glassmorphism hero swatch",
           "ratio": "1:1"
         }
-      ]
+      ],
+      "assetKind": "image"
     },
     "icon_sheets": {
       "spec": "02_icons_graphics.md",
@@ -92,7 +93,8 @@
           "section": "10. Texture & gradient tiles (reuse from 00, §3)",
           "ratio": "1:1"
         }
-      ]
+      ],
+      "assetKind": "icon"
     },
     "effect_overlays": {
       "spec": "02_icons_graphics.md",
@@ -128,7 +130,8 @@
             "*"
           ]
         }
-      ]
+      ],
+      "assetKind": "image"
     },
     "video_plates": {
       "spec": "03_video.md",
@@ -148,7 +151,8 @@
           "section": "6. Transitions & brand plates — Device-frame marketing loop (16:9, 10s)",
           "ratio": "16:9"
         }
-      ]
+      ],
+      "assetKind": "video"
     },
     "sfx_common": {
       "spec": "04_audio.md",
@@ -173,7 +177,8 @@
           "prompt": "sfx-brand-intro-chime",
           "section": "5. Brand audio — Brand intro chime (matches 03 §6 brand plate)"
         }
-      ]
+      ],
+      "assetKind": "audio"
     }
   },
   "screens": {

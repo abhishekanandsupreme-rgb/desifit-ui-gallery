@@ -41,6 +41,13 @@ jobs:
       - name: Check asset manifest ↔ gallery ↔ spec pack
         run: node tools/check_asset_manifest.js
 
+      # Generated media lands in stitch_desifit_ui_design/assets/ and is pinned
+      # (bytes + sha256) into assets/registry.json by tools/register_assets.js.
+      # This gate fails if a registered asset goes missing, is swapped without
+      # re-registration, or if gallery chips drift from manifest+registry truth.
+      - name: Check asset files ↔ registry ↔ manifest ↔ chips
+        run: node tools/check_asset_files.js
+
       # A malformed workflow file fails CI *silently* (zero jobs, no log) - as
       # happened 2026-09-03 with an unquoted colon in a step name. actionlint
       # parses the YAML and expression syntax up front, so a bad file fails

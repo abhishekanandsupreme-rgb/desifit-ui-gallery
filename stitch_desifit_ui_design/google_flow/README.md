@@ -94,3 +94,48 @@ Every prompt below is structured as: **Context → Subject → Composition →
 Color/Lighting → Style anchor → Ratio → Negatives**. If Flow asks you to simplify,
 keep the Subject + Style + Ratio lines and trim the rest. Paste the whole block
 anyway — the Gemini agent tolerates long, structured prompts better than short ones.
+
+---
+
+## 4. Asset drop pipeline (Flow export → gallery chip)
+
+Every prompt in this pack maps to exactly one media file. Save each Flow export
+using the convention below (all paths under the repo root):
+
+```
+stitch_desifit_ui_design/assets/<kind>/<scope>/<prompt>.<ext>
+```
+
+| Part | Values |
+|---|---|
+| `kind` | `image` (png/jpg/webp) · `video` (mp4/webm) · `audio` (mp3/m4a/wav/aac/ogg) · `icon` (svg) |
+| `scope` | the screen's manifest key, e.g. `onboarding_1_5` — or `shared` for pack-level assets |
+| `prompt` | the prompt name from the manifest, e.g. `hero-thali`, `bed-monsoon-morning` |
+
+Example: the Eat Like a King hero → `assets/image/onboarding_1_5/hero-thali.png`.
+The authoritative list of all 103 units (75 screen-level + 28 shared) is
+`google_flow/asset_manifest.json`.
+
+After each export round, from the repo root:
+
+```bash
+node tools/register_assets.js     # validate naming, pin bytes+sha256 into assets/registry.json
+node tools/build_asset_chips.js   # refresh data-asset-ready counts on the 30 gallery cards
+git add ... && git commit         # commit assets + registry.json + index.html together
+```
+
+Enforcement (CI + `make lint-local` + pre-push, via `tools/check_asset_files.js`):
+
+- **Pending is legal.** Un-generated prompts simply report as pending (progress
+  prints `n/103`); the gallery chips show `0/N` until real files land.
+- **Registered is forever.** Once registered, a file that goes missing, gets
+  truncated, or is swapped without re-running `register_assets.js` fails CI on
+  its pinned size/hash.
+- **Chips cannot drift.** Every card's `data-asset-ready` counts are verified
+  against manifest totals + registry contents; a stale gallery fails the build.
+- **Orphans are rejected.** A file in `assets/` that no manifest prompt claims
+  refuses registration.
+
+The compare overlay and the QA (VRM) overlay render each asset chip as
+`kind n/total` and highlight it once `n > 0`, so the gallery always shows
+honestly which media is real.
