@@ -29,6 +29,7 @@ lint-local:
 	node tools/check_no_private_keys.js
 	node tools/check_flutter_pin.js
 	node tools/check_asset_manifest.js
+	node tools/check_asset_files.js
 
 bootstrap-flutter:
 	bash tools/bootstrap_flutter.sh

@@ -3,6 +3,7 @@
  * Tests dark mode persistence, nav injection, and gallery page guard
  */
 const { test, expect, chromium } = require('@playwright/test');
+const fs = require('fs');
 const path = require('path');
 
 const SCREEN_NAV_PATH = 'file://' + path.resolve(__dirname, 'fixtures', 'screen-nav-test.html');
@@ -250,8 +251,10 @@ test.describe('Asset manifest wiring', () => {
 
   test('QA (VRM) overlay renders one asset chip per card kind', async () => {
     await page.click('#vrm-toggle');
-    await page.waitForSelector('#vrm-overlay.active', { timeout: 10000 });
-    await page.waitForSelector('#vrm-grid .vrm-card', { timeout: 15000 });
+    // state:'attached' — the overlay's entry animation makes the default
+    // visible+stable wait racy (element is visible but never "stable").
+    await page.waitForSelector('#vrm-overlay.active', { timeout: 10000, state: 'attached' });
+    await page.waitForSelector('#vrm-grid .vrm-card', { timeout: 15000, state: 'attached' });
     const result = await page.evaluate(() => {
       const cards = document.querySelectorAll('#vrm-grid .vrm-card');
       let chips = 0;
@@ -276,12 +279,53 @@ test.describe('Asset manifest wiring', () => {
       if (!overlay) return { opened: false };
       const tags = Array.from(overlay.querySelectorAll('.compare-card'));
       const mirrored = tags.map((cc) => ({
-        tags: Array.from(cc.querySelectorAll('.asset-tag')).map((t) => t.textContent.trim()),
+        chips: Array.from(cc.querySelectorAll('.asset-tag')).map((t) => {
+          const [kind, count] = t.textContent.trim().split(/\s+/);
+          return { kind, count, ready: t.classList.contains('ready') };
+        }),
       }));
-      const expected = two.map((c) => (c.dataset.assets || '').split(',').map((s) => s.trim()).filter(Boolean));
+      const expected = two.map((c) => (c.dataset.assetReady || '').split(',').filter(Boolean).map((p) => {
+        const [kind, count] = p.split(':');
+        return { kind, count, ready: (parseInt(count, 10) || 0) > 0 };
+      }));
       return { opened: true, mirrored, expected };
     });
     expect(result.opened).toBe(true);
-    expect(result.mirrored).toEqual(result.expected.map((kinds) => ({ tags: kinds })));
+    expect(result.mirrored).toEqual(result.expected.map((chips) => ({ chips })));
+  });
+
+  test('card data-asset-ready chips match manifest totals and registered files on disk', async () => {
+    const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'google_flow', 'asset_manifest.json'), 'utf8'));
+    const registryPath = path.join(__dirname, '..', 'assets', 'registry.json');
+    const registry = fs.existsSync(registryPath)
+      ? JSON.parse(fs.readFileSync(registryPath, 'utf8'))
+      : { files: [] };
+    const totals = {};
+    const counts = {};
+    for (const [slug, entry] of Object.entries(manifest.screens)) {
+      totals[slug] = {};
+      counts[slug] = {};
+      for (const [k, list] of Object.entries(entry.assets || {})) {
+        totals[slug][k] = list.length;
+        counts[slug][k] = registry.files.filter((f) => f.scope === slug && f.kind === k).length;
+      }
+    }
+    const result = await page.evaluate(({ totals, counts }) => {
+      const mismatches = [];
+      document.querySelectorAll('.filter-item').forEach((card) => {
+        const slug = (card.getAttribute('href') || '').replace(/\/code\.html$/, '');
+        if (!totals[slug]) { mismatches.push(slug + ': no manifest entry'); return; }
+        // Expected string follows the card's data-assets order (rendering truth).
+        const expected = (card.dataset.assets || '').split(',').filter(Boolean).map((k) => {
+          return `${k}:${counts[slug][k] || 0}/${totals[slug][k] || 0}`;
+        }).join(',');
+        if (card.dataset.assetReady !== expected) {
+          mismatches.push(`${slug}: html="${card.dataset.assetReady}" expected="${expected}"`);
+        }
+      });
+      return { manifestScreens: Object.keys(totals).length, mismatches };
+    }, { totals, counts });
+    expect(result.manifestScreens).toBe(30);
+    expect(result.mismatches).toEqual([]);
   });
 });

@@ -68,7 +68,7 @@ while read -r local_ref local_sha remote_ref remote_sha; do
     need_signing=1
   fi
   if printf '%s\n' "${changed}" \
-    | grep -qE '^stitch_desifit_ui_design/(index\.html|google_flow/asset_manifest\.json|google_flow/0[0-4]_.*\.md)$'; then
+    | grep -qE '^stitch_desifit_ui_design/(index\.html|assets/.+|google_flow/asset_manifest\.json|google_flow/0[0-4]_.*\.md)$'; then
     need_manifest=1
   fi
 done
@@ -107,6 +107,8 @@ if [ "${need_dart}" = "1" ] || [ "${need_signing}" = "1" ] || [ "${need_secrets}
     if [ "${need_manifest}" = "1" ]; then
       echo "pre-push: gallery/asset-pack files changed — running check_asset_manifest.js (CI parity)..."
       node "${REPO_ROOT}/tools/check_asset_manifest.js"
+      echo "pre-push: running check_asset_files.js (CI parity)..."
+      node "${REPO_ROOT}/tools/check_asset_files.js"
     fi
   fi
 fi
