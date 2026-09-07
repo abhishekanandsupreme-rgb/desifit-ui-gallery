@@ -115,6 +115,37 @@ jobs:
         working-directory: AuraSync
         run: flutter test
 
+  # Same gate for the main desifit app: static analysis plus the widget/unit
+  # suite (29 tests incl. the four-screen widget coverage and the onboarding
+  # smoke test) on the pinned SDK, so refactors of the split state files and
+  # extracted widgets cannot land on main without their tests passing.
+  desifit-checks:
+    name: Analyze & Test desifit
+    needs: syntax-gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.47.2'  # kept in sync with .flutter-version by tools/check_flutter_pin.js
+          cache: true
+
+      - name: Install Dependencies
+        working-directory: desifit
+        run: flutter pub get
+
+      - name: Analyze Project
+        working-directory: desifit
+        run: flutter analyze
+
+      - name: Run Tests
+        working-directory: desifit
+        run: flutter test
+
   # Headless-Chromium e2e for the 30-screen HTML gallery: exercises the
   # animation engine API (anim-engine.spec.js) and per-screen nav + dark
   # mode (screen-nav.spec.js) against the real index.html and fixtures.
@@ -212,21 +243,11 @@ jobs:
           flutter-version: '3.47.2'  # kept in sync with .flutter-version by tools/check_flutter_pin.js
           cache: true
 
-      # Step 4: Resolve dependencies
+      # Step 4: Resolve dependencies (analyze + test live in the dedicated
+      # desifit-checks job above — no duplicate runs inside the build job)
       - name: Install Dependencies
         working-directory: desifit
         run: flutter pub get
-
-      # Step 5: Run Static Code Analysis (optional check)
-      - name: Analyze Project
-        working-directory: desifit
-        run: flutter analyze
-
-      # Step 5.25: Run the desifit widget/unit test suite. Ungated so it
-      # runs on every PR and push, matching the AuraSync test gate.
-      - name: Run Tests
-        working-directory: desifit
-        run: flutter test
 
       # Step 5.5: Configure Production Release Signing (if secrets are set)
       - name: Configure Production Signing
